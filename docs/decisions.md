@@ -704,3 +704,87 @@ interface NumberProperties {
   // ... additional properties
 }
 ```
+
+---
+
+### D-041: Font Awesome Icons Over Emojis
+**Decision**: Use Font Awesome icons throughout the UI instead of emojis, with the single exception of the snake emoji (🐍) for branding.
+
+**Rationale**:
+- Consistent visual style across the application
+- Font Awesome icons are monochromatic and outlined, matching the design system
+- Emojis render differently across operating systems and browsers
+- Font Awesome provides semantic icon classes (fa-solid fa-gamepad vs 🎮)
+- Better accessibility through `aria-hidden="true"` pattern
+
+**Exception**: The snake emoji 🐍 is retained for:
+- Logo in header
+- Hero section on homepage
+- Brand identity recognition
+
+**Implementation**:
+```vue
+<!-- Before (inconsistent) -->
+<span>🎮</span>
+<span>{{ topic.icon }}</span>  <!-- emoji string -->
+
+<!-- After (consistent) -->
+<i class="fa-solid fa-gamepad" aria-hidden="true" />
+<i :class="topic.faIcon" aria-hidden="true" />
+```
+
+---
+
+### D-042: Consistent Collapsible Pattern for Content Sections
+**Decision**: Apply consistent collapsible behavior across content pages: introductory sections remain open, deeper topic sections are collapsible, and code examples within collapsible sections are also collapsible.
+
+**Rationale**:
+- Reduces initial page length for scan-ability
+- Users can focus on sections relevant to them
+- Code examples don't dominate the page when collapsed
+- Progressive disclosure: overview first, details on demand
+
+**Pattern**:
+```
+Page Structure:
+├── Intro Section (NOT collapsible) - establishes context
+├── Topic Section A (collapsible) - deeper content
+│   └── CodeExample (collapsible)
+├── Topic Section B (collapsible)
+│   └── CodeExample (collapsible)
+└── Summary/Reference (NOT collapsible) - quick lookup
+```
+
+**Implementation**:
+```vue
+<!-- Intro - always visible -->
+<ContentSection id="intro" title="Overview">...</ContentSection>
+
+<!-- Topic sections - collapsible with collapsible code -->
+<ContentSection id="summation" title="Summation" collapsible>
+  <p>Explanation...</p>
+  <CodeExample :code="code" collapsible />
+</ContentSection>
+```
+
+---
+
+### D-043: Mathematical Symbols in Section Titles
+**Decision**: Use actual mathematical symbols (Σ, Π) in section titles rather than ASCII approximations (E, P).
+
+**Rationale**:
+- Reinforces the visual connection between notation and code
+- More professional appearance
+- Educational: users see the real symbols they'll encounter
+- Browsers and fonts handle Unicode math symbols well
+
+**Implementation**:
+```vue
+<!-- Before -->
+<ContentSection title="Summation: E = for loop">
+
+<!-- After -->
+<ContentSection title="Summation: Σ = for loop">
+```
+
+**Note**: The ASCII version can still appear in code comments where Unicode may cause issues.

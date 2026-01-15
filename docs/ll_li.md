@@ -592,3 +592,106 @@ Phase 4 introduced interactive widgets with URL state synchronization and visual
 3. Computed getter/setter enables flexible state binding patterns
 4. Visualizations should adapt to their data (auto-zoom, scaling)
 5. Educational widgets benefit from curated examples and bonus insights
+
+---
+
+## Phase 4 Continued: UI Consistency
+
+### LL-018: Emoji-to-Icon Migration Requires Interface Updates
+**Issue**: When replacing emojis with Font Awesome icons, interface property names needed updating across multiple files.
+
+**Context**: The navigation data used an `icon` property storing emoji strings (e.g., `icon: '🧱'`). Switching to Font Awesome required changing to `faIcon` with class strings.
+
+**Resolution**: Update interfaces and all references systematically:
+```typescript
+// Before
+interface NavTopic {
+  icon: string  // emoji: '🧱'
+}
+
+// After
+interface NavTopic {
+  faIcon: string  // FA class: 'fa-solid fa-cubes'
+}
+```
+
+**Files affected**:
+- `navigation.ts` - interface and data
+- `AppHeader.vue` - template binding
+- `TopicPage.vue` - props and computed properties
+- `RelatedTopics.vue` - interface and template
+
+**Lesson**: When changing property names across interfaces, use TypeScript's compiler errors to find all usage sites. Run `npm run type-check` after each change to catch missed references.
+
+---
+
+### LL-019: Searching for Emojis in Codebase
+**Issue**: Finding all emoji occurrences required regex patterns that match Unicode emoji ranges.
+
+**Resolution**: Use grep with Unicode-aware patterns:
+```bash
+# Search for common emoji ranges
+grep -rn "[\x{1F300}-\x{1F9FF}]" src/
+```
+
+**Lesson**: When auditing for specific character types (emojis, special symbols), use appropriate Unicode range patterns. Simple text search won't find all emoji variants.
+
+---
+
+### LI-015: Prop Naming Conventions for Icon Types
+**Identified**: When a component accepts different icon types, use descriptive prop names to indicate the expected format.
+
+**Pattern**:
+```typescript
+// Ambiguous - what format?
+icon?: string
+
+// Clear - indicates Font Awesome class expected
+faIcon?: string
+
+// Alternative patterns
+iconClass?: string      // CSS class name
+iconEmoji?: string      // Emoji character
+iconSvg?: string        // SVG path/content
+```
+
+**Note**: Prefixing with the icon system name (`fa` for Font Awesome) makes the expected format immediately clear to component users.
+
+---
+
+### LI-016: Consistent Collapsible Nesting
+**Identified**: Content pages benefit from a two-level collapsible hierarchy: sections and code examples.
+
+**Pattern**:
+```vue
+<ContentSection title="Topic" collapsible>
+  <p>Prose content (visible when section expanded)</p>
+  <CodeExample :code="code" collapsible />
+</ContentSection>
+```
+
+**Benefits**:
+- Users can expand a section to read prose without seeing code
+- Code can be expanded separately when needed
+- Reduces visual noise while maintaining access to all content
+- Consistent UX across all topic pages
+
+**Note**: Not all CodeExamples need to be collapsible. Short inline snippets (< 10 lines) may be better always visible.
+
+---
+
+## Phase 4 Continued Summary
+
+**Lessons Learned (LL)**:
+- LL-018: Emoji-to-icon migration requires interface updates
+- LL-019: Searching for emojis in codebase
+
+**Lessons Identified (LI)**:
+- LI-015: Prop naming conventions for icon types
+- LI-016: Consistent collapsible nesting
+
+**Key Takeaways**:
+1. Property name changes ripple through interfaces, components, and templates - use TypeScript to catch all sites
+2. Unicode-aware grep patterns are needed for finding emojis and special characters
+3. Clear naming conventions (like `faIcon` vs `icon`) prevent confusion about expected formats
+4. Two-level collapsible hierarchy (section + code) provides good progressive disclosure

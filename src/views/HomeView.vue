@@ -187,6 +187,16 @@ const siteStructure = [
       </ul>
     </section>
 
+    <!-- MATLAB Joke -->
+    <section class="text-center py-4">
+      <p class="text-text-muted italic">
+        <i class="fa-solid fa-question-circle mr-2" aria-hidden="true" />
+        Why not just use MATLAB?
+      </p>
+      <p class="text-text-muted text-sm mt-1">MATLAB is an illegitimate programming language and it knows!</p>
+      <p class="text-text-muted text-sm mt-1">(Just kidding. Use whatever tools work for you. But Python is pretty great.)</p>
+    </section>
+
     <!-- Call to Action -->
     <section class="text-center py-8">
       <h2 class="text-2xl font-bold text-text-primary mb-2">Ready to dive in?</h2>

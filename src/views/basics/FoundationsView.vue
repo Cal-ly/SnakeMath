@@ -117,7 +117,12 @@ result = math.prod(range(1, 6))  # 120`
       </ContentSection>
 
       <!-- Summation -->
-      <ContentSection id="summation" title="Summation: E = for loop" icon="fa-solid fa-plus">
+      <ContentSection
+        id="summation"
+        title="Summation: Σ = for loop"
+        icon="fa-solid fa-plus"
+        collapsible
+      >
         <p class="mb-4">
           That big and scary-looking <MathBlock formula="\Sigma" /> is basically just
           a for loop adding all the variables together:
@@ -138,11 +143,17 @@ result = math.prod(range(1, 6))  # 120`
           language="python"
           title="summation.py"
           line-numbers
+          collapsible
         />
       </ContentSection>
 
       <!-- Product -->
-      <ContentSection id="product" title="Product: P = multiply loop" icon="fa-solid fa-xmark">
+      <ContentSection
+        id="product"
+        title="Product: Π = multiply loop"
+        icon="fa-solid fa-xmark"
+        collapsible
+      >
         <p class="mb-4">
           Similarly, <MathBlock formula="\Pi" /> (capital pi) means "multiply them all together":
         </p>
@@ -202,6 +213,7 @@ result = math.prod(range(1, 6))  # 120`
           language="python"
           title="Euler's Method"
           line-numbers
+          collapsible
         />
 
         <div class="mt-6 p-4 bg-math-highlight rounded-lg">
@@ -218,7 +230,7 @@ result = math.prod(range(1, 6))  # 120`
       </ContentSection>
 
       <!-- MATLAB joke -->
-      <ContentSection
+      <!-- <ContentSection
         id="matlab"
         title="Why not just use MATLAB?"
         icon="fa-solid fa-face-grin-wink"
@@ -231,7 +243,7 @@ result = math.prod(range(1, 6))  # 120`
         <p class="mt-2 text-sm text-text-muted">
           (Just kidding. Use whatever tools work for you. But Python is pretty great.)
         </p>
-      </ContentSection>
+      </ContentSection> -->
     </div>
 
     <template #related>
