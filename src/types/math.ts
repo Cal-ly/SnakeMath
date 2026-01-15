@@ -92,3 +92,20 @@ export interface CalculationStep {
   /** Result of this step */
   result: string
 }
+
+/**
+ * Number properties for display
+ */
+export interface NumberProperties {
+  type: 'natural' | 'integer' | 'rational' | 'irrational' | 'real' | 'complex' | 'special'
+  value: number | { real: number; imag: number }
+  sign?: number
+  isInteger?: boolean
+  isEven?: boolean
+  isPrime?: boolean
+  absoluteValue?: number
+  realPart?: number
+  imaginaryPart?: number
+  isSpecial?: boolean
+  specialName?: string
+}

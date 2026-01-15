@@ -5,52 +5,44 @@ The intent with this document is to outline the current state of the project, in
 
 ---
 
-## Current Status: Phase 3 Complete
+## Current Status: Phase 4 Complete
 
 **Last Updated**: 2026-01-15
 
-### Phase 3 Summary: Content Components (Complete)
+### Phase 4 Summary: Interactive Widgets (Complete)
 
-Phase 3 added the core content components for displaying educational material with math rendering, syntax highlighting, and searchable symbol tables.
+Phase 4 added the NumberTypeExplorer widget and supporting components for interactive learning about number types.
 
 | Increment | Description | Status |
 |-----------|-------------|--------|
-| 3A | KaTeX + MathBlock Component | ✅ Complete |
-| 3B | Shiki + CodeExample Component | ✅ Complete |
-| 3C | CollapsiblePanel + ContentSection | ✅ Complete |
-| 3D | TabGroup (Accessible Tabs) | ✅ Complete |
-| 3E | Symbol Data Files (Split by Category) | ✅ Complete |
-| 3F | SymbolTable (Responsive, Searchable) | ✅ Complete |
-| 3G | Content Integration & Testing | ✅ Complete |
+| 4A | NumberInput Component with Validation | ✅ Complete |
+| 4B | NumberTypeExplorer Widget | ✅ Complete |
+| 4C | URL State Synchronization | ✅ Complete |
+| 4D | Visualizations (Number Line, Venn) | ✅ Complete |
+| 4E | Content Migration from Archive | ✅ Complete |
+| 4F | Integration & Polish | ✅ Complete |
 
-#### What Was Built in Phase 3
+#### What Was Built in Phase 4
 
-**Content Components** (`src/components/content/`):
-- **MathBlock**: KaTeX-powered math formula rendering with error handling
-- **CodeExample**: Shiki syntax highlighting with copy button, line numbers, collapsible
-- **ContentSection**: Collapsible content sections with icons and anchor links
-- **SymbolTable**: Searchable, responsive symbol tables (table on desktop, cards on mobile)
-
-**UI Components** (`src/components/ui/`):
-- **CollapsiblePanel**: Reusable expand/collapse panel with ARIA
-- **TabGroup**: Accessible tabbed interface with keyboard navigation
-- **CopyButton**: Copy-to-clipboard with visual feedback
-- **SearchInput**: Debounced search input with clear button
+**Widget Components** (`src/components/widgets/`):
+- **NumberInput**: Reusable number input with real-time validation
+- **NumberTypeExplorer**: Main widget combining input, results, and visualizations
+- **SetMembershipDisplay**: Checklist showing set membership (ℕ, ℤ, ℚ, ℝ, ℂ)
+- **NumberProperties**: Grid showing number properties (type, sign, parity, primality)
+- **NumberLine**: Visual number line with auto-zoom and position marker
+- **SetVennDiagram**: Nested set visualization with highlighting
+- **VisualizationToggle**: Toggle button for showing/hiding visualizations
 
 **Composables** (`src/composables/`):
-- **useClipboard**: Clipboard API wrapper with copied state
-- **useHighlighter**: Shiki highlighter singleton for performance
+- **useUrlState**: Bi-directional URL query param synchronization with debouncing
 
-**Symbol Data** (`src/data/symbols/`):
-- 80+ math symbols across 7 categories
-- 24 Greek letters with LaTeX and common uses
-- Search and filter utilities
+**Data** (`src/data/`):
+- **exampleNumbers.ts**: Quick-select example numbers by category
 
-**Dependencies Added**:
-- `katex@0.16` - Math rendering
-- `shiki@1` - Syntax highlighting
+**Tests** (`src/components/widgets/`):
+- **NumberInput.test.ts**: 14 tests for input validation
 
-#### Project Structure (Phase 3 Complete)
+#### Project Structure (Phase 4 Complete)
 
 ```
 src/
@@ -66,28 +58,39 @@ src/
 │   │   ├── index.ts
 │   │   ├── TopicPage.vue
 │   │   ├── RelatedTopics.vue
-│   │   ├── MathBlock.vue       # NEW: KaTeX math rendering
-│   │   ├── CodeExample.vue     # NEW: Shiki syntax highlighting
-│   │   ├── ContentSection.vue  # NEW: Collapsible sections
-│   │   └── SymbolTable.vue     # NEW: Searchable symbol tables
-│   ├── widgets/                # (ready for Phase 4)
+│   │   ├── MathBlock.vue
+│   │   ├── CodeExample.vue
+│   │   ├── ContentSection.vue
+│   │   └── SymbolTable.vue
+│   ├── widgets/               # NEW: Phase 4
+│   │   ├── index.ts
+│   │   ├── NumberInput.vue
+│   │   ├── NumberInput.test.ts
+│   │   ├── NumberTypeExplorer.vue
+│   │   ├── SetMembershipDisplay.vue
+│   │   ├── NumberProperties.vue
+│   │   ├── NumberLine.vue
+│   │   ├── SetVennDiagram.vue
+│   │   └── VisualizationToggle.vue
 │   └── ui/
 │       ├── index.ts
 │       ├── FaIcon.vue
-│       ├── CopyButton.vue      # NEW: Copy to clipboard
-│       ├── CollapsiblePanel.vue # NEW: Expand/collapse
-│       ├── TabGroup.vue        # NEW: Accessible tabs
-│       └── SearchInput.vue     # NEW: Debounced search
+│       ├── CopyButton.vue
+│       ├── CollapsiblePanel.vue
+│       ├── TabGroup.vue
+│       └── SearchInput.vue
 ├── composables/
 │   ├── index.ts
 │   ├── useTheme.ts
 │   ├── useBreadcrumbs.ts
-│   ├── useClipboard.ts         # NEW: Clipboard API
-│   └── useHighlighter.ts       # NEW: Shiki singleton
+│   ├── useClipboard.ts
+│   ├── useHighlighter.ts
+│   └── useUrlState.ts         # NEW: URL state sync
 ├── data/
 │   ├── navigation.ts
-│   └── symbols/                # NEW: Symbol data
-│       ├── index.ts            # Barrel + search utilities
+│   ├── exampleNumbers.ts      # NEW: Example numbers
+│   └── symbols/
+│       ├── index.ts
 │       ├── arithmetic.ts
 │       ├── algebra.ts
 │       ├── calculus.ts
@@ -99,53 +102,68 @@ src/
 ├── types/
 │   ├── index.ts
 │   ├── components.ts
-│   └── symbols.ts              # UPDATED: MathSymbol, GreekLetter
+│   ├── math.ts                # UPDATED: NumberProperties type
+│   └── symbols.ts
 ├── utils/math/
+│   └── numberClassification.ts # UPDATED: getNumberProperties fn
 ├── views/
 │   ├── HomeView.vue
 │   ├── NotFoundView.vue
 │   └── basics/
 │       ├── BasicsIndex.vue
-│       ├── FoundationsView.vue # UPDATED: Full content
-│       ├── SymbolsView.vue     # UPDATED: Tabbed symbol tables
-│       └── NumberTypesView.vue # UPDATED: Number hierarchy
+│       ├── FoundationsView.vue
+│       ├── SymbolsView.vue
+│       └── NumberTypesView.vue # UPDATED: Full content + explorer
 ├── App.vue
 └── main.ts
 ```
 
 #### Key Features Working
 
-- **Math Rendering**: KaTeX with custom macros (\\N, \\Z, \\Q, \\R, \\C)
-- **Syntax Highlighting**: VSCode-quality highlighting via Shiki
-- **Collapsible Content**: Accessible expand/collapse with animations
-- **Accessible Tabs**: Full keyboard navigation (arrows, Home, End)
-- **Symbol Search**: Debounced search across 80+ symbols
-- **Responsive Tables**: Cards on mobile, tables on desktop
-- **Copy to Clipboard**: Visual feedback with checkmark animation
-- **All Tests Passing**: 42 tests in number classification utility
-- **Production Build**: Successful with lazy-loaded language chunks
+- **NumberTypeExplorer**: Interactive number classification with all visualizations
+- **URL State Sync**: Shareable links via `?n=42` query params
+- **Number Line**: Auto-zoom to fit value, tick marks, position marker
+- **Venn Diagram**: Nested sets with highlighting for current value
+- **Toggleable Visualizations**: User controls visibility
+- **Comprehensive Content**: Educational explanations with Python code examples
+- **56 Tests Passing**: 42 numberClassification + 14 NumberInput tests
+- **Production Build**: Successful with lazy-loaded chunks
 
 ---
 
-## Phase 2 Summary (Complete)
+## Previous Phases
 
-Phase 2 established the app shell, navigation infrastructure, and accessibility foundations.
+### Phase 3 Summary (Complete)
+
+Phase 3 added the core content components for displaying educational material.
+
+| Increment | Description | Status |
+|-----------|-------------|--------|
+| 3A | KaTeX + MathBlock | ✅ Complete |
+| 3B | Shiki + CodeExample | ✅ Complete |
+| 3C | CollapsiblePanel + ContentSection | ✅ Complete |
+| 3D | TabGroup (Accessible Tabs) | ✅ Complete |
+| 3E | Symbol Data Files | ✅ Complete |
+| 3F | SymbolTable (Searchable) | ✅ Complete |
+| 3G | Content Integration | ✅ Complete |
+
+### Phase 2 Summary (Complete)
+
+Phase 2 established the app shell, navigation, and accessibility foundations.
 
 | Increment | Description | Status |
 |-----------|-------------|--------|
 | 2A | Theme Composable | ✅ Complete |
-| 2B | AppHeader Component | ✅ Complete |
+| 2B | AppHeader | ✅ Complete |
 | 2C | Mobile Navigation | ✅ Complete |
-| 2D | Breadcrumbs Component | ✅ Complete |
-| 2E | TopicPage Layout Wrapper | ✅ Complete |
+| 2D | Breadcrumbs | ✅ Complete |
+| 2E | TopicPage Layout | ✅ Complete |
 | 2F | AppFooter | ✅ Complete |
-| 2G | Shell Integration & Accessibility | ✅ Complete |
+| 2G | Shell Integration | ✅ Complete |
 
----
+### Phase 1 Summary (Complete)
 
-## Phase 1 Summary (Complete)
-
-Phase 1 established the development foundation:
+Phase 1 established the development foundation.
 
 | Increment | Description | Status |
 |-----------|-------------|--------|
@@ -155,28 +173,25 @@ Phase 1 established the development foundation:
 | 1D | TypeScript Type Definitions | ✅ Complete |
 | 1E | Vitest Configuration | ✅ Complete |
 | 1F | GitHub Pages Deployment | ✅ Complete |
-| 1G | ESLint & Prettier Configuration | ✅ Complete |
+| 1G | ESLint & Prettier | ✅ Complete |
 
 ---
 
 ## Next Steps
 
-### Phase 4: Interactive Widgets
-- **NumberTypeExplorer**: Interactive number classification widget
-- **URL State Sync**: Shareable widget configurations
-- **Content Migration**: Migrate content from archive folder
-- **Additional Visualizations**: Quadratic explorer, etc.
-
-### Future Phases
-- **Phase 5**: Advanced topics (Linear Algebra, Calculus)
-- **Phase 6**: Performance optimization, PWA features
+### Phase 5: Future Possibilities
+- **More Widgets**: Quadratic formula explorer, derivative visualizer
+- **Content Migration**: Bring more content from archive (algebra, calculus)
+- **Advanced Topics**: Linear algebra, statistics, calculus content
+- **Interactivity**: Animations, step-by-step solutions
+- **PWA Features**: Offline support, installability
 
 ---
 
 ## How to Resume Development
 
 1. **Start dev server**: `npm run dev`
-2. **Read Phase 4 instructions**: `instructions/phase_4/` (when available)
+2. **Read instructions**: `instructions/phase_X/` for next phase
 3. **Run verification before commits**:
    ```bash
    npm run type-check && npm run lint && npm run test && npm run build
@@ -189,20 +204,15 @@ Phase 1 established the development foundation:
 | Purpose | File |
 |---------|------|
 | Project guide | `CLAUDE.md` |
-| Phase 1 instructions | `instructions/phase_1/` |
-| Phase 2 instructions | `instructions/phase_2/` |
-| Phase 3 instructions | `instructions/phase_3/` |
-| Phase 3 completion | `docs/PHASE_3_COMPLETE.md` |
+| Phase 1-4 instructions | `instructions/phase_*/` |
+| Phase 4 completion | `docs/PHASE_4_COMPLETE.md` |
 | Accessibility guide | `docs/ACCESSIBILITY.md` |
 | Route definitions | `src/router/index.ts` |
 | Navigation data | `src/data/navigation.ts` |
-| Symbol data | `src/data/symbols/index.ts` |
-| Theme composable | `src/composables/useTheme.ts` |
-| Highlighter composable | `src/composables/useHighlighter.ts` |
+| Widget components | `src/components/widgets/` |
+| URL state composable | `src/composables/useUrlState.ts` |
 | Type definitions | `src/types/index.ts` |
 | Theme styles | `src/assets/styles/main.css` |
-| Build config | `vite.config.ts` |
-| Test config | `vitest.config.ts` |
 
 ---
 
@@ -212,12 +222,12 @@ Phase 1 established the development foundation:
 npm run dev          # Start dev server
 npm run type-check   # TypeScript validation
 npm run lint         # ESLint check (2 expected v-html warnings)
-npm run test         # Run all tests
+npm run test         # Run all 56 tests
 npm run build        # Production build
 npm run preview      # Preview production build
 ```
 
-All commands should pass without errors (lint has 2 expected warnings for v-html in KaTeX/Shiki components).
+All commands should pass without errors. Lint has 2 expected warnings for v-html in KaTeX/Shiki components.
 
 ---
 

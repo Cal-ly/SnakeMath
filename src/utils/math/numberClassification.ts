@@ -1,4 +1,4 @@
-import type { NumberClassification, NumberInput } from '@/types'
+import type { NumberClassification, NumberInput, NumberProperties } from '@/types'
 
 /**
  * Parse a string input into a NumberInput structure
@@ -251,4 +251,81 @@ type(value)  # <class 'decimal.Decimal'>`
   return `value = ${parsed.parsedReal}
 type(value)  # <class 'float'>
 value.is_integer()  # ${classification.isInteger}`
+}
+
+/**
+ * Check if a number is prime
+ */
+function isPrime(n: number): boolean {
+  if (n < 2) return false
+  if (n === 2) return true
+  if (n % 2 === 0) return false
+  for (let i = 3; i <= Math.sqrt(n); i += 2) {
+    if (n % i === 0) return false
+  }
+  return true
+}
+
+/**
+ * Get detailed properties of a number for display
+ */
+export function getNumberProperties(
+  parsed: NumberInput,
+  input: string
+): NumberProperties {
+  // Complex number
+  if (parsed.parsedImaginary !== undefined && parsed.parsedImaginary !== 0) {
+    const real = parsed.parsedReal || 0
+    const imag = parsed.parsedImaginary
+    return {
+      type: 'complex',
+      value: { real, imag },
+      realPart: real,
+      imaginaryPart: imag,
+      isSpecial: false,
+    }
+  }
+
+  const value = parsed.parsedReal!
+
+  // Special values (infinity)
+  if (!Number.isFinite(value)) {
+    return {
+      type: 'special',
+      value,
+      isSpecial: true,
+      specialName: value === Infinity ? '∞' : '-∞',
+    }
+  }
+
+  const isInt = Number.isInteger(value)
+  const sign = Math.sign(value)
+
+  // Check for known constants
+  const lowerInput = input.toLowerCase().trim()
+  const isSpecialConstant = ['pi', 'π', 'e'].includes(lowerInput)
+
+  // Determine the most specific type
+  let type: NumberProperties['type']
+  if (isInt && value >= 1) {
+    type = 'natural'
+  } else if (isInt) {
+    type = 'integer'
+  } else if (isSpecialConstant) {
+    type = 'irrational'
+  } else {
+    type = 'rational'
+  }
+
+  return {
+    type,
+    value,
+    sign,
+    isInteger: isInt,
+    isEven: isInt ? value % 2 === 0 : undefined,
+    isPrime: isInt && value > 1 ? isPrime(value) : undefined,
+    absoluteValue: Math.abs(value),
+    isSpecial: isSpecialConstant,
+    specialName: isSpecialConstant ? input.trim() : undefined,
+  }
 }

@@ -106,7 +106,7 @@ const siteStructure = [
 
         <img src="/img/dont-know-snake-math-small.gif" alt="Don't know Snake Math meme" class="w-full max-w-md mx-auto rounded-lg my-4">
 
-        <h3 class="text-xl font-semibold text-text-primary mt-6 mb-3">...But wait, you can!</h3>
+        <h3 class="text-xl font-semibold text-text-primary mt-6 mb-3 text-center">...But wait, you can!</h3>
 
         <p class="text-text-muted mt-4 italic">
           That big and scary-looking <code class="text-primary">Σ</code> is basically just a for

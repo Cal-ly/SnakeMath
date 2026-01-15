@@ -24,6 +24,7 @@ export type {
   WidgetState,
   CalculationResult,
   CalculationStep,
+  NumberProperties,
 } from './math'
 
 // Component prop types
