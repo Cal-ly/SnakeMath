@@ -46,8 +46,23 @@ export const topics: NavTopic[] = [
       },
     ],
   },
+  {
+    id: 'algebra',
+    title: 'Algebra',
+    description: 'Equations, patterns, and the language of mathematics',
+    faIcon: 'fa-solid fa-superscript',
+    path: '/algebra',
+    subtopics: [
+      {
+        id: 'summation',
+        title: 'Summation Notation',
+        description: 'Sigma is just a for loop',
+        path: '/algebra/summation',
+        faIcon: 'fa-solid fa-sigma',
+      },
+    ],
+  },
   // Future topics will be added here:
-  // { id: 'algebra', title: 'Algebra', ... },
   // { id: 'statistics', title: 'Statistics', ... },
 ]
 

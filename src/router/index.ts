@@ -29,6 +29,17 @@ const router = createRouter({
       name: 'basics-number-types',
       component: () => import('@/views/basics/NumberTypesView.vue'),
     },
+    // Algebra section
+    {
+      path: '/algebra',
+      name: 'algebra',
+      component: () => import('@/views/algebra/AlgebraIndex.vue'),
+    },
+    {
+      path: '/algebra/summation',
+      name: 'algebra-summation',
+      component: () => import('@/views/algebra/SummationView.vue'),
+    },
     // Catch-all 404
     {
       path: '/:pathMatch(.*)*',
