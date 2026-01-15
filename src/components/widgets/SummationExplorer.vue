@@ -1,6 +1,6 @@
 <script setup lang="ts">
 import { ref, computed, onMounted } from 'vue'
-import { BoundsInput, PresetSelector, SummationResult } from './summation'
+import { BoundsInput, PresetSelector, SummationResult, SummationCodeParallel } from './summation'
 import { evaluateSummation, getPresetExpression } from '@/utils/math/summation'
 import { useUrlState } from '@/composables'
 import type { SummationPresetId, SummationResult as SummationResultType } from '@/types/math'
@@ -199,20 +199,19 @@ function handlePresetUpdate(val: SummationPresetId) {
       </div>
     </div>
 
-    <!-- Placeholder sections for future increments -->
-    <div v-if="showCodeParallel || showVisualization || showFormulaComparison" class="mt-6">
-      <div class="grid gap-4 md:grid-cols-2 lg:grid-cols-3">
-        <!-- Code Parallel (5D) -->
-        <div
-          v-if="showCodeParallel"
-          class="card p-4 border-2 border-dashed border-border text-center"
-        >
-          <p class="text-text-muted text-sm">
-            <i class="fa-solid fa-code mr-1" aria-hidden="true" />
-            Code Parallel (5D)
-          </p>
-        </div>
+    <!-- Code Parallel Display (5D) -->
+    <div v-if="showCodeParallel && isValid" class="mt-6">
+      <SummationCodeParallel
+        :preset="preset"
+        :start="start"
+        :end="end"
+        :total="result.total"
+      />
+    </div>
 
+    <!-- Placeholder sections for future increments -->
+    <div v-if="showVisualization || showFormulaComparison" class="mt-6">
+      <div class="grid gap-4 md:grid-cols-2">
         <!-- Visualization (5E) -->
         <div
           v-if="showVisualization"
