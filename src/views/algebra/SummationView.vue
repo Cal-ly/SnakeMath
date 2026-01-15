@@ -1,6 +1,7 @@
 <script setup lang="ts">
 import TopicPage from '@/components/content/TopicPage.vue'
 import ContentSection from '@/components/content/ContentSection.vue'
+import { SummationExplorer } from '@/components/widgets'
 </script>
 
 <template>
@@ -20,14 +21,15 @@ import ContentSection from '@/components/content/ContentSection.vue'
 
       <ContentSection id="explorer" title="Interactive Explorer">
         <p class="text-text-secondary mb-4">
-          The full SummationExplorer widget will be added here in subsequent increments.
+          Experiment with different summation formulas. Select an expression, adjust the bounds, and
+          see how the sum is calculated.
         </p>
-        <div
-          class="border-2 border-dashed border-border rounded-lg p-8 text-center text-text-muted"
-        >
-          <i class="fa-solid fa-sigma text-4xl mb-2" aria-hidden="true" />
-          <p>SummationExplorer Widget Coming Soon</p>
-        </div>
+        <SummationExplorer
+          :initial-preset="'arithmetic'"
+          :initial-start="1"
+          :initial-end="10"
+          :sync-url="true"
+        />
       </ContentSection>
     </div>
   </TopicPage>
