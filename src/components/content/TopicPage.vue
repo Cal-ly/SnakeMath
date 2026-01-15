@@ -9,8 +9,8 @@ interface Props {
   title?: string
   /** Page description - overrides auto-detected description */
   description?: string
-  /** Custom icon (emoji or Font Awesome class) */
-  icon?: string
+  /** Custom icon (Font Awesome class) */
+  faIcon?: string
   /** Whether to show breadcrumbs */
   showBreadcrumbs?: boolean
 }
@@ -18,7 +18,7 @@ interface Props {
 const props = withDefaults(defineProps<Props>(), {
   title: undefined,
   description: undefined,
-  icon: undefined,
+  faIcon: undefined,
   showBreadcrumbs: true,
 })
 
@@ -45,15 +45,15 @@ const autoDescription = computed(() => {
   return ''
 })
 
-const autoIcon = computed(() => {
+const autoFaIcon = computed(() => {
   const topic = getTopicByPath(route.path)
-  if (topic && topic.path === route.path) return topic.icon
+  if (topic && topic.path === route.path) return topic.faIcon
   return ''
 })
 
 const displayTitle = computed(() => props.title || autoTitle.value)
 const displayDescription = computed(() => props.description || autoDescription.value)
-const displayIcon = computed(() => props.icon || autoIcon.value)
+const displayFaIcon = computed(() => props.faIcon || autoFaIcon.value)
 
 const breadcrumbs = computed(() => getBreadcrumbs(route.path))
 </script>
@@ -66,7 +66,7 @@ const breadcrumbs = computed(() => getBreadcrumbs(route.path))
     <!-- Page Header -->
     <header>
       <h1 class="text-2xl md:text-3xl font-bold text-text-primary flex items-center gap-3">
-        <span v-if="displayIcon" aria-hidden="true">{{ displayIcon }}</span>
+        <i v-if="displayFaIcon" :class="[displayFaIcon, 'text-primary']" aria-hidden="true" />
         {{ displayTitle }}
       </h1>
       <p v-if="displayDescription" class="text-text-secondary mt-2 text-lg">

@@ -4,28 +4,24 @@ import { topics } from '@/data/navigation'
 const features = [
   {
     icon: 'fa-solid fa-gamepad',
-    emoji: '🎮',
     title: 'Interactive Learning',
     description:
       'Explore mathematical concepts through hands-on examples with interactive visualizations.',
   },
   {
     icon: 'fa-solid fa-layer-group',
-    emoji: '📚',
     title: 'Progressive Curriculum',
     description:
       'Start with basics and gradually build up to advanced topics like calculus and linear algebra.',
   },
   {
     icon: 'fa-solid fa-flask',
-    emoji: '🔬',
     title: 'Real-World Applications',
     description:
       'See how mathematical concepts apply to real programming problems and data science.',
   },
   {
     icon: 'fa-solid fa-chart-line',
-    emoji: '📊',
     title: 'Visual Understanding',
     description:
       'Use charts, graphs, and interactive components to visualize mathematical relationships.',
@@ -76,19 +72,6 @@ const siteStructure = [
       </div>
     </section>
 
-    <!-- Features Grid -->
-    <section class="grid gap-6 sm:grid-cols-2 lg:grid-cols-4">
-      <div v-for="feature in features" :key="feature.title" class="card p-6 text-center">
-        <div class="text-3xl mb-3" aria-hidden="true">
-          {{ feature.emoji }}
-        </div>
-        <h2 class="font-semibold text-text-primary mb-2">{{ feature.title }}</h2>
-        <p class="text-sm text-text-muted">
-          {{ feature.description }}
-        </p>
-      </div>
-    </section>
-
     <!-- The "Hrumph" Section - Personal Story -->
     <section class="card p-6 md:p-8">
       <div class="max-w-3xl mx-auto">
@@ -111,6 +94,19 @@ const siteStructure = [
         <p class="text-text-muted mt-4 italic">
           That big and scary-looking <code class="text-primary">Σ</code> is basically just a for
           loop adding all the variables together.
+        </p>
+      </div>
+    </section>
+
+    <!-- Features Grid -->
+    <section class="grid gap-6 sm:grid-cols-2 lg:grid-cols-4">
+      <div v-for="feature in features" :key="feature.title" class="card p-6 text-center">
+        <div class="text-3xl mb-3 text-primary" aria-hidden="true">
+          <i :class="feature.icon" />
+        </div>
+        <h2 class="font-semibold text-text-primary mb-2">{{ feature.title }}</h2>
+        <p class="text-sm text-text-muted">
+          {{ feature.description }}
         </p>
       </div>
     </section>
@@ -145,7 +141,7 @@ const siteStructure = [
           class="card p-6 hover:border-primary hover:shadow-md transition-all group"
         >
           <div class="flex items-start gap-4">
-            <span class="text-3xl" aria-hidden="true">{{ topic.icon }}</span>
+            <i :class="[topic.faIcon, 'text-3xl text-primary']" aria-hidden="true" />
             <div class="flex-1">
               <h3
                 class="font-semibold text-text-primary group-hover:text-primary transition-colors"

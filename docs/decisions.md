@@ -516,3 +516,191 @@ background-color: color-mix(in srgb, var(--color-primary) 10%, transparent);
 ```
 
 **Trade-off**: Slightly more verbose than Tailwind utilities. Necessary workaround.
+
+---
+
+## Phase 4 Decisions
+
+### D-031: useUrlState Composable for Shareable Widget States
+**Decision**: Create a dedicated `useUrlState` composable for bi-directional URL query parameter synchronization.
+
+**Rationale**:
+- Validates the D-001 decision (no Pinia, use URL for shareable state)
+- Reusable across multiple widgets
+- Encapsulates debouncing, encoding, and router integration
+- Composable pattern fits Vue 3 idioms
+
+**Implementation**:
+```typescript
+export function useUrlState(key: string, defaultValue: string) {
+  const route = useRoute()
+  const router = useRouter()
+
+  // Initialize from URL or default
+  const value = ref(route.query[key]?.toString() ?? defaultValue)
+
+  // Debounced sync to URL
+  watch(value, (newValue) => {
+    // ... debounced router.replace
+  })
+
+  return { value, setValue }
+}
+```
+
+---
+
+### D-032: Debounce Duration of 300ms for URL Updates
+**Decision**: Use 300ms debounce delay when syncing state to URL query parameters.
+
+**Rationale**:
+- Fast enough to feel responsive
+- Slow enough to batch rapid keystrokes
+- Matches the search debounce duration (D-024) for consistency
+- Prevents browser history from being spammed
+
+**Trade-off**: Very fast typists might see a slight delay before URL updates. Acceptable for the benefit of clean history.
+
+---
+
+### D-033: router.replace Over router.push for URL State
+**Decision**: Use `router.replace()` instead of `router.push()` when updating URL query parameters from widget state.
+
+**Rationale**:
+- Doesn't create new history entries for each state change
+- Back button works as expected (returns to previous page, not previous state)
+- Reduces memory usage from history stack
+- Users can still share current URL
+
+**Trade-off**: Users cannot use browser back/forward to navigate widget state history. This is intentional — use explicit undo/redo if needed.
+
+---
+
+### D-034: NumberTypeExplorer as Composition of Sub-Components
+**Decision**: Build the NumberTypeExplorer from discrete sub-components rather than one monolithic component.
+
+**Rationale**:
+- Each sub-component has single responsibility
+- Easier to test individual pieces
+- Components can be reused in other contexts
+- Maintainable and extensible
+
+**Component Structure**:
+```
+NumberTypeExplorer (orchestrator)
+├── NumberInput (validated input)
+├── SetMembershipDisplay (ℕ, ℤ, ℚ, ℝ, ℂ checklist)
+├── NumberProperties (type, sign, parity grid)
+├── NumberLine (SVG visualization)
+├── SetVennDiagram (SVG nested circles)
+└── VisualizationToggle (show/hide controls)
+```
+
+---
+
+### D-035: SVG for Mathematical Visualizations
+**Decision**: Use inline SVG for the number line and Venn diagram visualizations instead of Canvas or a charting library.
+
+**Rationale**:
+- Vue can bind directly to SVG attributes (reactive updates)
+- Scalable and crisp at any size
+- No external dependencies
+- Accessible (can add ARIA labels, titles)
+- Lightweight for our simple visualization needs
+
+**Trade-offs**:
+- More complex visualizations might need a library (D3, Chart.js)
+- Manual calculation of positions and scaling
+- No built-in animation library (CSS transitions work though)
+
+---
+
+### D-036: Auto-Zoom Number Line Based on Value Magnitude
+**Decision**: Number line automatically adjusts its range based on the magnitude of the displayed number.
+
+**Rationale**:
+- Static range (e.g., -10 to 10) would clip large numbers
+- Infinite range would make small numbers invisible
+- Auto-zoom provides optimal viewing for any input
+- Educational: shows relative position regardless of scale
+
+**Implementation**:
+- Values ≤ 10: range -10 to 10
+- Values ≤ 100: range -100 to 100
+- Larger values: scale to nearest power of 10
+
+---
+
+### D-037: Nested Circles for Set Venn Diagram
+**Decision**: Represent the number set hierarchy (ℕ ⊂ ℤ ⊂ ℚ ⊂ ℝ ⊂ ℂ) as concentric nested circles rather than overlapping Venn-style ovals.
+
+**Rationale**:
+- Accurately represents proper subset relationships
+- Simpler to implement and understand
+- Clear visual hierarchy (larger = contains more)
+- No ambiguous overlap regions
+
+**Implementation**:
+- ℂ: largest circle (outermost)
+- ℝ, ℚ, ℤ, ℕ: progressively smaller, nested inside
+- Active sets highlighted with color
+
+---
+
+### D-038: Example Numbers Organized by Category
+**Decision**: Provide pre-defined example numbers grouped by their mathematical category.
+
+**Rationale**:
+- Helps users explore edge cases
+- Educational: shows examples of each number type
+- Faster than typing complex numbers
+- Demonstrates widget capabilities
+
+**Categories**:
+- Natural (1, 7, 42)
+- Integers (-5, 0)
+- Rational (1/2, 3/4)
+- Irrational (π, e, √2)
+- Complex (3+4i, i)
+
+---
+
+### D-039: Optional URL Sync via Props
+**Decision**: URL state synchronization in NumberTypeExplorer is opt-in via `syncUrl` prop, not default behavior.
+
+**Rationale**:
+- Not all widget instances need shareable URLs
+- Allows widget to be used in contexts where URL sync is undesirable
+- Explicit is better than implicit
+- Avoids conflicts if multiple widgets try to use same URL key
+
+**Usage**:
+```vue
+<!-- URL sync enabled -->
+<NumberTypeExplorer sync-url url-key="n" />
+
+<!-- Local state only (default) -->
+<NumberTypeExplorer initial-value="42" />
+```
+
+---
+
+### D-040: NumberProperties Type for Extended Classification
+**Decision**: Create a dedicated `NumberProperties` type that extends basic classification with additional properties.
+
+**Rationale**:
+- Basic classification (isNatural, isInteger, etc.) is for set membership
+- Extended properties (isPrime, isEven, sign) provide educational value
+- Separation of concerns: classification vs properties
+- Type safety for property display
+
+**Implementation**:
+```typescript
+interface NumberProperties {
+  type: string         // "Natural" | "Integer" | etc.
+  sign: string         // "Positive" | "Negative" | "Zero"
+  parity: string       // "Even" | "Odd" | "N/A"
+  isPrime: boolean
+  // ... additional properties
+}
+```

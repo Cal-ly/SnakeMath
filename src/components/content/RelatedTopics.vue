@@ -5,7 +5,7 @@ interface RelatedTopic {
   title: string
   path: string
   description?: string
-  icon?: string
+  faIcon?: string
 }
 
 interface Props {
@@ -33,9 +33,11 @@ withDefaults(defineProps<Props>(), {
         class="card p-4 hover:border-primary transition-colors group"
       >
         <div class="flex items-start gap-3">
-          <span v-if="topic.icon" class="text-lg" aria-hidden="true">
-            {{ topic.icon }}
-          </span>
+          <i
+            v-if="topic.faIcon"
+            :class="[topic.faIcon, 'text-lg text-primary']"
+            aria-hidden="true"
+          />
           <div>
             <span
               class="font-medium text-text-primary group-hover:text-primary transition-colors"

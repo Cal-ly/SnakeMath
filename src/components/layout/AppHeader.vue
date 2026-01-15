@@ -47,7 +47,7 @@ function isActiveRoute(path: string): boolean {
                 : 'text-white/90 hover:bg-white/10 hover:text-white',
             ]"
           >
-            <span class="mr-2" aria-hidden="true">{{ topic.icon }}</span>
+            <i :class="topic.faIcon" class="mr-2" aria-hidden="true" />
             {{ topic.title }}
           </RouterLink>
         </nav>

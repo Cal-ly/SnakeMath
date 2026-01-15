@@ -401,3 +401,194 @@ Phase 3 introduced content rendering and data organization patterns:
 2. Singleton patterns are essential for expensive initializations like syntax highlighters
 3. Keep computed properties pure by returning objects with success/error states
 4. Responsive design sometimes requires separate markup for different screen sizes
+
+---
+
+## Phase 4: Interactive Widgets
+
+### LL-014: Unused Variable in Vue `defineProps`
+**Issue**: When defining props with TypeScript, assigning `defineProps` to a variable that's only used in the template triggers ESLint's `@typescript-eslint/no-unused-vars` error.
+
+**Code**:
+```typescript
+// Error: 'props' is assigned a value but never used
+const props = defineProps<Props>()
+```
+
+**Resolution**: If props are only accessed in the template, omit the variable assignment:
+```typescript
+// Template can still access props directly
+defineProps<Props>()
+```
+
+**Lesson**: Vue's `defineProps` makes props available to the template automatically. Only assign to a variable if you need to access props in `<script setup>` code.
+
+---
+
+### LL-015: URL State Sync Requires Debouncing
+**Issue**: Updating URL query parameters on every keystroke creates excessive browser history entries and can cause performance issues.
+
+**Resolution**: Implement debounced URL updates:
+```typescript
+watch(value, (newValue) => {
+  clearTimeout(debounceTimer)
+  debounceTimer = window.setTimeout(() => {
+    router.replace({ query: { ...route.query, [key]: newValue } })
+  }, 300)
+})
+```
+
+**Lesson**: Always debounce URL state synchronization to prevent history spam. Use `router.replace` instead of `router.push` to avoid cluttering the back button history.
+
+---
+
+### LL-016: Encoding Special Characters in URL Parameters
+**Issue**: Complex numbers like `3+4i` contain the `+` character, which has special meaning in URLs (represents a space).
+
+**Resolution**: Use `encodeURIComponent` when setting URL parameters:
+```typescript
+router.replace({
+  query: { [key]: encodeURIComponent(value) }
+})
+```
+
+**Lesson**: Always encode URL parameter values that may contain special characters (`+`, `&`, `=`, `#`, etc.). The browser's native URL handling may not encode all characters correctly.
+
+---
+
+### LL-017: Number Line Auto-Zoom Calculation
+**Issue**: Fixed-range number lines don't work for numbers of vastly different magnitudes (1 vs 1000000).
+
+**Resolution**: Calculate appropriate bounds based on the number's magnitude:
+```typescript
+const range = computed(() => {
+  const absValue = Math.abs(numericValue.value)
+  if (absValue <= 10) return { min: -10, max: 10 }
+  if (absValue <= 100) return { min: -100, max: 100 }
+  // Scale to nearest power of 10
+  const magnitude = Math.pow(10, Math.ceil(Math.log10(absValue)))
+  return { min: -magnitude, max: magnitude }
+})
+```
+
+**Lesson**: Visualizations need to adapt to the data they're displaying. Consider the full range of possible inputs when designing visual components.
+
+---
+
+### LI-010: Computed Getter/Setter for Bidirectional Binding
+**Identified**: When a component needs to support both local state and external state (like URL sync), use a computed with getter/setter.
+
+```typescript
+const inputValue = computed({
+  get: () => (urlState ? urlState.value.value : localValue.value),
+  set: (val: string) => {
+    if (urlState) {
+      urlState.setValue(val)
+    } else {
+      localValue.value = val
+    }
+  },
+})
+```
+
+**Note**: This pattern allows the same component to work with different state sources without conditional logic scattered throughout the component.
+
+---
+
+### LI-011: SVG for Data Visualizations
+**Identified**: SVG is excellent for mathematical visualizations in Vue components.
+
+**Benefits**:
+- Scalable at any size (Retina displays, zoom)
+- Can use Vue's reactive bindings directly
+- Accessible (can add ARIA labels, titles)
+- Animatable with CSS transitions
+- Crisp lines and text at any scale
+
+**Pattern**:
+```vue
+<svg :viewBox="`0 0 ${width} ${height}`" class="w-full">
+  <line v-for="tick in ticks" :key="tick" ... />
+  <circle :cx="position" :cy="center" r="8" />
+</svg>
+```
+
+**Note**: Use `viewBox` for responsive sizing and calculate positions as percentages or relative units.
+
+---
+
+### LI-012: Example Numbers by Category
+**Identified**: Providing categorized example numbers enhances widget usability and educational value.
+
+```typescript
+export const exampleNumbers = {
+  natural: ['1', '7', '42', '100'],
+  integers: ['-5', '0', '-42'],
+  rational: ['1/2', '3/4', '-2/3', '0.5'],
+  irrational: ['π', 'e', '√2', 'φ'],
+  complex: ['3+4i', '2-i', 'i', '-1+0i'],
+}
+```
+
+**Note**: Categorized examples help users explore edge cases and understand number classifications better.
+
+---
+
+### LI-013: Venn Diagram as Nested Circles
+**Identified**: Mathematical set relationships (ℕ ⊂ ℤ ⊂ ℚ ⊂ ℝ ⊂ ℂ) visualize well as nested circles.
+
+**Pattern**:
+- Larger circles represent supersets
+- Smaller circles (subsets) are contained within
+- Highlighting shows which sets contain the current value
+- Labels placed at set boundaries
+
+**Implementation Notes**:
+- Use different fill opacities for visual hierarchy
+- Transition colors smoothly when value changes
+- Consider color-blind accessible palettes
+
+---
+
+### LI-014: Primality Checking for Educational Context
+**Identified**: Adding primality checking enhances the NumberTypeExplorer with additional mathematical insight.
+
+```typescript
+function isPrime(n: number): boolean {
+  if (!Number.isInteger(n) || n < 2) return false
+  if (n === 2) return true
+  if (n % 2 === 0) return false
+  for (let i = 3; i <= Math.sqrt(n); i += 2) {
+    if (n % i === 0) return false
+  }
+  return true
+}
+```
+
+**Note**: Include primality as a "bonus" property alongside standard number classification. It adds educational value without overcomplicating the main classification.
+
+---
+
+## Phase 4 Summary
+
+Phase 4 introduced interactive widgets with URL state synchronization and visualizations:
+
+**Lessons Learned (LL)**:
+- LL-014: Unused variable in Vue `defineProps`
+- LL-015: URL state sync requires debouncing
+- LL-016: Encoding special characters in URL parameters
+- LL-017: Number line auto-zoom calculation
+
+**Lessons Identified (LI)**:
+- LI-010: Computed getter/setter for bidirectional binding
+- LI-011: SVG for data visualizations
+- LI-012: Example numbers by category
+- LI-013: Venn diagram as nested circles
+- LI-014: Primality checking for educational context
+
+**Key Takeaways**:
+1. URL state synchronization needs careful handling (debouncing, encoding, replace vs push)
+2. SVG is the right choice for mathematical visualizations in Vue
+3. Computed getter/setter enables flexible state binding patterns
+4. Visualizations should adapt to their data (auto-zoom, scaling)
+5. Educational widgets benefit from curated examples and bonus insights

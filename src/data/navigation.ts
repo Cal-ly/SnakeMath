@@ -2,7 +2,6 @@ export interface NavTopic {
   id: string
   title: string
   description: string
-  icon: string
   faIcon: string // Font Awesome icon class
   path: string
   subtopics: NavSubtopic[]
@@ -21,7 +20,6 @@ export const topics: NavTopic[] = [
     id: 'basics',
     title: 'Foundations',
     description: 'Core mathematical concepts every programmer should know',
-    icon: '🧱',
     faIcon: 'fa-solid fa-cubes',
     path: '/basics',
     subtopics: [
