@@ -1,0 +1,11 @@
+{
+  "extends": "./tsconfig.app.json",
+  "include": ["src/**/*.test.ts", "src/**/__tests__/*", "src/test/**/*", "env.d.ts"],
+  "exclude": ["archive/**/*"],
+  "compilerOptions": {
+    "tsBuildInfoFile": "./node_modules/.tmp/tsconfig.vitest.tsbuildinfo",
+
+    "lib": [],
+    "types": ["node", "jsdom", "vitest/globals"]
+  }
+}

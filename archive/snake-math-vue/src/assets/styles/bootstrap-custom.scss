@@ -1,0 +1,221 @@
+// Bootstrap Custom Variables and Overrides
+// This file customizes Bootstrap variables to match our design system
+
+// Import Bootstrap functions and variables first
+@import 'bootstrap/scss/functions';
+@import 'bootstrap/scss/variables';
+
+// Color System Override
+// Primary color matches our snake theme
+$primary: #10b981; // Green-500 (emerald)
+$secondary: #6b7280; // Gray-500
+$success: #22c55e; // Green-500
+$info: #3b82f6; // Blue-500
+$warning: #f59e0b; // Amber-500
+$danger: #ef4444; // Red-500
+$light: #f9fafb; // Gray-50
+$dark: #111827; // Gray-900
+
+// Typography
+$font-family-sans-serif: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+$font-family-monospace: 'JetBrains Mono', 'Fira Code', 'SF Mono', Monaco, monospace;
+
+$font-size-base: 1rem;
+$line-height-base: 1.6;
+
+$h1-font-size: 2.5rem;
+$h2-font-size: 2rem;
+$h3-font-size: 1.5rem;
+$h4-font-size: 1.25rem;
+$h5-font-size: 1.125rem;
+$h6-font-size: 1rem;
+
+// Spacing
+$spacer: 1rem;
+$spacers: (
+  0: 0,
+  1: $spacer * 0.25, // 4px
+  2: $spacer * 0.5,  // 8px
+  3: $spacer * 1,    // 16px
+  4: $spacer * 1.5,  // 24px
+  5: $spacer * 2,    // 32px
+  6: $spacer * 3,    // 48px
+  7: $spacer * 4,    // 64px
+);
+
+// Border radius
+$border-radius: 0.5rem;
+$border-radius-sm: 0.25rem;
+$border-radius-lg: 0.75rem;
+$border-radius-xl: 1rem;
+
+// Shadows
+$box-shadow-sm: 0 1px 2px rgba(0, 0, 0, 0.05);
+$box-shadow: 0 4px 6px rgba(0, 0, 0, 0.07);
+$box-shadow-lg: 0 10px 15px rgba(0, 0, 0, 0.1);
+
+// Component specific customizations
+$navbar-padding-y: 1rem;
+$navbar-padding-x: 1.5rem;
+
+$btn-padding-y: 0.5rem;
+$btn-padding-x: 1rem;
+$btn-border-radius: $border-radius;
+
+$card-border-radius: $border-radius-lg;
+$card-border-width: 1px;
+$card-border-color: rgba(0, 0, 0, 0.125);
+
+// Import Bootstrap with our customizations
+@import 'bootstrap/scss/bootstrap';
+
+// Custom utility classes
+.text-snake {
+  color: $primary !important;
+}
+
+.bg-snake {
+  background-color: $primary !important;
+}
+
+.border-snake {
+  border-color: $primary !important;
+}
+
+// Mathematical content specific styles
+.math-content {
+  .katex {
+    font-size: 1.1em;
+  }
+  
+  .katex-display {
+    margin: 1.5em 0;
+    text-align: center;
+  }
+}
+
+// Canvas and visualization styles
+.canvas-container {
+  @extend .border;
+  @extend .rounded;
+  @extend .bg-light;
+  @extend .p-3;
+  @extend .shadow-sm;
+  
+  canvas {
+    @extend .border;
+    @extend .rounded;
+    max-width: 100%;
+    height: auto;
+  }
+}
+
+// Interactive controls
+.math-controls {
+  @extend .card;
+  @extend .mb-4;
+  
+  .control-group {
+    @extend .mb-3;
+    
+    label {
+      @extend .form-label;
+      @extend .fw-medium;
+    }
+    
+    input[type="range"] {
+      @extend .form-range;
+    }
+    
+    .control-value {
+      @extend .badge;
+      @extend .bg-light;
+      @extend .text-dark;
+      font-family: $font-family-monospace;
+    }
+  }
+}
+
+// Topic navigation customizations
+.topic-nav-button {
+  @extend .btn;
+  @extend .btn-outline-secondary;
+  @extend .me-2;
+  @extend .mb-2;
+  
+  &.active {
+    @extend .btn-primary;
+  }
+  
+  i {
+    @extend .me-1;
+  }
+}
+
+// Header customizations
+.app-header {
+  @extend .sticky-top;
+  @extend .shadow-sm;
+}
+
+// Responsive utilities for mathematical content
+@include media-breakpoint-down(md) {
+  .math-content {
+    font-size: 0.9rem;
+    
+    .katex {
+      font-size: 1em;
+    }
+  }
+  
+  .canvas-container {
+    padding: 0.75rem;
+    
+    canvas {
+      max-width: 100%;
+      height: auto;
+    }
+  }
+}
+
+// Dark theme support
+[data-bs-theme="dark"] {
+  --bs-body-bg: #{$dark};
+  --bs-body-color: #{$light};
+  --bs-border-color: rgba(255, 255, 255, 0.1);
+  
+  .bg-light {
+    background-color: #{darken($dark, 3%)} !important;
+    border-color: rgba(255, 255, 255, 0.1) !important;
+  }
+  
+  .border-bottom {
+    border-color: rgba(255, 255, 255, 0.1) !important;
+  }
+  
+  .text-muted {
+    color: rgba(255, 255, 255, 0.6) !important;
+  }
+}
+
+// Auto dark mode based on system preference
+@media (prefers-color-scheme: dark) {
+  :root:not([data-bs-theme]) {
+    --bs-body-bg: #{$dark};
+    --bs-body-color: #{$light};
+    --bs-border-color: rgba(255, 255, 255, 0.1);
+  }
+  
+  :root:not([data-bs-theme]) .bg-light {
+    background-color: #{darken($dark, 3%)} !important;
+    border-color: rgba(255, 255, 255, 0.1) !important;
+  }
+  
+  :root:not([data-bs-theme]) .border-bottom {
+    border-color: rgba(255, 255, 255, 0.1) !important;
+  }
+  
+  :root:not([data-bs-theme]) .text-muted {
+    color: rgba(255, 255, 255, 0.6) !important;
+  }
+}

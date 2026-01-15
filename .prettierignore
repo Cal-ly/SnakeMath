@@ -1,0 +1,18 @@
+# Build outputs
+dist
+dist-ssr
+coverage
+
+# Dependencies
+node_modules
+
+# Archive (old implementation)
+archive
+
+# Generated files
+*.min.js
+*.min.css
+
+# Config files that have specific formatting
+*.config.js
+*.config.ts

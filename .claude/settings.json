@@ -1,0 +1,204 @@
+{
+  "$schema": "https://claude.ai/code/settings-schema.json",
+  
+  "permissions": {
+    "allow": [
+      // ===================
+      // NPM / Node Commands
+      // ===================
+      "npm install",
+      "npm install *",
+      "npm ci",
+      "npm run dev",
+      "npm run build",
+      "npm run preview",
+      "npm run test",
+      "npm run test:run",
+      "npm run test:watch",
+      "npm run test:coverage",
+      "npm run lint",
+      "npm run lint:fix",
+      "npm run format",
+      "npm run format:check",
+      "npm run type-check",
+      "npm list",
+      "npm list *",
+      "npm outdated",
+      "npm audit",
+      "npm init *",
+      "npm create *",
+      "npm exec *",
+      "npm pkg *",
+      "npx *",
+      
+      // ===================
+      // Git - Read/Safe Operations
+      // ===================
+      "git status",
+      "git status *",
+      "git diff",
+      "git diff *",
+      "git log",
+      "git log *",
+      "git branch",
+      "git branch -a",
+      "git branch -v",
+      "git branch --list",
+      "git show",
+      "git show *",
+      "git remote -v",
+      "git fetch",
+      "git fetch *",
+      "git stash list",
+      "git config --list",
+      "git config --get *",
+      
+      // Git - Common write operations
+      "git add *",
+      "git add .",
+      "git commit *",
+      "git commit -m *",
+      "git checkout *",
+      "git checkout -b *",
+      "git switch *",
+      "git switch -c *",
+      "git merge *",
+      "git pull",
+      "git pull *",
+      "git push",
+      "git push *",
+      "git stash",
+      "git stash *",
+      "git restore *",
+      "git reset HEAD *",
+      "git clean -n *",
+      
+      // ===================
+      // File System - Read Operations
+      // ===================
+      "ls",
+      "ls *",
+      "ll",
+      "ll *",
+      "la",
+      "la *",
+      "cat *",
+      "head *",
+      "tail *",
+      "less *",
+      "more *",
+      "wc *",
+      "file *",
+      "stat *",
+      "du *",
+      "df *",
+      "tree",
+      "tree *",
+      "find *",
+      "grep *",
+      "rg *",
+      "ag *",
+      "awk *",
+      "sed -n *",
+      "diff *",
+      "which *",
+      "whereis *",
+      "type *",
+      "pwd",
+      "realpath *",
+      "dirname *",
+      "basename *",
+      
+      // ===================
+      // File System - Safe Write Operations
+      // ===================
+      "mkdir *",
+      "mkdir -p *",
+      "touch *",
+      "cp *",
+      "cp -r *",
+      "mv *",
+      "ln *",
+      "ln -s *",
+      
+      // ===================
+      // Environment / Shell
+      // ===================
+      "echo *",
+      "printf *",
+      "env",
+      "printenv",
+      "printenv *",
+      "date",
+      "date *",
+      "whoami",
+      "id",
+      "uname *",
+      "hostname",
+      "uptime",
+      
+      // ===================
+      // Node/TypeScript Specific
+      // ===================
+      "node *",
+      "node --version",
+      "tsc *",
+      "tsc --version",
+      "vue-tsc *",
+      "vite *",
+      "vitest *",
+      "eslint *",
+      "prettier *",
+      "tailwindcss *",
+      
+      // ===================
+      // Package Info
+      // ===================
+      "npm view *",
+      "npm info *",
+      "npm search *",
+      "npm docs *",
+      "npm repo *"
+    ],
+    
+    "ask": [
+      // Destructive git operations
+      "git push --force",
+      "git push -f",
+      "git push --force-with-lease",
+      "git reset --hard *",
+      "git clean -f *",
+      "git clean -fd *",
+      "git branch -D *",
+      "git branch --delete --force *",
+      
+      // Dangerous file operations
+      "rm -rf /",
+      "rm -rf /*",
+      "rm -rf ~",
+      "rm -rf ~/*",
+      "rm -rf .",
+      "chmod -R 777 *",
+      "chown -R *",
+      
+      // System modification
+      "sudo *",
+      "su *",
+      "shutdown *",
+      "reboot *",
+      "systemctl *",
+      "service *",
+      
+      // Network/download without review
+      "curl * | bash",
+      "curl * | sh",
+      "wget * | bash",
+      "wget * | sh"
+    ]
+  },
+  
+  "context": {
+    "project_type": "vue3-typescript",
+    "description": "SnakeMath - Educational math website for programmers"
+  }
+}

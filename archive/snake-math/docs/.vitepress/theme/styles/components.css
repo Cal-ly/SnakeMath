@@ -1,0 +1,960 @@
+/* Common Component Styles */
+
+/* Container and Layout */
+.interactive-component {
+  margin: 2rem 0;
+  padding: 1.5rem;
+  border: 1px solid #ddd;
+  border-radius: 8px;
+  background: #fafafa;
+}
+
+.component-section {
+  margin: 1.5rem 0;
+}
+
+.section-title {
+  margin-top: 0;
+  margin-bottom: 1rem;
+  color: #333;
+  font-weight: 600;
+}
+
+/* Grid Layouts */
+.results-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+  gap: 1rem;
+  margin: 1.5rem 0;
+}
+
+.controls-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+  gap: 1rem;
+  margin: 1rem 0;
+}
+
+/* Cards */
+.result-card, .control-card {
+  padding: 1rem;
+  border: 1px solid #ddd;
+  border-radius: 4px;
+  background: white;
+  box-shadow: 0 1px 3px rgba(0, 0, 0, 0.1);
+}
+
+.interactive-card {
+  padding: 1rem;
+  border: 2px solid #ddd;
+  border-radius: 4px;
+  background: white;
+  cursor: pointer;
+  transition: all 0.2s ease;
+}
+
+.interactive-card:hover {
+  border-color: #2196F3;
+  box-shadow: 0 2px 8px rgba(33, 150, 243, 0.2);
+}
+
+.interactive-card.active {
+  border-color: #4CAF50;
+  background: #e8f5e8;
+}
+
+/* Input Groups */
+.input-group {
+  margin: 1rem 0;
+  padding: 1rem;
+  background: white;
+  border-radius: 4px;
+  border: 1px solid #ddd;
+}
+
+.input-group-title {
+  margin: 0 0 1rem 0;
+  color: #333;
+  font-size: 1.1em;
+  font-weight: 500;
+}
+
+.component-inputs {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+  flex-wrap: wrap;
+}
+
+.component-inputs label {
+  font-weight: 500;
+  color: #555;
+  min-width: 20px;
+}
+
+.component-inputs input {
+  width: 60px;
+  padding: 0.25rem 0.5rem;
+  border: 1px solid #ccc;
+  border-radius: 4px;
+  font-size: 0.9em;
+  transition: border-color 0.2s;
+}
+
+.component-inputs input:focus {
+  outline: none;
+  border-color: #2196F3;
+  box-shadow: 0 0 0 2px rgba(33, 150, 243, 0.2);
+}
+
+/* Range Inputs */
+.range-input {
+  width: 200px;
+  margin: 0 0.5rem;
+}
+
+/* Function and Select Inputs */
+.function-select, select {
+  padding: 0.5rem;
+  border: 1px solid #ccc;
+  border-radius: 4px;
+  font-size: 0.9em;
+  background: white;
+  transition: border-color 0.2s;
+}
+
+.function-select:focus, select:focus {
+  outline: none;
+  border-color: #2196F3;
+  box-shadow: 0 0 0 2px rgba(33, 150, 243, 0.2);
+}
+
+/* Evaluation Input */
+.eval-input {
+  width: 80px;
+  padding: 0.25rem 0.5rem;
+  border: 1px solid #ccc;
+  border-radius: 4px;
+  font-size: 0.9em;
+  transition: border-color 0.2s;
+}
+
+.eval-input:focus {
+  outline: none;
+  border-color: #2196F3;
+  box-shadow: 0 0 0 2px rgba(33, 150, 243, 0.2);
+}
+
+/* Buttons */
+.btn-group {
+  display: flex;
+  gap: 0.5rem;
+  margin: 1rem 0;
+  flex-wrap: wrap;
+}
+
+.btn-primary, .preset-btn {
+  padding: 0.5rem 1rem;
+  background: #4CAF50;
+  color: white;
+  border: none;
+  border-radius: 4px;
+  cursor: pointer;
+  font-size: 0.9em;
+  font-weight: 500;
+  transition: all 0.2s ease;
+}
+
+.btn-primary:hover, .preset-btn:hover {
+  background: #45a049;
+  transform: translateY(-1px);
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.2);
+}
+
+.btn-secondary {
+  padding: 0.5rem 1rem;
+  background: #2196F3;
+  color: white;
+  border: none;
+  border-radius: 4px;
+  cursor: pointer;
+  font-size: 0.9em;
+  font-weight: 500;
+  transition: all 0.2s ease;
+}
+
+.btn-secondary:hover {
+  background: #1976D2;
+  transform: translateY(-1px);
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.2);
+}
+
+/* Visualization */
+.visualization-container {
+  margin: 1.5rem 0;
+  text-align: center;
+}
+
+.visualization-canvas {
+  border: 2px solid #ccc;
+  border-radius: 4px;
+  background: white;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+}
+
+/* Results and Output */
+.result-value {
+  margin: 0.5rem 0;
+  font-family: 'Consolas', 'Monaco', 'Courier New', monospace;
+  color: #2196F3;
+  font-weight: 600;
+  font-size: 0.95em;
+}
+
+.result-label {
+  margin: 0.5rem 0;
+  font-size: 0.9em;
+  color: #666;
+  font-weight: 500;
+}
+
+.result-highlight {
+  margin: 1rem 0;
+  padding: 0.75rem;
+  background: #f0f8ff;
+  border-left: 4px solid #2196F3;
+  border-radius: 4px;
+  font-weight: 600;
+  color: #1976D2;
+}
+
+/* Application Details */
+.app-details {
+  margin: 1rem 0;
+  padding: 1rem;
+  background: #f8f9fa;
+  border-radius: 4px;
+  border: 1px solid #e9ecef;
+}
+
+.app-title {
+  margin: 0 0 0.5rem 0;
+  color: #333;
+  font-weight: 600;
+}
+
+.app-description {
+  margin: 0 0 1rem 0;
+  color: #666;
+  line-height: 1.5;
+}
+
+.app-result {
+  margin: 1rem 0;
+  padding: 0.75rem;
+  background: white;
+  border-radius: 4px;
+  border: 1px solid #ddd;
+  font-weight: 600;
+  color: #2196F3;
+}
+
+/* Table styles */
+.approach-table {
+  margin: 1rem 0;
+  border: 1px solid #ddd;
+  border-radius: 4px;
+  overflow: hidden;
+}
+
+.table-header {
+  display: grid;
+  grid-template-columns: 1fr 1fr 1fr;
+  background: #f0f0f0;
+  font-weight: bold;
+  padding: 0.5rem;
+  border-bottom: 1px solid #ddd;
+}
+
+.table-row {
+  display: grid;
+  grid-template-columns: 1fr 1fr 1fr;
+  padding: 0.5rem;
+  border-bottom: 1px solid #eee;
+  font-family: monospace;
+}
+
+.table-row:nth-child(even) {
+  background: #f9f9f9;
+}
+
+/* Law explanation styles */
+.laws-explanation {
+  margin: 1rem 0;
+}
+
+.law {
+  margin: 0.5rem 0;
+  padding: 0.5rem;
+  background: white;
+  border-radius: 4px;
+  border-left: 4px solid #4CAF50;
+}
+
+/* LinearSystemSolver specific styles */
+.equation {
+  margin: 0.5rem 0;
+  color: #2196F3;
+  font-weight: bold;
+  font-family: 'Times New Roman', serif;
+  font-size: 1.1em;
+}
+
+.solution-box {
+  padding: 1rem;
+  border-radius: 4px;
+  margin: 1rem 0;
+}
+
+.solution-box.unique {
+  background: #e8f5e8;
+  border: 1px solid #4CAF50;
+}
+
+.solution-box.no-solution {
+  background: #fdeaea;
+  border: 1px solid #f44336;
+}
+
+.solution-box.infinite {
+  background: #fff3e0;
+  border: 1px solid #ff9800;
+}
+
+.solution-box.calculating {
+  background: #f5f5f5;
+  border: 1px solid #ccc;
+}
+
+.verification {
+  margin-top: 1rem;
+  font-size: 0.9em;
+  color: #666;
+}
+
+.matrix-display {
+  display: flex;
+  align-items: center;
+  gap: 1rem;
+  margin: 1rem 0;
+  font-family: 'Times New Roman', serif;
+  font-size: 1.1em;
+}
+
+.matrix {
+  display: flex;
+  align-items: center;
+}
+
+.matrix-bracket {
+  font-size: 2em;
+  font-weight: bold;
+}
+
+.matrix-content {
+  margin: 0 0.5rem;
+}
+
+.matrix-row {
+  text-align: center;
+  padding: 0.25rem 0;
+}
+
+.equals {
+  font-size: 1.5em;
+  font-weight: bold;
+}
+
+.determinant-info {
+  margin: 1rem 0;
+  padding: 1rem;
+  background: #f0f0f0;
+  border-radius: 4px;
+}
+
+.det-meaning {
+  font-style: italic;
+  color: #666;
+  margin-top: 0.5rem;
+}
+
+.plot-legend {
+  margin-top: 1rem;
+}
+
+.legend-item {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+  margin: 0.5rem 0;
+}
+
+.line-sample {
+  width: 30px;
+  height: 3px;
+  border-radius: 2px;
+}
+
+.line-sample.blue {
+  background: #2196F3;
+}
+
+.line-sample.red {
+  background: #F44336;
+}
+
+.point-sample {
+  width: 12px;
+  height: 12px;
+  border-radius: 50%;
+  background: #FF9800;
+  border: 2px solid #000;
+}
+
+/* MathDisplay specific styles */
+.math-notation {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 1.5rem;
+  gap: 0.5rem;
+  flex-wrap: wrap;
+}
+
+.sigma {
+  font-size: 3rem;
+  font-weight: bold;
+  color: #007bff;
+  margin-right: 0.2rem;
+}
+
+.limits {
+  display: flex;
+  flex-direction: column;
+  font-size: 0.9rem;
+  margin-right: 0.5rem;
+  line-height: 1;
+}
+
+.upper, .lower {
+  text-align: center;
+}
+
+.expression {
+  font-style: italic;
+  margin-right: 0.5rem;
+  color: #333;
+}
+
+.equals {
+  margin: 0 0.5rem;
+  font-weight: bold;
+  color: #666;
+}
+
+.expansion {
+  color: #28a745;
+  font-family: monospace;
+  font-size: 0.9em;
+}
+
+.math-expression {
+  text-align: center;
+  font-size: 1.2rem;
+  font-family: 'Times New Roman', serif;
+  padding: 1rem;
+}
+
+.fraction {
+  display: inline-block;
+  text-align: center;
+  vertical-align: middle;
+}
+
+.numerator {
+  display: block;
+  border-bottom: 1px solid #333;
+  padding-bottom: 2px;
+}
+
+.denominator {
+  display: block;
+  padding-top: 2px;
+}
+
+.summation {
+  font-size: 1.5em;
+}
+
+/* MatrixTransformations specific styles */
+.matrix-grid {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 0.5rem;
+  width: 150px;
+  margin: 1rem 0;
+}
+
+.matrix-grid input {
+  width: 60px;
+  padding: 0.25rem;
+  border: 1px solid #ccc;
+  border-radius: 4px;
+  text-align: center;
+}
+
+.matrix-properties {
+  margin: 1rem 0;
+}
+
+.property {
+  margin: 0.5rem 0;
+  font-size: 0.9em;
+}
+
+/* ProbabilitySimulator specific styles */
+.theoretical-comparison {
+  margin: 1.5rem 0;
+}
+
+.comparison-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+  gap: 1rem;
+}
+
+.comparison-item {
+  padding: 1rem;
+  border: 1px solid #ddd;
+  border-radius: 4px;
+  background: white;
+}
+
+.comparison-label {
+  font-weight: bold;
+  margin-bottom: 0.5rem;
+  color: #333;
+}
+
+.comparison-values div {
+  margin: 0.25rem 0;
+  font-size: 0.9em;
+}
+
+.prob-result {
+  font-weight: bold;
+  color: #FF5722;
+  margin-left: 1rem;
+}
+
+/* ProductDemo specific styles */
+.large-number {
+  color: #f59e0b !important;
+  animation: pulse 2s infinite;
+}
+
+.result-info {
+  margin-top: 5px;
+  text-align: center;
+}
+
+.growth-chart {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+  max-width: 400px;
+  margin: 0 auto;
+}
+
+.chart-labels {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 20px;
+  font-weight: 500;
+  text-align: center;
+}
+
+.bars {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 20px;
+  height: 100px;
+  align-items: end;
+}
+
+.bar {
+  position: relative;
+  border-radius: 4px 4px 0 0;
+  transition: height 0.3s ease;
+  min-height: 10px;
+  display: flex;
+  align-items: end;
+  justify-content: center;
+}
+
+.sum-bar {
+  background: linear-gradient(to top, #3b82f6, #60a5fa);
+}
+
+.product-bar {
+  background: linear-gradient(to top, #ef4444, #f87171);
+}
+
+.bar-value {
+  position: absolute;
+  top: -25px;
+  font-size: 12px;
+  font-weight: 500;
+  white-space: nowrap;
+}
+
+.growth-note {
+  margin-top: 10px;
+  font-style: italic;
+  text-align: center;
+}
+
+@keyframes pulse {
+  0% { opacity: 1; }
+  50% { opacity: 0.7; }
+  100% { opacity: 1; }
+}
+
+@media (max-width: 768px) {
+  .interactive-component {
+    padding: 1rem;
+    margin: 1rem 0;
+  }
+  
+  .results-grid {
+    grid-template-columns: 1fr;
+  }
+  
+  .controls-grid {
+    grid-template-columns: 1fr;
+  }
+  
+  .component-inputs {
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 0.25rem;
+  }
+  
+  .component-inputs input {
+    width: 100px;
+  }
+  
+  .btn-group {
+    flex-direction: column;
+  }
+  
+  .math-notation {
+    font-size: 1.2rem;
+  }
+  
+  .sigma {
+    font-size: 2.5rem;
+  }
+}
+
+/* Animations */
+@keyframes fadeIn {
+  from {
+    opacity: 0;
+    transform: translateY(10px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+.fade-in {
+  animation: fadeIn 0.3s ease-out;
+}
+
+/* Utility Classes */
+.text-center {
+  text-align: center;
+}
+
+.mb-0 { margin-bottom: 0; }
+.mb-1 { margin-bottom: 0.5rem; }
+.mb-2 { margin-bottom: 1rem; }
+.mb-3 { margin-bottom: 1.5rem; }
+
+.mt-0 { margin-top: 0; }
+.mt-1 { margin-top: 0.5rem; }
+.mt-2 { margin-top: 1rem; }
+.mt-3 { margin-top: 1.5rem; }
+
+.p-0 { padding: 0; }
+.p-1 { padding: 0.5rem; }
+.p-2 { padding: 1rem; }
+
+/* QuadraticExplorer specific styles */
+.description {
+  font-style: italic;
+  color: #666;
+  font-size: 0.9em;
+}
+
+.current-equation {
+  font-size: 1.5em;
+  font-weight: bold;
+  color: #2196F3;
+  font-family: 'Times New Roman', serif;
+  text-align: center;
+}
+
+.vertex-info, .axis-info, .intercept-info, .discriminant-info, .roots-info, .domain-range {
+  font-size: 0.9em;
+}
+
+.point {
+  font-weight: bold;
+  color: #FF5722;
+}
+
+.vertex-type {
+  font-style: italic;
+  color: #666;
+  margin-top: 0.5rem;
+}
+
+.solve-result {
+  font-weight: bold;
+  color: #9C27B0;
+  margin-left: 0.5rem;
+}
+
+/* Unit Circle Explorer specific styles */
+.angle-controls {
+  margin: 1.5rem 0;
+}
+
+.slider-group {
+  display: flex;
+  align-items: center;
+  gap: 1rem;
+  margin: 1rem 0;
+}
+
+.slider-group label {
+  font-weight: 500;
+  min-width: 140px;
+}
+
+.slider-group input[type="range"] {
+  width: 200px;
+}
+
+.value {
+  font-weight: bold;
+  color: #2196F3;
+  min-width: 60px;
+}
+
+.angle-input {
+  width: 80px;
+  padding: 0.25rem;
+  border: 1px solid #ccc;
+  border-radius: 4px;
+}
+
+.special-angles {
+  margin: 1.5rem 0;
+}
+
+.angle-buttons {
+  display: flex;
+  gap: 0.5rem;
+  flex-wrap: wrap;
+}
+
+.angle-btn {
+  padding: 0.5rem 1rem;
+  background: #4CAF50;
+  color: white;
+  border: none;
+  border-radius: 4px;
+  cursor: pointer;
+  transition: background-color 0.2s;
+}
+
+.angle-btn:hover {
+  background: #45a049;
+}
+
+.animation-controls {
+  display: flex;
+  align-items: center;
+  gap: 1rem;
+  margin: 1.5rem 0;
+}
+
+.control-btn {
+  padding: 0.5rem 1rem;
+  background: #2196F3;
+  color: white;
+  border: none;
+  border-radius: 4px;
+  cursor: pointer;
+  transition: background-color 0.2s;
+}
+
+.control-btn:hover {
+  background: #1976D2;
+}
+
+.speed-control {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+}
+
+.speed-control input[type="range"] {
+  width: 100px;
+}
+
+.trig-values {
+  margin: 1.5rem 0;
+}
+
+.values-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+  gap: 1rem;
+  margin: 1rem 0;
+}
+
+.value-card {
+  padding: 1rem;
+  border: 1px solid #ddd;
+  border-radius: 4px;
+  background: white;
+  text-align: center;
+}
+
+.value-card.sin {
+  border-left: 4px solid #2196F3;
+}
+
+.value-card.cos {
+  border-left: 4px solid #F44336;
+}
+
+.value-card.tan {
+  border-left: 4px solid #FF9800;
+}
+
+.value-label {
+  font-size: 0.9em;
+  color: #666;
+  margin-bottom: 0.5rem;
+}
+
+.value-number {
+  font-size: 1.5em;
+  font-weight: bold;
+  color: #333;
+  margin: 0.5rem 0;
+}
+
+.value-description {
+  font-size: 0.8em;
+  color: #999;
+  font-style: italic;
+}
+
+.coordinates, .quadrant-info {
+  margin: 1.5rem 0;
+}
+
+.coord-display, .quadrant-display {
+  margin: 1rem 0;
+}
+
+.coord-item, .quadrant-item {
+  margin: 0.5rem 0;
+  padding: 0.5rem;
+  background: white;
+  border-radius: 4px;
+  border: 1px solid #ddd;
+}
+
+.identities {
+  margin: 1.5rem 0;
+}
+
+.identity-checks {
+  margin: 1rem 0;
+}
+
+.identity {
+  margin: 0.5rem 0;
+  padding: 0.5rem;
+  background: white;
+  border-radius: 4px;
+  border: 1px solid #ddd;
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+}
+
+.identity-value {
+  font-weight: bold;
+  color: #2196F3;
+}
+
+.identity-status {
+  font-weight: bold;
+  font-size: 1.2em;
+}
+
+.wave-functions {
+  margin: 1.5rem 0;
+}
+
+.wave-functions canvas {
+  border: 2px solid #ccc;
+  border-radius: 4px;
+  background: white;
+  display: block;
+  margin: 1rem auto;
+}
+
+.wave-info {
+  text-align: center;
+  margin: 1rem 0;
+}
+
+.current-point {
+  display: flex;
+  justify-content: center;
+  gap: 2rem;
+}
+
+.point-indicator {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+}
+
+.sin-point {
+  color: #2196F3;
+}
+
+.cos-point {
+  color: #F44336;
+}

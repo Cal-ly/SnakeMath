@@ -1,4 +1,4 @@
-# Increment 1D: TypeScript Type Definitions
+# SnakeMath - Increment 1D: TypeScript Type Definitions
 
 ## Context
 SnakeMath needs shared type definitions for content structures, symbol data, and component props. Establishing these early ensures type safety throughout development.
@@ -6,83 +6,399 @@ SnakeMath needs shared type definitions for content structures, symbol data, and
 ## Task
 Create TypeScript type definitions in `src/types/`.
 
-## Required Type Files
+## Requirements
 
-### `src/types/content.ts`
-Define types for content structure:
+### 1. Create `src/types/content.ts`
 
-1. `Topic` - A major topic area (e.g., Basics, Algebra)
-   - id: string (url slug)
-   - title: string
-   - description: string
-   - icon: string (emoji or icon name)
-   - subtopics: Subtopic[]
+```typescript
+/**
+ * Content structure types for SnakeMath educational content
+ */
 
-2. `Subtopic` - A page within a topic
-   - id: string
-   - title: string
-   - description: string
-   - path: string (full route path)
+/**
+ * A major topic area (e.g., Basics, Algebra, Calculus)
+ */
+export interface Topic {
+  /** URL-friendly identifier */
+  id: string
+  /** Display title */
+  title: string
+  /** Brief description for cards/previews */
+  description: string
+  /** Emoji or icon identifier */
+  icon: string
+  /** List of subtopics within this topic */
+  subtopics: Subtopic[]
+}
 
-3. `ContentSection` - A collapsible section within a page
-   - id: string (anchor)
-   - title: string
-   - defaultExpanded: boolean
+/**
+ * A page within a topic
+ */
+export interface Subtopic {
+  /** URL-friendly identifier */
+  id: string
+  /** Display title */
+  title: string
+  /** Brief description */
+  description: string
+  /** Full route path (e.g., '/basics/foundations') */
+  path: string
+}
 
-4. `BreadcrumbItem` - Navigation breadcrumb
-   - label: string
-   - path: string (optional - omit for current page)
+/**
+ * A collapsible section within a content page
+ */
+export interface ContentSection {
+  /** Anchor ID for deep linking */
+  id: string
+  /** Section title */
+  title: string
+  /** Whether section is expanded by default */
+  defaultExpanded: boolean
+}
 
-### `src/types/symbols.ts`
-Define types for mathematical symbol data:
+/**
+ * Navigation breadcrumb item
+ */
+export interface BreadcrumbItem {
+  /** Display label */
+  label: string
+  /** Route path (omit for current/last item) */
+  path?: string
+}
 
-1. `MathSymbol` - A single symbol definition
-   - symbol: string (the actual symbol, e.g., "∑")
-   - name: string (e.g., "Summation")
-   - meaning: string (brief description)
-   - programmingAnalogy: string (optional - code equivalent)
-   - example: string (optional - usage example)
-   - category: SymbolCategory
+/**
+ * Difficulty level for content
+ */
+export type DifficultyLevel = 'beginner' | 'intermediate' | 'advanced'
 
-2. `SymbolCategory` - Enum or union type
-   - 'arithmetic' | 'algebra' | 'calculus' | 'logic' | 'constants' | 'greek' | 'ml'
+/**
+ * Metadata for a content page
+ */
+export interface ContentMeta {
+  title: string
+  description: string
+  difficulty: DifficultyLevel
+  prerequisites: string[]
+  relatedTopics: string[]
+  hasInteractive: boolean
+  hasCodeExamples: boolean
+}
+```
 
-3. `GreekLetter` - Special type for Greek letters
-   - name: string (e.g., "alpha")
-   - lowercase: string (e.g., "α")
-   - uppercase: string (e.g., "Α")
-   - commonUseLower: string (optional)
-   - commonUseUpper: string (optional)
+### 2. Create `src/types/symbols.ts`
 
-### `src/types/math.ts`
-Define types for mathematical operations and widget state:
+```typescript
+/**
+ * Mathematical symbol definitions for reference tables
+ */
 
-1. `NumberClassification` - Result of number type analysis
-   - isNatural: boolean
-   - isInteger: boolean
-   - isRational: boolean
-   - isReal: boolean
-   - isComplex: boolean
-   - pythonType: 'int' | 'float' | 'complex' | 'Decimal'
-   - warnings: string[]
+/**
+ * Categories for mathematical symbols
+ */
+export type SymbolCategory =
+  | 'arithmetic'
+  | 'algebra'
+  | 'calculus'
+  | 'logic'
+  | 'constants'
+  | 'greek'
+  | 'sets'
+  | 'ml'
 
-2. `NumberInput` - Parsed number input
-   - raw: string (user input)
-   - parsed: number | null
-   - isValid: boolean
-   - errorMessage: string | null
+/**
+ * A single mathematical symbol definition
+ */
+export interface MathSymbol {
+  /** The actual symbol (e.g., '∑', '∫', '≠') */
+  symbol: string
+  /** Name of the symbol (e.g., 'Summation', 'Integral') */
+  name: string
+  /** Brief meaning/description */
+  meaning: string
+  /** Programming equivalent or analogy (e.g., 'sum()', 'for loop') */
+  programmingAnalogy?: string
+  /** Example usage */
+  example?: string
+  /** Category for filtering/grouping */
+  category: SymbolCategory
+}
 
-### `src/types/index.ts`
-Create a barrel export that re-exports all types from the above files.
+/**
+ * Greek letter with both cases
+ */
+export interface GreekLetter {
+  /** English name (e.g., 'alpha', 'beta') */
+  name: string
+  /** Lowercase symbol (e.g., 'α') */
+  lowercase: string
+  /** Uppercase symbol (e.g., 'Α') */
+  uppercase: string
+  /** Common mathematical use of lowercase */
+  commonUseLower?: string
+  /** Common mathematical use of uppercase */
+  commonUseUpper?: string
+}
+
+/**
+ * Symbol table section for UI grouping
+ */
+export interface SymbolTableSection {
+  /** Section title */
+  title: string
+  /** Category filter */
+  category: SymbolCategory
+  /** Symbols in this section */
+  symbols: MathSymbol[]
+}
+```
+
+### 3. Create `src/types/math.ts`
+
+```typescript
+/**
+ * Types for mathematical operations and widget state
+ */
+
+/**
+ * Result of number type classification
+ */
+export interface NumberClassification {
+  /** Whether the number is a natural number (ℕ): positive integers */
+  isNatural: boolean
+  /** Whether the number is an integer (ℤ): whole numbers including zero and negatives */
+  isInteger: boolean
+  /** Whether the number is rational (ℚ): expressible as p/q */
+  isRational: boolean
+  /** Whether the number is real (ℝ): all non-complex numbers */
+  isReal: boolean
+  /** Whether the number is complex (ℂ): has imaginary component */
+  isComplex: boolean
+  /** Python data type that would represent this number */
+  pythonType: PythonNumberType
+  /** Any warnings about the number (precision loss, overflow, etc.) */
+  warnings: string[]
+  /** Whether the input was successfully parsed */
+  isValid: boolean
+  /** Error message if parsing failed */
+  errorMessage?: string
+}
+
+/**
+ * Python number types
+ */
+export type PythonNumberType = 'int' | 'float' | 'complex' | 'Decimal' | 'unknown'
+
+/**
+ * Parsed number input from user
+ */
+export interface NumberInput {
+  /** Original user input string */
+  raw: string
+  /** Parsed numeric value (null if invalid or complex) */
+  parsedReal?: number
+  /** Imaginary component for complex numbers */
+  parsedImaginary?: number
+  /** Whether parsing succeeded */
+  isValid: boolean
+  /** Error message if parsing failed */
+  errorMessage?: string
+}
+
+/**
+ * Complex number representation
+ */
+export interface ComplexNumber {
+  /** Real part */
+  real: number
+  /** Imaginary part */
+  imaginary: number
+}
+
+/**
+ * Widget state that can be serialized to URL
+ */
+export interface WidgetState {
+  /** Unique identifier for the widget instance */
+  id: string
+  /** Serializable parameters */
+  params: Record<string, string | number | boolean>
+}
+
+/**
+ * Mathematical operation result with steps
+ */
+export interface CalculationResult<T> {
+  /** Final result */
+  result: T
+  /** Intermediate steps for educational display */
+  steps: CalculationStep[]
+  /** Whether calculation succeeded */
+  success: boolean
+  /** Error message if failed */
+  error?: string
+}
+
+/**
+ * A single step in a calculation
+ */
+export interface CalculationStep {
+  /** Description of what this step does */
+  description: string
+  /** Mathematical expression (KaTeX format) */
+  expression: string
+  /** Result of this step */
+  result: string
+}
+```
+
+### 4. Create `src/types/components.ts`
+
+```typescript
+/**
+ * Shared component prop types
+ */
+
+/**
+ * Props for MathBlock component
+ */
+export interface MathBlockProps {
+  /** KaTeX formula string */
+  formula: string
+  /** Whether to render in display mode (centered, larger) */
+  display?: boolean
+  /** Additional CSS classes */
+  className?: string
+  /** Error fallback text */
+  errorFallback?: string
+}
+
+/**
+ * Props for CodeExample component
+ */
+export interface CodeExampleProps {
+  /** Code content */
+  code: string
+  /** Programming language for syntax highlighting */
+  language: 'python' | 'javascript' | 'typescript' | 'text'
+  /** Optional title */
+  title?: string
+  /** Whether the code block is collapsible */
+  collapsible?: boolean
+  /** Whether collapsed by default (if collapsible) */
+  defaultCollapsed?: boolean
+  /** Whether to show line numbers */
+  showLineNumbers?: boolean
+}
+
+/**
+ * Props for ContentSection component
+ */
+export interface ContentSectionProps {
+  /** Anchor ID for deep linking */
+  id: string
+  /** Section title */
+  title: string
+  /** Whether collapsible */
+  collapsible?: boolean
+  /** Whether expanded by default */
+  defaultExpanded?: boolean
+}
+
+/**
+ * Props for CollapsiblePanel component
+ */
+export interface CollapsiblePanelProps {
+  /** Panel title */
+  title: string
+  /** Whether expanded by default */
+  defaultExpanded?: boolean
+  /** Icon to show (optional) */
+  icon?: string
+}
+
+/**
+ * Props for SymbolTable component
+ */
+export interface SymbolTableProps {
+  /** Symbols to display */
+  symbols: import('./symbols').MathSymbol[]
+  /** Whether to show search input */
+  searchable?: boolean
+  /** Whether to show category filter */
+  filterable?: boolean
+  /** Initial search query */
+  initialSearch?: string
+}
+```
+
+### 5. Create `src/types/index.ts` (Barrel Export)
+
+```typescript
+/**
+ * Central export for all type definitions
+ */
+
+// Content types
+export type {
+  Topic,
+  Subtopic,
+  ContentSection,
+  BreadcrumbItem,
+  DifficultyLevel,
+  ContentMeta,
+} from './content'
+
+// Symbol types
+export type {
+  SymbolCategory,
+  MathSymbol,
+  GreekLetter,
+  SymbolTableSection,
+} from './symbols'
+
+// Math types
+export type {
+  NumberClassification,
+  PythonNumberType,
+  NumberInput,
+  ComplexNumber,
+  WidgetState,
+  CalculationResult,
+  CalculationStep,
+} from './math'
+
+// Component prop types
+export type {
+  MathBlockProps,
+  CodeExampleProps,
+  ContentSectionProps,
+  CollapsiblePanelProps,
+  SymbolTableProps,
+} from './components'
+```
 
 ## Success Criteria
-- All type files compile without errors
-- Types are exported and importable via `@/types`
-- `npm run type-check` passes
-- Types are documented with JSDoc comments explaining their purpose
+- [ ] All type files compile without errors
+- [ ] Types are exported and importable via `@/types`
+- [ ] `npm run type-check` passes
+- [ ] JSDoc comments are present on all exported types
+- [ ] No use of `any` type
+- [ ] Optional properties are marked with `?`
+
+## Verification
+Test imports work by adding to any view temporarily:
+
+```typescript
+import type { NumberClassification, MathSymbol, Topic } from '@/types'
+```
 
 ## Constraints
 - Use `interface` for object shapes (extensible)
 - Use `type` for unions and computed types
-- Avoid `any` - use `unknown` if type is truly unknown
-- Make optional properties explicit with `?`
+- Avoid `any` - use `unknown` if truly unknown
+- All types should be documented with JSDoc
+- Keep types focused - don't over-engineer for future needs
+
+## Next Increment
+After completion, proceed to `inc_1e.md` for Vitest configuration and initial tests.
