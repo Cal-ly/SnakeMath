@@ -109,3 +109,34 @@ export interface NumberProperties {
   isSpecial?: boolean
   specialName?: string
 }
+
+/**
+ * Result of evaluating a summation
+ */
+export interface SummationResult {
+  /** Total sum of all terms */
+  total: number
+  /** Individual term values */
+  terms: number[]
+  /** Number of terms in the sum */
+  termCount: number
+}
+
+/**
+ * Comparison between loop evaluation and closed-form formula
+ */
+export interface FormulaComparison {
+  /** Result computed via iteration */
+  loopResult: number
+  /** Result computed via closed-form formula */
+  formulaResult: number
+  /** Whether the two results match */
+  match: boolean
+  /** Number of iterations performed by the loop */
+  iterations: number
+}
+
+/**
+ * Identifier for summation preset formulas
+ */
+export type SummationPresetId = 'arithmetic' | 'squares' | 'cubes' | 'geometric' | 'constant'
