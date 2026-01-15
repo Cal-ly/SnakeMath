@@ -210,3 +210,194 @@ Phase 2 introduced several patterns and lessons:
 2. Vue's ESLint rules enforce best practices but may need explicit `undefined` defaults
 3. Accessibility should be built in from the start, not added later
 4. Centralized navigation data (navigation.ts) enables consistent auto-detection across components
+
+---
+
+## Phase 3: Content Components
+
+### LL-010: Tailwind Opacity Modifiers Don't Work with CSS Variables
+**Issue**: Using `bg-primary/10` in a `@apply` directive failed during production build when `primary` is defined as a CSS variable (`var(--color-primary)`).
+
+**Error**:
+```
+The `bg-primary/10` class does not exist. If `bg-primary/10` is a custom class,
+make sure it is defined within a `@layer` directive.
+```
+
+**Resolution**: Use CSS `color-mix()` function instead:
+```css
+/* Before (broken) */
+.copy-success {
+  @apply text-primary bg-primary/10;
+}
+
+/* After (working) */
+.copy-success {
+  @apply text-primary;
+  background-color: color-mix(in srgb, var(--color-primary) 10%, transparent);
+}
+```
+
+**Lesson**: Tailwind's opacity modifiers (`/10`, `/50`, etc.) require colors to be defined in a format that supports alpha channels. CSS variables like `var(--color-primary)` don't support this out of the box. Use `color-mix()` for dynamic opacity with CSS variable colors.
+
+---
+
+### LL-011: ESLint v-html Warnings Are Expected for Rendered Content
+**Issue**: ESLint warns about `vue/no-v-html` when using `v-html` for KaTeX and Shiki output.
+
+**Context**: Both KaTeX and Shiki return pre-rendered HTML strings that must be inserted via `v-html`. The warning is valid for user-controlled content but expected for library-generated output.
+
+**Resolution**: Add eslint-disable comments where the source is trusted:
+```vue
+<!-- eslint-disable-next-line vue/no-v-html -->
+<span v-html="renderedMath" />
+```
+
+**Lesson**: Don't blindly suppress warnings, but document when they're expected. KaTeX and Shiki output is sanitized by design, making `v-html` safe in these specific cases.
+
+---
+
+### LL-012: Shiki Highlighter Requires Singleton Pattern
+**Issue**: Creating a new Shiki highlighter instance for every code block is expensive (~100ms+ per instance).
+
+**Resolution**: Use singleton pattern with lazy initialization:
+```typescript
+let highlighterInstance: Highlighter | null = null
+let highlighterPromise: Promise<Highlighter> | null = null
+
+async function getHighlighter(): Promise<Highlighter> {
+  if (highlighterInstance) return highlighterInstance
+  if (highlighterPromise) return highlighterPromise
+
+  highlighterPromise = createHighlighter({ /* options */ })
+  highlighterInstance = await highlighterPromise
+  return highlighterInstance
+}
+```
+
+**Lesson**: Heavy initialization (syntax highlighters, WASM modules) should use singleton patterns. The "promise caching" technique prevents race conditions when multiple components request the highlighter simultaneously.
+
+---
+
+### LL-013: Vue Dynamic Slot Names with Special Characters
+**Issue**: Tab labels like "Sets & Logic" caused template parsing errors when used as dynamic slot names (`#"Sets & Logic"`).
+
+**Resolution**: Use simple, safe slot names without special characters:
+```vue
+<!-- Before (broken) -->
+<template #"Sets & Logic">...</template>
+
+<!-- After (working) -->
+<template #Sets>...</template>
+```
+
+**Lesson**: Dynamic slot names in Vue templates have naming restrictions. Stick to alphanumeric names for slots. Display labels can differ from slot identifiers.
+
+---
+
+### LI-006: KaTeX Custom Macros for Common Notation
+**Identified**: KaTeX supports custom macros for frequently used notation.
+
+```typescript
+katex.renderToString(formula, {
+  macros: {
+    '\\R': '\\mathbb{R}',
+    '\\N': '\\mathbb{N}',
+    '\\Z': '\\mathbb{Z}',
+    '\\Q': '\\mathbb{Q}',
+    '\\C': '\\mathbb{C}',
+  },
+})
+```
+
+**Note**: Custom macros reduce repetition in content and provide consistent notation. Authors can write `\R` instead of `\mathbb{R}`.
+
+---
+
+### LI-007: Computed Properties Should Be Pure Functions
+**Identified**: Vue computed properties should not have side effects.
+
+**Anti-pattern**:
+```typescript
+const renderedHtml = computed(() => {
+  try {
+    return katex.renderToString(formula)
+  } catch (e) {
+    error.value = e.message  // Side effect! Don't do this
+    return ''
+  }
+})
+```
+
+**Correct approach**:
+```typescript
+const renderResult = computed(() => {
+  try {
+    return { html: katex.renderToString(formula), error: null }
+  } catch (e) {
+    return { html: null, error: e.message }
+  }
+})
+```
+
+**Note**: Return an object containing both success and error states. This keeps computed properties pure and predictable.
+
+---
+
+### LI-008: Debounced Search Input Pattern
+**Identified**: Search inputs should debounce user input to avoid excessive filtering on every keystroke.
+
+```typescript
+const searchQuery = ref('')
+const debouncedQuery = ref('')
+
+watch(searchQuery, (newValue) => {
+  clearTimeout(debounceTimeout)
+  debounceTimeout = setTimeout(() => {
+    debouncedQuery.value = newValue
+  }, 300)
+})
+```
+
+**Note**: Filter/search based on `debouncedQuery`, not `searchQuery`. This provides responsive UI feedback while avoiding performance issues.
+
+---
+
+### LI-009: Responsive Table/Card Pattern
+**Identified**: Tables don't work well on mobile. Use a responsive pattern that shows cards on small screens.
+
+```vue
+<!-- Table for desktop -->
+<table class="hidden md:table">...</table>
+
+<!-- Cards for mobile -->
+<div class="md:hidden space-y-4">
+  <div v-for="item in items" class="card p-4">...</div>
+</div>
+```
+
+**Note**: This pattern duplicates markup but provides optimal UX for each screen size. Consider which columns are essential for mobile cards.
+
+---
+
+## Phase 3 Summary
+
+Phase 3 introduced content rendering and data organization patterns:
+
+**Lessons Learned (LL)**:
+- LL-010: Tailwind opacity modifiers don't work with CSS variables
+- LL-011: ESLint v-html warnings are expected for rendered content
+- LL-012: Shiki highlighter requires singleton pattern
+- LL-013: Vue dynamic slot names with special characters
+
+**Lessons Identified (LI)**:
+- LI-006: KaTeX custom macros for common notation
+- LI-007: Computed properties should be pure functions
+- LI-008: Debounced search input pattern
+- LI-009: Responsive table/card pattern
+
+**Key Takeaways**:
+1. CSS `color-mix()` is a powerful alternative when Tailwind modifiers don't work
+2. Singleton patterns are essential for expensive initializations like syntax highlighters
+3. Keep computed properties pure by returning objects with success/error states
+4. Responsive design sometimes requires separate markup for different screen sizes

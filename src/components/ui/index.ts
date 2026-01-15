@@ -1,1 +1,5 @@
 export { default as FaIcon } from './FaIcon.vue'
+export { default as CopyButton } from './CopyButton.vue'
+export { default as CollapsiblePanel } from './CollapsiblePanel.vue'
+export { default as TabGroup } from './TabGroup.vue'
+export { default as SearchInput } from './SearchInput.vue'

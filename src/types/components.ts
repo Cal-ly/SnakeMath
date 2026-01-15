@@ -8,14 +8,14 @@ import type { MathSymbol } from './symbols'
  * Props for MathBlock component
  */
 export interface MathBlockProps {
-  /** KaTeX formula string */
+  /** LaTeX formula string */
   formula: string
-  /** Whether to render in display mode (centered, larger) */
+  /** Display mode (centered, larger) vs inline */
   display?: boolean
   /** Additional CSS classes */
-  className?: string
-  /** Error fallback text */
-  errorFallback?: string
+  class?: string
+  /** Custom error message if rendering fails */
+  errorText?: string
 }
 
 /**

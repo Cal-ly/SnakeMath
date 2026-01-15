@@ -23,12 +23,18 @@ export interface MathSymbol {
   symbol: string
   /** Name of the symbol (e.g., 'Summation', 'Integral') */
   name: string
+  /** LaTeX command to produce this symbol */
+  latex: string
   /** Brief meaning/description */
   meaning: string
   /** Programming equivalent or analogy (e.g., 'sum()', 'for loop') */
   programmingAnalogy?: string
-  /** Example usage */
-  example?: string
+  /** Python code example */
+  pythonExample?: string
+  /** Common use cases */
+  commonUses?: string[]
+  /** Related symbols */
+  related?: string[]
   /** Category for filtering/grouping */
   category: SymbolCategory
 }
@@ -37,16 +43,18 @@ export interface MathSymbol {
  * Greek letter with both cases
  */
 export interface GreekLetter {
-  /** English name (e.g., 'alpha', 'beta') */
-  name: string
   /** Lowercase symbol (e.g., 'α') */
   lowercase: string
   /** Uppercase symbol (e.g., 'Α') */
   uppercase: string
-  /** Common mathematical use of lowercase */
-  commonUseLower?: string
-  /** Common mathematical use of uppercase */
-  commonUseUpper?: string
+  /** English name (e.g., 'alpha', 'beta') */
+  name: string
+  /** LaTeX command for lowercase */
+  latex: string
+  /** LaTeX command for uppercase */
+  uppercaseLaTeX: string
+  /** Common mathematical uses */
+  commonUses: string[]
 }
 
 /**

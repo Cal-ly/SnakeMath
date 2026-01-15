@@ -1,3 +1,6 @@
 export { useTheme } from './useTheme'
 export type { ThemeMode } from './useTheme'
 export { useBreadcrumbs } from './useBreadcrumbs'
+export { useClipboard } from './useClipboard'
+export { useHighlighter } from './useHighlighter'
+export type { BundledLanguage } from './useHighlighter'

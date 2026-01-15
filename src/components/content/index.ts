@@ -1,2 +1,6 @@
 export { default as TopicPage } from './TopicPage.vue'
 export { default as RelatedTopics } from './RelatedTopics.vue'
+export { default as MathBlock } from './MathBlock.vue'
+export { default as CodeExample } from './CodeExample.vue'
+export { default as ContentSection } from './ContentSection.vue'
+export { default as SymbolTable } from './SymbolTable.vue'

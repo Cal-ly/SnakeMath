@@ -323,3 +323,196 @@ export { default as AppFooter } from './AppFooter.vue'
   border: 0;
 }
 ```
+
+---
+
+## Phase 3 Decisions
+
+### D-021: Shiki over Prism/Highlight.js for Syntax Highlighting
+**Decision**: Use Shiki for code syntax highlighting instead of Prism or Highlight.js.
+
+**Rationale**:
+- VSCode-quality highlighting using TextMate grammars
+- Accurate tokenization (same as user's IDE)
+- Built-in theme support matching our light/dark modes
+- Tree-shaking friendly with lazy language loading
+- No runtime CSS required (inline styles)
+
+**Trade-offs**:
+- Larger initial download for language support
+- Async initialization required (uses WASM)
+- Build output includes many language chunk files
+
+**Implementation**: Singleton pattern with lazy initialization in `useHighlighter` composable.
+
+---
+
+### D-022: Symbol Data Split by Category
+**Decision**: Organize math symbol data into separate files by category rather than one large file.
+
+**Rationale**:
+- Easier to maintain and extend individual categories
+- Clear ownership and organization
+- Smaller, focused files are easier to review
+- Categories map naturally to UI tabs
+
+**Structure**:
+```
+src/data/symbols/
+├── index.ts      # Barrel export + search utilities
+├── arithmetic.ts # +, -, ×, ÷, etc.
+├── algebra.ts    # =, ≠, variables, etc.
+├── calculus.ts   # ∫, ∂, lim, etc.
+├── sets.ts       # ∈, ⊂, ∪, ∩, + logic
+├── constants.ts  # π, e, i, ∞, φ
+├── greek.ts      # α, β, γ, etc.
+└── ml.ts         # ML-specific notation
+```
+
+---
+
+### D-023: Responsive Table with Card Fallback
+**Decision**: Use separate table (desktop) and card (mobile) layouts rather than a responsive table solution.
+
+**Rationale**:
+- Tables are inherently difficult to make responsive
+- CSS-only responsive table solutions often compromise readability
+- Cards provide better mobile UX than horizontal scrolling tables
+- Explicit control over what information appears on mobile
+
+**Implementation**:
+```vue
+<table class="hidden md:table">...</table>
+<div class="md:hidden"><!-- Cards --></div>
+```
+
+**Trade-off**: Markup duplication. Accepted because it provides significantly better UX.
+
+---
+
+### D-024: Debounced Search with Immediate Visual Feedback
+**Decision**: Debounce search filtering (300ms) but update input value immediately.
+
+**Rationale**:
+- Immediate input feedback feels responsive
+- Debouncing prevents excessive re-renders during fast typing
+- 300ms delay is imperceptible for most users
+- Reduces CPU usage on large symbol tables
+
+**Implementation**: Two refs - `searchQuery` (immediate) and `debouncedQuery` (filtered).
+
+---
+
+### D-025: TabGroup with Dynamic Slots
+**Decision**: Use Vue's dynamic slots for TabGroup content rather than render functions.
+
+**Rationale**:
+- More natural Vue template syntax
+- Content stays in parent component (better for content pages)
+- Slot names provide clear mapping to tabs
+- No need for render function complexity
+
+**Implementation**:
+```vue
+<TabGroup :tabs="tabs">
+  <template #Arithmetic>
+    <SymbolTable :symbols="arithmeticSymbols" />
+  </template>
+  <template #Algebra>
+    <SymbolTable :symbols="algebraSymbols" />
+  </template>
+</TabGroup>
+```
+
+---
+
+### D-026: MathBlock with Graceful Error Handling
+**Decision**: MathBlock renders error messages inline instead of throwing exceptions.
+
+**Rationale**:
+- Invalid LaTeX shouldn't crash the page
+- Authors see immediate feedback on syntax errors
+- Error messages help debug formula issues
+- Production users see graceful degradation
+
+**Implementation**:
+```vue
+<div v-if="renderResult.error" class="text-red-500">
+  {{ renderResult.error }}
+</div>
+<span v-else v-html="renderResult.html" />
+```
+
+---
+
+### D-027: CodeExample with Optional Features
+**Decision**: CodeExample component has optional line numbers, collapsible, and copy functionality.
+
+**Rationale**:
+- Not all code examples need line numbers
+- Short snippets don't need to be collapsible
+- Opt-in features keep simple usage simple
+- Props provide flexibility for different contexts
+
+**Props**:
+- `lineNumbers?: boolean` - Show line numbers
+- `collapsible?: boolean` - Can collapse/expand
+- `title?: string` - Header with filename
+
+---
+
+### D-028: ContentSection Inherits CollapsiblePanel
+**Decision**: ContentSection wraps CollapsiblePanel with content-specific defaults.
+
+**Rationale**:
+- Separation of concerns: CollapsiblePanel is generic UI, ContentSection is content-specific
+- ContentSection adds icon support, anchor links, consistent spacing
+- CollapsiblePanel can be reused in non-content contexts
+- Single responsibility principle
+
+**Hierarchy**:
+```
+CollapsiblePanel (generic, reusable)
+  └── ContentSection (content-specific wrapper)
+```
+
+---
+
+### D-029: Greek Letters as Separate Data Type
+**Decision**: Greek letters have a distinct interface from MathSymbol.
+
+**Rationale**:
+- Greek letters have unique properties (lowercase, uppercase, both LaTeX forms)
+- Different display requirements (show both cases)
+- CommonUses differs from programmingAnalogy
+- Cleaner type safety
+
+**Implementation**:
+```typescript
+interface GreekLetter {
+  lowercase: string
+  uppercase: string
+  name: string
+  latex: string
+  uppercaseLaTeX: string
+  commonUses: string[]
+}
+```
+
+---
+
+### D-030: color-mix() for Dynamic Opacity
+**Decision**: Use CSS `color-mix()` instead of Tailwind opacity modifiers for CSS variable colors.
+
+**Rationale**:
+- Tailwind's `/10` modifier doesn't work with CSS custom properties
+- `color-mix()` has good browser support (baseline 2023)
+- Works with any color format
+- No build-time processing required
+
+**Implementation**:
+```css
+background-color: color-mix(in srgb, var(--color-primary) 10%, transparent);
+```
+
+**Trade-off**: Slightly more verbose than Tailwind utilities. Necessary workaround.
