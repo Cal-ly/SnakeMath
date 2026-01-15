@@ -56,10 +56,6 @@ const siteStructure = [
         Learn Mathematics Through Python
       </p>
 
-      <p class="text-lg text-text-secondary max-w-xl mx-auto mb-8">
-        Master mathematical concepts while building your programming skills
-      </p>
-
       <div class="flex flex-col sm:flex-row gap-4 justify-center">
         <RouterLink
           to="/basics"
@@ -101,19 +97,16 @@ const siteStructure = [
         </h2>
 
         <p class="text-text-secondary mb-4">
-          The initial goal with this site was a personal cheatsheet on how to combine Python with
-          mathematical concepts.
+          This site started as a personal cheatsheet on how to combine Python with
+          mathematical concepts. A couple of people lended those notes, so now it has become a website!
+          Whether you're a programmer looking to strengthen your math skills or a math enthusiast
+          wanting to see practical applications, this site tries to bridge the gap between theory
+          and practice.
         </p>
 
         <img src="/img/dont-know-snake-math-small.gif" alt="Don't know Snake Math meme" class="w-full max-w-md mx-auto rounded-lg my-4">
 
         <h3 class="text-xl font-semibold text-text-primary mt-6 mb-3">...But wait, you can!</h3>
-
-        <p class="text-text-secondary">
-          Whether you're a programmer looking to strengthen your math skills or a math enthusiast
-          wanting to see practical applications, this site tries to bridge the gap between theory
-          and practice.
-        </p>
 
         <p class="text-text-muted mt-4 italic">
           That big and scary-looking <code class="text-primary">Σ</code> is basically just a for
@@ -209,7 +202,7 @@ const siteStructure = [
         class="inline-flex items-center gap-2 bg-primary text-text-inverse px-8 py-4 rounded-lg font-medium text-lg hover:bg-primary-hover transition-colors"
       >
         <i class="fa-solid fa-play" aria-hidden="true" />
-        Start Learning
+        Start here!
       </RouterLink>
     </section>
   </div>
