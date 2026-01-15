@@ -23,13 +23,13 @@
 
 | Technology | Version | Purpose |
 |------------|---------|---------|
-| Vue | 3.x | Reactive UI framework |
-| TypeScript | 5.x | Type safety |
-| Vite | 5.x | Build tool and dev server |
-| Tailwind CSS | 3.x | Utility-first styling |
-| Vue Router | 4.x | Client-side routing |
-| KaTeX | 0.16.x | Math rendering |
-| Vitest | 1.x | Unit testing |
+| Vue | 3.5.x | Reactive UI framework |
+| TypeScript | 5.9.x | Type safety |
+| Vite | 7.x | Build tool and dev server |
+| Tailwind CSS | 3.4.x | Utility-first styling |
+| Vue Router | 4.6.x | Client-side routing |
+| KaTeX | 0.16.x | Math rendering (to be added) |
+| Vitest | 4.x | Unit testing |
 
 ### Key Technical Decisions
 - **No Pinia**: State is local to components or passed via props; URL state for shareable widget configurations
@@ -52,6 +52,10 @@ SnakeMath/
 │   └── extensions.json          # Recommended extensions
 ├── archive/                     # OLD CODE - excluded from build
 │   └── snake-math/              # Previous implementation (reference only)
+├── docs/                        # Project documentation
+│   ├── current_state.md         # Current project status
+│   ├── decisions.md             # Architectural decisions
+│   └── ll_li.md                 # Lessons learned
 ├── instructions/                # Claude Code task instructions
 │   ├── inc_1a.md               # Phase 1 increments
 │   ├── inc_1b.md
@@ -72,6 +76,8 @@ SnakeMath/
 │   │   └── symbols/             # Math symbol definitions
 │   ├── router/
 │   │   └── index.ts             # Route definitions
+│   ├── test/                    # Test setup and utilities
+│   │   └── setup.ts             # Vitest setup file
 │   ├── types/                   # TypeScript definitions
 │   ├── utils/
 │   │   └── math/                # Pure math functions
@@ -84,6 +90,8 @@ SnakeMath/
 │   │       └── NumberTypesView.vue
 │   ├── App.vue
 │   └── main.ts
+├── scripts/
+│   └── copy-404.js              # SPA routing fix for GitHub Pages
 ├── CLAUDE.md                    # This file
 ├── README.md
 ├── index.html
@@ -558,13 +566,15 @@ npm run build       # Production build
 ### Useful Commands
 ```bash
 npm run dev          # Start dev server
-npm run build        # Production build
+npm run build        # Production build (includes 404.html copy)
 npm run preview      # Preview production build
-npm run test         # Run tests
+npm run test         # Run tests once
 npm run test:watch   # Run tests in watch mode
-npm run lint         # Check linting
-npm run lint:fix     # Fix linting issues
+npm run test:coverage # Run tests with coverage report
+npm run lint         # Check and fix linting issues
+npm run lint:check   # Check linting (no fix)
 npm run format       # Format with Prettier
+npm run format:check # Check formatting (no fix)
 npm run type-check   # TypeScript validation
 ```
 
@@ -575,6 +585,8 @@ npm run type-check   # TypeScript validation
 ### Key Files
 - Entry point: `src/main.ts`
 - Routes: `src/router/index.ts`
+- Navigation data: `src/data/navigation.ts`
 - Types: `src/types/index.ts`
 - Theme CSS: `src/assets/styles/main.css`
 - Tailwind config: `tailwind.config.js`
+- Test setup: `src/test/setup.ts`

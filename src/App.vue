@@ -1,39 +1,41 @@
 <script setup lang="ts">
-  import { ref } from 'vue'
-  import { RouterView } from 'vue-router'
+import { ref } from 'vue'
+import { RouterView } from 'vue-router'
+import { useTheme } from '@/composables'
+import AppHeader from '@/components/layout/AppHeader.vue'
+import MobileMenu from '@/components/layout/MobileMenu.vue'
+import AppFooter from '@/components/layout/AppFooter.vue'
 
-  const isDark = ref(false)
+// Initialize theme
+useTheme()
 
-  function toggleTheme() {
-    isDark.value = !isDark.value
-    document.documentElement.classList.toggle('dark', isDark.value)
-  }
+const isMobileMenuOpen = ref(false)
+
+function openMobileMenu() {
+  isMobileMenuOpen.value = true
+}
+
+function closeMobileMenu() {
+  isMobileMenuOpen.value = false
+}
 </script>
 
 <template>
-  <div class="min-h-screen bg-surface transition-colors">
-    <header class="bg-primary text-white p-4">
-      <div class="container mx-auto flex justify-between items-center">
-        <h1 class="text-xl font-bold">SnakeMath</h1>
-        <button
-          class="px-3 py-1 rounded bg-primary-hover hover:bg-emerald-800 transition-colors"
-          @click="toggleTheme"
-        >
-          {{ isDark ? 'Light' : 'Dark' }}
-        </button>
-      </div>
-    </header>
+  <div class="min-h-screen flex flex-col bg-surface transition-colors">
+    <!-- Skip link for accessibility -->
+    <a href="#main-content" class="skip-link"> Skip to main content </a>
 
-    <main class="container mx-auto p-4">
-      <div class="card p-6 mt-4">
-        <h2 class="section-header">Tailwind CSS is Working!</h2>
-        <p class="text-text-secondary mb-4">
-          If you can see this styled card with the green header, Tailwind is configured correctly.
-        </p>
-        <p class="text-text-muted text-sm">Toggle the theme button to verify dark mode works.</p>
-      </div>
+    <AppHeader
+      :is-mobile-menu-open="isMobileMenuOpen"
+      @toggle-mobile-menu="isMobileMenuOpen ? closeMobileMenu() : openMobileMenu()"
+    />
 
+    <MobileMenu :is-open="isMobileMenuOpen" @close="closeMobileMenu" />
+
+    <main id="main-content" class="flex-1 container mx-auto px-4 py-6">
       <RouterView />
     </main>
+
+    <AppFooter />
   </div>
 </template>

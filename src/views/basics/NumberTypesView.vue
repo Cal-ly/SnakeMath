@@ -1,32 +1,24 @@
 <script setup lang="ts">
-  import { getBreadcrumbs } from '@/data/navigation'
-  import { useRoute } from 'vue-router'
+import TopicPage from '@/components/content/TopicPage.vue'
+import RelatedTopics from '@/components/content/RelatedTopics.vue'
 
-  const route = useRoute()
-  const breadcrumbs = getBreadcrumbs(route.path)
+const relatedTopics = [
+  { title: 'Foundations', path: '/basics/foundations', description: 'Core concepts' },
+  { title: 'Math Symbols', path: '/basics/symbols', description: 'Notation guide' },
+]
 </script>
 
 <template>
-  <div class="space-y-6">
-    <nav class="text-sm text-text-muted">
-      <template v-for="(crumb, index) in breadcrumbs" :key="index">
-        <RouterLink v-if="crumb.path" :to="crumb.path" class="hover:text-primary">
-          {{ crumb.label }}
-        </RouterLink>
-        <span v-else>{{ crumb.label }}</span>
-        <span v-if="index < breadcrumbs.length - 1" class="mx-2">/</span>
-      </template>
-    </nav>
-
-    <header>
-      <h1 class="text-3xl font-bold text-text-primary">Number Types</h1>
-      <p class="text-text-secondary mt-2">
-        Understanding N, Z, Q, R, and C — and how they map to code.
-      </p>
-    </header>
-
+  <TopicPage
+    title="Number Types"
+    description="Understanding ℕ, ℤ, ℚ, ℝ, and ℂ — and how they map to code."
+  >
     <div class="card p-6">
-      <p class="text-text-secondary">Content and NumberTypeExplorer widget coming soon.</p>
+      <p>Content and NumberTypeExplorer widget coming soon.</p>
     </div>
-  </div>
+
+    <template #related>
+      <RelatedTopics :topics="relatedTopics" />
+    </template>
+  </TopicPage>
 </template>

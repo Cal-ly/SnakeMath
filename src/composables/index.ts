@@ -1,2 +1,3 @@
-// Barrel export for composables
-// Composables will be added here as the project grows
+export { useTheme } from './useTheme'
+export type { ThemeMode } from './useTheme'
+export { useBreadcrumbs } from './useBreadcrumbs'

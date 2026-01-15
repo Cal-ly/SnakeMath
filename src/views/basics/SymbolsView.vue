@@ -1,33 +1,27 @@
 <script setup lang="ts">
-  import { getBreadcrumbs } from '@/data/navigation'
-  import { useRoute } from 'vue-router'
+import TopicPage from '@/components/content/TopicPage.vue'
+import RelatedTopics from '@/components/content/RelatedTopics.vue'
 
-  const route = useRoute()
-  const breadcrumbs = getBreadcrumbs(route.path)
+const relatedTopics = [
+  { title: 'Foundations', path: '/basics/foundations', description: 'Core concepts' },
+  { title: 'Number Types', path: '/basics/number-types', description: 'ℕ, ℤ, ℚ, ℝ, ℂ' },
+]
 </script>
 
 <template>
-  <div class="space-y-6">
-    <nav class="text-sm text-text-muted">
-      <template v-for="(crumb, index) in breadcrumbs" :key="index">
-        <RouterLink v-if="crumb.path" :to="crumb.path" class="hover:text-primary">
-          {{ crumb.label }}
-        </RouterLink>
-        <span v-else>{{ crumb.label }}</span>
-        <span v-if="index < breadcrumbs.length - 1" class="mx-2">/</span>
-      </template>
-    </nav>
-
-    <header>
-      <h1 class="text-3xl font-bold text-text-primary">Math Symbols</h1>
-      <p class="text-text-secondary mt-2">A programmer's guide to mathematical notation.</p>
-    </header>
-
+  <TopicPage
+    title="Math Symbols"
+    description="A programmer's guide to mathematical notation."
+  >
     <div class="card p-6">
-      <p class="text-text-secondary">
+      <p>
         Content coming soon. This page will contain searchable tables of mathematical symbols with
         programming analogies.
       </p>
     </div>
-  </div>
+
+    <template #related>
+      <RelatedTopics :topics="relatedTopics" />
+    </template>
+  </TopicPage>
 </template>
