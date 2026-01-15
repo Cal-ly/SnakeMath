@@ -1,6 +1,12 @@
 <script setup lang="ts">
 import { ref, computed, onMounted } from 'vue'
-import { BoundsInput, PresetSelector, SummationResult, SummationCodeParallel } from './summation'
+import {
+  BoundsInput,
+  PresetSelector,
+  SummationResult,
+  SummationCodeParallel,
+  SummationBarChart,
+} from './summation'
 import { evaluateSummation, getPresetExpression } from '@/utils/math/summation'
 import { useUrlState } from '@/composables'
 import type { SummationPresetId, SummationResult as SummationResultType } from '@/types/math'
@@ -209,24 +215,18 @@ function handlePresetUpdate(val: SummationPresetId) {
       />
     </div>
 
-    <!-- Placeholder sections for future increments -->
-    <div v-if="showVisualization || showFormulaComparison" class="mt-6">
-      <div class="grid gap-4 md:grid-cols-2">
-        <!-- Visualization (5E) -->
-        <div
-          v-if="showVisualization"
-          class="card p-4 border-2 border-dashed border-border text-center"
-        >
-          <p class="text-text-muted text-sm">
-            <i class="fa-solid fa-chart-bar mr-1" aria-hidden="true" />
-            Bar Chart (5E)
-          </p>
+    <!-- Visualization and Formula sections -->
+    <div v-if="(showVisualization || showFormulaComparison) && isValid" class="mt-6">
+      <div class="grid gap-4 lg:grid-cols-2">
+        <!-- Bar Chart Visualization (5E) -->
+        <div v-if="showVisualization" class="card p-4">
+          <SummationBarChart :terms="result.terms" :animated="true" :show-running-total="true" />
         </div>
 
-        <!-- Formula Comparison (5F) -->
+        <!-- Formula Comparison (5F) - placeholder -->
         <div
           v-if="showFormulaComparison"
-          class="card p-4 border-2 border-dashed border-border text-center"
+          class="card p-4 border-2 border-dashed border-border text-center flex items-center justify-center"
         >
           <p class="text-text-muted text-sm">
             <i class="fa-solid fa-not-equal mr-1" aria-hidden="true" />
