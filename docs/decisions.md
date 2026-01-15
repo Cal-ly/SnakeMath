@@ -788,3 +788,142 @@ Page Structure:
 ```
 
 **Note**: The ASCII version can still appear in code comments where Unicode may cause issues.
+
+---
+
+## Phase 5 Decisions
+
+### D-044: Preset-Based Summation Widget
+**Decision**: Use a preset-based architecture with 5 fixed formulas rather than arbitrary user-defined expressions.
+
+**Rationale**:
+- Educational focus: each preset has a known closed-form formula to demonstrate
+- Safer: no need to parse/evaluate arbitrary user expressions
+- Richer content: each preset can have curated LaTeX, Python, and JavaScript representations
+- Simpler UX: dropdown selection vs expression input
+
+**Presets**:
+| ID | Expression | Closed Form |
+|----|------------|-------------|
+| arithmetic | i | n(n+1)/2 |
+| squares | i² | n(n+1)(2n+1)/6 |
+| cubes | i³ | [n(n+1)/2]² |
+| geometric | 2^(i-1) | 2^n - 1 |
+| constant | 1 | n |
+
+**Trade-off**: Less flexible than arbitrary expressions, but more educational and safer.
+
+---
+
+### D-045: Orchestrator Pattern for Complex Widgets
+**Decision**: Structure the SummationExplorer as an orchestrator component with discrete sub-components for each feature.
+
+**Rationale**:
+- Single responsibility: each sub-component handles one concern
+- Testable: sub-components can be tested in isolation
+- Reusable: components like BoundsInput could be used elsewhere
+- Maintainable: changes to visualization don't affect input handling
+
+**Structure**:
+```
+SummationExplorer.vue (orchestrator)
+├── PresetSelector.vue (formula selection)
+├── BoundsInput.vue (start/end inputs)
+├── SummationResult.vue (total display)
+├── SummationCodeParallel.vue (math ↔ code)
+├── SummationBarChart.vue (visualization)
+└── FormulaComparison.vue (O(n) vs O(1))
+```
+
+---
+
+### D-046: Python as Default Code Language
+**Decision**: Show Python code by default in the SummationCodeParallel component, with JavaScript as secondary.
+
+**Rationale**:
+- Aligns with "SnakeMath" branding (Python = snake)
+- Python syntax is cleaner for mathematical examples
+- Python's `range()` maps well to summation bounds
+- Target audience (programmers learning math) often knows Python
+
+**Implementation**: Language toggle in component, defaulting to Python.
+
+---
+
+### D-047: SVG Bar Chart for Term Visualization
+**Decision**: Use inline SVG for the term visualization bar chart rather than a charting library (Chart.js, D3).
+
+**Rationale**:
+- Consistent with Phase 4 visualizations (NumberLine, VennDiagram)
+- Vue can bind directly to SVG attributes
+- No external dependencies
+- Full control over accessibility (aria-labels, reduced motion)
+- Simple requirements don't justify a charting library
+
+**Features implemented**:
+- Bar per term with height proportional to value
+- Running total line overlay
+- Animation with play/stop controls
+- Hover tooltips
+- Max 20 bars with truncation warning
+
+---
+
+### D-048: Animation Opt-In with Reduced Motion Support
+**Decision**: Bar chart animation is opt-in (requires clicking "Animate" button) and respects `prefers-reduced-motion`.
+
+**Rationale**:
+- Accessibility: users with motion sensitivity aren't surprised
+- Performance: static rendering is faster for initial page load
+- User control: animation can be stopped/reset
+- Educational: users can choose to see terms appear sequentially
+
+**Implementation**:
+```typescript
+const prefersReducedMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches
+if (prefersReducedMotion) {
+  // Show all bars immediately, skip animation
+  visibleBars.value = displayTerms.value.length
+}
+```
+
+---
+
+### D-049: Closed-Form Formula Data Structure
+**Decision**: Create a comprehensive `SummationPreset` interface that includes both evaluation functions and display strings.
+
+**Rationale**:
+- Single source of truth for each preset
+- Supports multiple output formats (LaTeX, Python, JavaScript)
+- Includes both loop evaluation and closed-form functions
+- Enables formula comparison feature
+
+**Interface**:
+```typescript
+interface SummationPreset {
+  id: SummationPresetId
+  name: string
+  description: string
+  expressionLatex: string        // "i^2"
+  expressionPython: string       // "i ** 2"
+  expressionJavaScript: string   // "i ** 2"
+  closedFormLatex: string | null // "\\frac{n(n+1)(2n+1)}{6}"
+  closedFormName: string | null  // "Sum of squares formula"
+  evaluate: (i: number) => number
+  closedForm: ((n: number) => number) | null
+}
+```
+
+---
+
+### D-050: Bounds Limited to 0-100 Range
+**Decision**: Limit summation bounds to integers between 0 and 100.
+
+**Rationale**:
+- Prevents performance issues from large loops
+- Bar chart limited to 20 terms anyway (D-047)
+- Educational examples don't need larger ranges
+- Keeps URL parameters reasonable length
+- Avoids integer overflow for sum of cubes (100³ × 100 is large but safe)
+
+**Trade-off**: Can't demonstrate truly large summations, but formula comparison section explains the scaling.

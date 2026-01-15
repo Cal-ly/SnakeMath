@@ -695,3 +695,225 @@ iconSvg?: string        // SVG path/content
 2. Unicode-aware grep patterns are needed for finding emojis and special characters
 3. Clear naming conventions (like `faIcon` vs `icon`) prevent confusion about expected formats
 4. Two-level collapsible hierarchy (section + code) provides good progressive disclosure
+
+---
+
+## Phase 5: Algebra Section & Summation Widget
+
+### LL-020: Vue Reactivity Transform Not Enabled by Default
+**Issue**: Using `$computed` instead of `computed` caused runtime errors because Vue's reactivity transform is not enabled by default.
+
+**Code**:
+```typescript
+// Error: $computed is not defined
+const selectedName = $computed(() => presets.find(p => p.id === modelValue)?.name)
+```
+
+**Resolution**: Use standard `computed` from Vue imports:
+```typescript
+import { computed } from 'vue'
+const selectedName = computed(() => presets.find(p => p.id === modelValue)?.name)
+```
+
+**Lesson**: Vue's reactivity transform (`$ref`, `$computed`) is an opt-in feature requiring explicit configuration. Stick to standard `ref()` and `computed()` unless the project has enabled the transform.
+
+---
+
+### LL-021: TypeScript Array Access Returns Possibly Undefined
+**Issue**: When accessing array elements by index, TypeScript's strict mode considers the result potentially undefined, even after length checks.
+
+**Code**:
+```typescript
+// Error: Object is possibly 'undefined'
+const bar = bars[hoveredBar]
+const x = bar.x  // TS error
+```
+
+**Resolution**: Use optional chaining and nullish coalescing:
+```typescript
+const x = bars[hoveredBar]?.x ?? 0
+const y = bars[hoveredBar]?.y ?? 0
+```
+
+**Lesson**: TypeScript doesn't narrow array element types based on index bounds checks. Always use optional chaining (`?.`) when accessing array elements by dynamic index.
+
+---
+
+### LL-022: Unused Imports Caught by ESLint
+**Issue**: Importing `watch` from Vue but never using it triggered ESLint's `@typescript-eslint/no-unused-vars` error.
+
+**Resolution**: Remove unused imports:
+```typescript
+// Before
+import { ref, computed, watch, onMounted } from 'vue'
+
+// After (watch removed)
+import { ref, computed, onMounted } from 'vue'
+```
+
+**Lesson**: Clean up imports after refactoring. ESLint catches unused imports, but it's better to remove them proactively to keep code clean.
+
+---
+
+### LL-023: URL State Computed Getter/Setter Pattern
+**Issue**: Supporting both local state and URL-synced state in the same component required conditional logic.
+
+**Resolution**: Use computed getter/setter that delegates to the appropriate source:
+```typescript
+const preset = computed({
+  get: () => {
+    if (presetUrlState) {
+      return presetUrlState.value.value as SummationPresetId
+    }
+    return localPreset.value
+  },
+  set: (val: SummationPresetId) => {
+    if (presetUrlState) {
+      presetUrlState.setValue(val)
+    } else {
+      localPreset.value = val
+    }
+  },
+})
+```
+
+**Lesson**: Computed getter/setter is a powerful pattern for abstracting state source. Components can use `v-model` without knowing whether state is local or URL-synced.
+
+---
+
+### LI-017: Preset Data as Single Source of Truth
+**Identified**: Creating a comprehensive preset data structure enables multiple features from one definition.
+
+**Pattern**:
+```typescript
+interface SummationPreset {
+  id: SummationPresetId
+  name: string
+  expressionLatex: string
+  expressionPython: string
+  closedFormLatex: string | null
+  evaluate: (i: number) => number
+  closedForm: ((n: number) => number) | null
+}
+```
+
+**Benefits**:
+- PresetSelector uses `name` for dropdown
+- SummationCodeParallel uses `expressionLatex` and `expressionPython`
+- FormulaComparison uses `closedFormLatex` and `closedForm`
+- SummationResult uses `evaluate` for calculation
+
+**Note**: Rich preset objects eliminate prop drilling and ensure consistency.
+
+---
+
+### LI-018: SVG Running Total Line Overlay
+**Identified**: Overlaying a running total line on a bar chart enhances educational value.
+
+**Implementation**:
+```typescript
+const runningTotalPath = computed(() => {
+  let total = 0
+  const points: string[] = [`M ${startX} ${baseY}`]
+
+  for (let i = 0; i < terms.length; i++) {
+    total += terms[i]
+    const x = barX(i) + barWidth / 2
+    const y = scaleY(total)
+    points.push(`L ${x} ${y}`)
+  }
+
+  return points.join(' ')
+})
+```
+
+**Note**: The path builds incrementally, showing how the total grows. Use `stroke-linecap="round"` for smooth line joins.
+
+---
+
+### LI-019: Animation Timer Cleanup
+**Identified**: Components with `setTimeout` animations need cleanup to prevent memory leaks.
+
+**Pattern**:
+```typescript
+const animationTimer = ref<ReturnType<typeof setTimeout> | null>(null)
+
+function startAnimation() {
+  const animateNext = () => {
+    if (visibleBars.value < terms.length) {
+      visibleBars.value++
+      animationTimer.value = setTimeout(animateNext, 200)
+    }
+  }
+  animateNext()
+}
+
+function cleanup() {
+  if (animationTimer.value) {
+    clearTimeout(animationTimer.value)
+  }
+}
+
+// In template: @vue:unmounted="cleanup"
+```
+
+**Note**: Always clear timers on unmount. Consider also clearing when props change (terms array).
+
+---
+
+### LI-020: Formula Substitution for Educational Display
+**Identified**: Showing formulas with actual values substituted helps users understand the calculation.
+
+**Pattern**:
+```typescript
+// General formula
+const formula = "\\frac{n(n+1)}{2}"
+
+// Substituted formula
+const substituted = formula.replace(/n/g, n.toString())
+// Result: "\\frac{10(10+1)}{2}"
+```
+
+**Note**: Simple string replacement works for basic formulas. More complex formulas might need a proper template system.
+
+---
+
+### LI-021: O(n) vs O(1) Educational Comparison
+**Identified**: Explicitly comparing loop iterations vs formula calculations makes complexity tangible.
+
+**Pattern**:
+```vue
+<div class="comparison">
+  <div>Loop: {{ n }} iterations (O(n) time)</div>
+  <div>Formula: 1 calculation (O(1) time)</div>
+  <p>For n = 1,000,000: loop needs 1,000,000 additions!</p>
+</div>
+```
+
+**Note**: Concrete examples (n = 1,000,000) are more impactful than abstract big-O notation alone.
+
+---
+
+## Phase 5 Summary
+
+Phase 5 introduced the Algebra section with the flagship SummationExplorer widget:
+
+**Lessons Learned (LL)**:
+- LL-020: Vue reactivity transform not enabled by default
+- LL-021: TypeScript array access returns possibly undefined
+- LL-022: Unused imports caught by ESLint
+- LL-023: URL state computed getter/setter pattern
+
+**Lessons Identified (LI)**:
+- LI-017: Preset data as single source of truth
+- LI-018: SVG running total line overlay
+- LI-019: Animation timer cleanup
+- LI-020: Formula substitution for educational display
+- LI-021: O(n) vs O(1) educational comparison
+
+**Key Takeaways**:
+1. Rich data structures (presets) enable multiple features from one source
+2. Computed getter/setter abstracts state source (local vs URL)
+3. SVG overlays (running total line) enhance visualization
+4. Always clean up timers and animations on component unmount
+5. Concrete examples (n = 1,000,000) make abstract concepts tangible
