@@ -6,8 +6,10 @@ import {
   SummationResult,
   SummationCodeParallel,
   SummationBarChart,
+  FormulaComparison,
 } from './summation'
 import { evaluateSummation, getPresetExpression } from '@/utils/math/summation'
+import { getPreset } from '@/data/summation'
 import { useUrlState } from '@/composables'
 import type { SummationPresetId, SummationResult as SummationResultType } from '@/types/math'
 
@@ -223,15 +225,13 @@ function handlePresetUpdate(val: SummationPresetId) {
           <SummationBarChart :terms="result.terms" :animated="true" :show-running-total="true" />
         </div>
 
-        <!-- Formula Comparison (5F) - placeholder -->
-        <div
-          v-if="showFormulaComparison"
-          class="card p-4 border-2 border-dashed border-border text-center flex items-center justify-center"
-        >
-          <p class="text-text-muted text-sm">
-            <i class="fa-solid fa-not-equal mr-1" aria-hidden="true" />
-            Formula Comparison (5F)
-          </p>
+        <!-- Formula Comparison (5F) -->
+        <div v-if="showFormulaComparison" class="card p-4">
+          <FormulaComparison
+            :preset="getPreset(preset)"
+            :n="result.termCount"
+            :loop-total="result.total"
+          />
         </div>
       </div>
     </div>
