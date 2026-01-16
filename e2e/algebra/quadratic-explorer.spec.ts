@@ -1,13 +1,17 @@
 import { test, expect } from '@playwright/test'
 
+// Base path for the app (matches vite.config.ts base)
+const BASE = '/SnakeMath'
+
 test.describe('QuadraticExplorer Widget', () => {
   test.beforeEach(async ({ page }) => {
-    await page.goto('/algebra/quadratics')
+    await page.goto(`${BASE}/algebra/quadratics`)
     await page.waitForLoadState('networkidle')
   })
 
   test('default state shows standard parabola', async ({ page }) => {
-    await expect(page.locator('[data-testid="equation-standard"]')).toContainText('y = x²')
+    // KaTeX renders formulas with raw LaTeX in the text content
+    await expect(page.locator('[data-testid="equation-standard"]')).toContainText('y = x^2')
     await expect(page.locator('[data-testid="vertex-display"]')).toContainText('(0, 0)')
   })
 
@@ -18,9 +22,10 @@ test.describe('QuadraticExplorer Widget', () => {
     await page.waitForTimeout(300)
 
     // Verify equation updated (projectile has a=-4.9, b=20, c=1.5)
-    await expect(page.locator('[data-testid="equation-standard"]')).toContainText('-4.9x²')
-    await expect(page.locator('[data-testid="equation-standard"]')).toContainText('+ 20x')
-    await expect(page.locator('[data-testid="equation-standard"]')).toContainText('+ 1.5')
+    // KaTeX text includes raw LaTeX: -4.9x^2
+    await expect(page.locator('[data-testid="equation-standard"]')).toContainText('-4.9x^2')
+    await expect(page.locator('[data-testid="equation-standard"]')).toContainText('20x')
+    await expect(page.locator('[data-testid="equation-standard"]')).toContainText('1.5')
   })
 
   test('adjusting coefficient a changes equation', async ({ page }) => {
@@ -30,18 +35,19 @@ test.describe('QuadraticExplorer Widget', () => {
     await slider.fill('2')
     await page.waitForTimeout(100)
 
-    await expect(page.locator('[data-testid="equation-standard"]')).toContainText('2x²')
+    await expect(page.locator('[data-testid="equation-standard"]')).toContainText('2x^2')
   })
 
   test('discriminant correctly identifies root types', async ({ page }) => {
-    // Default (standard) has two real roots at x=0 (one repeated)
-    await expect(page.locator('[data-testid="discriminant-value"]')).toContainText('Δ = 0')
+    // Default (standard) has discriminant = 0 (one repeated real root)
+    // KaTeX renders \Delta = 0, text content includes the raw form
+    await expect(page.locator('[data-testid="discriminant-value"]')).toContainText('= 0')
 
-    // Load inverted preset (a=-1, b=0, c=4 → roots at ±2)
+    // Load inverted preset (a=-1, b=0, c=4 → discriminant = 16)
     await page.locator('[data-testid="preset-selector"]').selectOption('inverted')
     await page.waitForTimeout(300)
 
-    await expect(page.locator('[data-testid="discriminant-value"]')).toContainText('Δ = 16')
+    await expect(page.locator('[data-testid="discriminant-value"]')).toContainText('= 16')
   })
 
   test('complex roots show message with link', async ({ page }) => {
@@ -55,7 +61,7 @@ test.describe('QuadraticExplorer Widget', () => {
     await expect(page.locator('[data-testid="roots-display"]')).toContainText('No real roots')
     await expect(page.locator('[data-testid="roots-display"] a')).toHaveAttribute(
       'href',
-      '/basics/number-types'
+      `${BASE}/basics/number-types`
     )
   })
 
@@ -74,7 +80,8 @@ test.describe('QuadraticExplorer Widget', () => {
     await page.locator('[data-testid="preset-selector"]').selectOption('shifted')
     await page.waitForTimeout(300)
 
-    await expect(page.locator('[data-testid="equation-vertex"]')).toContainText('(x - 2)²')
+    // KaTeX includes raw LaTeX: (x - 2)^2
+    await expect(page.locator('[data-testid="equation-vertex"]')).toContainText('(x - 2)^2')
     await expect(page.locator('[data-testid="equation-vertex"]')).toContainText('- 1')
   })
 
@@ -101,15 +108,15 @@ test.describe('QuadraticExplorer Widget', () => {
 
   test('URL state syncs with coefficients', async ({ page }) => {
     // Navigate with URL parameters
-    await page.goto('/algebra/quadratics?a=2&b=-4&c=1')
+    await page.goto(`${BASE}/algebra/quadratics?a=2&b=-4&c=1`)
     await page.waitForLoadState('networkidle')
 
     // Verify sliders reflect URL values
     const aSlider = page.locator('[data-testid="coefficient-a-slider"]')
     await expect(aSlider).toHaveValue('2')
 
-    // Verify equation matches
-    await expect(page.locator('[data-testid="equation-standard"]')).toContainText('2x²')
+    // Verify equation matches (KaTeX raw LaTeX form)
+    await expect(page.locator('[data-testid="equation-standard"]')).toContainText('2x^2')
   })
 
   test('graph is visible', async ({ page }) => {

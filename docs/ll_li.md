@@ -1152,3 +1152,276 @@ Phase 6 completed the Basics section and added comprehensive E2E testing infrast
 4. Escape `${}` when including Python f-strings in JS template literals
 5. Use `exact: true` in Playwright selectors to avoid partial matches
 6. Preset-based widgets are safer and more maintainable than arbitrary expression input
+
+---
+
+## Phase 7: Quadratics & Visual Regression
+
+### LL-029: Visual Regression Test Baseline Strategy
+**Issue**: Adding visual regression tests to an existing project required careful consideration of when to capture baselines.
+
+**Resolution**: Capture baselines before adding new visual components to establish a known-good state. This allows detecting unintended regressions in existing UI while developing new features.
+
+**Lesson**: Visual regression tests work best when baselines are captured at stable points. Run baseline updates only when visual changes are intentional.
+
+---
+
+### LL-030: SVG Coordinate System Origin Handling
+**Issue**: Mathematical coordinate systems place origin at center or bottom-left, but SVG's origin is top-left with y increasing downward.
+
+**Resolution**: Create transformation functions that map mathematical coordinates to SVG coordinates:
+```typescript
+const svgY = (mathY: number) => viewHeight - ((mathY - yMin) / (yMax - yMin)) * viewHeight
+```
+
+**Lesson**: When building mathematical visualizations in SVG, always create explicit coordinate transformation utilities. This centralizes the math↔SVG conversion logic.
+
+---
+
+### LI-026: Reusable Coordinate System Components
+**Identified**: Breaking the coordinate system into discrete components improves reusability.
+
+**Pattern**:
+```
+CoordinateSystem (container with axes, grid, labels)
+├── PlotCurve (render function as SVG path)
+├── PlotPoint (render labeled point)
+└── PlotLine (render vertical/horizontal lines)
+```
+
+**Benefits**:
+- Each component has single responsibility
+- Can compose different visualization types
+- Consistent styling across all graphs
+- Easy to add new plot types (area, scatter, etc.)
+
+---
+
+### LI-027: Quadratic Form Display Pattern
+**Identified**: Showing multiple equivalent forms of equations enhances understanding.
+
+**Pattern**:
+```typescript
+// Standard form: ax² + bx + c
+// Vertex form: a(x - h)² + k
+// Factored form: a(x - r₁)(x - r₂)
+```
+
+**Benefits**:
+- Shows same equation from different perspectives
+- Vertex form highlights the vertex directly
+- Factored form shows roots directly
+- Demonstrates mathematical equivalence
+
+---
+
+### LI-028: Real-World Presets with Context
+**Identified**: Mathematical widgets benefit from real-world application presets with explanatory context.
+
+**Pattern**:
+```typescript
+{
+  id: 'projectile',
+  name: 'Projectile Motion',
+  coefficients: { a: -4.9, b: 20, c: 1.5 },
+  context: 'Models a ball thrown upward at 20 m/s from 1.5m height',
+  realWorld: true
+}
+```
+
+**Benefits**:
+- Connects abstract math to tangible applications
+- Explains why coefficients have specific values
+- Reinforces practical relevance of mathematics
+
+---
+
+## Phase 7 Summary
+
+**Lessons Learned (LL)**:
+- LL-029: Visual regression test baseline strategy
+- LL-030: SVG coordinate system origin handling
+
+**Lessons Identified (LI)**:
+- LI-026: Reusable coordinate system components
+- LI-027: Quadratic form display pattern
+- LI-028: Real-world presets with context
+
+**Key Takeaways**:
+1. Visual regression tests need baselines captured at stable points
+2. SVG coordinate transformations should be centralized in utility functions
+3. Component composition enables flexible visualization building
+4. Multiple equation forms enhance mathematical understanding
+5. Real-world presets with context connect math to applications
+
+---
+
+## Phase 8: Exponentials & Logarithms
+
+### LL-031: Locale-Dependent Number Formatting in Tests
+**Issue**: Tests for `formatExponentialNumber` failed because number formatting depends on system locale. Expected `'1,000'` but received `'1.000'` (European locale uses period as thousands separator).
+
+**Code**:
+```typescript
+// Failed on some systems
+expect(formatExponentialNumber(1000)).toBe('1,000')
+```
+
+**Resolution**: Use regex patterns that accept either separator:
+```typescript
+expect(formatExponentialNumber(1000)).toMatch(/1[,.]000/)
+expect(formatExponentialNumber(Math.PI)).toMatch(/3[,.]142/)
+```
+
+**Lesson**: When testing formatted number output, account for locale differences. Use flexible assertions (regex) or normalize the output before comparing.
+
+---
+
+### LL-032: TypeScript Array Access After Length Check
+**Issue**: Even after checking array length, TypeScript considers array element access as potentially undefined.
+
+**Code**:
+```typescript
+const points = generateExponentialPoints(2, 0, 5)
+expect(points.length).toBeGreaterThan(0)
+const lastPoint = points[points.length - 1]
+expect(lastPoint.y).toBe(32) // Error: 'lastPoint' is possibly 'undefined'
+```
+
+**Resolution**: Add explicit existence check before accessing properties:
+```typescript
+const lastPoint = points[points.length - 1]
+expect(lastPoint).toBeDefined()
+expect(lastPoint!.y).toBe(32)
+```
+
+**Lesson**: TypeScript's strict mode doesn't narrow array element types based on length checks. Use explicit `toBeDefined()` assertions followed by non-null assertion (`!`) for cleaner test code.
+
+---
+
+### LL-033: Unused Props Variable in Vue Components
+**Issue**: Assigning `defineProps` to a variable that's only used in the template triggers ESLint's unused variable warning.
+
+**Code**:
+```typescript
+// Warning: 'props' is assigned but never used
+const props = defineProps<Props>()
+```
+
+**Resolution**: If props are only accessed in the template, omit the variable:
+```typescript
+defineProps<Props>()
+```
+
+**Lesson**: Vue's `defineProps` automatically exposes props to the template. Only assign to a variable when props need to be accessed in `<script setup>` code.
+
+---
+
+### LI-029: Tabbed Widget Interface Pattern
+**Identified**: Complex widgets with multiple distinct features benefit from a tabbed interface.
+
+**Pattern**:
+```typescript
+type ExplorerTab = 'function' | 'complexity'
+
+// URL sync: ?tab=function or ?tab=complexity
+const activeTab = ref<ExplorerTab>('function')
+```
+
+**Benefits**:
+- Separates distinct use cases into focused views
+- Reduces visual clutter
+- URL state enables deep linking to specific tabs
+- Each tab can have its own state subset
+
+**Example**: ExponentialExplorer separates function graphing from complexity comparison.
+
+---
+
+### LI-030: Complexity Comparison Visualization
+**Identified**: Showing multiple complexity classes on a single graph with a slider for n effectively demonstrates algorithmic scaling.
+
+**Implementation**:
+```typescript
+const complexityClasses = ['constant', 'logarithmic', 'linear', 'linearithmic', 'quadratic', 'exponential']
+
+// Each class has: function, label, color, examples
+complexityFunctions: Record<ComplexityClass, (n: number) => number>
+complexityLabels: Record<ComplexityClass, string>  // O(1), O(log n), etc.
+complexityColors: Record<ComplexityClass, string>  // Distinct colors
+complexityExamples: Record<ComplexityClass, string[]>  // Algorithm examples
+```
+
+**Benefits**:
+- Visual comparison makes abstract complexity tangible
+- Slider shows how differences grow with n
+- Color coding aids quick identification
+- Real algorithm examples provide context
+
+---
+
+### LI-031: Growth/Decay Analysis as Computed Properties
+**Identified**: Analyzing exponential function characteristics (growth vs decay, doubling time, half-life) as computed properties enables reactive display.
+
+**Pattern**:
+```typescript
+const growthDecay = computed(() => analyzeGrowthDecay(base.value))
+
+// Returns:
+{
+  type: 'growth' | 'decay',
+  doublingTime: number | null,  // For growth (base > 1)
+  halfLife: number | null,      // For decay (0 < base < 1)
+  percentChangePerUnit: number  // (base - 1) * 100
+}
+```
+
+**Benefits**:
+- Automatically updates when base changes
+- Encapsulates complex analysis logic
+- Consistent calculations across components
+
+---
+
+### LI-032: Base Validation for Exponential Functions
+**Identified**: Exponential and logarithm functions have specific domain restrictions that require validation.
+
+**Validation Rules**:
+```typescript
+// Exponential base: must be positive, not 1
+function isValidExponentialBase(base: number): boolean {
+  return base > 0 && base !== 1 && Number.isFinite(base)
+}
+
+// Logarithm input: must be positive
+function isValidLogarithmInput(value: number): boolean {
+  return value > 0 && Number.isFinite(value)
+}
+```
+
+**Why base ≠ 1**: f(x) = 1^x = 1 for all x, making it a constant function (not exponential).
+
+**Lesson**: Mathematical functions have domain restrictions. Validate inputs and provide clear error messages.
+
+---
+
+## Phase 8 Summary
+
+**Lessons Learned (LL)**:
+- LL-031: Locale-dependent number formatting in tests
+- LL-032: TypeScript array access after length check
+- LL-033: Unused props variable in Vue components
+
+**Lessons Identified (LI)**:
+- LI-029: Tabbed widget interface pattern
+- LI-030: Complexity comparison visualization
+- LI-031: Growth/decay analysis as computed properties
+- LI-032: Base validation for exponential functions
+
+**Key Takeaways**:
+1. Number formatting tests should be locale-agnostic (use regex or normalization)
+2. TypeScript strict mode requires explicit undefined checks even after length validation
+3. Tabbed interfaces effectively separate distinct widget features
+4. Complexity visualization makes algorithm analysis tangible for programmers
+5. Mathematical domain restrictions (base > 0, base ≠ 1) require explicit validation
+6. Growth/decay characteristics (doubling time, half-life) are natural computed properties

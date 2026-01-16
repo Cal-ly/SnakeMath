@@ -452,6 +452,8 @@ coverage
 
 # Vitest
 __screenshots__/
+# But include Playwright E2E visual regression baselines
+!e2e/__screenshots__/
 
 # Playwright
 /playwright-report/
