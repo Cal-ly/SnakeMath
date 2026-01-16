@@ -73,7 +73,7 @@ const siteStructure = [
     </section>
 
     <!-- The "Hrumph" Section - Personal Story -->
-    <section class="card p-6 md:p-8">
+    <section class="rounded-lg p-6 md:p-8 border border-border">
       <div class="max-w-3xl mx-auto">
         <h2 class="text-2xl font-bold text-text-primary mb-4">
           <em>Hrumph!</em> What's the meaning of all this?
@@ -100,7 +100,7 @@ const siteStructure = [
 
     <!-- Features Grid -->
     <section class="grid gap-6 sm:grid-cols-2 lg:grid-cols-4">
-      <div v-for="feature in features" :key="feature.title" class="bg-surface-alt rounded-lg p-6 border border-border/50 text-center">
+      <div v-for="feature in features" :key="feature.title" class="rounded-lg p-6 border border-border text-center">
         <div class="text-3xl mb-3 text-primary" aria-hidden="true">
           <i :class="feature.icon" />
         </div>
@@ -119,7 +119,7 @@ const siteStructure = [
       </h2>
 
       <div class="grid gap-3 sm:grid-cols-2 lg:grid-cols-3">
-        <div v-for="item in siteStructure" :key="item.name" class="bg-surface-alt rounded-lg p-4 border border-border/50">
+        <div v-for="item in siteStructure" :key="item.name" class="rounded-lg p-4 border border-border">
           <h3 class="font-semibold text-text-primary">{{ item.name }}</h3>
           <p class="text-sm text-text-muted mt-1">{{ item.description }}</p>
         </div>
@@ -138,7 +138,7 @@ const siteStructure = [
           v-for="topic in topics"
           :key="topic.id"
           :to="topic.path"
-          class="card p-6 hover:border-primary hover:shadow-md transition-all group"
+          class="block bg-surface-alt rounded-lg p-6 border border-border/50 hover:border-primary hover:shadow-md transition-all group"
         >
           <div class="flex items-start gap-4">
             <i :class="[topic.faIcon, 'text-3xl text-primary']" aria-hidden="true" />
@@ -165,7 +165,7 @@ const siteStructure = [
     </section>
 
     <!-- Prerequisites -->
-    <section class="card p-6 md:p-8 bg-surface-alt">
+    <section class="rounded-lg p-6 md:p-8 border border-border">
       <h2 class="text-xl font-bold text-text-primary mb-4">
         <i class="fa-solid fa-clipboard-check mr-2 text-primary" aria-hidden="true" />
         Prerequisites

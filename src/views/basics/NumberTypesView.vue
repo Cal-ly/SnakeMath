@@ -338,17 +338,17 @@ print(Decimal('0.1'))  # 0.1 (exact)`
         </p>
 
         <div class="grid md:grid-cols-3 gap-4 mb-4">
-          <div class="p-4 bg-surface-alt rounded-lg text-center">
+          <div class="p-4 rounded-lg border border-border text-center">
             <div class="font-mono text-lg text-primary mb-1">int</div>
             <div class="text-sm text-text-muted">Integers (ℤ)</div>
             <div class="text-xs text-text-muted mt-2">Arbitrary precision!</div>
           </div>
-          <div class="p-4 bg-surface-alt rounded-lg text-center">
+          <div class="p-4 rounded-lg border border-border text-center">
             <div class="font-mono text-lg text-primary mb-1">float</div>
             <div class="text-sm text-text-muted">Real numbers (ℝ)</div>
             <div class="text-xs text-text-muted mt-2">64-bit IEEE 754</div>
           </div>
-          <div class="p-4 bg-surface-alt rounded-lg text-center">
+          <div class="p-4 rounded-lg border border-border text-center">
             <div class="font-mono text-lg text-primary mb-1">complex</div>
             <div class="text-sm text-text-muted">Complex numbers (ℂ)</div>
             <div class="text-xs text-text-muted mt-2">Two floats (a + bj)</div>

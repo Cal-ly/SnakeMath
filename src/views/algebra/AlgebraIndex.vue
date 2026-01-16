@@ -41,7 +41,7 @@ const topic = topics.find((t) => t.id === 'algebra')!
             v-for="subtopic in topic.subtopics"
             :key="subtopic.id"
             :to="subtopic.path"
-            class="card p-4 flex items-center gap-4 hover:border-primary transition-colors group"
+            class="flex items-center gap-4 bg-surface-alt rounded-lg p-4 border border-border/50 hover:border-primary transition-colors group"
           >
             <div
               class="w-12 h-12 rounded-lg bg-primary/10 flex items-center justify-center flex-shrink-0"
@@ -77,7 +77,7 @@ const topic = topics.find((t) => t.id === 'algebra')!
         </p>
 
         <div class="grid gap-3 md:grid-cols-2">
-          <div class="p-3 bg-surface-alt rounded-lg border border-border/50">
+          <div class="p-3 rounded-lg border border-border">
             <p class="font-medium text-text-primary">
               <i class="fa-solid fa-pi text-text-muted mr-2" aria-hidden="true" />
               Product Notation (Π)
@@ -87,7 +87,7 @@ const topic = topics.find((t) => t.id === 'algebra')!
             </p>
           </div>
 
-          <div class="p-3 bg-surface-alt rounded-lg border border-border/50">
+          <div class="p-3 rounded-lg border border-border">
             <p class="font-medium text-text-primary">
               <i class="fa-solid fa-chart-line text-text-muted mr-2" aria-hidden="true" />
               Quadratic Functions
@@ -97,7 +97,7 @@ const topic = topics.find((t) => t.id === 'algebra')!
             </p>
           </div>
 
-          <div class="p-3 bg-surface-alt rounded-lg border border-border/50">
+          <div class="p-3 rounded-lg border border-border">
             <p class="font-medium text-text-primary">
               <i class="fa-solid fa-equals text-text-muted mr-2" aria-hidden="true" />
               Linear Equations
@@ -107,7 +107,7 @@ const topic = topics.find((t) => t.id === 'algebra')!
             </p>
           </div>
 
-          <div class="p-3 bg-surface-alt rounded-lg border border-border/50">
+          <div class="p-3 rounded-lg border border-border">
             <p class="font-medium text-text-primary">
               <i class="fa-solid fa-arrow-trend-up text-text-muted mr-2" aria-hidden="true" />
               Exponentials & Logarithms

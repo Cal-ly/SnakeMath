@@ -12,38 +12,50 @@
 
 **Use for**: Links to topic pages, related content, any clickable card that navigates.
 
+**Design rationale**: Navigational cards use a filled background (`bg-surface-alt`) to stand out and invite clicks. The background treatment signals "this is actionable."
+
 **Required elements**:
 - `router-link` or `a` tag as container
-- `.card` class
+- `bg-surface-alt` background for prominence
 - `hover:border-primary` for hover state
 - `group` class if children need hover effects
 
 **Example**:
 ```vue
-<router-link to="/topic" class="card p-4 hover:border-primary transition-colors group">
+<router-link
+  to="/topic"
+  class="block bg-surface-alt rounded-lg p-4 border border-border/50
+         hover:border-primary transition-colors group"
+>
   <h3 class="group-hover:text-primary transition-colors">Topic Title</h3>
   <p class="text-text-secondary">Description</p>
 </router-link>
 ```
 
-### Informational Panel (Non-Clickable)
+### Content Card (Non-Clickable)
 
 **Use for**: Static content, feature lists, "why this matters" sections, any non-interactive grouped content.
 
-**Key distinction**: Do NOT use `.card` class — this prevents confusion with clickable elements.
+**Design rationale**: Content cards are subtle (border-only, no background fill) so they don't overwhelm the page. They organize information without competing for attention with navigational elements.
 
 **Pattern**:
 ```vue
-<div class="bg-surface-alt rounded-lg p-4 border border-border/50">
+<div class="rounded-lg p-4 border border-border">
   <h3>Section Title</h3>
   <p>Static informational content</p>
 </div>
 ```
 
-**Alternative** (for less emphasis):
+**With icon header**:
 ```vue
-<div class="rounded-lg p-4 border border-border/50">
-  <!-- content -->
+<div class="rounded-lg p-4 border border-border">
+  <div class="flex items-start gap-3">
+    <i class="fa-solid fa-icon text-primary mt-1" aria-hidden="true" />
+    <div>
+      <h4 class="font-medium">Title</h4>
+      <p class="text-text-secondary">Description</p>
+    </div>
+  </div>
 </div>
 ```
 
@@ -187,7 +199,8 @@ Use `filter: drop-shadow()` for glow effects on hover.
 | Purpose | Classes |
 |---------|---------|
 | Key insight | `bg-primary/10 border border-primary/30 rounded-lg p-4` |
-| Informational panel | `bg-surface-alt rounded-lg p-4 border border-border/50` |
+| Navigational card | `bg-surface-alt rounded-lg p-4 border border-border/50` |
+| Content card | `rounded-lg p-4 border border-border` |
 | Code background | Handled by CodeExample component |
 
 ---
@@ -215,7 +228,7 @@ Use `filter: drop-shadow()` for glow effects on hover.
 
 When creating new components, verify:
 
-- [ ] Cards: Clickable uses `.card` + hover, non-clickable uses `bg-surface-alt`
+- [ ] Cards: Navigational uses `bg-surface-alt` + hover, content uses border-only
 - [ ] Code examples: Has unique `id` prop, filename-style title
 - [ ] Collapsibles: Uses CollapsiblePanel, appropriate default state
 - [ ] Interactive elements: Has hover, focus, active states

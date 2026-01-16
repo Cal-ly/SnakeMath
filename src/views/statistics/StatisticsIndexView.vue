@@ -36,7 +36,7 @@ const topic = topics.find((t) => t.id === 'statistics')!
       <!-- The Three Pillars -->
       <ContentSection id="pillars" title="The Three Pillars of Descriptive Statistics" icon="fa-solid fa-landmark">
         <div class="grid gap-4 md:grid-cols-3">
-          <div class="p-4 rounded-lg border border-border/50 bg-surface-alt">
+          <div class="p-4 rounded-lg border border-border">
             <div class="w-12 h-12 mb-3 rounded-lg bg-emerald-100 dark:bg-emerald-900 flex items-center justify-center">
               <i class="fa-solid fa-bullseye text-emerald-600 dark:text-emerald-400 text-xl" aria-hidden="true" />
             </div>
@@ -47,7 +47,7 @@ const topic = topics.find((t) => t.id === 'statistics')!
             </p>
           </div>
 
-          <div class="p-4 rounded-lg border border-border/50 bg-surface-alt">
+          <div class="p-4 rounded-lg border border-border">
             <div class="w-12 h-12 mb-3 rounded-lg bg-blue-100 dark:bg-blue-900 flex items-center justify-center">
               <i class="fa-solid fa-arrows-left-right text-blue-600 dark:text-blue-400 text-xl" aria-hidden="true" />
             </div>
@@ -58,7 +58,7 @@ const topic = topics.find((t) => t.id === 'statistics')!
             </p>
           </div>
 
-          <div class="p-4 rounded-lg border border-border/50 bg-surface-alt">
+          <div class="p-4 rounded-lg border border-border">
             <div class="w-12 h-12 mb-3 rounded-lg bg-purple-100 dark:bg-purple-900 flex items-center justify-center">
               <i class="fa-solid fa-mountain text-purple-600 dark:text-purple-400 text-xl" aria-hidden="true" />
             </div>
@@ -74,7 +74,7 @@ const topic = topics.find((t) => t.id === 'statistics')!
       <!-- Why It Matters -->
       <ContentSection id="why-it-matters" title="Why Programmers Need This" icon="fa-solid fa-rocket">
         <div class="grid gap-4 md:grid-cols-2">
-          <div class="p-4 rounded-lg border border-border/50 bg-surface-alt">
+          <div class="p-4 rounded-lg border border-border">
             <p class="font-medium text-text-primary mb-2">
               <i class="fa-solid fa-brain text-primary mr-2" aria-hidden="true" />
               Machine Learning
@@ -85,7 +85,7 @@ const topic = topics.find((t) => t.id === 'statistics')!
             </p>
           </div>
 
-          <div class="p-4 rounded-lg border border-border/50 bg-surface-alt">
+          <div class="p-4 rounded-lg border border-border">
             <p class="font-medium text-text-primary mb-2">
               <i class="fa-solid fa-flask text-primary mr-2" aria-hidden="true" />
               A/B Testing
@@ -96,7 +96,7 @@ const topic = topics.find((t) => t.id === 'statistics')!
             </p>
           </div>
 
-          <div class="p-4 rounded-lg border border-border/50 bg-surface-alt">
+          <div class="p-4 rounded-lg border border-border">
             <p class="font-medium text-text-primary mb-2">
               <i class="fa-solid fa-magnifying-glass-chart text-primary mr-2" aria-hidden="true" />
               Data Exploration
@@ -107,7 +107,7 @@ const topic = topics.find((t) => t.id === 'statistics')!
             </p>
           </div>
 
-          <div class="p-4 rounded-lg border border-border/50 bg-surface-alt">
+          <div class="p-4 rounded-lg border border-border">
             <p class="font-medium text-text-primary mb-2">
               <i class="fa-solid fa-bug text-primary mr-2" aria-hidden="true" />
               Debugging & Monitoring
@@ -127,7 +127,7 @@ const topic = topics.find((t) => t.id === 'statistics')!
             v-for="subtopic in topic.subtopics"
             :key="subtopic.id"
             :to="subtopic.path"
-            class="card p-4 flex items-center gap-4 hover:border-primary transition-colors group"
+            class="flex items-center gap-4 bg-surface-alt rounded-lg p-4 border border-border/50 hover:border-primary transition-colors group"
           >
             <div
               class="w-12 h-12 rounded-lg bg-primary/10 flex items-center justify-center flex-shrink-0"
@@ -163,7 +163,7 @@ const topic = topics.find((t) => t.id === 'statistics')!
         </p>
 
         <div class="grid gap-3 md:grid-cols-2">
-          <div class="p-3 bg-surface-alt rounded-lg border border-border/50">
+          <div class="p-3 rounded-lg border border-border">
             <p class="font-medium text-text-primary">
               <i class="fa-solid fa-bell-curve text-text-muted mr-2" aria-hidden="true" />
               Probability Distributions
@@ -173,7 +173,7 @@ const topic = topics.find((t) => t.id === 'statistics')!
             </p>
           </div>
 
-          <div class="p-3 bg-surface-alt rounded-lg border border-border/50">
+          <div class="p-3 rounded-lg border border-border">
             <p class="font-medium text-text-primary">
               <i class="fa-solid fa-scale-balanced text-text-muted mr-2" aria-hidden="true" />
               Hypothesis Testing
@@ -183,7 +183,7 @@ const topic = topics.find((t) => t.id === 'statistics')!
             </p>
           </div>
 
-          <div class="p-3 bg-surface-alt rounded-lg border border-border/50">
+          <div class="p-3 rounded-lg border border-border">
             <p class="font-medium text-text-primary">
               <i class="fa-solid fa-chart-mixed text-text-muted mr-2" aria-hidden="true" />
               Correlation & Regression
@@ -193,7 +193,7 @@ const topic = topics.find((t) => t.id === 'statistics')!
             </p>
           </div>
 
-          <div class="p-3 bg-surface-alt rounded-lg border border-border/50">
+          <div class="p-3 rounded-lg border border-border">
             <p class="font-medium text-text-primary">
               <i class="fa-solid fa-database text-text-muted mr-2" aria-hidden="true" />
               Sampling & Estimation

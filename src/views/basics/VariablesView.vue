@@ -152,7 +152,7 @@ str_value = str(42)        # "42"`
         </p>
 
         <div class="grid md:grid-cols-2 gap-4 mb-4">
-          <div class="p-4 bg-surface-alt rounded-lg">
+          <div class="p-4 rounded-lg border border-border">
             <h4 class="font-medium text-primary mb-2">
               <i class="fa-solid fa-square-root-variable mr-2" aria-hidden="true" />
               In Math
@@ -160,7 +160,7 @@ str_value = str(42)        # "42"`
             <p class="text-text-secondary mb-2">We write "let x = 5" to mean:</p>
             <MathBlock formula="x = 5" display />
           </div>
-          <div class="p-4 bg-surface-alt rounded-lg">
+          <div class="p-4 rounded-lg border border-border">
             <h4 class="font-medium text-primary mb-2">
               <i class="fa-brands fa-python mr-2" aria-hidden="true" />
               In Python
@@ -260,7 +260,7 @@ str_value = str(42)        # "42"`
           evaluates to a single value:
         </p>
 
-        <div class="p-4 bg-surface-alt rounded-lg mb-4">
+        <div class="p-4 rounded-lg border border-border mb-4">
           <div class="flex flex-col md:flex-row items-center justify-center gap-4">
             <div class="text-center">
               <div class="text-sm text-text-muted mb-1">Math</div>
@@ -323,11 +323,11 @@ str_value = str(42)        # "42"`
         </p>
 
         <div class="grid md:grid-cols-2 gap-4 mb-4">
-          <div class="p-4 bg-surface-alt rounded-lg">
+          <div class="p-4 rounded-lg border border-border">
             <h4 class="font-medium mb-2">Area of Rectangle</h4>
             <MathBlock formula="A = w \times h" display />
           </div>
-          <div class="p-4 bg-surface-alt rounded-lg">
+          <div class="p-4 rounded-lg border border-border">
             <h4 class="font-medium mb-2">Distance Formula</h4>
             <MathBlock formula="d = \sqrt{(x_2-x_1)^2 + (y_2-y_1)^2}" display />
           </div>
@@ -349,7 +349,7 @@ str_value = str(42)        # "42"`
 
         <CodeExample id="basics-variables-dynamictypes" :code="dynamicTypingCode" language="python" title="dynamic_types.py" />
 
-        <div class="mt-4 p-4 bg-surface-alt rounded-lg">
+        <div class="mt-4 p-4 rounded-lg border border-border">
           <h4 class="font-medium text-text-primary mb-2">Math Sets → Python Types</h4>
           <div class="grid grid-cols-2 md:grid-cols-4 gap-2 text-sm">
             <div class="text-center p-2 bg-surface rounded">

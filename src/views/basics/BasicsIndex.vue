@@ -17,7 +17,7 @@ const topic = topics.find((t) => t.id === 'basics')!
           v-for="subtopic in topic.subtopics"
           :key="subtopic.id"
           :to="subtopic.path"
-          class="card p-4 flex items-center gap-3 hover:border-primary transition-colors group"
+          class="flex items-center gap-3 bg-surface-alt rounded-lg p-4 border border-border/50 hover:border-primary transition-colors group"
         >
           <i
             :class="subtopic.faIcon || 'fa-solid fa-file'"

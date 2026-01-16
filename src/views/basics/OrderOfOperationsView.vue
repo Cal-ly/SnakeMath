@@ -274,11 +274,11 @@ print(f"Future value: \${A:.2f}")  # $1,647.01
         </p>
 
         <div class="grid md:grid-cols-2 gap-4 mb-4">
-          <div class="p-4 bg-surface-alt rounded-lg">
+          <div class="p-4 rounded-lg border border-border">
             <h4 class="font-medium text-primary mb-2">Left-to-Right (most operators)</h4>
             <MathBlock formula="10 - 5 - 2 = (10 - 5) - 2 = 3" display />
           </div>
-          <div class="p-4 bg-surface-alt rounded-lg">
+          <div class="p-4 rounded-lg border border-border">
             <h4 class="font-medium text-primary mb-2">Right-to-Left (exponentiation)</h4>
             <MathBlock formula="2^{3^2} = 2^{(3^2)} = 512" display />
           </div>
@@ -345,31 +345,31 @@ print(f"Future value: \${A:.2f}")  # $1,647.01
       <!-- Quick Reference -->
       <ContentSection id="summary" title="Quick Reference" icon="fa-solid fa-list-check">
         <div class="space-y-3">
-          <div class="flex items-start gap-3 p-3 bg-surface-alt rounded-lg">
+          <div class="flex items-start gap-3 p-3 rounded-lg border border-border">
             <span class="font-bold text-primary w-8">1.</span>
             <div>
               <strong>Parentheses</strong> — Always evaluated first
             </div>
           </div>
-          <div class="flex items-start gap-3 p-3 bg-surface-alt rounded-lg">
+          <div class="flex items-start gap-3 p-3 rounded-lg border border-border">
             <span class="font-bold text-primary w-8">2.</span>
             <div>
               <strong>Exponents</strong> — Right-to-left! <code>2**3**2 = 512</code>
             </div>
           </div>
-          <div class="flex items-start gap-3 p-3 bg-surface-alt rounded-lg">
+          <div class="flex items-start gap-3 p-3 rounded-lg border border-border">
             <span class="font-bold text-primary w-8">3.</span>
             <div>
               <strong>Unary ±</strong> — After exponents! <code>-3**2 = -9</code>
             </div>
           </div>
-          <div class="flex items-start gap-3 p-3 bg-surface-alt rounded-lg">
+          <div class="flex items-start gap-3 p-3 rounded-lg border border-border">
             <span class="font-bold text-primary w-8">4.</span>
             <div>
               <strong>Multiplication & Division</strong> — Left-to-right, same precedence
             </div>
           </div>
-          <div class="flex items-start gap-3 p-3 bg-surface-alt rounded-lg">
+          <div class="flex items-start gap-3 p-3 rounded-lg border border-border">
             <span class="font-bold text-primary w-8">5.</span>
             <div>
               <strong>Addition & Subtraction</strong> — Left-to-right, same precedence

@@ -148,13 +148,13 @@ compare_methods(100_000_000)`
 
         <div class="grid gap-4 md:grid-cols-2 mb-6">
           <!-- Math side -->
-          <div class="p-4 bg-surface-alt rounded-lg">
+          <div class="p-4 rounded-lg border border-border">
             <p class="text-xs text-text-muted uppercase tracking-wide mb-2">Math Notation</p>
             <MathBlock formula="\sum_{i=1}^{n} \text{expression}" display />
           </div>
 
           <!-- Code side -->
-          <div class="p-4 bg-surface-alt rounded-lg">
+          <div class="p-4 rounded-lg border border-border">
             <p class="text-xs text-text-muted uppercase tracking-wide mb-2">Python Code</p>
             <pre
               class="text-sm font-mono text-primary"
@@ -347,7 +347,7 @@ for i in range(1, n+1):
       <!-- Quick Reference -->
       <ContentSection id="reference" title="Quick Reference" icon="fa-solid fa-list-check">
         <div class="grid gap-4 md:grid-cols-2">
-          <div class="p-4 bg-surface-alt rounded-lg">
+          <div class="p-4 rounded-lg border border-border">
             <h4 class="font-medium text-text-primary mb-3">Sigma Anatomy</h4>
             <div class="space-y-2 text-sm">
               <div class="flex items-center gap-2">
@@ -365,7 +365,7 @@ for i in range(1, n+1):
             </div>
           </div>
 
-          <div class="p-4 bg-surface-alt rounded-lg">
+          <div class="p-4 rounded-lg border border-border">
             <h4 class="font-medium text-text-primary mb-3">Common Patterns</h4>
             <div class="space-y-2 text-sm font-mono">
               <div class="flex justify-between">

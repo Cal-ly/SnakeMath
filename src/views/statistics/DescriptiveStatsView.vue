@@ -428,7 +428,7 @@ print(f"Normalized mean: {normalized.mean():.4f}, std: {normalized.std():.4f}")`
           values into "bins" and counting how many fall into each bin.
         </p>
 
-        <div class="p-4 bg-surface-alt rounded-lg border border-border mb-4">
+        <div class="p-4 rounded-lg border border-border mb-4">
           <p class="font-medium text-text-primary mb-2">
             <i class="fa-solid fa-sliders text-primary mr-2" aria-hidden="true" />
             Bin Count Matters!
@@ -604,7 +604,7 @@ print(f"Normalized mean: {normalized.mean():.4f}, std: {normalized.std():.4f}")`
           </table>
         </div>
 
-        <div class="mt-4 p-4 bg-surface-alt rounded-lg border border-border">
+        <div class="mt-4 p-4 rounded-lg border border-border">
           <p class="font-medium text-text-primary mb-2">
             <i class="fa-solid fa-lightbulb text-amber-500 mr-2" aria-hidden="true" />
             Common Pitfalls

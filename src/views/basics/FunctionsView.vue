@@ -204,7 +204,7 @@ print(impure_increment(5))  # 7 (counter is now 2)
           variable (the input).
         </p>
 
-        <div class="p-4 bg-surface-alt rounded-lg mb-4">
+        <div class="p-4 rounded-lg border border-border mb-4">
           <p class="font-medium mb-2">Common notations you'll see:</p>
           <ul class="space-y-2 text-text-secondary">
             <li class="flex items-center gap-3">
@@ -357,21 +357,21 @@ print(impure_increment(5))  # 7 (counter is now 2)
       <!-- Why Functions Matter -->
       <ContentSection id="why-matter" title="Why Functions Matter" icon="fa-solid fa-star">
         <div class="grid md:grid-cols-3 gap-4">
-          <div class="p-4 bg-surface-alt rounded-lg text-center">
+          <div class="p-4 rounded-lg border border-border text-center">
             <div class="text-3xl mb-3">♻️</div>
             <h4 class="font-medium text-text-primary mb-2">Reusability</h4>
             <p class="text-sm text-text-secondary">
               Write once, use anywhere. No copy-paste needed.
             </p>
           </div>
-          <div class="p-4 bg-surface-alt rounded-lg text-center">
+          <div class="p-4 rounded-lg border border-border text-center">
             <div class="text-3xl mb-3">📦</div>
             <h4 class="font-medium text-text-primary mb-2">Abstraction</h4>
             <p class="text-sm text-text-secondary">
               Hide complexity behind a simple interface.
             </p>
           </div>
-          <div class="p-4 bg-surface-alt rounded-lg text-center">
+          <div class="p-4 rounded-lg border border-border text-center">
             <div class="text-3xl mb-3">🧪</div>
             <h4 class="font-medium text-text-primary mb-2">Testability</h4>
             <p class="text-sm text-text-secondary">

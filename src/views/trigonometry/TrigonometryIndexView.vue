@@ -36,7 +36,7 @@ const topic = topics.find((t) => t.id === 'trigonometry')!
       <!-- Why It Matters -->
       <ContentSection id="why-it-matters" title="Why Programmers Need This" icon="fa-solid fa-rocket">
         <div class="grid gap-4 md:grid-cols-2">
-          <div class="p-4 rounded-lg border border-border/50 bg-surface-alt">
+          <div class="p-4 rounded-lg border border-border">
             <p class="font-medium text-text-primary mb-2">
               <i class="fa-solid fa-gamepad text-primary mr-2" aria-hidden="true" />
               Game Development
@@ -47,7 +47,7 @@ const topic = topics.find((t) => t.id === 'trigonometry')!
             </p>
           </div>
 
-          <div class="p-4 rounded-lg border border-border/50 bg-surface-alt">
+          <div class="p-4 rounded-lg border border-border">
             <p class="font-medium text-text-primary mb-2">
               <i class="fa-solid fa-palette text-primary mr-2" aria-hidden="true" />
               Graphics & Animation
@@ -58,7 +58,7 @@ const topic = topics.find((t) => t.id === 'trigonometry')!
             </p>
           </div>
 
-          <div class="p-4 rounded-lg border border-border/50 bg-surface-alt">
+          <div class="p-4 rounded-lg border border-border">
             <p class="font-medium text-text-primary mb-2">
               <i class="fa-solid fa-wave-square text-primary mr-2" aria-hidden="true" />
               Signal Processing
@@ -69,7 +69,7 @@ const topic = topics.find((t) => t.id === 'trigonometry')!
             </p>
           </div>
 
-          <div class="p-4 rounded-lg border border-border/50 bg-surface-alt">
+          <div class="p-4 rounded-lg border border-border">
             <p class="font-medium text-text-primary mb-2">
               <i class="fa-solid fa-compass text-primary mr-2" aria-hidden="true" />
               Geolocation & Maps
@@ -89,7 +89,7 @@ const topic = topics.find((t) => t.id === 'trigonometry')!
             v-for="subtopic in topic.subtopics"
             :key="subtopic.id"
             :to="subtopic.path"
-            class="card p-4 flex items-center gap-4 hover:border-primary transition-colors group"
+            class="flex items-center gap-4 bg-surface-alt rounded-lg p-4 border border-border/50 hover:border-primary transition-colors group"
           >
             <div
               class="w-12 h-12 rounded-lg bg-primary/10 flex items-center justify-center flex-shrink-0"
@@ -125,7 +125,7 @@ const topic = topics.find((t) => t.id === 'trigonometry')!
         </p>
 
         <div class="grid gap-3 md:grid-cols-2">
-          <div class="p-3 bg-surface-alt rounded-lg border border-border/50">
+          <div class="p-3 rounded-lg border border-border">
             <p class="font-medium text-text-primary">
               <i class="fa-solid fa-equals text-text-muted mr-2" aria-hidden="true" />
               Trig Identities
@@ -135,7 +135,7 @@ const topic = topics.find((t) => t.id === 'trigonometry')!
             </p>
           </div>
 
-          <div class="p-3 bg-surface-alt rounded-lg border border-border/50">
+          <div class="p-3 rounded-lg border border-border">
             <p class="font-medium text-text-primary">
               <i class="fa-solid fa-triangle text-text-muted mr-2" aria-hidden="true" />
               Right Triangle Trig
@@ -145,7 +145,7 @@ const topic = topics.find((t) => t.id === 'trigonometry')!
             </p>
           </div>
 
-          <div class="p-3 bg-surface-alt rounded-lg border border-border/50">
+          <div class="p-3 rounded-lg border border-border">
             <p class="font-medium text-text-primary">
               <i class="fa-solid fa-arrows-spin text-text-muted mr-2" aria-hidden="true" />
               Inverse Trig Functions
@@ -155,7 +155,7 @@ const topic = topics.find((t) => t.id === 'trigonometry')!
             </p>
           </div>
 
-          <div class="p-3 bg-surface-alt rounded-lg border border-border/50">
+          <div class="p-3 rounded-lg border border-border">
             <p class="font-medium text-text-primary">
               <i class="fa-solid fa-code text-text-muted mr-2" aria-hidden="true" />
               Trig in Code
