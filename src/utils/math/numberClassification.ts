@@ -154,7 +154,7 @@ export function classifyNumber(input: string): NumberClassification {
       isInteger: false,
       isRational: false,
       isReal: true, // Extended reals include infinity
-      isComplex: false,
+      isComplex: true, // Extended complex also includes infinity
       pythonType: 'float',
       warnings,
       isValid: true,
@@ -193,7 +193,7 @@ export function classifyNumber(input: string): NumberClassification {
     isInteger,
     isRational: true, // All JS numbers are rational (finite decimal representations)
     isReal: true,
-    isComplex: false,
+    isComplex: true, // All real numbers are complex (with imaginary part = 0)
     pythonType,
     warnings,
     isValid: true,
@@ -229,7 +229,9 @@ export function generatePythonCode(input: string, classification: NumberClassifi
 
   const parsed = parseNumberInput(input)
 
-  if (classification.isComplex) {
+  // Check if this is a complex number with non-zero imaginary part
+  const hasImaginaryPart = parsed.parsedImaginary !== undefined && parsed.parsedImaginary !== 0
+  if (hasImaginaryPart) {
     const real = parsed.parsedReal || 0
     const imag = parsed.parsedImaginary || 0
     return `value = complex(${real}, ${imag})  # ${real}${imag >= 0 ? '+' : ''}${imag}j

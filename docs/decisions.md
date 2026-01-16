@@ -927,3 +927,167 @@ interface SummationPreset {
 - Avoids integer overflow for sum of cubes (100³ × 100 is large but safe)
 
 **Trade-off**: Can't demonstrate truly large summations, but formula comparison section explains the scaling.
+
+---
+
+## Phase 6 Decisions
+
+### D-051: Playwright over Cypress for E2E Testing
+**Decision**: Use Playwright for end-to-end testing instead of Cypress.
+
+**Rationale**:
+- Native TypeScript support without additional configuration
+- Multi-browser testing (Chromium, Firefox, WebKit) out of the box
+- Better async/await handling (no Cypress command chaining)
+- Smaller bundle size and faster execution
+- Better integration with modern testing patterns
+- `@axe-core/playwright` for accessibility testing
+
+**Trade-offs**:
+- Less community resources compared to Cypress
+- No built-in test runner GUI (but Playwright Inspector works well)
+
+---
+
+### D-052: Data-Testid for E2E Selectors
+**Decision**: Use `data-testid` attributes for E2E test selectors rather than CSS classes or text content.
+
+**Rationale**:
+- Decouples tests from styling (class changes don't break tests)
+- Clear intent: elements marked for testing
+- Survives refactoring (element structure changes)
+- Explicit and searchable in codebase
+- Doesn't affect production behavior
+
+**Implementation**:
+```vue
+<input data-testid="number-input" ... />
+<div data-testid="set-membership-display" ... />
+```
+
+**Trade-off**: Adds attributes that aren't used in production. Acceptable for testing reliability.
+
+---
+
+### D-053: WCAG 2.1 AA as Accessibility Target
+**Decision**: Target WCAG 2.1 AA compliance with automated testing via axe-core.
+
+**Rationale**:
+- AA is the standard for public websites
+- Automated testing catches common issues (contrast, labels, focus)
+- Educational content should be accessible to all learners
+- Legal compliance in many jurisdictions
+
+**Implementation**:
+```typescript
+const results = await new AxeBuilder({ page })
+  .withTags(['wcag2a', 'wcag2aa', 'wcag21aa'])
+  .analyze()
+```
+
+**Note**: Automated testing catches ~30-50% of accessibility issues. Manual testing still needed for complex interactions.
+
+---
+
+### D-054: SimpleFunctionDemo Widget with Preset Functions
+**Decision**: Create a simple function widget with 4 preset functions rather than arbitrary user input.
+
+**Rationale**:
+- Educational focus: demonstrate f(x) notation, not expression parsing
+- Safe: no need to evaluate arbitrary user expressions
+- Focused: shows key concepts (linear, quadratic, absolute value, reciprocal)
+- Interactive: slider for x value provides immediate feedback
+
+**Presets**:
+| Function | f(x) | Educational Value |
+|----------|------|-------------------|
+| Linear | 2x + 3 | Basic function composition |
+| Quadratic | x² | Powers and growth |
+| Absolute Value | \|x\| | Piecewise behavior |
+| Reciprocal | 1/x | Division by zero, asymptotes |
+
+**Trade-off**: Less flexible than arbitrary input, but more focused on teaching the core concept.
+
+---
+
+### D-055: Content Pages Without Interactive Widgets
+**Decision**: Variables & Expressions and Order of Operations pages use only code examples, no interactive widgets.
+
+**Rationale**:
+- Not every concept needs an interactive widget
+- Code examples effectively demonstrate these concepts
+- Avoids widget fatigue
+- Focuses attention on the explanatory content
+- Widgets planned for future (expression builder, PEMDAS calculator) but not MVP
+
+**Content Strategy**:
+- Variables: Python code examples for assignment, naming, expressions
+- Order of Operations: Step-by-step Python examples for PEMDAS
+
+---
+
+### D-056: Mathematical Correctness Over Simplification
+**Decision**: Represent mathematical set relationships correctly even when it complicates the code.
+
+**Context**: Natural numbers should be marked as belonging to ℂ (complex numbers) because ℕ ⊂ ℤ ⊂ ℚ ⊂ ℝ ⊂ ℂ.
+
+**Rationale**:
+- Educational site must be mathematically accurate
+- Teaches correct set theory relationships
+- Venn diagram visualization depends on correct subset membership
+- Users might share/cite content
+
+**Implementation**:
+```typescript
+// All real numbers are complex (imaginary part = 0)
+isComplex: true
+```
+
+**Trade-off**: Code distinguishes "is mathematically complex" from "has non-zero imaginary part" in different contexts.
+
+---
+
+### D-057: E2E Tests Organized by Feature
+**Decision**: Organize E2E tests by feature/page rather than by test type.
+
+**Structure**:
+```
+e2e/
+├── navigation/
+│   └── navigation.spec.ts      # Nav links, breadcrumbs
+├── widgets/
+│   ├── number-type-explorer.spec.ts
+│   └── summation-explorer.spec.ts
+└── accessibility/
+    └── audit.spec.ts           # WCAG audits for all pages
+```
+
+**Rationale**:
+- Easy to find tests for a specific feature
+- Tests can be run in isolation for faster feedback
+- Mirrors source code organization
+- Accessibility tests centralized for comprehensive coverage
+
+---
+
+### D-058: Collapsible Sections for Deep Content
+**Decision**: Use collapsible `ContentSection` for detailed explanations while keeping introductory content always visible.
+
+**Pattern** (applied in Phase 6 content pages):
+```
+Page Structure:
+├── Intro Section (NOT collapsible) - hooks the reader
+├── Core Concept (NOT collapsible) - essential content
+├── Details Section A (collapsible) - deeper exploration
+│   └── CodeExample (collapsible)
+├── Details Section B (collapsible)
+└── Summary/Reference (NOT collapsible) - quick lookup
+```
+
+**Rationale**:
+- Progressive disclosure reduces cognitive load
+- Users can scan page structure easily
+- Detailed content available on demand
+- Consistent with Phase 4 decision (D-042)
+
+**Note**: All three new content pages (Functions, Variables, Order of Operations) follow this pattern.

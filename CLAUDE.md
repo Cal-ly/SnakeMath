@@ -28,8 +28,11 @@
 | Vite | 7.x | Build tool and dev server |
 | Tailwind CSS | 3.4.x | Utility-first styling |
 | Vue Router | 4.6.x | Client-side routing |
-| KaTeX | 0.16.x | Math rendering (to be added) |
+| KaTeX | 0.16.x | Math rendering |
+| Shiki | 1.x | Syntax highlighting |
 | Vitest | 4.x | Unit testing |
+| Playwright | 1.x | E2E testing |
+| axe-core | 4.x | Accessibility testing |
 
 ### Key Technical Decisions
 - **No Pinia**: State is local to components or passed via props; URL state for shareable widget configurations
@@ -53,13 +56,18 @@ SnakeMath/
 ├── archive/                     # OLD CODE - excluded from build
 │   └── snake-math/              # Previous implementation (reference only)
 ├── docs/                        # Project documentation
+│   ├── archive/                 # Completed phase summaries
 │   ├── current_state.md         # Current project status
 │   ├── decisions.md             # Architectural decisions
-│   └── ll_li.md                 # Lessons learned
+│   ├── ll_li.md                 # Lessons learned
+│   └── todo.md                  # Task tracking and backlog
+├── e2e/                         # Playwright E2E tests
+│   ├── accessibility/           # WCAG audit tests
+│   ├── navigation/              # Nav and routing tests
+│   └── widgets/                 # Widget interaction tests
 ├── instructions/                # Claude Code task instructions
-│   ├── inc_1a.md               # Phase 1 increments
-│   ├── inc_1b.md
-│   └── ...
+│   ├── archive/                 # Completed phase instructions
+│   └── PHASE_6_PROMPT.md        # Current/recent phase
 ├── public/
 │   └── favicon.ico
 ├── src/
@@ -83,11 +91,17 @@ SnakeMath/
 │   │   └── math/                # Pure math functions
 │   ├── views/                   # Route-level page components
 │   │   ├── HomeView.vue
-│   │   └── basics/
-│   │       ├── BasicsIndex.vue
-│   │       ├── FoundationsView.vue
-│   │       ├── SymbolsView.vue
-│   │       └── NumberTypesView.vue
+│   │   ├── basics/              # Foundations section
+│   │   │   ├── BasicsIndex.vue
+│   │   │   ├── FoundationsView.vue
+│   │   │   ├── SymbolsView.vue
+│   │   │   ├── NumberTypesView.vue
+│   │   │   ├── FunctionsView.vue
+│   │   │   ├── VariablesView.vue
+│   │   │   └── OrderOfOperationsView.vue
+│   │   └── algebra/             # Algebra section
+│   │       ├── AlgebraIndex.vue
+│   │       └── SummationView.vue
 │   ├── App.vue
 │   └── main.ts
 ├── scripts/
@@ -96,6 +110,7 @@ SnakeMath/
 ├── README.md
 ├── index.html
 ├── package.json
+├── playwright.config.ts         # Playwright E2E config
 ├── tailwind.config.js
 ├── tsconfig.json
 ├── vite.config.ts
@@ -205,7 +220,8 @@ function handleInput(event: Event) {
 - Interactive educational tools
 - Self-contained with own state
 - May sync state to URL parameters
-- Examples: `NumberTypeExplorer.vue`, `QuadraticVisualizer.vue`
+- Often use preset-based architecture (safer than arbitrary user expressions)
+- Examples: `NumberTypeExplorer.vue`, `SummationExplorer.vue`, `SimpleFunctionDemo.vue`
 
 **UI Components** (`src/components/ui/`)
 - Generic, non-domain-specific
@@ -404,10 +420,63 @@ describe('classifyNumber', () => {
 })
 ```
 
-### What to Test
+### What to Test (Unit)
 - **Always test**: Math utilities, classification logic, data transformations
 - **Test selectively**: Component logic via composables
 - **Don't test**: Vue internals, Tailwind classes, static content
+
+### E2E Testing with Playwright
+
+E2E tests live in the `e2e/` directory, organized by feature:
+
+```
+e2e/
+├── accessibility/audit.spec.ts    # WCAG 2.1 AA audits
+├── navigation/navigation.spec.ts  # Nav, breadcrumbs, routing
+└── widgets/
+    ├── number-type-explorer.spec.ts
+    └── summation-explorer.spec.ts
+```
+
+**Test Pattern**:
+```typescript
+import { test, expect } from '@playwright/test'
+
+test.describe('Widget Name', () => {
+  test.beforeEach(async ({ page }) => {
+    await page.goto('/path/to/page')
+  })
+
+  test('user interaction works', async ({ page }) => {
+    // Use data-testid for reliable selectors
+    await page.locator('[data-testid="input"]').fill('42')
+
+    // Use exact matching to avoid substring matches
+    await page.getByRole('button', { name: 'Submit', exact: true }).click()
+
+    // Assert on visible results
+    await expect(page.locator('[data-testid="result"]')).toContainText('42')
+  })
+})
+```
+
+**Accessibility Testing**:
+```typescript
+import AxeBuilder from '@axe-core/playwright'
+
+test('page passes WCAG 2.1 AA', async ({ page }) => {
+  await page.goto('/path')
+  await page.waitForLoadState('networkidle')
+
+  const results = await new AxeBuilder({ page })
+    .withTags(['wcag2a', 'wcag2aa', 'wcag21aa'])
+    .analyze()
+
+  expect(results.violations).toEqual([])
+})
+```
+
+**Data-Testid Convention**: Add `data-testid` attributes to interactive elements and key display areas that E2E tests need to target.
 
 ---
 
@@ -496,15 +565,11 @@ Claude Code task instructions are in `/instructions/`:
 
 | File | Description |
 |------|-------------|
-| `inc_1a.md` | Project initialization |
-| `inc_1b.md` | Tailwind CSS setup |
-| `inc_1c.md` | Project structure and routing |
-| `inc_1d.md` | TypeScript type definitions |
-| `inc_1e.md` | Vitest configuration |
-| `inc_1f.md` | GitHub Pages deployment |
-| `inc_1g.md` | ESLint and Prettier |
+| `archive/` | Completed phase instructions (Phase 1-5) |
+| `PHASE_6_PROMPT.md` | Phase 6 instructions (completed) |
+| `todo.md` | Moved to `docs/todo.md` |
 
-Future phases will add more instruction files.
+**Instruction File Pattern**: Each phase has a `PHASE_X_PROMPT.md` file with increments (6A, 6B, etc.) that define specific tasks. After completion, instructions are archived.
 
 ---
 
@@ -528,11 +593,45 @@ Future phases will add more instruction files.
 2. Follow `MathSymbol` or `GreekLetter` interface
 3. Include programming analogy where applicable
 
-### Documention
-1. Use the `docs/ll_li.md` to document lessons learned and lessons identified, at least after every phase.
-2. Use the `docs/decisions.md` to document bigger decisions taken and why.
-3. Update `CLAUDE.md` when necessary, in order to align our process.
-4. Update `docs/current_state.md` with the projects current state, at least after every phase.
+### Documentation
+The project maintains four key documentation files in `docs/`:
+
+**1. `docs/ll_li.md` - Lessons Learned & Lessons Identified**
+- **When to update**: After every phase, or when encountering significant bugs/patterns
+- **What to document**:
+  - **Lessons Learned (LL)**: Bugs, gotchas, and issues encountered with their resolutions
+  - **Lessons Identified (LI)**: Patterns, best practices, and reusable solutions discovered
+- **Format**: Numbered entries (LL-001, LI-001) with Issue, Resolution, and Lesson sections
+
+**2. `docs/decisions.md` - Architectural Decision Records**
+- **When to update**: When making significant technical or design decisions
+- **What to document**:
+  - Technology choices (e.g., KaTeX over MathJax)
+  - Architectural patterns (e.g., preset-based widgets)
+  - Trade-offs considered and rationale
+- **Format**: Numbered entries (D-001) with Decision, Rationale, and Trade-offs sections
+
+**3. `docs/current_state.md` - Project Status Snapshot**
+- **When to update**: After every phase completion
+- **What to document**:
+  - Current phase status and what's next
+  - What's live (content, widgets, infrastructure)
+  - Test coverage summary
+  - Quick reference for resuming development
+- **Purpose**: Enable easy project resumption after pauses
+
+**4. `docs/todo.md` - Task Tracking**
+- **When to update**: When completing tasks, identifying issues, or planning future work
+- **What to document**:
+  - Current phase tasks (with checkboxes)
+  - Known issues/bugs to fix
+  - Items needing review
+  - Future ideas and enhancements
+- **Purpose**: Track work in progress and backlog
+
+**5. `CLAUDE.md` - Project Guide (this file)**
+- **When to update**: When conventions, patterns, or workflows change
+- **Purpose**: Single source of truth for project standards and practices
 
 ---
 
@@ -568,14 +667,27 @@ npm run build       # Production build
 npm run dev          # Start dev server
 npm run build        # Production build (includes 404.html copy)
 npm run preview      # Preview production build
-npm run test         # Run tests once
-npm run test:watch   # Run tests in watch mode
-npm run test:coverage # Run tests with coverage report
+npm run test         # Run unit tests once
+npm run test:watch   # Run unit tests in watch mode
+npm run test:coverage # Run unit tests with coverage report
+npm run test:e2e     # Run Playwright E2E tests (requires dev server)
 npm run lint         # Check and fix linting issues
 npm run lint:check   # Check linting (no fix)
 npm run format       # Format with Prettier
 npm run format:check # Check formatting (no fix)
 npm run type-check   # TypeScript validation
+```
+
+### Before Committing
+```bash
+npm run type-check && npm run lint && npm run test && npm run build
+```
+
+### Running E2E Tests
+```bash
+npm run dev &        # Start dev server in background
+npm run test:e2e     # Run all E2E tests
+npx playwright test --ui  # Interactive test runner
 ```
 
 ### Path Aliases
@@ -589,4 +701,7 @@ npm run type-check   # TypeScript validation
 - Types: `src/types/index.ts`
 - Theme CSS: `src/assets/styles/main.css`
 - Tailwind config: `tailwind.config.js`
-- Test setup: `src/test/setup.ts`
+- Unit test setup: `src/test/setup.ts`
+- E2E test config: `playwright.config.ts`
+- Project status: `docs/current_state.md`
+- Task tracking: `docs/todo.md`

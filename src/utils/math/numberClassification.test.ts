@@ -128,7 +128,7 @@ describe('classifyNumber', () => {
       expect(result.isInteger).toBe(true)
       expect(result.isRational).toBe(true)
       expect(result.isReal).toBe(true)
-      expect(result.isComplex).toBe(false)
+      expect(result.isComplex).toBe(true) // All real numbers are also complex (imaginary part = 0)
     })
 
     it('classifies 1 as natural', () => {

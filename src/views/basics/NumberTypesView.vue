@@ -106,6 +106,48 @@ print(isinstance(3.14, Real))     # True
 
 print(isinstance(1+2j, Real))     # False
 print(isinstance(1+2j, Complex))  # True`
+
+const dataTypesCode = `# Mathematical type → Python type
+natural = 42        # int
+integer = -5        # int
+rational = 0.5      # float (approximation of 1/2)
+real = 3.14159      # float (approximation of π)
+imaginary = 3 + 4j  # complex
+
+# Check the type
+print(type(42))        # <class 'int'>
+print(type(3.14))      # <class 'float'>
+print(type(3 + 4j))    # <class 'complex'>
+
+# Type conversion
+int_val = int(3.7)     # 3 (truncates)
+float_val = float(42)  # 42.0
+complex_val = complex(3, 4)  # (3+4j)`
+
+const precisionWarningCode = `# The infamous floating-point precision issue!
+
+# This looks like it should be True...
+print(0.1 + 0.2 == 0.3)  # False!
+
+# But why?
+print(0.1 + 0.2)  # 0.30000000000000004
+
+# Floats are stored in binary, and 0.1 can't be
+# represented exactly (like 1/3 can't be exact in decimal)
+
+# Solution 1: Use isclose() for comparisons
+import math
+print(math.isclose(0.1 + 0.2, 0.3))  # True
+
+# Solution 2: Use Decimal for exact arithmetic
+from decimal import Decimal
+a = Decimal('0.1')
+b = Decimal('0.2')
+print(a + b == Decimal('0.3'))  # True
+
+# Note: Use strings with Decimal to avoid float conversion
+print(Decimal(0.1))    # 0.1000000000000000055511151231...
+print(Decimal('0.1'))  # 0.1 (exact)`
 </script>
 
 <template>
@@ -282,6 +324,74 @@ print(isinstance(1+2j, Complex))  # True`
           This hierarchy is useful for writing generic functions that work with any numeric type.
           Check the abstract base classes when you need to verify what operations a number supports!
         </p>
+      </ContentSection>
+
+      <!-- Python Data Types -->
+      <ContentSection
+        id="data-types"
+        title="Python Data Types for Numbers"
+        icon="fa-solid fa-code"
+        collapsible
+      >
+        <p class="mb-4">
+          Python provides three built-in numeric types that correspond to the mathematical sets:
+        </p>
+
+        <div class="grid md:grid-cols-3 gap-4 mb-4">
+          <div class="p-4 bg-surface-alt rounded-lg text-center">
+            <div class="font-mono text-lg text-primary mb-1">int</div>
+            <div class="text-sm text-text-muted">Integers (ℤ)</div>
+            <div class="text-xs text-text-muted mt-2">Arbitrary precision!</div>
+          </div>
+          <div class="p-4 bg-surface-alt rounded-lg text-center">
+            <div class="font-mono text-lg text-primary mb-1">float</div>
+            <div class="text-sm text-text-muted">Real numbers (ℝ)</div>
+            <div class="text-xs text-text-muted mt-2">64-bit IEEE 754</div>
+          </div>
+          <div class="p-4 bg-surface-alt rounded-lg text-center">
+            <div class="font-mono text-lg text-primary mb-1">complex</div>
+            <div class="text-sm text-text-muted">Complex numbers (ℂ)</div>
+            <div class="text-xs text-text-muted mt-2">Two floats (a + bj)</div>
+          </div>
+        </div>
+
+        <CodeExample :code="dataTypesCode" language="python" title="data_types.py" />
+      </ContentSection>
+
+      <!-- Floating-Point Precision -->
+      <ContentSection
+        id="precision"
+        title="Floating-Point Precision"
+        icon="fa-solid fa-triangle-exclamation"
+        collapsible
+      >
+        <p class="mb-4">
+          Floating-point numbers are <em>approximations</em>. This can lead to surprises:
+        </p>
+
+        <div class="p-4 bg-red-50 dark:bg-red-900/20 border border-red-200 dark:border-red-800 rounded-lg mb-4">
+          <p class="font-medium text-red-700 dark:text-red-400 mb-2">
+            <i class="fa-solid fa-exclamation-triangle mr-1" aria-hidden="true" />
+            Watch Out!
+          </p>
+          <p class="font-mono text-sm text-red-600 dark:text-red-300">
+            0.1 + 0.2 == 0.3 → False
+          </p>
+        </div>
+
+        <CodeExample :code="precisionWarningCode" language="python" title="precision.py" />
+
+        <div class="mt-4 p-4 bg-primary/5 border border-primary/20 rounded-lg">
+          <p class="font-medium text-primary mb-2">
+            <i class="fa-solid fa-lightbulb mr-1" aria-hidden="true" />
+            When to use each
+          </p>
+          <ul class="text-sm text-text-secondary space-y-1">
+            <li><strong>float:</strong> Most scientific/graphics work</li>
+            <li><strong>Fraction:</strong> When you need exact ratios</li>
+            <li><strong>Decimal:</strong> Financial calculations (money!)</li>
+          </ul>
+        </div>
       </ContentSection>
 
       <!-- Quick Reference -->

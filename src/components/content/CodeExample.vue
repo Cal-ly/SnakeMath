@@ -103,7 +103,7 @@ function toggleCollapse() {
         <!-- Language badge (if title is shown) -->
         <span
           v-if="title"
-          class="text-xs px-1.5 py-0.5 rounded bg-border text-text-muted"
+          class="text-xs px-1.5 py-0.5 rounded bg-border text-text-secondary"
         >
           {{ displayLanguage }}
         </span>

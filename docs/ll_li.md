@@ -917,3 +917,238 @@ Phase 5 introduced the Algebra section with the flagship SummationExplorer widge
 3. SVG overlays (running total line) enhance visualization
 4. Always clean up timers and animations on component unmount
 5. Concrete examples (n = 1,000,000) make abstract concepts tangible
+
+---
+
+## Phase 6: Basics Completion + E2E Testing
+
+### LL-024: Mathematical Set Membership - ℝ ⊂ ℂ
+**Issue**: Number classification tests failed because natural numbers were not marked as belonging to ℂ (complex numbers).
+
+**Context**: Initially, `isComplex` was `false` for real numbers. But mathematically, all real numbers are complex numbers with imaginary part 0: ℕ ⊂ ℤ ⊂ ℚ ⊂ ℝ ⊂ ℂ.
+
+**Resolution**: Changed `numberClassification.ts` to set `isComplex: true` for all real numbers:
+```typescript
+return {
+  isNatural,
+  isInteger,
+  isRational: true,
+  isReal: true,
+  isComplex: true, // All real numbers are complex (with imaginary part = 0)
+  // ...
+}
+```
+
+**Follow-up Issue**: After this fix, `generatePythonCode` was generating complex number code for all inputs since it checked `isComplex`. Fixed by checking for actual imaginary part:
+```typescript
+const hasImaginaryPart = parsed.parsedImaginary !== undefined && parsed.parsedImaginary !== 0
+if (hasImaginaryPart) {
+  // Generate complex number code
+}
+```
+
+**Lesson**: Mathematical correctness matters. When implementing set theory, ensure subset relationships are properly reflected (ℝ ⊂ ℂ means all real numbers are complex).
+
+---
+
+### LL-025: Playwright Test Selector Specificity
+**Issue**: Test selector `button:has-text("42")` matched multiple buttons ("42" and "1.41421...").
+
+**Resolution**: Use `getByRole` with `exact: true` for precise matching:
+```typescript
+// Before (matched multiple buttons)
+await page.locator('button:has-text("42")').click()
+
+// After (exact match)
+await page.getByRole('button', { name: '42', exact: true }).click()
+```
+
+**Lesson**: E2E test selectors should be as specific as possible. Use `exact: true` when matching text that could be a substring of other elements.
+
+---
+
+### LL-026: WCAG Color Contrast Requirements
+**Issue**: Accessibility audit failed because `text-text-muted` on `bg-border` had a contrast ratio of 3.9:1 (WCAG AA requires 4.5:1 for normal text).
+
+**Context**: The language badge in `CodeExample.vue` used `text-text-muted` which is a lighter gray designed for less important text.
+
+**Resolution**: Changed to `text-text-secondary` which has a darker color and meets contrast requirements:
+```vue
+<!-- Before (3.9:1 contrast - fails WCAG AA) -->
+<span class="text-xs px-1.5 py-0.5 rounded bg-border text-text-muted">
+
+<!-- After (4.5:1+ contrast - passes WCAG AA) -->
+<span class="text-xs px-1.5 py-0.5 rounded bg-border text-text-secondary">
+```
+
+**Lesson**: Always verify color contrast ratios when using muted/lighter text colors. Use tools like axe-core in automated tests to catch these issues early.
+
+---
+
+### LL-027: JavaScript Template Literal Escaping in Vue
+**Issue**: Python f-string `${A:.2f}` in a template literal caused a syntax error because `${}` is JavaScript template literal syntax.
+
+**Code**:
+```typescript
+// Error: Unexpected token in template literal
+const code = `print(f"Future value: ${A:.2f}")`
+```
+
+**Resolution**: Escape the dollar sign with backslash:
+```typescript
+const code = `print(f"Future value: \${A:.2f}")`
+```
+
+**Lesson**: When including Python f-strings (or any `${}` syntax) in JavaScript template literals, escape the dollar sign to prevent JavaScript from interpreting it.
+
+---
+
+### LL-028: TypeScript Strict Array Access with Find
+**Issue**: `array.find()` returns `T | undefined`, but component logic expected a guaranteed result.
+
+**Code**:
+```typescript
+// Error: Object is possibly 'undefined'
+const selectedPreset = computed(() => presets.find(p => p.id === id.value))
+// Using selectedPreset.value.name fails
+```
+
+**Resolution**: Use non-null assertion with fallback when array is known non-empty:
+```typescript
+const selectedPreset = computed((): FunctionPreset => {
+  return presets.find(p => p.id === id.value) ?? presets[0]!
+})
+```
+
+**Lesson**: When using `find()` on a known non-empty array with a guaranteed match, use explicit return types and the `??` operator with non-null assertion for the fallback.
+
+---
+
+### LI-022: Axe-Core Integration for Automated Accessibility Testing
+**Identified**: `@axe-core/playwright` enables automated WCAG compliance testing in E2E tests.
+
+**Pattern**:
+```typescript
+import AxeBuilder from '@axe-core/playwright'
+
+test('page passes WCAG 2.1 AA', async ({ page }) => {
+  await page.goto('/path')
+  await page.waitForLoadState('networkidle')
+
+  const results = await new AxeBuilder({ page })
+    .withTags(['wcag2a', 'wcag2aa', 'wcag21aa'])
+    .analyze()
+
+  expect(results.violations).toEqual([])
+})
+```
+
+**Benefits**:
+- Catches color contrast issues, missing labels, focus management problems
+- Runs automatically in CI
+- Tests multiple pages efficiently with loops
+- Provides detailed violation reports
+
+**Note**: Test pages after full load (`networkidle`) to ensure dynamically rendered content is evaluated.
+
+---
+
+### LI-023: Data-Testid Attributes for E2E Testing
+**Identified**: Adding `data-testid` attributes to key interactive elements improves test reliability.
+
+**Pattern**:
+```vue
+<input data-testid="number-input" ... />
+<button data-testid="example-42" ... />
+<div data-testid="set-membership-display" ... />
+```
+
+**Benefits**:
+- Decouples tests from CSS classes/structure
+- Survives refactoring (class changes, element restructuring)
+- Clear intent: this element is tested
+- Doesn't affect production behavior
+
+**Note**: Add to interactive elements (inputs, buttons) and key display areas that tests need to verify.
+
+---
+
+### LI-024: Preset-Based Widget Pattern
+**Identified**: Widgets with a fixed set of options work well with a preset-based architecture.
+
+**Pattern**:
+```typescript
+interface FunctionPreset {
+  id: string
+  name: string
+  latex: string
+  python: string
+  evaluate: (x: number) => number
+}
+
+const presets: FunctionPreset[] = [
+  { id: 'linear', name: 'Linear', latex: '2x + 3', python: '2*x + 3', evaluate: x => 2*x + 3 },
+  // ...
+]
+```
+
+**Benefits**:
+- Type-safe: each preset has all required fields
+- Single source of truth for display and evaluation
+- Easy to add new presets
+- Safer than user-defined expressions (no parsing/eval)
+
+**Note**: Used in both SimpleFunctionDemo and SummationExplorer widgets.
+
+---
+
+### LI-025: Keyboard Navigation Testing Pattern
+**Identified**: E2E tests should verify keyboard accessibility for interactive widgets.
+
+**Pattern**:
+```typescript
+test('keyboard navigation works', async ({ page }) => {
+  // Focus the input
+  await page.locator('[data-testid="input"]').focus()
+
+  // Tab to next element
+  await page.keyboard.press('Tab')
+
+  // Verify focus moved to expected element
+  const focused = page.locator(':focus')
+  await expect(focused).toHaveAttribute('data-testid', 'expected-element')
+
+  // Test Enter key activation
+  await page.keyboard.press('Enter')
+  await expect(/* result */).toBeVisible()
+})
+```
+
+**Note**: Focus management and keyboard operability are critical for accessibility.
+
+---
+
+## Phase 6 Summary
+
+Phase 6 completed the Basics section and added comprehensive E2E testing infrastructure:
+
+**Lessons Learned (LL)**:
+- LL-024: Mathematical set membership - ℝ ⊂ ℂ
+- LL-025: Playwright test selector specificity
+- LL-026: WCAG color contrast requirements
+- LL-027: JavaScript template literal escaping in Vue
+- LL-028: TypeScript strict array access with Find
+
+**Lessons Identified (LI)**:
+- LI-022: Axe-Core integration for automated accessibility testing
+- LI-023: Data-testid attributes for E2E testing
+- LI-024: Preset-based widget pattern
+- LI-025: Keyboard navigation testing pattern
+
+**Key Takeaways**:
+1. Mathematical correctness matters - verify subset relationships (ℝ ⊂ ℂ)
+2. Automated accessibility testing catches issues early (color contrast, focus management)
+3. `data-testid` attributes make tests resilient to refactoring
+4. Escape `${}` when including Python f-strings in JS template literals
+5. Use `exact: true` in Playwright selectors to avoid partial matches
+6. Preset-based widgets are safer and more maintainable than arbitrary expression input

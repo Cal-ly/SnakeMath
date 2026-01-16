@@ -29,6 +29,21 @@ const router = createRouter({
       name: 'basics-number-types',
       component: () => import('@/views/basics/NumberTypesView.vue'),
     },
+    {
+      path: '/basics/functions',
+      name: 'basics-functions',
+      component: () => import('@/views/basics/FunctionsView.vue'),
+    },
+    {
+      path: '/basics/variables',
+      name: 'basics-variables',
+      component: () => import('@/views/basics/VariablesView.vue'),
+    },
+    {
+      path: '/basics/order-of-operations',
+      name: 'basics-order-of-operations',
+      component: () => import('@/views/basics/OrderOfOperationsView.vue'),
+    },
     // Algebra section
     {
       path: '/algebra',

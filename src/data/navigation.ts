@@ -44,6 +44,27 @@ export const topics: NavTopic[] = [
         path: '/basics/number-types',
         faIcon: 'fa-solid fa-hashtag',
       },
+      {
+        id: 'functions',
+        title: 'Functions',
+        description: 'Input, output, and the f(x) notation',
+        path: '/basics/functions',
+        faIcon: 'fa-solid fa-arrow-right-arrow-left',
+      },
+      {
+        id: 'variables',
+        title: 'Variables & Expressions',
+        description: 'Named values and how to combine them',
+        path: '/basics/variables',
+        faIcon: 'fa-solid fa-box-archive',
+      },
+      {
+        id: 'order-of-operations',
+        title: 'Order of Operations',
+        description: 'PEMDAS and operator precedence',
+        path: '/basics/order-of-operations',
+        faIcon: 'fa-solid fa-list-ol',
+      },
     ],
   },
   {
