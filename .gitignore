@@ -453,6 +453,11 @@ coverage
 # Vitest
 __screenshots__/
 
+# Playwright
+/playwright-report/
+/playwright/.cache/
+/test-results/
+
 # Environment files
 .env.local
 .env.*.local
