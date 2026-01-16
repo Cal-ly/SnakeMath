@@ -76,10 +76,10 @@ export const topics: NavTopic[] = [
     subtopics: [
       {
         id: 'summation',
-        title: 'Summation Notation',
+        title: 'Summation',
         description: 'Sigma is just a for loop',
         path: '/algebra/summation',
-        faIcon: 'fa-solid fa-sigma',
+        faIcon: 'bi bi-sigma',
       },
       {
         id: 'quadratics',

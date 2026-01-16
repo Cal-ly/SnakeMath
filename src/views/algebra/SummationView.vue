@@ -113,7 +113,7 @@ compare_methods(100_000_000)`
   >
     <div class="space-y-8">
       <!-- Introduction -->
-      <ContentSection id="introduction" title="What is Summation Notation?" icon="fa-solid fa-sigma">
+      <ContentSection id="introduction" title="What is Summation Notation?" icon="bi bi-sigma">
         <p class="mb-4">
           That big, scary Greek letter <MathBlock formula="\Sigma" /> (sigma) sitting in your
           textbook? It's just a fancy way of saying <strong>"add all these things up."</strong>

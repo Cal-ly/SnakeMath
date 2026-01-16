@@ -1,6 +1,9 @@
 /* KaTeX styles */
 @import 'katex/dist/katex.min.css';
 
+/* Bootstrap Icons - used for icons not in Font Awesome Free (e.g., sigma) */
+@import 'bootstrap-icons/font/bootstrap-icons.css';
+
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
