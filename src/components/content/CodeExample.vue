@@ -5,6 +5,8 @@ import { useTheme } from '@/composables/useTheme'
 import CopyButton from '@/components/ui/CopyButton.vue'
 
 interface Props {
+  /** Unique identifier for cross-referencing */
+  id?: string
   /** Code content */
   code: string
   /** Programming language */
@@ -20,6 +22,7 @@ interface Props {
 }
 
 const props = withDefaults(defineProps<Props>(), {
+  id: undefined,
   language: 'python',
   title: undefined,
   lineNumbers: false,
@@ -72,7 +75,7 @@ function toggleCollapse() {
 </script>
 
 <template>
-  <div class="code-example rounded-lg border border-border overflow-hidden">
+  <div :id="id" class="code-example rounded-lg border border-border overflow-hidden">
     <!-- Header -->
     <div
       class="code-header flex items-center justify-between px-3 py-2 bg-surface-alt border-b border-border"

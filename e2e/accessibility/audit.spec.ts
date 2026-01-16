@@ -12,6 +12,8 @@ const pagesToAudit = [
   { name: 'Summation', path: `${BASE}/algebra/summation` },
   { name: 'Trigonometry Index', path: `${BASE}/trigonometry` },
   { name: 'Unit Circle', path: `${BASE}/trigonometry/unit-circle` },
+  { name: 'Statistics Index', path: `${BASE}/statistics` },
+  { name: 'Descriptive Statistics', path: `${BASE}/statistics/descriptive` },
 ]
 
 test.describe('Accessibility Audits - WCAG 2.1 AA @a11y', () => {
@@ -154,6 +156,44 @@ test.describe('Accessibility - Keyboard Navigation @a11y', () => {
     await page.keyboard.press('Enter')
     const slider = page.locator('[data-testid="angle-slider"]')
     await expect(slider).toHaveValue('0')
+  })
+
+  test('Statistics calculator dataset selector is keyboard accessible', async ({ page }) => {
+    await page.goto(`${BASE}/statistics/descriptive`)
+    await page.waitForLoadState('networkidle')
+
+    // Tab to reach dataset selector button
+    let foundSelector = false
+    for (let i = 0; i < 30; i++) {
+      await page.keyboard.press('Tab')
+      const focused = page.locator(':focus')
+      const testId = await focused.getAttribute('data-testid')
+      if (testId === 'dataset-test-scores') {
+        foundSelector = true
+        break
+      }
+    }
+
+    expect(foundSelector).toBe(true)
+  })
+
+  test('Statistics calculator bin count slider is keyboard accessible', async ({ page }) => {
+    await page.goto(`${BASE}/statistics/descriptive`)
+    await page.waitForLoadState('networkidle')
+
+    // Tab to reach bin count slider
+    let foundSlider = false
+    for (let i = 0; i < 40; i++) {
+      await page.keyboard.press('Tab')
+      const focused = page.locator(':focus')
+      const testId = await focused.getAttribute('data-testid')
+      if (testId === 'bin-count-slider') {
+        foundSlider = true
+        break
+      }
+    }
+
+    expect(foundSlider).toBe(true)
   })
 })
 

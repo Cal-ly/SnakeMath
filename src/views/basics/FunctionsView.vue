@@ -173,7 +173,7 @@ print(impure_increment(5))  # 7 (counter is now 2)
           <MathBlock formula="f(5) = 2(5) + 3 = 13" />.
         </p>
 
-        <CodeExample :code="basicFunctionCode" language="python" title="basic_function.py" />
+        <CodeExample id="basics-functions-basic" :code="basicFunctionCode" language="python" title="basic_function.py" />
       </ContentSection>
 
       <!-- Interactive Demo -->
@@ -222,7 +222,7 @@ print(impure_increment(5))  # 7 (counter is now 2)
           </ul>
         </div>
 
-        <CodeExample :code="notationCode" language="python" title="notation.py" />
+        <CodeExample id="basics-functions-notation" :code="notationCode" language="python" title="notation.py" />
 
         <p class="mt-4 p-3 bg-math-highlight rounded-lg">
           <strong>Key insight:</strong> In both math and Python, you call a function by writing its
@@ -248,7 +248,7 @@ print(impure_increment(5))  # 7 (counter is now 2)
           This is directly analogous to Python functions with multiple parameters:
         </p>
 
-        <CodeExample :code="multipleArgsCode" language="python" title="multiple_args.py" />
+        <CodeExample id="basics-functions-multipleargs" :code="multipleArgsCode" language="python" title="multiple_args.py" />
 
         <p class="mt-4 text-text-secondary">
           Real-world functions often have many inputs — think of calculating loan payments
@@ -270,7 +270,7 @@ print(impure_increment(5))  # 7 (counter is now 2)
 
         <MathBlock formula="f(x) = x^2 \quad \Leftrightarrow \quad \texttt{f = lambda x: x ** 2}" display />
 
-        <CodeExample :code="lambdaCode" language="python" title="lambda_functions.py" />
+        <CodeExample id="basics-functions-lambda" :code="lambdaCode" language="python" title="lambda_functions.py" />
 
         <p class="mt-4 text-text-muted">
           Lambdas are most useful when you need a quick function for things like sorting,
@@ -297,7 +297,7 @@ print(impure_increment(5))  # 7 (counter is now 2)
           nested function calls in programming:
         </p>
 
-        <CodeExample :code="compositionCode" language="python" title="composition.py" />
+        <CodeExample id="basics-functions-composition" :code="compositionCode" language="python" title="composition.py" />
 
         <div class="mt-4 p-4 bg-primary/5 border border-primary/20 rounded-lg">
           <p class="font-medium text-primary mb-2">
@@ -351,7 +351,7 @@ print(impure_increment(5))  # 7 (counter is now 2)
           </div>
         </div>
 
-        <CodeExample :code="pureVsImpureCode" language="python" title="pure_vs_impure.py" />
+        <CodeExample id="basics-functions-purity" :code="pureVsImpureCode" language="python" title="pure_vs_impure.py" />
       </ContentSection>
 
       <!-- Why Functions Matter -->

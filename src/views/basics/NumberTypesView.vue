@@ -203,7 +203,7 @@ print(Decimal('0.1'))  # 0.1 (exact)`
           contexts, we often use the "positive integers" definition.
         </p>
 
-        <CodeExample :code="naturalNumbersCode" language="python" title="natural_numbers.py" />
+        <CodeExample id="basics-numbertypes-natural" :code="naturalNumbersCode" language="python" title="natural_numbers.py" />
 
         <p class="mt-4 text-text-secondary">
           Natural numbers are used for counting, indexing, and anywhere you need "how many" without
@@ -230,7 +230,7 @@ print(Decimal('0.1'))  # 0.1 (exact)`
           positions.
         </p>
 
-        <CodeExample :code="integersCode" language="python" title="integers.py" />
+        <CodeExample id="basics-numbertypes-integers" :code="integersCode" language="python" title="integers.py" />
       </ContentSection>
 
       <!-- Rational Numbers -->
@@ -251,7 +251,7 @@ print(Decimal('0.1'))  # 0.1 (exact)`
           <MathBlock formula="\frac{1}{2}" /> and <MathBlock formula="\frac{3}{4}" />.
         </p>
 
-        <CodeExample :code="rationalsCode" language="python" title="rational_numbers.py" />
+        <CodeExample id="basics-numbertypes-rationals" :code="rationalsCode" language="python" title="rational_numbers.py" />
 
         <p class="mt-4 p-3 bg-math-highlight rounded-lg">
           <strong>Pro tip:</strong> Use Python's <code>Fraction</code> class when you need exact
@@ -278,7 +278,7 @@ print(Decimal('0.1'))  # 0.1 (exact)`
           <li><MathBlock formula="\sqrt{2} \approx 1.41421..." /> — diagonal of a unit square</li>
         </ul>
 
-        <CodeExample :code="realsCode" language="python" title="real_numbers.py" />
+        <CodeExample id="basics-numbertypes-reals" :code="realsCode" language="python" title="real_numbers.py" />
 
         <p class="mt-4 text-text-muted">
           Real numbers fill the entire number line with no gaps — a profound concept that took
@@ -299,7 +299,7 @@ print(Decimal('0.1'))  # 0.1 (exact)`
 
         <MathBlock formula="\mathbb{C} = \{a + bi : a, b \in \mathbb{R}\}" display />
 
-        <CodeExample :code="complexCode" language="python" title="complex_numbers.py" />
+        <CodeExample id="basics-numbertypes-complex" :code="complexCode" language="python" title="complex_numbers.py" />
 
         <p class="mt-4 text-text-secondary">
           Complex numbers are essential in signal processing, quantum mechanics, electrical
@@ -318,7 +318,7 @@ print(Decimal('0.1'))  # 0.1 (exact)`
           Python's <code>numbers</code> module mirrors the mathematical hierarchy:
         </p>
 
-        <CodeExample :code="typeHierarchyCode" language="python" title="type_hierarchy.py" />
+        <CodeExample id="basics-numbertypes-hierarchy" :code="typeHierarchyCode" language="python" title="type_hierarchy.py" />
 
         <p class="mt-4 text-text-secondary">
           This hierarchy is useful for writing generic functions that work with any numeric type.
@@ -355,7 +355,7 @@ print(Decimal('0.1'))  # 0.1 (exact)`
           </div>
         </div>
 
-        <CodeExample :code="dataTypesCode" language="python" title="data_types.py" />
+        <CodeExample id="basics-numbertypes-datatypes" :code="dataTypesCode" language="python" title="data_types.py" />
       </ContentSection>
 
       <!-- Floating-Point Precision -->
@@ -379,7 +379,7 @@ print(Decimal('0.1'))  # 0.1 (exact)`
           </p>
         </div>
 
-        <CodeExample :code="precisionWarningCode" language="python" title="precision.py" />
+        <CodeExample id="basics-numbertypes-precision" :code="precisionWarningCode" language="python" title="precision.py" />
 
         <div class="mt-4 p-4 bg-primary/5 border border-primary/20 rounded-lg">
           <p class="font-medium text-primary mb-2">

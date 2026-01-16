@@ -113,8 +113,22 @@ export const topics: NavTopic[] = [
       },
     ],
   },
-  // Future topics will be added here:
-  // { id: 'statistics', title: 'Statistics', ... },
+  {
+    id: 'statistics',
+    title: 'Statistics',
+    description: 'Describing and analyzing data through numbers',
+    faIcon: 'fa-solid fa-chart-pie',
+    path: '/statistics',
+    subtopics: [
+      {
+        id: 'descriptive',
+        title: 'Descriptive Statistics',
+        description: 'Mean, median, variance, and data visualization',
+        path: '/statistics/descriptive',
+        faIcon: 'fa-solid fa-chart-simple',
+      },
+    ],
+  },
 ]
 
 export function getTopicByPath(path: string): NavTopic | undefined {

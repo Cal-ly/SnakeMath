@@ -100,7 +100,7 @@ const siteStructure = [
 
     <!-- Features Grid -->
     <section class="grid gap-6 sm:grid-cols-2 lg:grid-cols-4">
-      <div v-for="feature in features" :key="feature.title" class="card p-6 text-center">
+      <div v-for="feature in features" :key="feature.title" class="bg-surface-alt rounded-lg p-6 border border-border/50 text-center">
         <div class="text-3xl mb-3 text-primary" aria-hidden="true">
           <i :class="feature.icon" />
         </div>
@@ -119,7 +119,7 @@ const siteStructure = [
       </h2>
 
       <div class="grid gap-3 sm:grid-cols-2 lg:grid-cols-3">
-        <div v-for="item in siteStructure" :key="item.name" class="card p-4">
+        <div v-for="item in siteStructure" :key="item.name" class="bg-surface-alt rounded-lg p-4 border border-border/50">
           <h3 class="font-semibold text-text-primary">{{ item.name }}</h3>
           <p class="text-sm text-text-muted mt-1">{{ item.description }}</p>
         </div>

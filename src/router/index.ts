@@ -76,6 +76,17 @@ const router = createRouter({
       name: 'trigonometry-unit-circle',
       component: () => import('@/views/trigonometry/UnitCircleView.vue'),
     },
+    // Statistics section
+    {
+      path: '/statistics',
+      name: 'statistics',
+      component: () => import('@/views/statistics/StatisticsIndexView.vue'),
+    },
+    {
+      path: '/statistics/descriptive',
+      name: 'statistics-descriptive',
+      component: () => import('@/views/statistics/DescriptiveStatsView.vue'),
+    },
     // Catch-all 404
     {
       path: '/:pathMatch(.*)*',

@@ -175,7 +175,7 @@ str_value = str(42)        # "42"`
           says "store the value on the right in the variable on the left."
         </p>
 
-        <CodeExample :code="basicAssignmentCode" language="python" title="assignment.py" />
+        <CodeExample id="basics-variables-assignment" :code="basicAssignmentCode" language="python" title="assignment.py" />
 
         <div class="mt-4 p-3 bg-math-highlight rounded-lg">
           <strong>Important:</strong> In math, <MathBlock formula="x = 5" /> is a statement of
@@ -233,7 +233,7 @@ str_value = str(42)        # "42"`
           </table>
         </div>
 
-        <CodeExample :code="namingConventionsCode" language="python" title="naming.py" />
+        <CodeExample id="basics-variables-naming" :code="namingConventionsCode" language="python" title="naming.py" />
 
         <div class="mt-4 p-4 bg-primary/5 border border-primary/20 rounded-lg">
           <p class="font-medium text-primary mb-2">
@@ -274,7 +274,7 @@ str_value = str(42)        # "42"`
           </div>
         </div>
 
-        <CodeExample :code="expressionsCode" language="python" title="expressions.py" />
+        <CodeExample id="basics-variables-expressions" :code="expressionsCode" language="python" title="expressions.py" />
 
         <p class="mt-4 text-text-secondary">
           Notice that Python requires explicit multiplication (<code>*</code>). In math we write
@@ -303,7 +303,7 @@ str_value = str(42)        # "42"`
           </div>
         </div>
 
-        <CodeExample :code="substitutionCode" language="python" title="substitution.py" />
+        <CodeExample id="basics-variables-substitution" :code="substitutionCode" language="python" title="substitution.py" />
 
         <p class="mt-4 text-text-muted">
           Python performs substitution automatically. When you write <code>2 * x + 3</code> and x
@@ -333,7 +333,7 @@ str_value = str(42)        # "42"`
           </div>
         </div>
 
-        <CodeExample :code="multipleVariablesCode" language="python" title="multiple_vars.py" />
+        <CodeExample id="basics-variables-multiple" :code="multipleVariablesCode" language="python" title="multiple_vars.py" />
       </ContentSection>
 
       <!-- Python's Dynamic Types -->
@@ -347,7 +347,7 @@ str_value = str(42)        # "42"`
           Unlike statically typed languages, Python lets variables hold different types of values:
         </p>
 
-        <CodeExample :code="dynamicTypingCode" language="python" title="dynamic_types.py" />
+        <CodeExample id="basics-variables-dynamictypes" :code="dynamicTypingCode" language="python" title="dynamic_types.py" />
 
         <div class="mt-4 p-4 bg-surface-alt rounded-lg">
           <h4 class="font-medium text-text-primary mb-2">Math Sets → Python Types</h4>

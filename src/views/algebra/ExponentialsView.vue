@@ -218,7 +218,7 @@ print(f"Concert: {watts_to_decibels(concert):.0f} dB")  # 110 dB
         universe. Understanding exponential growth is essential for writing efficient code.
       </p>
 
-      <CodeExample language="python" title="Powers of 2 in Python" :code="basicExponentialCode" />
+      <CodeExample id="algebra-exponentials-basic" language="python" title="powers_of_2.py" :code="basicExponentialCode" />
     </ContentSection>
 
     <!-- Interactive Explorer -->
@@ -293,7 +293,7 @@ print(f"Concert: {watts_to_decibels(concert):.0f} dB")  # 110 dB
         </div>
       </div>
 
-      <CodeExample language="python" title="The three special bases" :code="specialBasesCode" />
+      <CodeExample id="algebra-exponentials-bases" language="python" title="special_bases.py" :code="specialBasesCode" />
     </ContentSection>
 
     <!-- Growth and Decay -->
@@ -327,7 +327,7 @@ print(f"Concert: {watts_to_decibels(concert):.0f} dB")  # 110 dB
         </p>
       </div>
 
-      <CodeExample language="python" title="Calculating doubling time" :code="doublingTimeCode" />
+      <CodeExample id="algebra-exponentials-doubling" language="python" title="doubling_time.py" :code="doublingTimeCode" />
     </ContentSection>
 
     <!-- What are Logarithms? -->
@@ -357,7 +357,7 @@ print(f"Concert: {watts_to_decibels(concert):.0f} dB")  # 110 dB
         tractable by converting it to addition using log tables.
       </p>
 
-      <CodeExample language="python" title="Logarithm basics in Python" :code="logarithmBasicsCode" />
+      <CodeExample id="algebra-exponentials-logbasics" language="python" title="logarithm_basics.py" :code="logarithmBasicsCode" />
     </ContentSection>
 
     <!-- Logarithm Properties -->
@@ -384,7 +384,7 @@ print(f"Concert: {watts_to_decibels(concert):.0f} dB")  # 110 dB
         </div>
       </div>
 
-      <CodeExample language="python" title="Logarithm properties" :code="logPropertiesCode" />
+      <CodeExample id="algebra-exponentials-logprops" language="python" title="log_properties.py" :code="logPropertiesCode" />
     </ContentSection>
 
     <!-- Compound Interest -->
@@ -410,7 +410,7 @@ print(f"Concert: {watts_to_decibels(concert):.0f} dB")  # 110 dB
         <MathBlock formula="A = Pe^{rt}" />
       </p>
 
-      <CodeExample language="python" title="Compound interest calculator" :code="compoundInterestCode" />
+      <CodeExample id="algebra-exponentials-interest" language="python" title="compound_interest.py" :code="compoundInterestCode" />
     </ContentSection>
 
     <!-- Algorithm Complexity -->
@@ -461,7 +461,7 @@ print(f"Concert: {watts_to_decibels(concert):.0f} dB")  # 110 dB
         logarithmic time because they eliminate half the remaining work at each step.
       </p>
 
-      <CodeExample language="python" title="Linear vs Binary Search" :code="algorithmComplexityCode" />
+      <CodeExample id="algebra-exponentials-complexity" language="python" title="binary_vs_linear.py" :code="algorithmComplexityCode" />
     </ContentSection>
 
     <!-- Real-World Examples -->
@@ -473,7 +473,7 @@ print(f"Concert: {watts_to_decibels(concert):.0f} dB")  # 110 dB
             How many bits do you need to represent a number?
             <MathBlock formula="\lceil \log_2(n) \rceil + 1" /> bits.
           </p>
-          <CodeExample language="python" title="Bits needed" :code="binaryBitsCode" />
+          <CodeExample id="algebra-exponentials-bits" language="python" title="bits_needed.py" :code="binaryBitsCode" />
         </div>
 
         <div>
@@ -483,7 +483,7 @@ print(f"Concert: {watts_to_decibels(concert):.0f} dB")  # 110 dB
             <MathBlock formula="pH = -\log_{10}[H^+]" />. Each unit represents a 10x change in
             acidity.
           </p>
-          <CodeExample language="python" title="pH calculations" :code="phScaleCode" />
+          <CodeExample id="algebra-exponentials-ph" language="python" title="ph_scale.py" :code="phScaleCode" />
         </div>
 
         <div>
@@ -492,7 +492,7 @@ print(f"Concert: {watts_to_decibels(concert):.0f} dB")  # 110 dB
             Sound intensity is measured logarithmically:
             <MathBlock formula="dB = 10 \cdot \log_{10}\left(\frac{P}{P_0}\right)" />
           </p>
-          <CodeExample language="python" title="Decibel calculations" :code="decibelsCode" />
+          <CodeExample id="algebra-exponentials-decibels" language="python" title="decibels.py" :code="decibelsCode" />
         </div>
       </div>
     </ContentSection>

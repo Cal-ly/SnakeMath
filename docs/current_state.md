@@ -5,13 +5,13 @@ This document outlines the current state of the project for easy resumption afte
 
 ---
 
-## Current Status: Phase 9 Complete, Phase 10 Next
+## Current Status: Phase 10 Complete
 
 **Last Updated**: 2026-01-16
 
 ### Project Summary
 
-SnakeMath is an educational mathematics website for programmers. Nine phases of development have established:
+SnakeMath is an educational mathematics website for programmers. Ten phases of development have established:
 
 | Phase | Focus | Key Deliverables | Status |
 |-------|-------|------------------|--------|
@@ -24,7 +24,7 @@ SnakeMath is an educational mathematics website for programmers. Nine phases of 
 | 7 | Quadratics & Visual Regression | QuadraticExplorer, coordinate system, visual tests | Complete |
 | 8 | Exponentials & Logarithms | ExponentialExplorer, complexity comparison | Complete |
 | 9 | Trigonometry + Testing Refinement | UnitCircleExplorer, WaveGraphs, tiered CI | Complete |
-| **10** | **Statistics Foundation** | **StatisticsCalculator** | **Next** |
+| 10 | Statistics Foundation | StatisticsCalculator, histogram, box plot | Complete |
 
 ### What's Live
 
@@ -40,8 +40,9 @@ SnakeMath is an educational mathematics website for programmers. Nine phases of 
   - Summation notation (SummationExplorer widget)
   - Quadratic Functions (QuadraticExplorer widget)
   - Exponentials & Logarithms (ExponentialExplorer widget)
-- `/trigonometry` - New section:
-  - **Unit Circle (UnitCircleExplorer widget with WaveGraphs)**
+- `/trigonometry` - Unit Circle (UnitCircleExplorer widget with WaveGraphs)
+- `/statistics` - **New section**:
+  - **Descriptive Statistics (StatisticsCalculator widget with histogram & box plot)**
 
 **Interactive Widgets**:
 - **NumberTypeExplorer**: Classify numbers, Venn diagram, number line, set membership
@@ -50,15 +51,18 @@ SnakeMath is an educational mathematics website for programmers. Nine phases of 
 - **QuadraticExplorer**: Coefficient sliders, parabola graph, equation forms, real-world presets
 - **ExponentialExplorer**: Function explorer tab (exp/log plotting, growth/decay analysis), complexity comparison tab (O(1) to O(2^n))
 - **UnitCircleExplorer**: Angle controls (slider, input), special angle buttons, SVG unit circle with point/arc/projections, trig values display, quadrant/reference angle info, optional wave graphs (sin θ, cos θ)
+- **StatisticsCalculator**: Dataset presets, custom data input, central tendency (mean/median/mode), spread (variance/std dev/range), quartiles (Q1/Q2/Q3/IQR), outlier detection (Tukey's fences), skewness analysis, histogram with adjustable bins, box plot visualization
 
 **Visualization Components**:
 - **CoordinateSystem**: Reusable SVG coordinate system with axes, grid, labels
 - **PlotCurve**: Plot mathematical functions as SVG paths
 - **PlotPoint**: Render labeled points on coordinate system
 - **PlotLine**: Vertical/horizontal lines (axis of symmetry, asymptotes)
+- **HistogramChart**: SVG histogram with adjustable bin count
+- **BoxPlotChart**: SVG box plot with quartiles, whiskers, and outlier markers
 
 **Testing Infrastructure**:
-- 270+ unit tests (Vitest) - including 64 new trigonometry tests
+- 375+ unit tests (Vitest) - including 105 new statistics tests
 - E2E tests (Playwright) with tiered CI approach
 - Visual regression tests (Playwright screenshot comparison) - local only
 - WCAG 2.1 AA accessibility audits via axe-core
@@ -102,11 +106,8 @@ npm run build        # Production build
 | Type definitions | `src/types/index.ts` |
 | E2E tests | `e2e/` directory |
 | Playwright config | `playwright.config.ts` |
-| Quadratic utilities | `src/utils/math/quadratic.ts` |
-| Exponential utilities | `src/utils/math/exponential.ts` |
-| Trigonometry utilities | `src/utils/math/trigonometry.ts` |
-| Coordinate system | `src/components/visualizations/` |
-| Unit circle composable | `src/composables/useUnitCircle.ts` |
+| Statistics utilities | `src/utils/math/statistics.ts` |
+| Statistics composable | `src/composables/useStatistics.ts` |
 
 ### Archived Documentation
 Phase completion summaries are in `docs/archive/`:
@@ -118,8 +119,8 @@ Phase completion summaries are in `docs/archive/`:
 
 ## Test Coverage
 
-### Unit Tests (270+ tests)
-- Math utilities (number classification, parsing, quadratic, exponential, trigonometry functions)
+### Unit Tests (375+ tests)
+- Math utilities (number classification, parsing, quadratic, exponential, trigonometry, statistics functions)
 - Data validation (symbols, navigation)
 - Component logic (via composables)
 
@@ -128,8 +129,9 @@ Phase completion summaries are in `docs/archive/`:
 - NumberTypeExplorer (input, examples, visualizations, URL sync)
 - SummationExplorer (presets, bounds, animation, URL sync)
 - QuadraticExplorer (presets, coefficients, equation forms, roots)
-- **UnitCircleExplorer** (angle controls, special angles, trig values, wave graphs)
-- Accessibility (WCAG 2.1 AA audits for all pages including trigonometry)
+- UnitCircleExplorer (angle controls, special angles, trig values, wave graphs)
+- **StatisticsCalculator** (datasets, custom data, histograms, box plots, URL sync)
+- Accessibility (WCAG 2.1 AA audits for all pages including statistics)
 
 ### Visual Regression Tests (Local Only)
 - All pages baseline screenshots
@@ -167,68 +169,88 @@ Phase completion summaries are in `docs/archive/`:
 
 ---
 
-## Phase 8 Completion Summary
+## Phase 10 Completion Summary
 
-Phase 8 accomplished:
+Phase 10 accomplished:
 
-1. **Exponential Math Utilities** (8A)
-   - Created `src/utils/math/exponential.ts` with 69 tests
-   - Functions: evaluateExponential, evaluateLogarithm, analyzeGrowthDecay
-   - Functions: calculateDoublingTime, calculateHalfLife
-   - Functions: calculateCompoundInterest, calculateContinuousInterest
-   - Functions: compareComplexities, generateExponentialPoints, generateLogarithmPoints
-   - Types: ComplexityClass, ComplexityComparison, GrowthDecayResult, etc.
-   - Exported complexity functions, labels, colors, examples for visualization
+1. **Statistics Math Utilities** (10A)
+   - Created `src/utils/math/statistics.ts` with 105 tests
+   - Descriptive stats: calculateSum, calculateMean, calculateMedian, calculateMode
+   - Spread stats: calculateRange, calculateVariance, calculateStdDev
+   - Quartiles: calculatePercentile, calculateQuartiles
+   - Outliers: detectOutliers (Tukey's fences method)
+   - Analysis: calculateSkewness, suggestBinCount (Sturges' rule)
+   - Histograms: generateHistogramBins
+   - Combined: calculateFullStatistics
+   - Utilities: validateStatisticsInput, parseDataInput, formatStatValue
+   - Types: DescriptiveStats, SpreadStats, Quartiles, OutlierAnalysis, SkewnessAnalysis, HistogramBin, HistogramData, FullStatistics, DatasetPreset, ParseResult, ValidationResult
+   - 5 preset datasets: test-scores, heights, salaries, reaction-times, symmetric
 
-2. **ExponentialExplorer Widget** (8B)
-   - Built main `ExponentialExplorer.vue` component with tabbed interface
-   - `FunctionExplorerTab.vue` - exp/log function plotting
-   - `ComplexityComparisonTab.vue` - O(1) to O(2^n) comparison
-   - `BaseSelector.vue` - preset buttons (e, 2, 10) + custom input
-   - `FunctionTypeSelector.vue` - exponential vs logarithm toggle
-   - `GrowthDecayPanel.vue` - doubling time, half-life, percent change
-   - `useExponentialExplorer.ts` composable for state management
-   - URL state sync for shareable links (?tab=function&type=exp&base=2)
+2. **StatisticsCalculator Core Widget** (10B)
+   - Created `src/composables/useStatistics.ts` for state management + URL sync
+   - Built modular component architecture in `src/components/widgets/StatisticsCalculator/`:
+     - `StatisticsCalculator.vue` - main orchestrator component
+     - `DatasetSelector.vue` - preset buttons + custom toggle
+     - `CustomDataInput.vue` - text area with validation
+     - `StatisticsPanel.vue` - count, sum, mean, median, mode, min, max
+     - `SpreadPanel.vue` - variance, std dev, range, skewness
+     - `QuartilesPanel.vue` - Q1, Q2, Q3, IQR
+     - `OutliersPanel.vue` - fences and outlier list
 
-3. **Complexity Comparison Feature** (8C)
-   - Logarithmic slider for n (1-1000 range)
-   - Multi-curve graph showing all 6 complexity classes
-   - Comparison table with operations count and relative speed
-   - Dynamic insight text explaining the implications
-   - Algorithm examples for each complexity class
+3. **Histogram Visualization** (10C)
+   - Created `HistogramChart.vue` component
+   - SVG histogram with adjustable bin count (3-20)
+   - Frequency axis, bin labels, bar coloring
+   - Responsive sizing, axis labeling
 
-4. **Exponentials Content Page** (8D)
-   - Created `ExponentialsView.vue` with comprehensive content
-   - Sections: Introduction, Explorer, Special Bases, Growth/Decay
-   - Sections: Logarithms, Log Properties, Compound Interest
-   - Sections: Algorithm Complexity, Real-World Examples, Reference
-   - Python code examples throughout
-   - Added to router and navigation
+4. **Box Plot Visualization** (10D)
+   - Created `BoxPlotChart.vue` component
+   - SVG box plot with quartile box (Q1-Q3)
+   - Whiskers extending to min/max (within fences)
+   - Median line, outlier markers (red dots)
+   - Min/max/quartile labels
 
-5. **Applications Content** (8E)
-   - Compound interest calculator with frequency comparison
-   - Linear vs binary search comparison with operation counts
-   - Binary bits needed for number representation
-   - pH scale logarithmic calculations
-   - Decibel (sound) logarithmic calculations
+5. **Statistics Content Pages** (10E)
+   - Created `StatisticsIndexView.vue` section landing page
+     - Three pillars of descriptive statistics
+     - Why programmers need statistics
+     - Coming soon sections (probability, inference)
+   - Created `DescriptiveStatsView.vue` comprehensive content page
+     - Interactive StatisticsCalculator widget with URL sync
+     - Collapsible sections: Central Tendency, Spread, Quartiles, Outliers, Skewness, Histograms, Box Plots, Programmer Applications
+     - Python code examples throughout
+     - Quick reference table for outlier robustness
 
-6. **Mobile Optimization & Polish** (8F)
-   - Minimum 44px touch targets for buttons and sliders
-   - Responsive grid layouts (stack on mobile, side-by-side on desktop)
-   - Data-testid attributes for E2E testing
-   - Slider thumb enlargement on desktop
+6. **E2E Tests & Polish** (10F)
+   - Created `e2e/statistics/statistics-calculator.spec.ts` with 16 tests
+   - Added statistics pages to accessibility audits
+   - Added keyboard accessibility tests for statistics widget
+   - Fixed color contrast issue (green-600 → green-700) for WCAG compliance
 
 **Key Architectural Decisions**:
-- D-064: Widget named "ExponentialExplorer"
-- D-065: Presets + custom base input
-- D-066: Tabbed interface (Function Explorer | Complexity Comparison)
-- D-067: Core complexity set (6 classes)
-- D-068: Single content page for exponentials + logarithms
-- D-069: Mobile optimization via responsive layouts
+- D-077: Widget named "StatisticsCalculator"
+- D-078: Preset datasets + custom data input
+- D-079: Composable pattern (useStatistics) for state management
+- D-080: Modular panel components for different stat categories
+- D-081: Tukey's fences for outlier detection (1.5 × IQR)
+- D-082: Sturges' rule for default bin count
+- D-083: Green-700 for better color contrast (WCAG compliance)
+
+**Lessons Learned**:
+- LL-037: Linear interpolation method for quartile calculation differs from some implementations
+- LL-038: green-600 fails WCAG contrast (3.29:1), green-700 passes (4.61:1)
+- LL-039: SVG line elements may report as "hidden" in Playwright even when visible
+
+**Lessons Identified**:
+- LI-038: Composable pattern for statistics state with URL sync
+- LI-039: Panel-based component architecture for organized statistics display
+- LI-040: Use toHaveCount(1) instead of toBeVisible() for SVG line elements
 
 ---
 
-## Phase 9 Completion Summary
+## Previous Phase Summaries
+
+### Phase 9 Completion Summary
 
 Phase 9 accomplished:
 
@@ -250,39 +272,23 @@ Phase 9 accomplished:
 
 3. **UnitCircleExplorer Widget** (9C)
    - Created `src/composables/useUnitCircle.ts` for state management + URL sync
-   - Built modular component architecture in `src/components/widgets/UnitCircleExplorer/`:
-     - `AngleControls.vue` - slider, direct input, unit toggle (degrees/radians)
-     - `SpecialAngleButtons.vue` - first quadrant angles + expandable more angles
-     - `TrigValuesDisplay.vue` - sin/cos/tan values with exact values for special angles
-     - `UnitCircleExplorer.vue` - main component with SVG visualization
+   - Built modular component architecture in `src/components/widgets/UnitCircleExplorer/`
    - SVG features: unit circle, angle arc, radius line, point on circle, sin/cos projections
 
 4. **Wave Graphs Feature** (9D)
    - Created `WaveGraphs.vue` component showing sin θ and cos θ waves
    - Angle marker syncs with unit circle visualization
-   - X-axis labels in radians (π/2, π, 3π/2, 2π)
-   - Toggle to show/hide wave graphs in main widget
 
 5. **Trigonometry Content Page** (9E)
    - Created `TrigonometryIndexView.vue` section landing page
-   - Created `UnitCircleView.vue` comprehensive content page with:
-     - What is the Unit Circle section
-     - Interactive Explorer (UnitCircleExplorer widget with URL sync)
-     - Collapsible sections: Trig Functions, Special Angles, Quadrants, Radians, Applications, Identities
-     - Python code examples throughout
+   - Created `UnitCircleView.vue` comprehensive content page
    - Added routes and navigation for trigonometry section
 
 6. **E2E Tests & Polish** (9F)
    - Created `e2e/trigonometry/unit-circle-explorer.spec.ts` with 18 tests
    - Added trigonometry pages to accessibility audits
-   - Added keyboard accessibility tests for unit circle widget
-   - Updated all documentation (ROADMAP, decisions, current_state)
 
-**Key Architectural Decisions**:
-- D-070: Tiered CI workflow (quick-check vs full-test)
-- D-071: Visual regression tests local-only
-- D-072: Test tag system (@e2e, @a11y, @visual)
-- D-073: Composable pattern for widget state (useUnitCircle)
-- D-074: Modular component architecture for widget
-- D-075: Optional wave graphs (toggle, not always visible)
-- D-076: Special angles data-driven (array of SpecialAngle objects)
+### Phase 8 Completion Summary
+
+Phase 8 accomplished exponential and logarithmic functions with complexity comparison.
+See `docs/archive/` for detailed phase completion summaries.

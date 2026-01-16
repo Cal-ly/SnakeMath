@@ -175,7 +175,7 @@ print(f"Future value: \${A:.2f}")  # $1,647.01
           (and programming languages) follow strict <strong>precedence rules</strong>.
         </p>
 
-        <CodeExample :code="whyOrderMattersCode" language="python" title="order_matters.py" />
+        <CodeExample id="basics-orderops-matters" :code="whyOrderMattersCode" language="python" title="order_matters.py" />
       </ContentSection>
 
       <!-- PEMDAS -->
@@ -217,7 +217,7 @@ print(f"Future value: \${A:.2f}")  # $1,647.01
           So do Addition and Subtraction. Within the same level, evaluate left to right.
         </div>
 
-        <CodeExample :code="pemdasCode" language="python" title="pemdas.py" />
+        <CodeExample id="basics-orderops-pemdas" :code="pemdasCode" language="python" title="pemdas.py" />
       </ContentSection>
 
       <!-- Precedence Table -->
@@ -284,7 +284,7 @@ print(f"Future value: \${A:.2f}")  # $1,647.01
           </div>
         </div>
 
-        <CodeExample :code="leftToRightCode" language="python" title="left_to_right.py" />
+        <CodeExample id="basics-orderops-lefttoright" :code="leftToRightCode" language="python" title="left_to_right.py" />
       </ContentSection>
 
       <!-- Common Mistakes -->
@@ -298,13 +298,13 @@ print(f"Future value: \${A:.2f}")  # $1,647.01
         <p class="mb-4 text-text-secondary">
           Unlike most operators, <code>**</code> groups from right to left:
         </p>
-        <CodeExample :code="exponentAssociativityCode" language="python" title="exponent_associativity.py" />
+        <CodeExample id="basics-orderops-exponent" :code="exponentAssociativityCode" language="python" title="exponent_associativity.py" />
 
         <h4 class="font-medium text-text-primary mb-3 mt-6">2. Unary Minus vs Exponentiation</h4>
         <p class="mb-4 text-text-secondary">
           This trips up almost everyone the first time:
         </p>
-        <CodeExample :code="unaryMinusCode" language="python" title="unary_minus.py" />
+        <CodeExample id="basics-orderops-unaryminus" :code="unaryMinusCode" language="python" title="unary_minus.py" />
 
         <div class="mt-4 p-4 bg-red-50 dark:bg-red-900/20 border border-red-200 dark:border-red-800 rounded-lg">
           <p class="font-medium text-red-700 dark:text-red-400 mb-2">
@@ -339,7 +339,7 @@ print(f"Future value: \${A:.2f}")  # $1,647.01
           </p>
         </div>
 
-        <CodeExample :code="parenthesesCode" language="python" title="parentheses.py" />
+        <CodeExample id="basics-orderops-parentheses" :code="parenthesesCode" language="python" title="parentheses.py" />
       </ContentSection>
 
       <!-- Quick Reference -->

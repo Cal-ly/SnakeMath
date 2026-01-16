@@ -190,7 +190,7 @@ for i in range(1, n+1):
           </li>
         </ul>
 
-        <CodeExample :code="basicLoopCode" language="python" title="sigma_as_loop.py" />
+        <CodeExample id="algebra-summation-loop" :code="basicLoopCode" language="python" title="sigma_as_loop.py" />
       </ContentSection>
 
       <!-- Interactive Explorer -->
@@ -215,7 +215,7 @@ for i in range(1, n+1):
           Python makes summation even easier with its built-in <code>sum()</code> function:
         </p>
 
-        <CodeExample :code="pythonSumCode" language="python" title="python_sum.py" />
+        <CodeExample id="algebra-summation-pythonsum" :code="pythonSumCode" language="python" title="python_sum.py" />
 
         <p class="mt-4 text-text-secondary">
           The <code>sum()</code> function is highly optimized in C, so it's typically faster than a
@@ -244,7 +244,7 @@ for i in range(1, n+1):
 
         <MathBlock formula="\sum_{i=1}^{n} i = \frac{n(n+1)}{2}" display />
 
-        <CodeExample :code="gaussStoryCode" language="python" title="gauss_formula.py" />
+        <CodeExample id="algebra-summation-gauss" :code="gaussStoryCode" language="python" title="gauss_formula.py" />
       </ContentSection>
 
       <!-- Closed-Form Formulas -->
@@ -301,7 +301,7 @@ for i in range(1, n+1):
           </p>
         </div>
 
-        <CodeExample :code="closedFormsCode" language="python" title="closed_forms.py" />
+        <CodeExample id="algebra-summation-closedforms" :code="closedFormsCode" language="python" title="closed_forms.py" />
       </ContentSection>
 
       <!-- Why Formulas Matter -->
@@ -336,7 +336,7 @@ for i in range(1, n+1):
           </div>
         </div>
 
-        <CodeExample :code="complexityCode" language="python" title="complexity_comparison.py" />
+        <CodeExample id="algebra-summation-complexity" :code="complexityCode" language="python" title="complexity_comparison.py" />
 
         <p class="mt-4 text-text-muted">
           This is why algorithm analysis matters! Recognizing when a loop can be replaced by a

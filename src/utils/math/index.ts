@@ -58,3 +58,38 @@ export type {
   ComplexityClass,
   ComplexityComparison,
 } from './exponential'
+
+export {
+  calculateSum,
+  calculateMean,
+  calculateMedian,
+  calculateMode,
+  calculateRange,
+  calculateVariance,
+  calculateStdDev,
+  calculatePercentile,
+  calculateQuartiles,
+  detectOutliers,
+  calculateSkewness,
+  suggestBinCount,
+  generateHistogramBins,
+  calculateFullStatistics,
+  validateStatisticsInput,
+  parseDataInput,
+  formatStatValue,
+  datasetPresets,
+} from './statistics'
+
+export type {
+  DescriptiveStats,
+  SpreadStats,
+  Quartiles,
+  OutlierAnalysis,
+  SkewnessAnalysis,
+  HistogramBin,
+  HistogramData,
+  FullStatistics,
+  DatasetPreset,
+  ParseResult,
+  ValidationResult,
+} from './statistics'

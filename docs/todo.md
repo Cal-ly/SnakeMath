@@ -4,98 +4,72 @@
 
 ---
 
-## Phase 6: Basics Completion + Testing Infrastructure ✅ COMPLETE
+## Current: Phase 10 - Statistics Foundation
 
-### Content (from archive) ✅
-- [x] Functions (composition, inverse, vending machine analogy)
-- [x] Variables and expressions (expression building, implementation methods)
-- [x] Order of operations (PEMDAS, precedence tables, AST concepts)
-
-### Testing Infrastructure ✅
-- [x] Playwright setup and configuration
-- [x] E2E tests for navigation
-- [x] E2E tests for NumberTypeExplorer
-- [x] E2E tests for SummationExplorer
-- [x] Accessibility audit integration (axe-core)
-- [x] CI workflow updates for E2E
-
----
-
-## Phase 7: Quadratic Functions & Visual Regression ✅ COMPLETE
-
-### Visual Regression (7A) ✅
-- [x] Configure Playwright for screenshot comparison
-- [x] Create visual test file for all pages
-- [x] Add npm scripts for visual testing
-- [x] CI workflow for visual regression
-- [x] Documentation (docs/VISUAL_TESTING.md)
-
-### Coordinate System Foundation (7B) ✅
-- [x] CoordinateSystem.vue (SVG axes, grid, labels)
-- [x] PlotCurve.vue (function plotting)
-- [x] PlotPoint.vue (labeled points)
-- [x] PlotLine.vue (vertical/horizontal lines)
-- [x] Barrel export in visualizations/
-
-### Quadratic Math Utilities (7C) ✅
-- [x] quadratic.ts with full test coverage
-- [x] Types: QuadraticCoefficients, Vertex, etc.
-- [x] Functions: vertex, discriminant, roots, forms
-- [x] 32 unit tests
-
-### QuadraticExplorer Widget (7D) ✅
-- [x] CoefficientControls.vue (a, b, c sliders)
-- [x] EquationDisplay.vue (three forms)
-- [x] AnalysisPanel.vue (discriminant, roots, vertex)
-- [x] PresetSelector.vue (8 presets)
-- [x] useQuadraticExplorer.ts composable
-- [x] URL state sync
-- [x] data-testid attributes
-
-### Quadratics Content Page (7E) ✅
-- [x] QuadraticsView.vue with all sections
-- [x] Python code examples
-- [x] Route and navigation added
-
-### Polish (7F) ✅
-- [x] Real-world preset explanations
-- [x] Complex roots link to Number Types
-- [x] E2E tests for QuadraticExplorer
-- [x] Documentation updates
-
----
-
-## Phase 8: To Be Planned
-
-*Next phase to be defined*
+**Planned Deliverables** (from ROADMAP.md):
+- StatisticsCalculator widget
+- Content: Mean, median, mode, variance, standard deviation, distributions
+- Features: Data input, histogram, box plot, statistics display
+- Preset datasets: Test scores, heights, salaries, reaction times
 
 ---
 
 ## Fixes (Known Issues)
-- [ ] Algebra/Summation page jumps to top when recalculating (scroll position issue)
-- On the algebra index page, the topic guiding to Summation Notation lacks it's big Sigma symbol. Further It should be chnaged from "Summation Notation" to just "Summation" 
+
+- [ ] **Scroll position issue**: Algebra/Summation page jumps to top when recalculating
+- [ ] **Missing Sigma symbol**: On algebra index page, the topic card for Summation lacks the Σ symbol
+- [ ] **Naming inconsistency**: Change "Summation Notation" to "Summation" on algebra index page
+- [ ] **UI/Design guideline**: A lot of the content has small differences in the design from subpage to sugpage. A guide would streamline the both the visual and how the user interacts with the sites functionality. This spans from how the `for` loop is visually represented to default behavior for what is collapsible and if it is collapsed by default.
+- [ ] **References**: Add references to code examples, so they can be refered in other content on the site. Wether they should be hyperlinks for quick navigation by opening in a new tab or if we can make a toast with the code example upon hover, needs to brainstormed further. The "Mobile" view should be taken into account on this aspect.
 
 ---
 
-## Review
-- Review what is collapsible and what is not. It is currently not being done in a standardized fashion.
-- Review the usage of code examples. An example: In `algebra/summation` we have the same code example showing up three times in quick succession.
+## Review Items
+
+- [ ] **Collapsible consistency**: Review which sections are collapsible across all pages; standardize the pattern
+- [ ] **Code example repetition**: In `algebra/summation`, the same code example appears three times in quick succession; consolidate or differentiate
 
 ---
 
 ## Future Ideas
-- Q&A section for each topic
-- Tech stack section, including "why" documentation (let site double as portfolio piece)
-- Write "for" in cursive to visually connect to for-loop
-- Add "Code Equivalent" to all/relevant code examples. Do it the same way, as been done in `algebra/summation`
-- Make "Summation to code example" interactive. The idea is, that the user can see "I change this number, is equivalent to changing this number in the mathematical notation" and vice versa.
-- Make it default behavior, that code examples that are not used directly in conveying the teaching material (e.g. "Code Equivalent" is directly used in conveying the content) collapsed.
-- Expression builder widget for Variables & Expressions page
-- PEMDAS step-by-step calculator widget for Order of Operations page
-- Add SEO
+
+### Widgets
+- [ ] Interactive summation: Let users see how changing numbers in code maps to mathematical notation and vice versa. The widget in `basics/functions` does something like this.
+
+### Content Enhancements
+- [ ] Q&A section for each topic
+- [ ] "Code Equivalent" sections for all relevant code examples (like in `algebra/summation` where there is also a swithc between Python and JavaScript)
+- [ ] Write "for" in cursive to visually connect to for-loop concept or otherwise visually differentiate.
+- [ ] Ensure "clickable" cards differ visually from other cards. E.g. on the Trigonometry index page, the cards under "Why Programmers Needs This" and "Topics In This Section" don't differ enough visually, before you hover over the "clickable" card i.e. "The Unit Circle". Ensure this becomes part of the standard design for the whole website.
+
+### UX Improvements
+- [ ] Default behavior: Collapse code examples not directly used in teaching (keep "Code Equivalent" visible)
+
+### Site Features
+- [ ] Tech stack section with "why" documentation. The intent is for the site to double as a portfolio piece
+- [ ] Add SEO (meta tags, structured data, sitemap)
 
 ---
 
+## Completed Phases
+
+| Phase | Focus | Status |
+|-------|-------|--------|
+| 1-5 | Foundation through Summation | ✅ Complete |
+| 6 | Basics Completion + E2E Testing | ✅ Complete |
+| 7 | Quadratics & Visual Regression | ✅ Complete |
+| 8 | Exponentials & Logarithms | ✅ Complete |
+| 9 | Trigonometry + Testing Refinement | ✅ Complete |
+
+*Detailed completion summaries are in `docs/current_state.md`*
+
+---
+
+## Ideas on hold
+- [ ] Expression builder widget for Variables & Expressions page
+- [ ] PEMDAS step-by-step calculator widget for Order of Operations page
+
 ## Archived
-Phase 1-5 instructions moved to `instructions/archive/`
-Phase 6 instructions: `instructions/archive/PHASE_6_PROMPT.md`
+
+- Phase 1-9 instructions: `instructions/archive/`
+- Phase completion docs: `docs/archive/`

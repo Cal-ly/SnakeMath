@@ -158,7 +158,7 @@ print(f"Ball hits ground at t = {t:.2f} seconds")`
         </div>
       </div>
 
-      <CodeExample language="python" title="Evaluating a quadratic" :code="basicQuadraticCode" />
+      <CodeExample id="algebra-quadratic-eval" language="python" title="quadratic_eval.py" :code="basicQuadraticCode" />
     </ContentSection>
 
     <!-- The Three Forms -->
@@ -191,7 +191,7 @@ print(f"Ball hits ground at t = {t:.2f} seconds")`
         </div>
       </div>
 
-      <CodeExample language="python" title="Converting between forms" :code="vertexFormCode" />
+      <CodeExample id="algebra-quadratic-vertex" language="python" title="vertex_form.py" :code="vertexFormCode" />
     </ContentSection>
 
     <!-- Solving Quadratic Equations -->
@@ -227,7 +227,7 @@ print(f"Ball hits ground at t = {t:.2f} seconds")`
         </li>
       </ul>
 
-      <CodeExample language="python" title="Finding roots with Python" :code="solveQuadraticCode" />
+      <CodeExample id="algebra-quadratic-roots" language="python" title="solve_quadratic.py" :code="solveQuadraticCode" />
     </ContentSection>
 
     <!-- Real-World Applications -->
@@ -266,7 +266,7 @@ print(f"Ball hits ground at t = {t:.2f} seconds")`
         </div>
       </div>
 
-      <CodeExample language="python" title="Projectile motion example" :code="projectileCode" />
+      <CodeExample id="algebra-quadratic-projectile" language="python" title="projectile.py" :code="projectileCode" />
     </ContentSection>
 
     <!-- Key Formulas Reference -->

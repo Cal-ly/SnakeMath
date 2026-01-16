@@ -110,6 +110,7 @@ result = math.prod(range(1, 6))  # 120`
         </p>
 
         <CodeExample
+          id="basics-foundations-operators"
           :code="basicOperatorsCode"
           language="python"
           title="basic_operators.py"
@@ -139,6 +140,7 @@ result = math.prod(range(1, 6))  # 120`
         </p>
 
         <CodeExample
+          id="basics-foundations-summation"
           :code="summationCode"
           language="python"
           title="summation.py"
@@ -168,6 +170,7 @@ result = math.prod(range(1, 6))  # 120`
         </p>
 
         <CodeExample
+          id="basics-foundations-product"
           :code="productCode"
           language="python"
           title="product.py"
@@ -209,9 +212,10 @@ result = math.prod(range(1, 6))  # 120`
         </p>
 
         <CodeExample
+          id="basics-foundations-euler"
           :code="eulerMethodCode"
           language="python"
-          title="Euler's Method"
+          title="euler_method.py"
           line-numbers
           collapsible
         />

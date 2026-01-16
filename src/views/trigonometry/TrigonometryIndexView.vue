@@ -36,7 +36,7 @@ const topic = topics.find((t) => t.id === 'trigonometry')!
       <!-- Why It Matters -->
       <ContentSection id="why-it-matters" title="Why Programmers Need This" icon="fa-solid fa-rocket">
         <div class="grid gap-4 md:grid-cols-2">
-          <div class="p-4 rounded-lg border border-border bg-surface">
+          <div class="p-4 rounded-lg border border-border/50 bg-surface-alt">
             <p class="font-medium text-text-primary mb-2">
               <i class="fa-solid fa-gamepad text-primary mr-2" aria-hidden="true" />
               Game Development
@@ -47,7 +47,7 @@ const topic = topics.find((t) => t.id === 'trigonometry')!
             </p>
           </div>
 
-          <div class="p-4 rounded-lg border border-border bg-surface">
+          <div class="p-4 rounded-lg border border-border/50 bg-surface-alt">
             <p class="font-medium text-text-primary mb-2">
               <i class="fa-solid fa-palette text-primary mr-2" aria-hidden="true" />
               Graphics & Animation
@@ -58,7 +58,7 @@ const topic = topics.find((t) => t.id === 'trigonometry')!
             </p>
           </div>
 
-          <div class="p-4 rounded-lg border border-border bg-surface">
+          <div class="p-4 rounded-lg border border-border/50 bg-surface-alt">
             <p class="font-medium text-text-primary mb-2">
               <i class="fa-solid fa-wave-square text-primary mr-2" aria-hidden="true" />
               Signal Processing
@@ -69,7 +69,7 @@ const topic = topics.find((t) => t.id === 'trigonometry')!
             </p>
           </div>
 
-          <div class="p-4 rounded-lg border border-border bg-surface">
+          <div class="p-4 rounded-lg border border-border/50 bg-surface-alt">
             <p class="font-medium text-text-primary mb-2">
               <i class="fa-solid fa-compass text-primary mr-2" aria-hidden="true" />
               Geolocation & Maps

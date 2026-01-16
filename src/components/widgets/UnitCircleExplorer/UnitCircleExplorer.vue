@@ -1,5 +1,5 @@
 <script setup lang="ts">
-import { computed } from 'vue'
+import { computed, ref } from 'vue'
 import AngleControls from './AngleControls.vue'
 import SpecialAngleButtons from './SpecialAngleButtons.vue'
 import TrigValuesDisplay from './TrigValuesDisplay.vue'
@@ -93,6 +93,9 @@ function handleToggleMore() {
 
 // Angle in radians for wave graphs
 const angleRadians = computed(() => degreesToRadians(angle.value))
+
+// SVG hover state
+const isPointHovered = ref(false)
 </script>
 
 <template>
@@ -221,10 +224,13 @@ const angleRadians = computed(() => degreesToRadians(angle.value))
             <circle
               :cx="pointSvg.x"
               :cy="pointSvg.y"
-              r="6"
+              :r="isPointHovered ? 8 : 6"
               fill="var(--color-primary)"
-              class="cursor-pointer"
+              class="cursor-pointer transition-all duration-150"
+              :style="isPointHovered ? 'filter: drop-shadow(0 0 6px var(--color-primary))' : ''"
               data-testid="point-on-circle"
+              @mouseenter="isPointHovered = true"
+              @mouseleave="isPointHovered = false"
             />
 
             <!-- Point label -->

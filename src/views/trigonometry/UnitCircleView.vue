@@ -157,7 +157,7 @@ print(f"Rotated point: ({result[0]:.2f}, {result[1]:.2f})")`
           </div>
         </div>
 
-        <CodeExample language="python" title="Calculating Trig Values in Python" :code="trigValuesCode" />
+        <CodeExample id="trig-unitcircle-values" language="python" title="trig_values.py" :code="trigValuesCode" />
       </ContentSection>
 
       <!-- Special Angles -->
@@ -261,7 +261,7 @@ print(f"Rotated point: ({result[0]:.2f}, {result[1]:.2f})")`
           <strong>S</strong>in, <strong>T</strong>an, <strong>C</strong>os for quadrants I through IV.
         </p>
 
-        <CodeExample language="python" title="Determining Quadrant and Signs" :code="quadrantCode" />
+        <CodeExample id="trig-unitcircle-quadrants" language="python" title="quadrant_signs.py" :code="quadrantCode" />
       </ContentSection>
 
       <!-- Radians vs Degrees -->
@@ -309,7 +309,7 @@ print(f"Rotated point: ({result[0]:.2f}, {result[1]:.2f})")`
           </p>
         </div>
 
-        <CodeExample language="python" title="Converting Between Degrees and Radians" :code="conversionCode" />
+        <CodeExample id="trig-unitcircle-conversion" language="python" title="deg_rad_convert.py" :code="conversionCode" />
       </ContentSection>
 
       <!-- Programmer Applications -->
@@ -339,7 +339,7 @@ print(f"Rotated point: ({result[0]:.2f}, {result[1]:.2f})")`
                 display
               />
             </div>
-            <CodeExample language="python" title="Rotating a Point" :code="rotatePointCode" />
+            <CodeExample id="trig-unitcircle-rotation" language="python" title="rotate_point.py" :code="rotatePointCode" />
           </div>
 
           <div>

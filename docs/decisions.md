@@ -1389,3 +1389,141 @@ interface SpecialAngle {
   exact: { sin: string; cos: string; tan: string }
 }
 ```
+
+---
+
+## Phase 10 Decisions
+
+### D-077: Widget Named "StatisticsCalculator"
+**Decision**: Name the statistics widget "StatisticsCalculator" rather than "StatisticsExplorer".
+
+**Rationale**:
+- "Calculator" more accurately reflects the widget's purpose (computing statistics)
+- Distinguishes from "Explorer" widgets which focus on visualization/exploration
+- Aligns with user expectations for a statistics tool
+- Clear and descriptive naming
+
+---
+
+### D-078: Preset Datasets + Custom Data Input
+**Decision**: Provide 5 preset datasets with quick-select buttons plus a custom data input option.
+
+**Rationale**:
+- Presets demonstrate different statistical scenarios (normal, skewed, outliers)
+- Quick exploration without typing data
+- Custom input allows users to analyze their own data
+- Educational: each preset has different characteristics to explore
+
+**Presets**:
+| ID | Name | Purpose |
+|----|------|---------|
+| test-scores | Test Scores | Normal distribution, familiar context |
+| heights | Heights | Real-world measurements, tight spread |
+| salaries | Salaries | Right-skewed with outliers |
+| reaction-times | Reaction Times | Small values, milliseconds |
+| symmetric | Symmetric | Perfectly symmetric for comparison |
+
+---
+
+### D-079: Composable Pattern for Statistics State
+**Decision**: Create `useStatistics` composable following the established pattern for complex widget state.
+
+**Rationale**:
+- Consistent with Phase 9's `useUnitCircle` pattern
+- Separates state logic from presentation
+- Supports optional URL state synchronization
+- Testable independently of components
+- Reusable if statistics appears in multiple contexts
+
+**Implementation**:
+```typescript
+export function useStatistics(options: UseStatisticsOptions = {}) {
+  // State: selectedDataset, customInput, binCount, showCustom
+  // Computed: currentData, statistics, histogramData
+  // Optional URL sync
+  return { ... }
+}
+```
+
+---
+
+### D-080: Panel-Based Component Architecture
+**Decision**: Organize statistics display into category-specific panels rather than a single monolithic display.
+
+**Rationale**:
+- Clear visual organization for users
+- Each panel has single responsibility
+- Easy to add/remove stat categories
+- Independent styling per category
+- Components can be reused in other contexts
+
+**Structure**:
+```
+StatisticsCalculator (orchestrator)
+├── DatasetSelector (preset buttons + custom toggle)
+├── CustomDataInput (text area with validation)
+├── StatisticsPanel (count, sum, mean, median, mode)
+├── SpreadPanel (variance, std dev, range, skewness)
+├── QuartilesPanel (Q1, Q2, Q3, IQR)
+├── OutliersPanel (fences, outlier list)
+├── HistogramChart (SVG visualization)
+└── BoxPlotChart (SVG visualization)
+```
+
+---
+
+### D-081: Tukey's Fences for Outlier Detection
+**Decision**: Use Tukey's fences method (1.5 × IQR) for outlier detection.
+
+**Rationale**:
+- Industry standard method, widely taught
+- Non-parametric (doesn't assume normal distribution)
+- Simple to understand and compute
+- Clear visual representation in box plot
+- Robust to extreme values
+
+**Implementation**:
+```typescript
+lowerFence = Q1 - 1.5 * IQR
+upperFence = Q3 + 1.5 * IQR
+outliers = values.filter(v => v < lowerFence || v > upperFence)
+```
+
+---
+
+### D-082: Sturges' Rule for Default Bin Count
+**Decision**: Use Sturges' rule to calculate default histogram bin count.
+
+**Rationale**:
+- Simple formula: k = ⌈log₂(n) + 1⌉
+- Works well for normally distributed data
+- Widely used default in statistical software
+- User can override with slider (3-20 bins)
+
+**Implementation**:
+```typescript
+const suggestedBins = Math.ceil(Math.log2(data.length) + 1)
+return Math.max(3, Math.min(20, suggestedBins))
+```
+
+---
+
+### D-083: Green-700 for WCAG Color Contrast
+**Decision**: Use Tailwind's `green-700` instead of `green-600` for success/positive text colors.
+
+**Rationale**:
+- `green-600` (#16a34a) has 3.29:1 contrast ratio - fails WCAG AA
+- `green-700` (#15803d) has 4.61:1 contrast ratio - passes WCAG AA
+- WCAG AA requires 4.5:1 for normal text
+- Applies to all success indicators (validation messages, "No outliers", etc.)
+
+**Implementation**:
+```vue
+<!-- Before (fails WCAG AA) -->
+<span class="text-green-600 dark:text-green-400">Valid</span>
+
+<!-- After (passes WCAG AA) -->
+<span class="text-green-700 dark:text-green-400">Valid</span>
+```
+
+**Note**: Dark mode uses `green-400` which has sufficient contrast against dark backgrounds.
