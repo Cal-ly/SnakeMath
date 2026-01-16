@@ -6,6 +6,29 @@
 
 ---
 
+## Icons
+
+### Icon Libraries
+
+We use two icon libraries:
+
+| Library | Prefix | Use Case |
+|---------|--------|----------|
+| Font Awesome Free | `fa-solid fa-{name}` | Primary icon library |
+| Bootstrap Icons | `bi bi-{name}` | Fallback for icons missing in FA Free |
+
+Both are imported in `main.css`. Prefer Font Awesome; use Bootstrap Icons only when FA Free lacks a specific icon.
+
+### Unicode Character Icons
+
+For special characters not in either library (e.g., Greek letters like Σ), use styled `<span>` elements:
+
+```vue
+<span class="text-primary text-xl font-bold" aria-hidden="true">Σ</span>
+```
+
+---
+
 ## Cards & Containers
 
 ### Navigational Card (Clickable)

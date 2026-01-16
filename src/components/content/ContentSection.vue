@@ -8,6 +8,8 @@ interface Props {
   title: string
   /** Font Awesome icon class */
   icon?: string
+  /** Unicode character for icons not in icon libraries (e.g., Σ) */
+  unicodeIcon?: string
   /** Make section collapsible */
   collapsible?: boolean
   /** Start expanded (if collapsible) */
@@ -16,6 +18,7 @@ interface Props {
 
 withDefaults(defineProps<Props>(), {
   icon: undefined,
+  unicodeIcon: undefined,
   collapsible: false,
   defaultExpanded: true,
 })
@@ -26,7 +29,10 @@ withDefaults(defineProps<Props>(), {
     <!-- Non-collapsible version -->
     <template v-if="!collapsible">
       <h2 class="flex items-center gap-2 text-xl font-semibold text-text-primary mb-4">
-        <i v-if="icon" :class="icon" class="text-primary" aria-hidden="true" />
+        <span v-if="unicodeIcon" class="text-primary font-bold" aria-hidden="true">{{
+          unicodeIcon
+        }}</span>
+        <i v-else-if="icon" :class="icon" class="text-primary" aria-hidden="true" />
         <a :href="`#${id}`" class="hover:text-primary transition-colors">
           {{ title }}
         </a>

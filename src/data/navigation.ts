@@ -13,6 +13,7 @@ export interface NavSubtopic {
   description?: string
   path: string
   faIcon?: string
+  unicodeIcon?: string // For special characters like Σ when no icon library has them
 }
 
 export const topics: NavTopic[] = [
@@ -79,7 +80,7 @@ export const topics: NavTopic[] = [
         title: 'Summation',
         description: 'Sigma is just a for loop',
         path: '/algebra/summation',
-        faIcon: 'bi bi-sigma',
+        unicodeIcon: 'Σ',
       },
       {
         id: 'quadratics',

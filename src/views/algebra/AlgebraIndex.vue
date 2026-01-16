@@ -46,7 +46,15 @@ const topic = topics.find((t) => t.id === 'algebra')!
             <div
               class="w-12 h-12 rounded-lg bg-primary/10 flex items-center justify-center flex-shrink-0"
             >
+              <span
+                v-if="subtopic.unicodeIcon"
+                class="text-primary text-2xl font-bold"
+                aria-hidden="true"
+              >
+                {{ subtopic.unicodeIcon }}
+              </span>
               <i
+                v-else
                 :class="subtopic.faIcon || 'fa-solid fa-file'"
                 class="text-primary text-xl"
                 aria-hidden="true"

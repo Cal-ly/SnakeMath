@@ -108,14 +108,14 @@ compare_methods(100_000_000)`
 
 <template>
   <TopicPage
-    title="Summation Notation"
-    description="Discover how the scary-looking Σ symbol is just a for loop in disguise."
+    title="Summation"
+    description="Discover how the Σ symbol is just a for loop in disguise."
   >
     <div class="space-y-8">
       <!-- Introduction -->
-      <ContentSection id="introduction" title="What is Summation Notation?" icon="bi bi-sigma">
+      <ContentSection id="introduction" title="What is Summation Notation?" unicode-icon="Σ">
         <p class="mb-4">
-          That big, scary Greek letter <MathBlock formula="\Sigma" /> (sigma) sitting in your
+          That big, scary Greek letter <MathBlock formula="\Sigma" /> (Sigma) sitting in your
           textbook? It's just a fancy way of saying <strong>"add all these things up."</strong>
         </p>
 
