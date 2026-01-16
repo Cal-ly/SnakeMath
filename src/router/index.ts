@@ -55,6 +55,11 @@ const router = createRouter({
       name: 'algebra-summation',
       component: () => import('@/views/algebra/SummationView.vue'),
     },
+    {
+      path: '/algebra/quadratics',
+      name: 'algebra-quadratics',
+      component: () => import('@/views/algebra/QuadraticsView.vue'),
+    },
     // Catch-all 404
     {
       path: '/:pathMatch(.*)*',

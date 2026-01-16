@@ -81,6 +81,13 @@ export const topics: NavTopic[] = [
         path: '/algebra/summation',
         faIcon: 'fa-solid fa-sigma',
       },
+      {
+        id: 'quadratics',
+        title: 'Quadratic Functions',
+        description: 'Parabolas, roots, and the quadratic formula',
+        path: '/algebra/quadratics',
+        faIcon: 'fa-solid fa-chart-line',
+      },
     ],
   },
   // Future topics will be added here:

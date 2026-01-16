@@ -1,0 +1,8 @@
+export { default as QuadraticExplorer } from './QuadraticExplorer.vue'
+export { default as CoefficientControls } from './CoefficientControls.vue'
+export { default as EquationDisplay } from './EquationDisplay.vue'
+export { default as AnalysisPanel } from './AnalysisPanel.vue'
+export { default as PresetSelector } from './PresetSelector.vue'
+export { useQuadraticExplorer } from './useQuadraticExplorer'
+export { quadraticPresets, getPreset, getPresetsByCategory } from './presets'
+export type { QuadraticPreset, QuadraticPresetId } from './types'

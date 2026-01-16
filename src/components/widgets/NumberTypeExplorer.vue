@@ -162,7 +162,7 @@ const quickExamples = computed(() => [
 </script>
 
 <template>
-  <div class="number-type-explorer">
+  <div class="number-type-explorer" data-testid="number-type-explorer">
     <!-- Main content grid -->
     <div class="grid gap-6 lg:grid-cols-2">
       <!-- Input Section -->

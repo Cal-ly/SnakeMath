@@ -5,23 +5,24 @@ This document outlines the current state of the project for easy resumption afte
 
 ---
 
-## Current Status: Phase 6 Complete, Phase 7 Next
+## Current Status: Phase 7 Complete, Phase 8 Next
 
 **Last Updated**: 2026-01-16
 
 ### Project Summary
 
-SnakeMath is an educational mathematics website for programmers. Six phases of development have established:
+SnakeMath is an educational mathematics website for programmers. Seven phases of development have established:
 
 | Phase | Focus | Key Deliverables | Status |
 |-------|-------|------------------|--------|
-| 1 | Foundation | Vite, Vue 3, TypeScript, Tailwind, Vitest | ✅ Complete |
-| 2 | App Shell | Header, nav, breadcrumbs, theme toggle, footer | ✅ Complete |
-| 3 | Content Components | MathBlock (KaTeX), CodeExample (Shiki), tabs, panels | ✅ Complete |
-| 4 | Interactive Widgets | NumberTypeExplorer, visualizations, URL state | ✅ Complete |
-| 5 | Algebra & Summation | SummationExplorer, bar chart, code parallel | ✅ Complete |
-| 6 | Basics Completion | E2E tests, Functions, Variables, Order of Ops | ✅ Complete |
-| **7** | **TBD** | **To be planned** | 🎯 **Next** |
+| 1 | Foundation | Vite, Vue 3, TypeScript, Tailwind, Vitest | Complete |
+| 2 | App Shell | Header, nav, breadcrumbs, theme toggle, footer | Complete |
+| 3 | Content Components | MathBlock (KaTeX), CodeExample (Shiki), tabs, panels | Complete |
+| 4 | Interactive Widgets | NumberTypeExplorer, visualizations, URL state | Complete |
+| 5 | Algebra & Summation | SummationExplorer, bar chart, code parallel | Complete |
+| 6 | Basics Completion | E2E tests, Functions, Variables, Order of Ops | Complete |
+| 7 | Quadratics & Visual Regression | QuadraticExplorer, coordinate system, visual tests | Complete |
+| **8** | **TBD** | **To be planned** | **Next** |
 
 ### What's Live
 
@@ -33,18 +34,28 @@ SnakeMath is an educational mathematics website for programmers. Six phases of d
   - Functions (with SimpleFunctionDemo widget)
   - Variables & Expressions
   - Order of Operations (PEMDAS)
-- `/algebra` - Summation notation (SummationExplorer widget)
+- `/algebra` - Two subtopics:
+  - Summation notation (SummationExplorer widget)
+  - Quadratic Functions (QuadraticExplorer widget)
 
 **Interactive Widgets**:
 - **NumberTypeExplorer**: Classify numbers, Venn diagram, number line, set membership
 - **SummationExplorer**: Presets, bar chart animation, code parallel, formula comparison
 - **SimpleFunctionDemo**: Function presets, slider input, substitution display
+- **QuadraticExplorer**: Coefficient sliders, parabola graph, equation forms, real-world presets
+
+**Visualization Components**:
+- **CoordinateSystem**: Reusable SVG coordinate system with axes, grid, labels
+- **PlotCurve**: Plot mathematical functions as SVG paths
+- **PlotPoint**: Render labeled points on coordinate system
+- **PlotLine**: Vertical/horizontal lines (axis of symmetry, asymptotes)
 
 **Testing Infrastructure**:
-- 105 unit tests (Vitest)
-- 38 E2E tests (Playwright)
+- 137+ unit tests (Vitest)
+- E2E tests (Playwright)
+- Visual regression tests (Playwright screenshot comparison)
 - WCAG 2.1 AA accessibility audits via axe-core
-- CI workflow with E2E testing
+- CI workflow with E2E and visual regression testing
 
 **Supporting Infrastructure**:
 - URL state sync for shareable widget links
@@ -63,7 +74,9 @@ npm run dev          # Start dev server
 npm run type-check   # TypeScript validation
 npm run lint         # ESLint check
 npm run test         # Run unit tests
-npm run test:e2e     # Run E2E tests (requires dev server)
+npm run test:e2e     # Run E2E tests (requires build)
+npm run test:visual  # Run visual regression tests
+npm run test:visual:update  # Update visual baselines
 npm run build        # Production build
 ```
 
@@ -71,7 +84,7 @@ npm run build        # Production build
 | Purpose | File |
 |---------|------|
 | Project guide | `CLAUDE.md` |
-| Roadmap | `docs/ROADMAP.md` |
+| Visual testing docs | `docs/VISUAL_TESTING.md` |
 | Decisions | `docs/decisions.md` |
 | Lessons learned | `docs/ll_li.md` |
 | Routes | `src/router/index.ts` |
@@ -79,6 +92,8 @@ npm run build        # Production build
 | Type definitions | `src/types/index.ts` |
 | E2E tests | `e2e/` directory |
 | Playwright config | `playwright.config.ts` |
+| Quadratic utilities | `src/utils/math/quadratic.ts` |
+| Coordinate system | `src/components/visualizations/` |
 
 ### Archived Documentation
 Phase completion summaries are in `docs/archive/`:
@@ -90,22 +105,28 @@ Phase completion summaries are in `docs/archive/`:
 
 ## Test Coverage
 
-### Unit Tests (105 tests)
-- Math utilities (number classification, parsing)
+### Unit Tests (137+ tests)
+- Math utilities (number classification, parsing, quadratic functions)
 - Data validation (symbols, navigation)
 - Component logic (via composables)
 
-### E2E Tests (38 tests)
+### E2E Tests
 - Navigation (header links, breadcrumbs, mobile menu)
 - NumberTypeExplorer (input, examples, visualizations, URL sync)
 - SummationExplorer (presets, bounds, animation, URL sync)
+- QuadraticExplorer (presets, coefficients, equation forms, roots)
 - Accessibility (WCAG 2.1 AA audits for all pages)
+
+### Visual Regression Tests
+- All pages baseline screenshots
+- Widget state snapshots (default, inputs, presets)
+- Desktop (1280x720) and mobile (375x667) viewports
 
 ---
 
 ## How to Resume Development
 
-1. **Check todo list**: `instructions/todo.md` for known issues and ideas
+1. **Check todo list**: `docs/todo.md` for known issues and ideas
 2. **Read decisions**: `docs/decisions.md` for architectural context
 3. **Start dev server**: `npm run dev`
 4. **Verify before commits**:
@@ -114,8 +135,12 @@ Phase completion summaries are in `docs/archive/`:
    ```
 5. **Run E2E tests**:
    ```bash
-   npm run dev &  # Start dev server in background
+   npm run build
    npm run test:e2e
+   ```
+6. **Update visual baselines** (if UI changed intentionally):
+   ```bash
+   npm run test:visual:update
    ```
 
 ---
@@ -127,37 +152,55 @@ Phase completion summaries are in `docs/archive/`:
 
 ---
 
-## Phase 6 Completion Summary
+## Phase 7 Completion Summary
 
-Phase 6 accomplished:
+Phase 7 accomplished:
 
-1. **Playwright E2E Testing** (6A, 6B)
-   - Set up Playwright with TypeScript
-   - Created tests for navigation, widgets, accessibility
-   - Added `data-testid` attributes for reliable selectors
+1. **Visual Regression Testing Infrastructure** (7A)
+   - Configured Playwright for screenshot comparison
+   - Created visual test file for all pages
+   - Added `npm run test:visual` command
+   - CI workflow for visual regression checks
+   - Documentation in `docs/VISUAL_TESTING.md`
 
-2. **Accessibility Audits** (6C)
-   - Integrated `@axe-core/playwright`
-   - WCAG 2.1 AA compliance testing
-   - Fixed color contrast issue in CodeExample
+2. **Coordinate System Foundation** (7B)
+   - Created reusable `CoordinateSystem.vue` SVG component
+   - Built `PlotCurve.vue` for plotting functions
+   - Built `PlotPoint.vue` for labeled points
+   - Built `PlotLine.vue` for vertical/horizontal lines
+   - Barrel export in `src/components/visualizations/`
 
-3. **Functions Content** (6D)
-   - Created FunctionsView with comprehensive content
-   - Built SimpleFunctionDemo widget (presets, slider, Python output)
+3. **Quadratic Math Utilities** (7C)
+   - Created `src/utils/math/quadratic.ts` with full test coverage
+   - Functions: vertex, discriminant, roots, vertex form, factored form
+   - Types: `QuadraticCoefficients`, `Vertex`, `DiscriminantResult`, etc.
+   - 32 unit tests covering all functions and edge cases
 
-4. **Variables & Expressions Content** (6E)
-   - Created VariablesView with assignment, naming, expressions content
-   - Code examples for substitution and multiple variables
+4. **QuadraticExplorer Widget** (7D)
+   - Built main `QuadraticExplorer.vue` component
+   - `CoefficientControls.vue` - sliders for a, b, c
+   - `EquationDisplay.vue` - standard, vertex, factored forms
+   - `AnalysisPanel.vue` - discriminant, roots, vertex info
+   - `PresetSelector.vue` - 8 presets (5 basic + 3 real-world)
+   - `useQuadraticExplorer.ts` composable for state management
+   - URL state sync for shareable links
+   - Real-world presets with contextual explanations
 
-5. **Order of Operations Content** (6F)
-   - Created OrderOfOperationsView with PEMDAS content
-   - Code examples for precedence, associativity, gotchas
+5. **Quadratics Content Page** (7E)
+   - Created `QuadraticsView.vue` with comprehensive content
+   - Sections: Introduction, Explorer, Coefficients, Forms, Solving, Applications, Reference
+   - Python code examples for each concept
+   - Added to router and navigation
 
-6. **Number Types Enhancement** (6G)
-   - Added Python Data Types section
-   - Added Floating-Point Precision warning section
+6. **Real-World Presets & Polish** (7F)
+   - Added explanation text for real-world presets
+   - Complex roots link to Number Types page
+   - Visual regression tests for quadratics page
+   - E2E tests for QuadraticExplorer widget
 
-**Key Fixes**:
-- Mathematical correctness: All real numbers now correctly marked as ∈ ℂ
-- Color contrast: Fixed WCAG violation in CodeExample language badge
-- Test reliability: Used exact matching for Playwright selectors
+**Key Architectural Decisions**:
+- D-059: Visual regression before new visuals
+- D-060: Coordinate system supports negative domain/range
+- D-061: Static form display (no animation) for MVP
+- D-062: "No real roots" with link for Δ < 0
+- D-063: 8 presets (5 basic + 3 real-world)

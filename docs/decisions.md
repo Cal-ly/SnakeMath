@@ -1091,3 +1091,92 @@ Page Structure:
 - Consistent with Phase 4 decision (D-042)
 
 **Note**: All three new content pages (Functions, Variables, Order of Operations) follow this pattern.
+
+---
+
+## Phase 7 Decisions
+
+### D-059: Visual Regression Before New Visuals
+**Decision**: Capture visual baseline screenshots before adding new complex visualizations.
+
+**Rationale**:
+- Establishes baseline for detecting unintended visual changes
+- Allows confident refactoring of existing components
+- CI can catch visual regressions before merge
+- Documents expected visual appearance
+
+**Implementation**: Visual tests run in Playwright with `toHaveScreenshot()` comparison.
+
+---
+
+### D-060: Coordinate System Supports Negative Domain/Range
+**Decision**: The reusable CoordinateSystem component supports any combination of positive and negative x/y ranges.
+
+**Rationale**:
+- Quadratic parabolas with a < 0 extend below the x-axis
+- Real-world applications (projectile motion) involve negative y values
+- Roots of equations can be positive or negative
+- Generalized component is more reusable
+
+**Implementation**:
+- Axes render at origin if visible, or at edge if origin out of view
+- Grid lines and labels work correctly for any range
+- Arrow heads point in positive x and y directions
+
+---
+
+### D-061: Static Form Display (No Animation) for MVP
+**Decision**: Display equation forms (standard, vertex, factored) as static text rather than animated transitions.
+
+**Rationale**:
+- Simpler implementation for MVP
+- Animation can be distracting when adjusting coefficients
+- Focus on educational content, not visual effects
+- Animation can be added later if valuable
+
+**Trade-off**: Less visually dynamic, but clearer for learning.
+
+---
+
+### D-062: "No Real Roots" with Link for Δ < 0
+**Decision**: When discriminant is negative, show "No real roots" with a link to the Number Types page.
+
+**Rationale**:
+- Avoid complex arithmetic on the quadratics page
+- Connect to existing content about complex numbers
+- Educational progression: "you'll learn about this here"
+- Keeps quadratics focused on real-valued analysis
+
+**Implementation**:
+```vue
+<RouterLink to="/basics/number-types">
+  The roots are complex numbers. Learn more in Number Types.
+</RouterLink>
+```
+
+---
+
+### D-063: 8 Presets (5 Basic + 3 Real-World)
+**Decision**: Provide 8 preset configurations for the QuadraticExplorer.
+
+**Basic Presets**:
+| ID | Name | Coefficients | Purpose |
+|----|------|--------------|---------|
+| standard | Standard | a=1, b=0, c=0 | y = x² baseline |
+| wide | Wide | a=0.5, b=0, c=0 | Show |a| < 1 effect |
+| narrow | Narrow | a=2, b=0, c=0 | Show |a| > 1 effect |
+| shifted | Shifted | a=1, b=-4, c=3 | Show vertex shift |
+| inverted | Inverted | a=-1, b=0, c=4 | Show a < 0 effect |
+
+**Real-World Presets**:
+| ID | Name | Coefficients | Application |
+|----|------|--------------|-------------|
+| projectile | Projectile Motion | a=-4.9, b=20, c=1.5 | Physics |
+| profit | Profit Optimization | a=-0.1, b=50, c=-200 | Economics |
+| reflector | Parabolic Reflector | a=0.25, b=0, c=0 | Optics |
+
+**Rationale**:
+- 5 basic presets cover all coefficient effects
+- 3 real-world presets reinforce practical math
+- Real-world presets include contextual explanations
+- Total of 8 gives good variety without overwhelming

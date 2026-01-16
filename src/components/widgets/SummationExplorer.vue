@@ -156,7 +156,7 @@ function handlePresetUpdate(val: SummationPresetId) {
 </script>
 
 <template>
-  <div class="summation-explorer">
+  <div class="summation-explorer" data-testid="summation-explorer">
     <div class="grid gap-6 lg:grid-cols-2">
       <!-- Controls Section -->
       <div class="controls-section space-y-6">
