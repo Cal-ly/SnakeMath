@@ -3,7 +3,23 @@ import TopicPage from '@/components/content/TopicPage.vue'
 import ContentSection from '@/components/content/ContentSection.vue'
 import MathBlock from '@/components/content/MathBlock.vue'
 import CodeExample from '@/components/content/CodeExample.vue'
+import RelatedTopics from '@/components/content/RelatedTopics.vue'
 import { StatisticsCalculator } from '@/components/widgets/StatisticsCalculator'
+
+const relatedTopics = [
+  {
+    title: 'Statistics Overview',
+    path: '/statistics',
+    description: 'All statistics topics',
+    faIcon: 'fa-solid fa-chart-pie',
+  },
+  {
+    title: 'Summation',
+    path: '/algebra/summation',
+    description: 'The math behind calculating sums',
+    faIcon: 'fa-solid fa-plus',
+  },
+]
 
 // Python code examples
 const centralTendencyCode = `import numpy as np
@@ -617,6 +633,9 @@ print(f"Normalized mean: {normalized.mean():.4f}, std: {normalized.std():.4f}")`
           </ul>
         </div>
       </ContentSection>
+
+      <!-- Related Topics -->
+      <RelatedTopics :topics="relatedTopics" />
     </div>
   </TopicPage>
 </template>

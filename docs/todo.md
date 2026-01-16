@@ -1,24 +1,22 @@
 # SnakeMath ToDo List
 
-**Last Updated**: 2026-01-16
+**Last Updated**: 2026-01-17
 
 ---
 
-## Current: Phase 10 - Statistics Foundation
+## Current: Post-Phase 10 - Algebra Expansion Complete
 
-**Planned Deliverables** (from ROADMAP.md):
-- StatisticsCalculator widget
-- Content: Mean, median, mode, variance, standard deviation, distributions
-- Features: Data input, histogram, box plot, statistics display
-- Preset datasets: Test scores, heights, salaries, reaction times
+Phase 10 (Statistics Foundation) is complete. Algebra section has been expanded with:
+- ✅ Product Notation (Π) - factorial, permutations, combinations
+- ✅ Linear Equations - single equations, systems, NumPy
+
+The "Coming Soon" section has been removed from AlgebraIndex.vue.
 
 ---
 
 ## Fixes (Known Issues)
 
 - [ ] **Scroll position issue**: Algebra/Summation page jumps to top when recalculating
-- [ ] **Missing Sigma symbol**: On algebra index page, the topic card for Summation lacks the Σ symbol
-- [ ] **Naming inconsistency**: Change "Summation Notation" to "Summation" on algebra index page
 
 ---
 
@@ -53,7 +51,9 @@
 | 7 | Quadratics & Visual Regression | ✅ Complete |
 | 8 | Exponentials & Logarithms | ✅ Complete |
 | 9 | Trigonometry + Testing Refinement | ✅ Complete |
+| 10 | Statistics Foundation | ✅ Complete |
 | — | Design System Standardization | ✅ Complete |
+| — | Algebra Expansion (Product Notation, Linear Equations) | ✅ Complete |
 
 *Detailed completion summaries are in `docs/current_state.md`*
 

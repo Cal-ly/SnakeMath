@@ -56,6 +56,16 @@ const router = createRouter({
       component: () => import('@/views/algebra/SummationView.vue'),
     },
     {
+      path: '/algebra/product-notation',
+      name: 'algebra-product-notation',
+      component: () => import('@/views/algebra/ProductNotationView.vue'),
+    },
+    {
+      path: '/algebra/linear-equations',
+      name: 'algebra-linear-equations',
+      component: () => import('@/views/algebra/LinearEquationsView.vue'),
+    },
+    {
       path: '/algebra/quadratics',
       name: 'algebra-quadratics',
       component: () => import('@/views/algebra/QuadraticsView.vue'),

@@ -78,54 +78,6 @@ const topic = topics.find((t) => t.id === 'algebra')!
         </div>
       </ContentSection>
 
-      <!-- Coming Soon -->
-      <ContentSection id="coming-soon" title="Coming Soon" icon="fa-solid fa-clock">
-        <p class="mb-4 text-text-secondary">
-          We're constantly expanding our algebra coverage. Here's what's in the pipeline:
-        </p>
-
-        <div class="grid gap-3 md:grid-cols-2">
-          <div class="p-3 rounded-lg border border-border">
-            <p class="font-medium text-text-primary">
-              <i class="fa-solid fa-pi text-text-muted mr-2" aria-hidden="true" />
-              Product Notation (Π)
-            </p>
-            <p class="text-sm text-text-muted mt-1">
-              Like summation but for multiplication — factorials, permutations, and more.
-            </p>
-          </div>
-
-          <div class="p-3 rounded-lg border border-border">
-            <p class="font-medium text-text-primary">
-              <i class="fa-solid fa-chart-line text-text-muted mr-2" aria-hidden="true" />
-              Quadratic Functions
-            </p>
-            <p class="text-sm text-text-muted mt-1">
-              Parabolas, vertex form, and the famous quadratic formula.
-            </p>
-          </div>
-
-          <div class="p-3 rounded-lg border border-border">
-            <p class="font-medium text-text-primary">
-              <i class="fa-solid fa-equals text-text-muted mr-2" aria-hidden="true" />
-              Linear Equations
-            </p>
-            <p class="text-sm text-text-muted mt-1">
-              Systems of equations and their connection to linear algebra.
-            </p>
-          </div>
-
-          <div class="p-3 rounded-lg border border-border">
-            <p class="font-medium text-text-primary">
-              <i class="fa-solid fa-arrow-trend-up text-text-muted mr-2" aria-hidden="true" />
-              Exponentials & Logarithms
-            </p>
-            <p class="text-sm text-text-muted mt-1">
-              O(log n) complexity explained through the math behind it.
-            </p>
-          </div>
-        </div>
-      </ContentSection>
     </div>
   </TopicPage>
 </template>

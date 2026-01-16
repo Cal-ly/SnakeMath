@@ -30,25 +30,27 @@ withDefaults(defineProps<Props>(), {
         v-for="topic in topics"
         :key="topic.path"
         :to="topic.path"
-        class="card p-4 hover:border-primary transition-colors group"
+        class="flex items-center gap-3 bg-surface-alt rounded-lg p-4 border border-border/50 hover:border-primary transition-colors group"
       >
-        <div class="flex items-start gap-3">
-          <i
-            v-if="topic.faIcon"
-            :class="[topic.faIcon, 'text-lg text-primary']"
-            aria-hidden="true"
-          />
-          <div>
-            <span
-              class="font-medium text-text-primary group-hover:text-primary transition-colors"
-            >
-              {{ topic.title }}
-            </span>
-            <p v-if="topic.description" class="text-sm text-text-muted mt-1">
-              {{ topic.description }}
-            </p>
-          </div>
+        <i
+          v-if="topic.faIcon"
+          :class="[topic.faIcon, 'text-lg text-primary']"
+          aria-hidden="true"
+        />
+        <div class="flex-1 min-w-0">
+          <span
+            class="font-medium text-text-primary group-hover:text-primary transition-colors block"
+          >
+            {{ topic.title }}
+          </span>
+          <p v-if="topic.description" class="text-sm text-text-muted mt-0.5">
+            {{ topic.description }}
+          </p>
         </div>
+        <i
+          class="fa-solid fa-chevron-right text-text-muted group-hover:text-primary transition-colors flex-shrink-0"
+          aria-hidden="true"
+        />
       </RouterLink>
     </div>
   </div>

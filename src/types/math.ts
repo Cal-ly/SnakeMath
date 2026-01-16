@@ -140,3 +140,20 @@ export interface FormulaComparison {
  * Identifier for summation preset formulas
  */
 export type SummationPresetId = 'arithmetic' | 'squares' | 'cubes' | 'geometric' | 'constant'
+
+/**
+ * Result of evaluating a product
+ */
+export interface ProductResult {
+  /** Total product of all factors */
+  product: number
+  /** Individual factor values */
+  factors: number[]
+  /** Number of factors in the product */
+  factorCount: number
+}
+
+/**
+ * Identifier for product preset formulas
+ */
+export type ProductPresetId = 'factorial' | 'evenNumbers' | 'oddNumbers' | 'powers' | 'fractions'

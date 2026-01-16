@@ -83,6 +83,20 @@ export const topics: NavTopic[] = [
         unicodeIcon: 'Σ',
       },
       {
+        id: 'product-notation',
+        title: 'Product Notation',
+        description: 'Pi is just a for loop with multiplication',
+        path: '/algebra/product-notation',
+        unicodeIcon: 'Π',
+      },
+      {
+        id: 'linear-equations',
+        title: 'Linear Equations',
+        description: 'Systems of equations and linear algebra',
+        path: '/algebra/linear-equations',
+        faIcon: 'fa-solid fa-equals',
+      },
+      {
         id: 'quadratics',
         title: 'Quadratic Functions',
         description: 'Parabolas, roots, and the quadratic formula',

@@ -94,6 +94,39 @@ For special characters not in either library (e.g., Greek letters like Σ), use 
 </div>
 ```
 
+### Related Topics Section
+
+**Use for**: Cross-linking to related content at the bottom of subpages.
+
+**Requirement**: All subpages (non-index views) must include a Related Topics section at the bottom.
+
+**Component**: Use `<RelatedTopics>` from `src/components/content/RelatedTopics.vue`
+
+**Pattern**:
+```vue
+<script setup>
+const relatedTopics = [
+  {
+    title: 'Topic Name',
+    path: '/path/to/topic',
+    description: 'Brief description',
+    faIcon: 'fa-solid fa-icon',
+  },
+]
+</script>
+
+<template>
+  <!-- At the end of the page content -->
+  <RelatedTopics :topics="relatedTopics" />
+</template>
+```
+
+**Guidelines**:
+- Include 2-4 related topics
+- Always link back to the parent index page (e.g., "Statistics Overview")
+- Include at least one topic from a different section when relevant
+- Use descriptive text, not just topic titles
+
 ---
 
 ## Code Examples
@@ -257,3 +290,4 @@ When creating new components, verify:
 - [ ] Interactive elements: Has hover, focus, active states
 - [ ] Colors: Uses semantic color classes
 - [ ] Responsive: Works on mobile, enhanced on desktop
+- [ ] Related Topics: Subpages have RelatedTopics section at bottom

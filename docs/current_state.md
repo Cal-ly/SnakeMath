@@ -5,9 +5,9 @@ This document outlines the current state of the project for easy resumption afte
 
 ---
 
-## Current Status: Phase 10 Complete
+## Current Status: Post-Phase 10 - Algebra Expansion
 
-**Last Updated**: 2026-01-16
+**Last Updated**: 2026-01-17
 
 ### Project Summary
 
@@ -36,8 +36,10 @@ SnakeMath is an educational mathematics website for programmers. Ten phases of d
   - Functions (with SimpleFunctionDemo widget)
   - Variables & Expressions
   - Order of Operations (PEMDAS)
-- `/algebra` - Three subtopics:
+- `/algebra` - Five subtopics:
   - Summation notation (SummationExplorer widget)
+  - **Product Notation (Π)** - factorial, permutations, combinations
+  - **Linear Equations** - single equations, systems, NumPy integration
   - Quadratic Functions (QuadraticExplorer widget)
   - Exponentials & Logarithms (ExponentialExplorer widget)
 - `/trigonometry` - Unit Circle (UnitCircleExplorer widget with WaveGraphs)
@@ -62,7 +64,7 @@ SnakeMath is an educational mathematics website for programmers. Ten phases of d
 - **BoxPlotChart**: SVG box plot with quartiles, whiskers, and outlier markers
 
 **Testing Infrastructure**:
-- 375+ unit tests (Vitest) - including 105 new statistics tests
+- 397+ unit tests (Vitest) - including product notation utilities (22 new tests)
 - E2E tests (Playwright) with tiered CI approach
 - Visual regression tests (Playwright screenshot comparison) - local only
 - WCAG 2.1 AA accessibility audits via axe-core
@@ -108,6 +110,7 @@ npm run build        # Production build
 | Playwright config | `playwright.config.ts` |
 | Statistics utilities | `src/utils/math/statistics.ts` |
 | Statistics composable | `src/composables/useStatistics.ts` |
+| Product utilities | `src/utils/math/product.ts` |
 
 ### Archived Documentation
 Phase completion summaries are in `docs/archive/`:
@@ -119,8 +122,8 @@ Phase completion summaries are in `docs/archive/`:
 
 ## Test Coverage
 
-### Unit Tests (375+ tests)
-- Math utilities (number classification, parsing, quadratic, exponential, trigonometry, statistics functions)
+### Unit Tests (397+ tests)
+- Math utilities (number classification, parsing, quadratic, exponential, trigonometry, statistics, product functions)
 - Data validation (symbols, navigation)
 - Component logic (via composables)
 
@@ -166,6 +169,50 @@ Phase completion summaries are in `docs/archive/`:
 
 - **Chunk Size Warnings**: Shiki produces large language chunks (lazy-loaded, acceptable)
 - **v-html Warnings**: ESLint warns about v-html in MathBlock/CodeExample (expected, trusted content)
+
+---
+
+## Algebra Expansion Summary (Post-Phase 10)
+
+After Phase 10 completion, the Algebra section was expanded with two new content pages:
+
+### Product Notation (Π)
+- Created `src/utils/math/product.ts` with 22 comprehensive tests
+- Functions: `evaluateProduct`, `factorial`, `permutations`, `combinations`, `doubleFactorial`
+- Preset support: `getProductPresetExpression`, `getProductPresetLatex`, `getProductClosedFormDescription`
+- Types: `ProductResult`, `ProductPresetId` added to `src/types/math.ts`
+- Created `src/views/algebra/ProductNotationView.vue` with:
+  - Interactive product explorer with preset formulas (factorial, even/odd numbers, powers, fractions)
+  - Factorial, permutations, and combinations sections with code examples
+  - Python implementations throughout
+  - Related Topics linking to Summation and other algebra content
+
+### Linear Equations
+- Created `src/views/algebra/LinearEquationsView.vue` with:
+  - Interactive single equation solver (ax + b = c)
+  - Interactive 2×2 system of equations solver
+  - Matrix form introduction
+  - NumPy integration examples
+  - Slope and intercept explanation
+  - Real-world applications (economics, physics, chemistry)
+  - Related Topics linking to Quadratics and other content
+
+### Infrastructure Updates
+- Updated `src/data/navigation.ts` with new subtopics (Product Notation, Linear Equations)
+- Updated `src/router/index.ts` with new routes
+- Removed "Coming Soon" section from AlgebraIndex.vue (all planned content now implemented)
+
+**Key Decisions**:
+- D-084: Preset-based product notation explorer (safer than arbitrary expressions)
+- D-085: Interactive equation solvers with computed properties
+
+**Lessons Learned**:
+- LL-040: Vue template literals don't play well with Python f-strings (`${var}` conflicts)
+- LL-041: HTML entities (`&lt;`, `&gt;`) required for comparison operators in Vue templates
+
+**Lessons Identified**:
+- LI-041: Computed properties for formula display (fullFormula pattern)
+- LI-042: Related topics cross-linking improves content discoverability
 
 ---
 

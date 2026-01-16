@@ -3,7 +3,23 @@ import TopicPage from '@/components/content/TopicPage.vue'
 import ContentSection from '@/components/content/ContentSection.vue'
 import MathBlock from '@/components/content/MathBlock.vue'
 import CodeExample from '@/components/content/CodeExample.vue'
+import RelatedTopics from '@/components/content/RelatedTopics.vue'
 import { UnitCircleExplorer } from '@/components/widgets/UnitCircleExplorer'
+
+const relatedTopics = [
+  {
+    title: 'Trigonometry Overview',
+    path: '/trigonometry',
+    description: 'All trigonometry topics',
+    faIcon: 'fa-solid fa-circle-notch',
+  },
+  {
+    title: 'Functions',
+    path: '/basics/functions',
+    description: 'Input, output, and notation',
+    faIcon: 'fa-solid fa-arrow-right-arrow-left',
+  },
+]
 
 // Python code examples
 const trigValuesCode = `import math
@@ -403,6 +419,9 @@ print(f"Rotated point: ({result[0]:.2f}, {result[1]:.2f})")`
           </div>
         </div>
       </ContentSection>
+
+      <!-- Related Topics -->
+      <RelatedTopics :topics="relatedTopics" />
     </div>
   </TopicPage>
 </template>

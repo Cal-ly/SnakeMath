@@ -93,3 +93,14 @@ export type {
   ParseResult,
   ValidationResult,
 } from './statistics'
+
+export {
+  evaluateProduct,
+  factorial,
+  permutations,
+  combinations,
+  doubleFactorial,
+  getProductPresetExpression,
+  getProductPresetLatex,
+  getProductClosedFormDescription,
+} from './product'

@@ -1527,3 +1527,81 @@ return Math.max(3, Math.min(20, suggestedBins))
 ```
 
 **Note**: Dark mode uses `green-400` which has sufficient contrast against dark backgrounds.
+
+---
+
+## Post-Phase 10: Algebra Expansion Decisions
+
+### D-084: Preset-Based Product Notation Explorer
+**Decision**: Use preset formulas (factorial, even numbers, odd numbers, powers, fractions) for the product notation explorer rather than arbitrary expressions.
+
+**Rationale**:
+- Consistent with SummationExplorer approach (D-044)
+- Safer: no need to evaluate arbitrary user expressions
+- Educational: each preset demonstrates key concepts
+- Richer content: presets include closed-form formulas where applicable
+
+**Trade-off**: Less flexible than arbitrary input, but more focused and safer.
+
+---
+
+### D-085: Interactive Equation Solvers with Computed Properties
+**Decision**: Use reactive computed properties for the linear equation solvers (single equation and 2×2 system).
+
+**Rationale**:
+- Immediate feedback as coefficients change
+- No need for "solve" button - solution updates automatically
+- Educational: shows relationship between inputs and outputs
+- Consistent with other widget patterns (QuadraticExplorer, ExponentialExplorer)
+
+**Implementation**:
+```typescript
+const solution = computed(() => {
+  // For ax + b = c: x = (c - b) / a
+  if (a.value === 0) return { valid: false, error: 'No solution (a=0)' }
+  return { valid: true, x: (c.value - b.value) / a.value }
+})
+```
+
+---
+
+### D-086: Computed Property for Dynamic Formula Display
+**Decision**: Use computed properties to construct MathBlock formulas dynamically rather than template string interpolation.
+
+**Context**: Vue template literals in `:formula` attributes caused parsing issues with complex LaTeX expressions.
+
+**Rationale**:
+- Cleaner separation of logic and template
+- Avoids template parsing issues with `${}`
+- Type-safe formula construction
+- Easier to debug and maintain
+
+**Implementation**:
+```typescript
+// Instead of inline template literal
+// :formula="`\\prod_{i=${start}}^{${end}} ${latex}`"
+
+// Use computed property
+const fullFormula = computed(() => {
+  return `\\prod_{i=${startValue.value}}^{${endValue.value}} ${formulaLatex.value}`
+})
+```
+
+---
+
+### D-087: HTML Entities for Comparison Operators in Vue Templates
+**Decision**: Use HTML entities (`&lt;`, `&gt;`) instead of raw `<` and `>` symbols in Vue template text content.
+
+**Rationale**:
+- Vue/ESLint parser interprets `< 0` as a malformed HTML tag start
+- HTML entities are valid in text content and render correctly
+- Consistent with HTML best practices
+
+**Implementation**:
+```vue
+<!-- Before (causes parsing error) -->
+<li>m < 0: line goes down</li>
+
+<!-- After (works correctly) -->
+<li>m &lt; 0: line goes down</li>
+```

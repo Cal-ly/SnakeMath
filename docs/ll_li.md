@@ -1773,3 +1773,169 @@ await expect(page.locator('[data-testid="dom-element"]')).toBeVisible()
 3. SVG elements may not pass Playwright visibility checks - use toHaveCount as alternative
 4. Composable pattern continues to be effective for complex widget state
 5. Panel-based architecture provides clean separation for different data categories
+
+---
+
+## Post-Phase 10: Algebra Expansion
+
+### LL-040: Vue Template Literals vs Python F-Strings
+**Issue**: Python f-string syntax `${variable}` conflicts with JavaScript template literal interpolation in Vue components.
+
+**Code**:
+```typescript
+// Error: Vue interprets ${final} as JavaScript template interpolation
+const code = `print(f"Final: ${final:.2f}")`
+```
+
+**Resolution**: Remove the extraneous `$` - Python f-strings use `{var}` not `${var}`:
+```typescript
+// Correct Python f-string syntax
+const code = `print(f"Final: {final:.2f}")`
+```
+
+**Lesson**: When writing Python code in JavaScript template literals, remember that Python f-strings use `{var}` syntax, not `${var}`. The `$` prefix is JavaScript-specific.
+
+---
+
+### LL-041: HTML Entities Required for Comparison Operators in Vue Templates
+**Issue**: Using `< 0` in Vue template text content caused ESLint parsing errors because the parser interpreted `<` as the start of an HTML tag.
+
+**Code**:
+```vue
+<!-- Error: Parsing error - unexpected character '0' -->
+<li>• m < 0: line goes down ↘</li>
+```
+
+**Resolution**: Use HTML entities for comparison operators:
+```vue
+<!-- Works correctly -->
+<li>• m &lt; 0: line goes down ↘</li>
+<li>• m &gt; 0: line goes up ↗</li>
+```
+
+**Lesson**: When displaying mathematical comparisons in Vue template text content, use HTML entities (`&lt;`, `&gt;`) to avoid parser confusion with HTML tags.
+
+---
+
+### LL-042: MathBlock Formula with Dynamic Template Strings
+**Issue**: Complex template strings in `:formula` attributes caused Vue template parsing errors.
+
+**Code**:
+```vue
+<!-- Error: Vue can't parse this complex expression -->
+<MathBlock :formula="`\\prod_{i=${startValue}}^{${endValue}} ${formulaLatex}`" display />
+```
+
+**Resolution**: Move formula construction to a computed property:
+```typescript
+const fullFormula = computed(() => {
+  return `\\prod_{i=${startValue.value}}^{${endValue.value}} ${formulaLatex.value}`
+})
+```
+```vue
+<MathBlock :formula="fullFormula" display />
+```
+
+**Lesson**: For complex dynamic formulas, use computed properties instead of inline template expressions. This improves readability and avoids parser issues.
+
+---
+
+### LI-041: Computed Properties for Dynamic Formula Display
+**Identified**: Using computed properties for MathBlock formulas provides cleaner code organization.
+
+**Pattern**:
+```typescript
+// Define formula as computed property
+const fullFormula = computed(() => {
+  const latex = getPresetLatex(currentPreset.value)
+  return `\\prod_{i=${start.value}}^{${end.value}} ${latex}`
+})
+
+// Use in template
+<MathBlock :formula="fullFormula" display />
+```
+
+**Benefits**:
+- Separates logic from template
+- Easier to debug and test
+- Avoids template parsing issues
+- Can include complex conditional logic
+
+---
+
+### LI-042: Related Topics Cross-Linking Pattern
+**Identified**: Consistent use of RelatedTopics component improves content discoverability and user navigation.
+
+**Pattern**:
+```typescript
+const relatedTopics = [
+  {
+    title: 'Summation (Σ)',
+    description: 'Addition-based notation',
+    path: '/algebra/summation',
+    unicodeIcon: 'Σ',
+  },
+  {
+    title: 'Quadratic Functions',
+    description: 'Parabolas and the quadratic formula',
+    path: '/algebra/quadratics',
+    faIcon: 'fa-solid fa-chart-line',
+  },
+]
+```
+
+**Benefits**:
+- Encourages exploration of related content
+- Reinforces conceptual connections
+- Consistent navigation pattern across pages
+- Supports both Font Awesome icons and Unicode symbols
+
+---
+
+### LI-043: Product Notation Utilities Pattern
+**Identified**: Creating dedicated utility functions for product notation follows the established math utilities pattern.
+
+**Pattern**:
+```typescript
+// Core evaluation function
+export function evaluateProduct(
+  expression: (i: number) => number,
+  start: number,
+  end: number
+): ProductResult {
+  if (start > end) return { product: 1, factors: [], factorCount: 0 }
+  // ... iteration logic
+}
+
+// Higher-level functions built on top
+export function factorial(n: number): number { ... }
+export function permutations(n: number, r: number): number { ... }
+export function combinations(n: number, r: number): number { ... }
+```
+
+**Benefits**:
+- Core function handles edge cases (empty product = 1)
+- Higher-level functions compose naturally
+- Each function is testable in isolation
+- Consistent with summation utilities pattern
+
+---
+
+## Post-Phase 10 Algebra Expansion Summary
+
+**Lessons Learned (LL)**:
+- LL-040: Vue template literals vs Python f-strings
+- LL-041: HTML entities required for comparison operators in Vue templates
+- LL-042: MathBlock formula with dynamic template strings
+
+**Lessons Identified (LI)**:
+- LI-041: Computed properties for dynamic formula display
+- LI-042: Related topics cross-linking pattern
+- LI-043: Product notation utilities pattern
+
+**Key Takeaways**:
+1. Python f-strings use `{var}`, not `${var}` - watch for this in JS template literals
+2. Use HTML entities for `<` and `>` in Vue template text content
+3. Move complex dynamic formulas to computed properties for cleaner code
+4. RelatedTopics component improves content discoverability
+5. Product notation utilities follow the same patterns as summation utilities
