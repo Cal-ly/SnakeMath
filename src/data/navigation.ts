@@ -88,6 +88,13 @@ export const topics: NavTopic[] = [
         path: '/algebra/quadratics',
         faIcon: 'fa-solid fa-chart-line',
       },
+      {
+        id: 'exponentials',
+        title: 'Exponentials & Logarithms',
+        description: 'Growth, decay, and algorithm complexity',
+        path: '/algebra/exponentials',
+        faIcon: 'fa-solid fa-arrow-up-right-dots',
+      },
     ],
   },
   // Future topics will be added here:

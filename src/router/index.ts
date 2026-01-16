@@ -60,6 +60,11 @@ const router = createRouter({
       name: 'algebra-quadratics',
       component: () => import('@/views/algebra/QuadraticsView.vue'),
     },
+    {
+      path: '/algebra/exponentials',
+      name: 'algebra-exponentials',
+      component: () => import('@/views/algebra/ExponentialsView.vue'),
+    },
     // Catch-all 404
     {
       path: '/:pathMatch(.*)*',

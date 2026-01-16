@@ -538,6 +538,7 @@ Usage: `/basics/number-types?value="3.14"` → shareable link to specific state.
 - Put business logic in templates
 - Use Options API (use Composition API)
 - Skip TypeScript in Vue components
+- Commit to GitHub, user will do it manually
 
 ---
 

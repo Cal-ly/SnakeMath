@@ -5,13 +5,13 @@ This document outlines the current state of the project for easy resumption afte
 
 ---
 
-## Current Status: Phase 7 Complete, Phase 8 Next
+## Current Status: Phase 8 Complete, Phase 9 Next
 
 **Last Updated**: 2026-01-16
 
 ### Project Summary
 
-SnakeMath is an educational mathematics website for programmers. Seven phases of development have established:
+SnakeMath is an educational mathematics website for programmers. Eight phases of development have established:
 
 | Phase | Focus | Key Deliverables | Status |
 |-------|-------|------------------|--------|
@@ -22,7 +22,8 @@ SnakeMath is an educational mathematics website for programmers. Seven phases of
 | 5 | Algebra & Summation | SummationExplorer, bar chart, code parallel | Complete |
 | 6 | Basics Completion | E2E tests, Functions, Variables, Order of Ops | Complete |
 | 7 | Quadratics & Visual Regression | QuadraticExplorer, coordinate system, visual tests | Complete |
-| **8** | **TBD** | **To be planned** | **Next** |
+| 8 | Exponentials & Logarithms | ExponentialExplorer, complexity comparison | Complete |
+| **9** | **TBD** | **To be planned** | **Next** |
 
 ### What's Live
 
@@ -34,15 +35,17 @@ SnakeMath is an educational mathematics website for programmers. Seven phases of
   - Functions (with SimpleFunctionDemo widget)
   - Variables & Expressions
   - Order of Operations (PEMDAS)
-- `/algebra` - Two subtopics:
+- `/algebra` - Three subtopics:
   - Summation notation (SummationExplorer widget)
   - Quadratic Functions (QuadraticExplorer widget)
+  - **Exponentials & Logarithms (ExponentialExplorer widget)**
 
 **Interactive Widgets**:
 - **NumberTypeExplorer**: Classify numbers, Venn diagram, number line, set membership
 - **SummationExplorer**: Presets, bar chart animation, code parallel, formula comparison
 - **SimpleFunctionDemo**: Function presets, slider input, substitution display
 - **QuadraticExplorer**: Coefficient sliders, parabola graph, equation forms, real-world presets
+- **ExponentialExplorer**: Function explorer tab (exp/log plotting, growth/decay analysis), complexity comparison tab (O(1) to O(2^n))
 
 **Visualization Components**:
 - **CoordinateSystem**: Reusable SVG coordinate system with axes, grid, labels
@@ -51,7 +54,7 @@ SnakeMath is an educational mathematics website for programmers. Seven phases of
 - **PlotLine**: Vertical/horizontal lines (axis of symmetry, asymptotes)
 
 **Testing Infrastructure**:
-- 137+ unit tests (Vitest)
+- 206+ unit tests (Vitest)
 - E2E tests (Playwright)
 - Visual regression tests (Playwright screenshot comparison)
 - WCAG 2.1 AA accessibility audits via axe-core
@@ -93,6 +96,7 @@ npm run build        # Production build
 | E2E tests | `e2e/` directory |
 | Playwright config | `playwright.config.ts` |
 | Quadratic utilities | `src/utils/math/quadratic.ts` |
+| Exponential utilities | `src/utils/math/exponential.ts` |
 | Coordinate system | `src/components/visualizations/` |
 
 ### Archived Documentation
@@ -105,8 +109,8 @@ Phase completion summaries are in `docs/archive/`:
 
 ## Test Coverage
 
-### Unit Tests (137+ tests)
-- Math utilities (number classification, parsing, quadratic functions)
+### Unit Tests (206+ tests)
+- Math utilities (number classification, parsing, quadratic, exponential functions)
 - Data validation (symbols, navigation)
 - Component logic (via composables)
 
@@ -152,55 +156,61 @@ Phase completion summaries are in `docs/archive/`:
 
 ---
 
-## Phase 7 Completion Summary
+## Phase 8 Completion Summary
 
-Phase 7 accomplished:
+Phase 8 accomplished:
 
-1. **Visual Regression Testing Infrastructure** (7A)
-   - Configured Playwright for screenshot comparison
-   - Created visual test file for all pages
-   - Added `npm run test:visual` command
-   - CI workflow for visual regression checks
-   - Documentation in `docs/VISUAL_TESTING.md`
+1. **Exponential Math Utilities** (8A)
+   - Created `src/utils/math/exponential.ts` with 69 tests
+   - Functions: evaluateExponential, evaluateLogarithm, analyzeGrowthDecay
+   - Functions: calculateDoublingTime, calculateHalfLife
+   - Functions: calculateCompoundInterest, calculateContinuousInterest
+   - Functions: compareComplexities, generateExponentialPoints, generateLogarithmPoints
+   - Types: ComplexityClass, ComplexityComparison, GrowthDecayResult, etc.
+   - Exported complexity functions, labels, colors, examples for visualization
 
-2. **Coordinate System Foundation** (7B)
-   - Created reusable `CoordinateSystem.vue` SVG component
-   - Built `PlotCurve.vue` for plotting functions
-   - Built `PlotPoint.vue` for labeled points
-   - Built `PlotLine.vue` for vertical/horizontal lines
-   - Barrel export in `src/components/visualizations/`
+2. **ExponentialExplorer Widget** (8B)
+   - Built main `ExponentialExplorer.vue` component with tabbed interface
+   - `FunctionExplorerTab.vue` - exp/log function plotting
+   - `ComplexityComparisonTab.vue` - O(1) to O(2^n) comparison
+   - `BaseSelector.vue` - preset buttons (e, 2, 10) + custom input
+   - `FunctionTypeSelector.vue` - exponential vs logarithm toggle
+   - `GrowthDecayPanel.vue` - doubling time, half-life, percent change
+   - `useExponentialExplorer.ts` composable for state management
+   - URL state sync for shareable links (?tab=function&type=exp&base=2)
 
-3. **Quadratic Math Utilities** (7C)
-   - Created `src/utils/math/quadratic.ts` with full test coverage
-   - Functions: vertex, discriminant, roots, vertex form, factored form
-   - Types: `QuadraticCoefficients`, `Vertex`, `DiscriminantResult`, etc.
-   - 32 unit tests covering all functions and edge cases
+3. **Complexity Comparison Feature** (8C)
+   - Logarithmic slider for n (1-1000 range)
+   - Multi-curve graph showing all 6 complexity classes
+   - Comparison table with operations count and relative speed
+   - Dynamic insight text explaining the implications
+   - Algorithm examples for each complexity class
 
-4. **QuadraticExplorer Widget** (7D)
-   - Built main `QuadraticExplorer.vue` component
-   - `CoefficientControls.vue` - sliders for a, b, c
-   - `EquationDisplay.vue` - standard, vertex, factored forms
-   - `AnalysisPanel.vue` - discriminant, roots, vertex info
-   - `PresetSelector.vue` - 8 presets (5 basic + 3 real-world)
-   - `useQuadraticExplorer.ts` composable for state management
-   - URL state sync for shareable links
-   - Real-world presets with contextual explanations
-
-5. **Quadratics Content Page** (7E)
-   - Created `QuadraticsView.vue` with comprehensive content
-   - Sections: Introduction, Explorer, Coefficients, Forms, Solving, Applications, Reference
-   - Python code examples for each concept
+4. **Exponentials Content Page** (8D)
+   - Created `ExponentialsView.vue` with comprehensive content
+   - Sections: Introduction, Explorer, Special Bases, Growth/Decay
+   - Sections: Logarithms, Log Properties, Compound Interest
+   - Sections: Algorithm Complexity, Real-World Examples, Reference
+   - Python code examples throughout
    - Added to router and navigation
 
-6. **Real-World Presets & Polish** (7F)
-   - Added explanation text for real-world presets
-   - Complex roots link to Number Types page
-   - Visual regression tests for quadratics page
-   - E2E tests for QuadraticExplorer widget
+5. **Applications Content** (8E)
+   - Compound interest calculator with frequency comparison
+   - Linear vs binary search comparison with operation counts
+   - Binary bits needed for number representation
+   - pH scale logarithmic calculations
+   - Decibel (sound) logarithmic calculations
+
+6. **Mobile Optimization & Polish** (8F)
+   - Minimum 44px touch targets for buttons and sliders
+   - Responsive grid layouts (stack on mobile, side-by-side on desktop)
+   - Data-testid attributes for E2E testing
+   - Slider thumb enlargement on desktop
 
 **Key Architectural Decisions**:
-- D-059: Visual regression before new visuals
-- D-060: Coordinate system supports negative domain/range
-- D-061: Static form display (no animation) for MVP
-- D-062: "No real roots" with link for Δ < 0
-- D-063: 8 presets (5 basic + 3 real-world)
+- D-064: Widget named "ExponentialExplorer"
+- D-065: Presets + custom base input
+- D-066: Tabbed interface (Function Explorer | Complexity Comparison)
+- D-067: Core complexity set (6 classes)
+- D-068: Single content page for exponentials + logarithms
+- D-069: Mobile optimization via responsive layouts

@@ -27,3 +27,34 @@ export type {
   VertexForm,
   FactoredForm,
 } from './quadratic'
+
+export {
+  evaluateExponential,
+  evaluateLogarithm,
+  analyzeGrowthDecay,
+  calculateDoublingTime,
+  calculateHalfLife,
+  calculateCompoundInterest,
+  calculateContinuousInterest,
+  compareComplexities,
+  generateExponentialPoints,
+  generateLogarithmPoints,
+  isValidExponentialBase,
+  isValidLogarithmInput,
+  formatExponentialNumber,
+  getComplexityDescription,
+  complexityFunctions,
+  complexityLabels,
+  complexityColors,
+  complexityExamples,
+} from './exponential'
+
+export type {
+  ExponentialParams,
+  LogarithmParams,
+  GrowthDecayResult,
+  CompoundInterestParams,
+  CompoundInterestResult,
+  ComplexityClass,
+  ComplexityComparison,
+} from './exponential'

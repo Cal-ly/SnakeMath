@@ -35,9 +35,9 @@ Each topic builds toward machine learning foundations:
 | 3 | Content Components | — | — | ✅ Complete |
 | 4 | Number Types | NumberTypeExplorer | Basics: Number Types | ✅ Complete |
 | 5 | Summation Notation | SummationExplorer | Algebra: Summation | ✅ Complete |
-| **6** | **Basics Completion + Testing** | **— (minor)** | **Basics: Functions, Variables, Order of Ops** | 🎯 Next |
-| 7 | Quadratic Functions | QuadraticExplorer | Algebra: Quadratics | Planned |
-| 8 | Exponentials & Logarithms | ExponentialCalculator | Algebra: Exp/Log | Planned |
+| 6 | Basics Completion + Testing | SimpleFunctionDemo | Basics: Functions, Variables, Order of Ops | ✅ Complete |
+| 7 | Quadratic Functions | QuadraticExplorer | Algebra: Quadratics | ✅ Complete |
+| **8** | **Exponentials & Logarithms** | **ExponentialCalculator** | **Algebra: Exp/Log** | 🎯 Next |
 | 9 | Trigonometry | UnitCircleExplorer | Trig: Unit Circle | Planned |
 | 10 | Statistics Foundation | StatisticsCalculator | Statistics: Descriptive | Planned |
 | 11 | Linear Algebra: Vectors | VectorOperations | Linear Algebra: Vectors | Planned |
@@ -306,9 +306,9 @@ Lower detail, higher flexibility. Evaluated after Phase 14.
 |-------|------|---------|-------------|
 | Unit | Vitest | Math utilities, pure functions | Phase 1 ✅ |
 | Component | Vitest + Vue Test Utils | Component logic, props, emits | Phase 4 ✅ |
-| E2E | Playwright | User flows, integration | Phase 6 |
-| Visual Regression | Playwright screenshots | UI consistency | Phase 7 |
-| Accessibility | axe-core + Playwright | WCAG compliance | Phase 6 |
+| E2E | Playwright | User flows, integration | Phase 6 ✅ |
+| Visual Regression | Playwright screenshots | UI consistency | Phase 7 ✅ |
+| Accessibility | axe-core + Playwright | WCAG compliance | Phase 6 ✅ |
 
 ### Test File Structure
 
@@ -365,6 +365,9 @@ Decisions made during roadmap planning:
 | R-004 | Playwright over Cypress | Better browser support, built-in visual testing, faster |
 | R-005 | E2E testing in Phase 6 | Early investment before widget count grows |
 | R-006 | Visual regression in Phase 7 | After coordinate system established; more visual complexity |
+| R-007 | Coordinate system supports negative ranges | Parabolas extend below x-axis; roots can be negative |
+| R-008 | Preset-based widgets (no arbitrary expressions) | Security, predictability, curated educational examples |
+| R-009 | Complex roots link to Number Types | Educational progression without complex arithmetic on quadratics page |
 
 ---
 
@@ -427,15 +430,15 @@ Phase 14: Tangent lines, derivative graphs
 
 ## Review Points
 
-| After Phase | Evaluate |
-|-------------|----------|
-| 5 | Widget architecture solid? Animation approach correct? |
-| 6 | Testing infrastructure working? Content density appropriate? |
-| 7 | Coordinate system reusable? Visual regression catching issues? |
-| 8 | Mobile experience acceptable? |
-| 10 | Performance acceptable? Ready for more complex visualizations? |
-| 12 | Linear algebra approach working? Ready for calculus? |
-| 14 | Calculus complete. Evaluate AI/ML phase scope. |
+| After Phase | Evaluate | Outcome |
+|-------------|----------|---------|
+| 5 | Widget architecture solid? Animation approach correct? | ✅ Yes - preset-based architecture works well |
+| 6 | Testing infrastructure working? Content density appropriate? | ✅ Playwright + axe-core working; content pacing good |
+| 7 | Coordinate system reusable? Visual regression catching issues? | ✅ CoordinateSystem + PlotCurve/Point/Line reusable for Phase 8+ |
+| 8 | Mobile experience acceptable? | — |
+| 10 | Performance acceptable? Ready for more complex visualizations? | — |
+| 12 | Linear algebra approach working? Ready for calculus? | — |
+| 14 | Calculus complete. Evaluate AI/ML phase scope. | — |
 
 ---
 
@@ -459,6 +462,8 @@ Phase 14: Tangent lines, derivative graphs
 |------|--------|
 | 2025-01-15 | Initial roadmap created after Phase 4 completion |
 | 2026-01-16 | Phase 5 complete, Phase 6 marked as next |
+| 2026-01-16 | Phase 6 complete: E2E testing, accessibility, Functions/Variables/OrderOfOps content |
+| 2026-01-16 | Phase 7 complete: QuadraticExplorer, CoordinateSystem, visual regression testing |
 
 ---
 

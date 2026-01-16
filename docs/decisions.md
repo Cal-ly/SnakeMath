@@ -1180,3 +1180,84 @@ Page Structure:
 - 3 real-world presets reinforce practical math
 - Real-world presets include contextual explanations
 - Total of 8 gives good variety without overwhelming
+
+---
+
+## Phase 8 Decisions
+
+### D-064: Widget Named "ExponentialExplorer"
+**Decision**: Name the exponential/logarithm widget "ExponentialExplorer" following the naming pattern of QuadraticExplorer.
+
+**Rationale**:
+- Consistent naming with other explorer widgets
+- Clearly communicates the widget's purpose
+- "Explorer" suffix indicates interactive exploration capability
+
+---
+
+### D-065: Presets + Custom Base Input
+**Decision**: Provide quick-access preset buttons for common bases (e, 2, 10) plus a custom input field.
+
+**Rationale**:
+- Most educational examples use e, 2, or 10 as bases
+- Quick selection improves UX for common cases
+- Custom input allows exploration of any valid base (0.1 to 100)
+- Balances ease of use with flexibility
+
+**Implementation**:
+- Preset buttons: e (natural), 2 (binary), 10 (common)
+- Custom input: number field with validation (0.1 ≤ base ≤ 100, base ≠ 1)
+
+---
+
+### D-066: Tabbed Interface (Function Explorer | Complexity Comparison)
+**Decision**: Use a tabbed interface to separate the function exploration from algorithm complexity comparison.
+
+**Rationale**:
+- Two distinct use cases warrant separate focused views
+- Function Explorer: visualize exp/log functions, growth/decay analysis
+- Complexity Comparison: compare O(1), O(log n), O(n), etc.
+- Tabs keep the widget clean without overwhelming users
+
+**Implementation**: Standard tab navigation with URL state sync (?tab=function or ?tab=complexity)
+
+---
+
+### D-067: Core Complexity Set
+**Decision**: Use six complexity classes for comparison: O(1), O(log n), O(n), O(n log n), O(n²), O(2^n).
+
+**Rationale**:
+- Covers the most common algorithm complexities programmers encounter
+- Demonstrates the dramatic difference between logarithmic and exponential growth
+- Six functions show clear patterns without overwhelming the visualization
+- Each has real algorithm examples for context
+
+**Trade-off**: Doesn't include O(n³) or O(n!) which are less common but can be dramatic.
+
+---
+
+### D-068: Single Content Page for Exponentials + Logarithms
+**Decision**: Combine exponentials and logarithms into a single content page rather than splitting them.
+
+**Rationale**:
+- Exponentials and logarithms are inverse functions - deeply connected
+- Splitting would fragment the narrative (log is meaningless without exp context)
+- Algorithm complexity analysis connects both concepts
+- Single page allows natural progression: exp → log → properties → applications
+
+---
+
+### D-069: Mobile Optimization via Responsive Layouts
+**Decision**: Prioritize responsive layouts with minimum 44px touch targets for mobile.
+
+**Rationale**:
+- Foundation for mobile experience before adding advanced gestures
+- 44px is Apple's recommended minimum touch target size
+- Responsive grid layouts stack on mobile, side-by-side on desktop
+- Slider thumb enlarged on desktop for better precision
+
+**Implementation**:
+- Tab buttons: min-height 44px
+- Preset buttons: min-width/height 44px
+- Slider thumb: 20px mobile, 44px desktop
+- Grid: single column mobile, two columns desktop (lg:grid-cols-2)
