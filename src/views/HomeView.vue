@@ -190,7 +190,6 @@ const siteStructure = [
     <!-- MATLAB Joke -->
     <section class="text-center py-4">
       <p class="text-text-muted italic">
-        <i class="fa-solid fa-question-circle mr-2" aria-hidden="true" />
         Why not just use MATLAB?
       </p>
       <p class="text-text-muted text-sm mt-1">MATLAB is an illegitimate programming language and it knows!</p>
@@ -198,7 +197,7 @@ const siteStructure = [
     </section>
 
     <!-- Call to Action -->
-    <section class="text-center py-8">
+    <!-- <section class="text-center py-8">
       <h2 class="text-2xl font-bold text-text-primary mb-2">Ready to dive in?</h2>
       <p class="text-text-muted mb-6">
         Start with the Foundations section to learn how to express mathematical concepts in code.
@@ -210,6 +209,6 @@ const siteStructure = [
         <i class="fa-solid fa-play" aria-hidden="true" />
         Start here!
       </RouterLink>
-    </section>
+    </section> -->
   </div>
 </template>

@@ -3,7 +3,7 @@ import { test, expect } from '@playwright/test'
 // Base path for the app (matches vite.config.ts base)
 const BASE = '/SnakeMath'
 
-test.describe('SummationExplorer Widget', () => {
+test.describe('SummationExplorer Widget @e2e', () => {
   test.beforeEach(async ({ page }) => {
     await page.goto(`${BASE}/algebra/summation`)
   })

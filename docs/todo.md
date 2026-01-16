@@ -73,6 +73,7 @@
 
 ## Fixes (Known Issues)
 - [ ] Algebra/Summation page jumps to top when recalculating (scroll position issue)
+- On the algebra index page, the topic guiding to Summation Notation lacks it's big Sigma symbol. Further It should be chnaged from "Summation Notation" to just "Summation" 
 
 ---
 

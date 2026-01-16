@@ -65,6 +65,17 @@ const router = createRouter({
       name: 'algebra-exponentials',
       component: () => import('@/views/algebra/ExponentialsView.vue'),
     },
+    // Trigonometry section
+    {
+      path: '/trigonometry',
+      name: 'trigonometry',
+      component: () => import('@/views/trigonometry/TrigonometryIndexView.vue'),
+    },
+    {
+      path: '/trigonometry/unit-circle',
+      name: 'trigonometry-unit-circle',
+      component: () => import('@/views/trigonometry/UnitCircleView.vue'),
+    },
     // Catch-all 404
     {
       path: '/:pathMatch(.*)*',

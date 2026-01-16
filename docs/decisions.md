@@ -1261,3 +1261,131 @@ Page Structure:
 - Preset buttons: min-width/height 44px
 - Slider thumb: 20px mobile, 44px desktop
 - Grid: single column mobile, two columns desktop (lg:grid-cols-2)
+
+---
+
+## Phase 9 Decisions
+
+### D-070: Tiered CI Workflow
+**Decision**: Implement tiered CI with quick-check on push and full-test on PR only.
+
+**Rationale**:
+- Reduces CI time for routine commits
+- Full E2E tests only needed for code review
+- Visual regression tests are flaky in CI (font rendering, timing)
+- Faster feedback loop for development
+
+**Implementation**:
+```yaml
+jobs:
+  quick-check:  # Always: type-check, lint, unit tests, build
+    if: always
+  full-test:    # PR only: E2E functional, accessibility
+    if: github.event_name == 'pull_request'
+```
+
+---
+
+### D-071: Visual Regression Tests Local-Only
+**Decision**: Remove visual regression tests from CI, run locally only.
+
+**Rationale**:
+- CI environments have different fonts, rendering engines
+- Screenshot comparison is inherently flaky across environments
+- Local tests are sufficient for developer validation
+- Reduces CI complexity and failure rate
+
+**Trade-off**: Visual regressions might slip through if developers don't run local tests. Mitigated by code review.
+
+---
+
+### D-072: Test Tag System
+**Decision**: Use grep-based test tags (@e2e, @a11y, @visual) in test names for filtering.
+
+**Rationale**:
+- Simple to implement (just add tag to test name)
+- Works with Playwright's built-in grep functionality
+- Easy to run specific test categories
+- Self-documenting test organization
+
+**Implementation**:
+```typescript
+test.describe('Widget Tests @e2e', () => { ... })
+test.describe('Accessibility Audits @a11y', () => { ... })
+test.describe('Visual Regression @visual', () => { ... })
+```
+
+---
+
+### D-073: Composable Pattern for Widget State
+**Decision**: Create `useUnitCircle` composable for all unit circle widget state and logic.
+
+**Rationale**:
+- Separates state logic from presentation
+- Composable can be tested independently
+- Supports optional URL state synchronization
+- Reusable if unit circle appears in multiple contexts
+
+**Implementation**:
+```typescript
+export function useUnitCircle(options: UseUnitCircleOptions = {}) {
+  // State: angle, unit, showMoreAngles, showWaves
+  // Computed: trigValues, exactValues, quadrant, pointOnCircle, etc.
+  // Methods: setAngle, setUnit, incrementAngle
+  // Optional URL sync
+}
+```
+
+---
+
+### D-074: Modular Component Architecture for UnitCircleExplorer
+**Decision**: Build UnitCircleExplorer from discrete sub-components.
+
+**Rationale**:
+- Each sub-component has single responsibility
+- Easier to test and maintain
+- Components can be reused elsewhere
+- Follows established pattern from other widgets
+
+**Structure**:
+```
+UnitCircleExplorer/ (orchestrator)
+├── AngleControls.vue (slider, input, unit toggle)
+├── SpecialAngleButtons.vue (quick angle selection)
+├── TrigValuesDisplay.vue (sin, cos, tan values)
+├── WaveGraphs.vue (optional wave visualization)
+└── index.ts (exports)
+```
+
+---
+
+### D-075: Optional Wave Graphs
+**Decision**: Wave graphs are hidden by default, shown via toggle checkbox.
+
+**Rationale**:
+- Reduces initial visual complexity
+- Users can focus on unit circle first
+- Progressive disclosure of related concepts
+- Keeps widget usable on smaller screens
+
+**Implementation**: `showWaves` ref in composable, checkbox toggle in main component.
+
+---
+
+### D-076: Data-Driven Special Angles
+**Decision**: Define special angles as an array of SpecialAngle objects with exact values.
+
+**Rationale**:
+- Single source of truth for angle data
+- Exact values (√2/2, √3/2, etc.) stored as strings
+- Easy to add/modify special angles
+- Enables quick validation of calculations
+
+**Data Structure**:
+```typescript
+interface SpecialAngle {
+  degrees: number
+  radians: { numerator: number; denominator: number; symbolic: string }
+  exact: { sin: string; cos: string; tan: string }
+}
+```

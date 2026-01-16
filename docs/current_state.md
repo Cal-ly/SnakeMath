@@ -5,13 +5,13 @@ This document outlines the current state of the project for easy resumption afte
 
 ---
 
-## Current Status: Phase 8 Complete, Phase 9 Next
+## Current Status: Phase 9 Complete, Phase 10 Next
 
 **Last Updated**: 2026-01-16
 
 ### Project Summary
 
-SnakeMath is an educational mathematics website for programmers. Eight phases of development have established:
+SnakeMath is an educational mathematics website for programmers. Nine phases of development have established:
 
 | Phase | Focus | Key Deliverables | Status |
 |-------|-------|------------------|--------|
@@ -23,7 +23,8 @@ SnakeMath is an educational mathematics website for programmers. Eight phases of
 | 6 | Basics Completion | E2E tests, Functions, Variables, Order of Ops | Complete |
 | 7 | Quadratics & Visual Regression | QuadraticExplorer, coordinate system, visual tests | Complete |
 | 8 | Exponentials & Logarithms | ExponentialExplorer, complexity comparison | Complete |
-| **9** | **TBD** | **To be planned** | **Next** |
+| 9 | Trigonometry + Testing Refinement | UnitCircleExplorer, WaveGraphs, tiered CI | Complete |
+| **10** | **Statistics Foundation** | **StatisticsCalculator** | **Next** |
 
 ### What's Live
 
@@ -38,7 +39,9 @@ SnakeMath is an educational mathematics website for programmers. Eight phases of
 - `/algebra` - Three subtopics:
   - Summation notation (SummationExplorer widget)
   - Quadratic Functions (QuadraticExplorer widget)
-  - **Exponentials & Logarithms (ExponentialExplorer widget)**
+  - Exponentials & Logarithms (ExponentialExplorer widget)
+- `/trigonometry` - New section:
+  - **Unit Circle (UnitCircleExplorer widget with WaveGraphs)**
 
 **Interactive Widgets**:
 - **NumberTypeExplorer**: Classify numbers, Venn diagram, number line, set membership
@@ -46,6 +49,7 @@ SnakeMath is an educational mathematics website for programmers. Eight phases of
 - **SimpleFunctionDemo**: Function presets, slider input, substitution display
 - **QuadraticExplorer**: Coefficient sliders, parabola graph, equation forms, real-world presets
 - **ExponentialExplorer**: Function explorer tab (exp/log plotting, growth/decay analysis), complexity comparison tab (O(1) to O(2^n))
+- **UnitCircleExplorer**: Angle controls (slider, input), special angle buttons, SVG unit circle with point/arc/projections, trig values display, quadrant/reference angle info, optional wave graphs (sin θ, cos θ)
 
 **Visualization Components**:
 - **CoordinateSystem**: Reusable SVG coordinate system with axes, grid, labels
@@ -54,11 +58,11 @@ SnakeMath is an educational mathematics website for programmers. Eight phases of
 - **PlotLine**: Vertical/horizontal lines (axis of symmetry, asymptotes)
 
 **Testing Infrastructure**:
-- 206+ unit tests (Vitest)
-- E2E tests (Playwright)
-- Visual regression tests (Playwright screenshot comparison)
+- 270+ unit tests (Vitest) - including 64 new trigonometry tests
+- E2E tests (Playwright) with tiered CI approach
+- Visual regression tests (Playwright screenshot comparison) - local only
 - WCAG 2.1 AA accessibility audits via axe-core
-- CI workflow with E2E and visual regression testing
+- **Tiered CI workflow**: quick-check (push), full-test (PR only)
 
 **Supporting Infrastructure**:
 - URL state sync for shareable widget links
@@ -77,9 +81,11 @@ npm run dev          # Start dev server
 npm run type-check   # TypeScript validation
 npm run lint         # ESLint check
 npm run test         # Run unit tests
-npm run test:e2e     # Run E2E tests (requires build)
-npm run test:visual  # Run visual regression tests
+npm run test:e2e     # Run E2E tests (grep-invert @visual)
+npm run test:a11y    # Run accessibility tests only (@a11y)
+npm run test:visual  # Run visual regression tests (@visual)
 npm run test:visual:update  # Update visual baselines
+npm run test:all     # Run unit + E2E + a11y tests
 npm run build        # Production build
 ```
 
@@ -87,6 +93,7 @@ npm run build        # Production build
 | Purpose | File |
 |---------|------|
 | Project guide | `CLAUDE.md` |
+| Testing docs | `docs/TESTING.md` |
 | Visual testing docs | `docs/VISUAL_TESTING.md` |
 | Decisions | `docs/decisions.md` |
 | Lessons learned | `docs/ll_li.md` |
@@ -97,7 +104,9 @@ npm run build        # Production build
 | Playwright config | `playwright.config.ts` |
 | Quadratic utilities | `src/utils/math/quadratic.ts` |
 | Exponential utilities | `src/utils/math/exponential.ts` |
+| Trigonometry utilities | `src/utils/math/trigonometry.ts` |
 | Coordinate system | `src/components/visualizations/` |
+| Unit circle composable | `src/composables/useUnitCircle.ts` |
 
 ### Archived Documentation
 Phase completion summaries are in `docs/archive/`:
@@ -109,8 +118,8 @@ Phase completion summaries are in `docs/archive/`:
 
 ## Test Coverage
 
-### Unit Tests (206+ tests)
-- Math utilities (number classification, parsing, quadratic, exponential functions)
+### Unit Tests (270+ tests)
+- Math utilities (number classification, parsing, quadratic, exponential, trigonometry functions)
 - Data validation (symbols, navigation)
 - Component logic (via composables)
 
@@ -119,12 +128,14 @@ Phase completion summaries are in `docs/archive/`:
 - NumberTypeExplorer (input, examples, visualizations, URL sync)
 - SummationExplorer (presets, bounds, animation, URL sync)
 - QuadraticExplorer (presets, coefficients, equation forms, roots)
-- Accessibility (WCAG 2.1 AA audits for all pages)
+- **UnitCircleExplorer** (angle controls, special angles, trig values, wave graphs)
+- Accessibility (WCAG 2.1 AA audits for all pages including trigonometry)
 
-### Visual Regression Tests
+### Visual Regression Tests (Local Only)
 - All pages baseline screenshots
 - Widget state snapshots (default, inputs, presets)
 - Desktop (1280x720) and mobile (375x667) viewports
+- **Not run in CI** - local validation only
 
 ---
 
@@ -214,3 +225,64 @@ Phase 8 accomplished:
 - D-067: Core complexity set (6 classes)
 - D-068: Single content page for exponentials + logarithms
 - D-069: Mobile optimization via responsive layouts
+
+---
+
+## Phase 9 Completion Summary
+
+Phase 9 accomplished:
+
+1. **Testing Infrastructure Refinement** (9A)
+   - Tiered CI workflow: quick-check (push), full-test (PR only)
+   - Test scripts with grep patterns: `test:e2e`, `test:a11y`, `test:visual`
+   - Test tags added to all E2E tests: `@e2e`, `@a11y`, `@visual`
+   - Visual regression tests removed from CI (local only)
+   - Created `docs/TESTING.md` comprehensive testing documentation
+   - Updated `docs/VISUAL_TESTING.md` with local-only guidance
+
+2. **Trigonometry Math Utilities** (9B)
+   - Created `src/utils/math/trigonometry.ts` with 64 comprehensive tests
+   - Types: AngleUnit, Quadrant, TrigValues, ExactTrigValues, QuadrantSigns, SpecialAngle, PointOnCircle, RadianDisplay
+   - Functions: degreesToRadians, radiansToDegrees, normalizeAngle, getQuadrant
+   - Functions: getQuadrantSigns, getReferenceAngle, calculateTrigValues, getPointOnCircle
+   - Functions: isSpecialAngle, getExactTrigValues, getSpecialAngles, formatRadians
+   - Special angles data: 0°, 30°, 45°, 60°, 90°, 120°, 135°, 150°, 180°, 210°, 225°, 240°, 270°, 300°, 315°, 330°
+
+3. **UnitCircleExplorer Widget** (9C)
+   - Created `src/composables/useUnitCircle.ts` for state management + URL sync
+   - Built modular component architecture in `src/components/widgets/UnitCircleExplorer/`:
+     - `AngleControls.vue` - slider, direct input, unit toggle (degrees/radians)
+     - `SpecialAngleButtons.vue` - first quadrant angles + expandable more angles
+     - `TrigValuesDisplay.vue` - sin/cos/tan values with exact values for special angles
+     - `UnitCircleExplorer.vue` - main component with SVG visualization
+   - SVG features: unit circle, angle arc, radius line, point on circle, sin/cos projections
+
+4. **Wave Graphs Feature** (9D)
+   - Created `WaveGraphs.vue` component showing sin θ and cos θ waves
+   - Angle marker syncs with unit circle visualization
+   - X-axis labels in radians (π/2, π, 3π/2, 2π)
+   - Toggle to show/hide wave graphs in main widget
+
+5. **Trigonometry Content Page** (9E)
+   - Created `TrigonometryIndexView.vue` section landing page
+   - Created `UnitCircleView.vue` comprehensive content page with:
+     - What is the Unit Circle section
+     - Interactive Explorer (UnitCircleExplorer widget with URL sync)
+     - Collapsible sections: Trig Functions, Special Angles, Quadrants, Radians, Applications, Identities
+     - Python code examples throughout
+   - Added routes and navigation for trigonometry section
+
+6. **E2E Tests & Polish** (9F)
+   - Created `e2e/trigonometry/unit-circle-explorer.spec.ts` with 18 tests
+   - Added trigonometry pages to accessibility audits
+   - Added keyboard accessibility tests for unit circle widget
+   - Updated all documentation (ROADMAP, decisions, current_state)
+
+**Key Architectural Decisions**:
+- D-070: Tiered CI workflow (quick-check vs full-test)
+- D-071: Visual regression tests local-only
+- D-072: Test tag system (@e2e, @a11y, @visual)
+- D-073: Composable pattern for widget state (useUnitCircle)
+- D-074: Modular component architecture for widget
+- D-075: Optional wave graphs (toggle, not always visible)
+- D-076: Special angles data-driven (array of SpecialAngle objects)

@@ -20,7 +20,7 @@ async function waitForPageReady(page: import('@playwright/test').Page) {
   await page.emulateMedia({ reducedMotion: 'reduce' })
 }
 
-test.describe('Visual Regression - Pages', () => {
+test.describe('Visual Regression - Pages @visual', () => {
   test('home page', async ({ page }) => {
     await page.goto(`${BASE}/`)
     await waitForPageReady(page)
@@ -90,7 +90,7 @@ test.describe('Visual Regression - Pages', () => {
   })
 })
 
-test.describe('Visual Regression - Widget States', () => {
+test.describe('Visual Regression - Widget States @visual', () => {
   test.describe('NumberTypeExplorer', () => {
     test('default state', async ({ page }) => {
       await page.goto(`${BASE}/basics/number-types`)

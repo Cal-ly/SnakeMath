@@ -2,6 +2,24 @@
 
 This document explains how to work with visual regression tests in SnakeMath.
 
+## Important: Local Only
+
+**Visual regression tests are NOT run in CI.** They are meant for local development only.
+
+### Why Not in CI?
+
+1. **Cross-platform rendering differences** - Fonts and anti-aliasing vary between Linux/macOS/Windows
+2. **False positives** - Minor rendering differences cause test failures that don't indicate real bugs
+3. **Maintenance overhead** - Constantly updating baselines for non-issues wastes time
+4. **Value vs. cost** - For an educational site, the overhead doesn't match the benefit
+
+### Local Development Value
+
+Visual tests are still valuable locally for:
+- Catching unintended visual changes during development
+- Verifying responsive layouts
+- Checking widget state rendering
+
 ## Overview
 
 Visual regression tests capture screenshots of pages and widgets, comparing them against baseline images to detect unintended visual changes. We use Playwright's built-in screenshot comparison.
@@ -38,7 +56,7 @@ When you intentionally change the UI, update the baseline screenshots:
 npm run test:visual:update
 
 # Update mobile baselines (if needed)
-npx playwright test --project=visual-mobile --update-snapshots
+npx playwright test --project=visual-mobile --grep @visual --update-snapshots
 ```
 
 ### Review Failures
@@ -81,18 +99,9 @@ Visual tests are configured in `playwright.config.ts`:
 
 When adding a new page or widget:
 
-1. Add test case in `e2e/visual/snapshots.spec.ts`
+1. Add test case in `e2e/visual/snapshots.spec.ts` (use `@visual` tag in describe)
 2. Run `npm run test:visual:update` to create baseline
 3. Commit the new baseline images
-4. CI will detect regressions going forward
-
-## CI Integration
-
-Visual regression tests run automatically on:
-- Push to `main`
-- Pull requests to `main`
-
-On failure, screenshot artifacts are uploaded for review.
 
 ## Troubleshooting
 
@@ -110,5 +119,6 @@ On failure, screenshot artifacts are uploaded for review.
 
 ### Platform differences
 
-- Baseline images should be generated on the same platform as CI
+- Baselines are platform-specific (fonts render differently)
+- Generate baselines on the same platform where you'll run tests
 - We use Chromium-only testing to reduce cross-browser visual flakiness

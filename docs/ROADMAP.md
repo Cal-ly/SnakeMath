@@ -37,9 +37,9 @@ Each topic builds toward machine learning foundations:
 | 5 | Summation Notation | SummationExplorer | Algebra: Summation | ✅ Complete |
 | 6 | Basics Completion + Testing | SimpleFunctionDemo | Basics: Functions, Variables, Order of Ops | ✅ Complete |
 | 7 | Quadratic Functions | QuadraticExplorer | Algebra: Quadratics | ✅ Complete |
-| **8** | **Exponentials & Logarithms** | **ExponentialCalculator** | **Algebra: Exp/Log** | 🎯 Next |
-| 9 | Trigonometry | UnitCircleExplorer | Trig: Unit Circle | Planned |
-| 10 | Statistics Foundation | StatisticsCalculator | Statistics: Descriptive | Planned |
+| 8 | Exponentials & Logarithms | ExponentialExplorer | Algebra: Exp/Log | ✅ Complete |
+| 9 | Trigonometry + Testing Refinement | UnitCircleExplorer | Trig: Unit Circle | ✅ Complete |
+| **10** | **Statistics Foundation** | **StatisticsCalculator** | **Statistics: Descriptive** | 🎯 Next |
 | 11 | Linear Algebra: Vectors | VectorOperations | Linear Algebra: Vectors | Planned |
 | 12 | Linear Algebra: Matrices | MatrixTransformations | Linear Algebra: Matrices | Planned |
 | 13 | Calculus: Limits | LimitsExplorer | Calculus: Limits | Planned |
@@ -435,7 +435,8 @@ Phase 14: Tangent lines, derivative graphs
 | 5 | Widget architecture solid? Animation approach correct? | ✅ Yes - preset-based architecture works well |
 | 6 | Testing infrastructure working? Content density appropriate? | ✅ Playwright + axe-core working; content pacing good |
 | 7 | Coordinate system reusable? Visual regression catching issues? | ✅ CoordinateSystem + PlotCurve/Point/Line reusable for Phase 8+ |
-| 8 | Mobile experience acceptable? | — |
+| 8 | Mobile experience acceptable? | ✅ Responsive layouts, 44px touch targets, touch-friendly sliders |
+| 9 | Tiered CI working? Unit circle visualization correct? | ✅ Tiered CI reduces build time; UnitCircleExplorer with wave graphs working |
 | 10 | Performance acceptable? Ready for more complex visualizations? | — |
 | 12 | Linear algebra approach working? Ready for calculus? | — |
 | 14 | Calculus complete. Evaluate AI/ML phase scope. | — |
@@ -464,6 +465,8 @@ Phase 14: Tangent lines, derivative graphs
 | 2026-01-16 | Phase 5 complete, Phase 6 marked as next |
 | 2026-01-16 | Phase 6 complete: E2E testing, accessibility, Functions/Variables/OrderOfOps content |
 | 2026-01-16 | Phase 7 complete: QuadraticExplorer, CoordinateSystem, visual regression testing |
+| 2026-01-16 | Phase 8 complete: ExponentialExplorer, complexity comparison, mobile optimization |
+| 2026-01-16 | Phase 9 complete: UnitCircleExplorer, WaveGraphs, trigonometry section, tiered CI |
 
 ---
 

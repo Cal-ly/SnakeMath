@@ -3,7 +3,7 @@ import { test, expect } from '@playwright/test'
 // Base path for the app (matches vite.config.ts base)
 const BASE = '/SnakeMath'
 
-test.describe('NumberTypeExplorer Widget', () => {
+test.describe('NumberTypeExplorer Widget @e2e', () => {
   test.beforeEach(async ({ page }) => {
     await page.goto(`${BASE}/basics/number-types`)
   })

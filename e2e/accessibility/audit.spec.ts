@@ -10,9 +10,11 @@ const pagesToAudit = [
   { name: 'Number Types', path: `${BASE}/basics/number-types` },
   { name: 'Algebra Index', path: `${BASE}/algebra` },
   { name: 'Summation', path: `${BASE}/algebra/summation` },
+  { name: 'Trigonometry Index', path: `${BASE}/trigonometry` },
+  { name: 'Unit Circle', path: `${BASE}/trigonometry/unit-circle` },
 ]
 
-test.describe('Accessibility Audits - WCAG 2.1 AA', () => {
+test.describe('Accessibility Audits - WCAG 2.1 AA @a11y', () => {
   for (const { name, path } of pagesToAudit) {
     test(`${name} page passes WCAG 2.1 AA`, async ({ page }) => {
       await page.goto(path)
@@ -38,7 +40,7 @@ test.describe('Accessibility Audits - WCAG 2.1 AA', () => {
   }
 })
 
-test.describe('Accessibility - Basic Checks', () => {
+test.describe('Accessibility - Basic Checks @a11y', () => {
   for (const { name, path } of pagesToAudit) {
     test(`${name} page has no empty links`, async ({ page }) => {
       await page.goto(path)
@@ -65,7 +67,7 @@ test.describe('Accessibility - Basic Checks', () => {
   }
 })
 
-test.describe('Accessibility - Keyboard Navigation', () => {
+test.describe('Accessibility - Keyboard Navigation @a11y', () => {
   test('Number Types widget input is keyboard accessible', async ({ page }) => {
     await page.goto(`${BASE}/basics/number-types`)
 
@@ -119,9 +121,43 @@ test.describe('Accessibility - Keyboard Navigation', () => {
     await page.keyboard.press('Escape')
     await expect(menu).not.toBeVisible()
   })
+
+  test('Unit Circle angle slider is keyboard accessible', async ({ page }) => {
+    await page.goto(`${BASE}/trigonometry/unit-circle`)
+    await page.waitForLoadState('networkidle')
+
+    // Tab to reach angle slider
+    let foundSlider = false
+    for (let i = 0; i < 30; i++) {
+      await page.keyboard.press('Tab')
+      const focused = page.locator(':focus')
+      const testId = await focused.getAttribute('data-testid')
+      if (testId === 'angle-slider') {
+        foundSlider = true
+        break
+      }
+    }
+
+    expect(foundSlider).toBe(true)
+  })
+
+  test('Unit Circle special angle buttons are keyboard accessible', async ({ page }) => {
+    await page.goto(`${BASE}/trigonometry/unit-circle`)
+    await page.waitForLoadState('networkidle')
+
+    // Find a special angle button and focus it (0° is always visible in first quadrant)
+    const button0 = page.locator('[data-testid="special-angle-0"]')
+    await button0.focus()
+    await expect(button0).toBeFocused()
+
+    // Pressing Enter should activate the button
+    await page.keyboard.press('Enter')
+    const slider = page.locator('[data-testid="angle-slider"]')
+    await expect(slider).toHaveValue('0')
+  })
 })
 
-test.describe('Accessibility - Focus Management', () => {
+test.describe('Accessibility - Focus Management @a11y', () => {
   test('Visualization toggles maintain focus after click', async ({ page }) => {
     await page.goto(`${BASE}/basics/number-types`)
 

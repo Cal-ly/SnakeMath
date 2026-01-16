@@ -97,6 +97,22 @@ export const topics: NavTopic[] = [
       },
     ],
   },
+  {
+    id: 'trigonometry',
+    title: 'Trigonometry',
+    description: 'Angles, circles, and periodic functions',
+    faIcon: 'fa-solid fa-circle-notch',
+    path: '/trigonometry',
+    subtopics: [
+      {
+        id: 'unit-circle',
+        title: 'The Unit Circle',
+        description: 'Sine, cosine, and angles on a circle',
+        path: '/trigonometry/unit-circle',
+        faIcon: 'fa-solid fa-circle',
+      },
+    ],
+  },
   // Future topics will be added here:
   // { id: 'statistics', title: 'Statistics', ... },
 ]

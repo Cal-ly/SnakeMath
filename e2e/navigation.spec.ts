@@ -3,7 +3,7 @@ import { test, expect } from '@playwright/test'
 // Base path for the app (matches vite.config.ts base)
 const BASE = '/SnakeMath'
 
-test.describe('Site Navigation', () => {
+test.describe('Site Navigation @e2e', () => {
   test('homepage loads and has correct title', async ({ page }) => {
     await page.goto(`${BASE}/`)
     await expect(page).toHaveTitle(/SnakeMath/)
