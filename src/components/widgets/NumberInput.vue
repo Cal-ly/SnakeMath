@@ -145,6 +145,7 @@ watch(
         :disabled="disabled"
         :aria-invalid="!validationResult.isValid && !validationResult.isEmpty"
         :aria-describedby="showValidation ? errorId : undefined"
+        data-testid="number-input"
         class="w-full px-4 py-2.5 rounded-lg border bg-surface text-text-primary font-mono text-lg transition-colors focus:outline-none focus:ring-2 focus:ring-primary/30"
         :class="[
           validationResult.isEmpty

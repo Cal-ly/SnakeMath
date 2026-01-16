@@ -108,6 +108,7 @@ function handleEndChange(event: Event) {
           :max="max"
           :disabled="disabled"
           :aria-invalid="!!startError || !!rangeError"
+          data-testid="bounds-start"
           class="w-20 px-3 py-1.5 rounded-lg border bg-surface text-text-primary font-mono text-center transition-colors focus:outline-none focus:ring-2 focus:ring-primary/30"
           :class="[
             startError || rangeError
@@ -133,6 +134,7 @@ function handleEndChange(event: Event) {
           :disabled="disabled"
           :aria-invalid="!!endError || !!rangeError"
           aria-label="End index"
+          data-testid="bounds-end"
           class="w-20 px-3 py-1.5 rounded-lg border bg-surface text-text-primary font-mono text-center transition-colors focus:outline-none focus:ring-2 focus:ring-primary/30"
           :class="[
             endError || rangeError

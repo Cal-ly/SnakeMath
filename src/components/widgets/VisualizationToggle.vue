@@ -3,6 +3,7 @@ interface Props {
   modelValue: boolean
   label: string
   icon?: string
+  testId?: string
 }
 
 defineProps<Props>()
@@ -22,6 +23,7 @@ const emit = defineEmits<{
         : 'border-border text-text-muted hover:border-primary hover:text-primary'
     "
     :aria-pressed="modelValue"
+    :data-testid="testId"
     @click="emit('update:modelValue', !modelValue)"
   >
     <i v-if="icon" :class="icon" aria-hidden="true" />

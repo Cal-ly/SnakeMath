@@ -94,7 +94,7 @@ function setLanguage(lang: 'python' | 'javascript') {
       </div>
 
       <!-- Code panel -->
-      <div class="code-panel card p-4">
+      <div class="code-panel card p-4" data-testid="code-parallel-python">
         <div class="flex items-center justify-between mb-3">
           <div class="flex items-center gap-2">
             <i class="fa-solid fa-code text-primary" aria-hidden="true" />

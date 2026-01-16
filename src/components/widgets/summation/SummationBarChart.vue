@@ -189,6 +189,7 @@ function formatNumber(num: number): string {
         <button
           v-if="animated || displayTerms.length > 0"
           type="button"
+          data-testid="animate-button"
           class="px-3 py-1 text-xs rounded border transition-colors"
           :class="
             isAnimating
@@ -245,6 +246,7 @@ function formatNumber(num: number): string {
       :viewBox="`0 0 ${svgWidth} ${chartHeight}`"
       preserveAspectRatio="xMidYMid meet"
       role="img"
+      data-testid="bar-chart"
       :aria-label="`Bar chart showing ${displayTerms.length} terms of the sum, total ${formatNumber(currentTotal)}`"
     >
       <!-- Background -->
@@ -289,6 +291,7 @@ function formatNumber(num: number): string {
           :y="bar.y"
           :width="bar.width"
           :height="bar.height"
+          :data-testid="`bar-${bar.index}`"
           fill="currentColor"
           class="text-primary transition-all duration-200"
           :class="{ 'opacity-30': !bar.isVisible }"

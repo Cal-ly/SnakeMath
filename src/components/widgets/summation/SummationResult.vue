@@ -58,7 +58,7 @@ function toggleShowAll() {
     <!-- Total display -->
     <div class="flex items-baseline gap-3 mb-3">
       <span class="text-sm text-text-muted uppercase tracking-wide">Total:</span>
-      <span class="text-3xl font-bold text-primary font-mono">
+      <span class="text-3xl font-bold text-primary font-mono" data-testid="summation-total">
         {{ formatNumber(result.total) }}
       </span>
     </div>
@@ -87,6 +87,7 @@ function toggleShowAll() {
         class="p-3 bg-surface-alt rounded-lg font-mono text-sm overflow-x-auto"
         role="region"
         aria-label="Term breakdown"
+        data-testid="summation-terms"
       >
         <p class="whitespace-nowrap">
           <span class="text-text-secondary">{{ termsDisplay.text }}</span>

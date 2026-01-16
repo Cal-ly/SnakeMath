@@ -38,7 +38,7 @@
 - Write "for" in cursive to visually connect to for-loop
 - Add "Code Equivalent" to all/relevant code examples. Do it the same way, as been done in `algebra/summation`
 - Make "Summation to code example" interactive. The idea is, that the user can see "I change this number, is equivalent to changing this number in the mathematical notation" and vice versa.
-- Make code examples that are not used directly in conveying the teaching material 
+- Make it default behavior, that code examples that are not used directly in conveying the teaching material (e.g. "Code Equivalent" is directly used in conveying the content) collapsed. 
 
 ---
 

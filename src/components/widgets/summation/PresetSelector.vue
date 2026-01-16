@@ -51,6 +51,7 @@ const selectedPreset = computed(() => presets.find((p) => p.id === props.modelVa
         id="preset-select"
         :value="modelValue"
         :disabled="disabled"
+        data-testid="preset-selector"
         class="w-full px-4 py-2.5 pr-10 rounded-lg border border-border bg-surface text-text-primary appearance-none cursor-pointer transition-colors focus:outline-none focus:ring-2 focus:ring-primary/30 focus:border-primary"
         :class="[disabled && 'opacity-50 cursor-not-allowed']"
         @change="handleChange"

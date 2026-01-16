@@ -103,6 +103,7 @@ const displayValue = computed(() => {
   <div
     class="number-line"
     role="img"
+    data-testid="number-line"
     :aria-label="value !== null ? `Number line showing ${value}` : 'Number line'"
   >
     <!-- Line container -->

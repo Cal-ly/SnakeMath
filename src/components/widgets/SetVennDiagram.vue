@@ -98,6 +98,7 @@ const markerSet = computed(() => {
   <div
     class="set-venn-diagram"
     role="img"
+    data-testid="venn-diagram"
     :aria-label="
       innermostSet
         ? `Venn diagram showing number belongs to ${innermostSet} numbers and all containing sets`

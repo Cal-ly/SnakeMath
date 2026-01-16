@@ -249,11 +249,13 @@ const quickExamples = computed(() => [
           v-model="showNumberLine"
           label="Number Line"
           icon="fa-solid fa-ruler-horizontal"
+          test-id="toggle-number-line"
         />
         <VisualizationToggle
           v-model="showVennDiagram"
           label="Set Diagram"
           icon="fa-solid fa-circle-nodes"
+          test-id="toggle-venn-diagram"
         />
       </div>
 

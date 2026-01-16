@@ -100,6 +100,7 @@ onUnmounted(() => {
         v-if="isOpen"
         id="mobile-menu"
         ref="menuRef"
+        data-testid="mobile-menu"
         class="fixed top-0 right-0 bottom-0 w-72 max-w-[80vw] bg-surface z-50 shadow-xl md:hidden"
         aria-label="Mobile navigation"
         role="dialog"
@@ -111,6 +112,7 @@ onUnmounted(() => {
             <span class="font-semibold text-text-primary">Menu</span>
             <button
               ref="firstFocusableRef"
+              data-testid="mobile-menu-close"
               class="p-2 -mr-2 text-text-muted hover:text-text-primary hover:bg-surface-alt rounded-md transition-colors"
               aria-label="Close menu"
               @click="emit('close')"

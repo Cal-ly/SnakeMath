@@ -45,7 +45,7 @@ function formatNumber(num: number): string {
 </script>
 
 <template>
-  <div class="formula-comparison">
+  <div class="formula-comparison" data-testid="formula-comparison">
     <!-- Header -->
     <h4 class="text-sm font-medium text-text-muted mb-4">
       <i class="fa-solid fa-bolt mr-1.5" aria-hidden="true" />

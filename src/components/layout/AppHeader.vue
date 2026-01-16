@@ -54,6 +54,7 @@ function isActiveRoute(path: string): boolean {
 
         <!-- Mobile Menu Button -->
         <button
+          data-testid="mobile-menu-button"
           class="md:hidden p-2 -mr-2 text-white/90 hover:text-white hover:bg-white/10 rounded-md transition-colors"
           :aria-expanded="props.isMobileMenuOpen"
           aria-controls="mobile-menu"

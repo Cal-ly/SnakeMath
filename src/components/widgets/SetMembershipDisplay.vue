@@ -21,6 +21,8 @@ defineProps<Props>()
     <div
       v-for="set in sets"
       :key="set.symbol"
+      :data-testid="`set-${set.symbol.toLowerCase()}`"
+      :data-member="set.isMember"
       class="flex items-center gap-3 p-3 rounded-lg transition-colors"
       :class="set.isMember ? 'bg-primary/10' : 'bg-surface-alt'"
     >
