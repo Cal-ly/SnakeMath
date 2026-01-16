@@ -1,17 +1,37 @@
 # SnakeMath ToDo List
 
-## Next in order
-- Plan phase 6
-- Clean up document structure
+**Last Updated**: 2026-01-16
 
-## Rearrange
+---
 
-## Fixes
-- Algebra/Summation jumps to the top, when recalculating.
+## Phase 6: Basics Completion + Testing Infrastructure
 
-## Ideas
-- Q&A section
-- Techstack including why (e.g. why tailwind) -> deepdive into the webdesign, as a protfolio piece.
+### Content (from archive)
+- [ ] Functions (composition, inverse, vending machine analogy)
+- [ ] Variables and expressions (expression building, implementation methods)
+- [ ] Order of operations (PEMDAS, precedence tables, AST concepts)
 
-## Perhaps
-- Write "for" in cusive to state that it is the for-loop visually.
+### Testing Infrastructure
+- [ ] Playwright setup and configuration
+- [ ] E2E tests for navigation
+- [ ] E2E tests for NumberTypeExplorer
+- [ ] E2E tests for SummationExplorer
+- [ ] Accessibility audit integration (axe-core)
+- [ ] CI workflow updates for E2E
+
+---
+
+## Fixes (Known Issues)
+- [ ] Algebra/Summation page jumps to top when recalculating (scroll position issue)
+
+---
+
+## Future Ideas
+- Q&A section for each topic
+- Tech stack "why" documentation (portfolio piece)
+- Write "for" in cursive to visually connect to for-loop
+
+---
+
+## Archived
+Phase 1-5 instructions moved to `instructions/archive/`

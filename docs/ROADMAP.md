@@ -34,8 +34,8 @@ Each topic builds toward machine learning foundations:
 | 2 | Layout & Navigation | — | — | ✅ Complete |
 | 3 | Content Components | — | — | ✅ Complete |
 | 4 | Number Types | NumberTypeExplorer | Basics: Number Types | ✅ Complete |
-| **5** | **Summation Notation** | **SummationExplorer** | **Algebra: Summation** | 🎯 Current |
-| 6 | Basics Completion + Testing | — (minor) | Basics: Functions, Variables, Order of Ops | Planned |
+| 5 | Summation Notation | SummationExplorer | Algebra: Summation | ✅ Complete |
+| **6** | **Basics Completion + Testing** | **— (minor)** | **Basics: Functions, Variables, Order of Ops** | 🎯 Next |
 | 7 | Quadratic Functions | QuadraticExplorer | Algebra: Quadratics | Planned |
 | 8 | Exponentials & Logarithms | ExponentialCalculator | Algebra: Exp/Log | Planned |
 | 9 | Trigonometry | UnitCircleExplorer | Trig: Unit Circle | Planned |
@@ -458,6 +458,7 @@ Phase 14: Tangent lines, derivative graphs
 | Date | Change |
 |------|--------|
 | 2025-01-15 | Initial roadmap created after Phase 4 completion |
+| 2026-01-16 | Phase 5 complete, Phase 6 marked as next |
 
 ---
 
