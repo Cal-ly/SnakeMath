@@ -16,7 +16,7 @@ The "Coming Soon" section has been removed from AlgebraIndex.vue.
 
 ## Fixes (Known Issues)
 
-- [ ] **Scroll position issue**: Algebra/Summation page jumps to top when recalculating
+- [x] **Scroll position issue**: Fixed in router scrollBehavior - query param changes no longer scroll to top
 
 ---
 
@@ -52,10 +52,12 @@ The "Coming Soon" section has been removed from AlgebraIndex.vue.
 | 8 | Exponentials & Logarithms | ✅ Complete |
 | 9 | Trigonometry + Testing Refinement | ✅ Complete |
 | 10 | Statistics Foundation | ✅ Complete |
+| 11 | Linear Algebra — Vectors | ✅ Complete |
+| 12 | Linear Algebra — Matrices | ✅ Complete |
 | — | Design System Standardization | ✅ Complete |
 | — | Algebra Expansion (Product Notation, Linear Equations) | ✅ Complete |
 
-*Detailed completion summaries are in `docs/current_state.md`*
+*Detailed completion summaries are in `docs/CURRENT_STATE.md`*
 
 ### Design System Standardization (Completed)
 - Created `docs/design-system.md` with comprehensive UI/UX guidelines

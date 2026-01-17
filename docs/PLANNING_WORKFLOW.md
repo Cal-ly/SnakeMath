@@ -14,7 +14,7 @@ This document defines the workflow between planning sessions (Claude Opus) and i
 │                     (Claude Opus)                                │
 │                                                                  │
 │  1. Review completed phase documentation                         │
-│  2. Update ROADMAP_V2.md with completion                        │
+│  2. Update docs/ROADMAP.md with completion                        │
 │  3. Discuss next phase scope and decisions                       │
 │  4. Create Phase Plan document                                   │
 │  5. Confirm decisions with numbered IDs                          │
@@ -49,10 +49,10 @@ This document defines the workflow between planning sessions (Claude Opus) and i
 ## Planning Session Responsibilities
 
 ### Input Required
-- Updated `current_state.md` from previous phase
-- Updated `decisions.md` from previous phase  
-- Updated `ll_li.md` from previous phase
-- `ROADMAP_V2.md` (authoritative roadmap)
+- Updated `CURRENT_STATE.md` from previous phase
+- Updated `DECISIONS.md` from previous phase  
+- Updated `LL_LI.md` from previous phase
+- `docs/ROADMAP.md` (authoritative roadmap)
 
 ### Activities
 
@@ -82,7 +82,7 @@ This document defines the workflow between planning sessions (Claude Opus) and i
    - Archive references
 
 ### Output
-- Updated `ROADMAP_V2.md`
+- Updated `docs/ROADMAP.md`
 - `PHASE_XX_PLAN.md` document
 
 ---
@@ -227,11 +227,11 @@ export function ...
    - Write comprehensive tests
 
 3. **Document**
-   - Add to `ll_li.md` (lessons learned/identified)
-   - Add to `decisions.md` (implementation decisions)
-   - Update `current_state.md` (phase summary)
-   - Update `ROADMAP_V2.md` (if needed)
-   - Update `design-system.md` (if new patterns)
+   - Add to `LL_LI.md` (lessons learned/identified)
+   - Add to `DECISIONS.md` (implementation decisions)
+   - Update `CURRENT_STATE.md` (phase summary)
+   - Update `docs/ROADMAP.md` (if needed)
+   - Update `DESIGN_SYSTEM.md` (if new patterns)
 
 ### Output
 - Implemented phase (code + tests)
@@ -260,11 +260,11 @@ export function ...
 
 | File | Primary Owner | Updates |
 |------|---------------|---------|
-| `ROADMAP_V2.md` | Planning Session | Phase status, decisions, history |
-| `docs/current_state.md` | Claude Code | Phase completion summaries |
-| `docs/decisions.md` | Both | Planning confirms, Claude Code adds implementation |
-| `docs/ll_li.md` | Claude Code | All entries |
-| `docs/design-system.md` | Claude Code | New patterns |
+| `docs/ROADMAP.md` | Planning Session | Phase status, decisions, history |
+| `docs/CURRENT_STATE.md` | Claude Code | Phase completion summaries |
+| `docs/DECISIONS.md` | Both | Planning confirms, Claude Code adds implementation |
+| `docs/LL_LI.md` | Claude Code | All entries |
+| `docs/DESIGN_SYSTEM.md` | Claude Code | New patterns |
 | `PHASE_XX_PLAN.md` | Planning Session | Created, then read-only |
 
 ---
@@ -272,7 +272,7 @@ export function ...
 ## Handoff Checklist
 
 ### Planning → Claude Code
-- [ ] ROADMAP_V2.md updated with next phase as 🎯 Next
+- [ ] docs/ROADMAP.md updated with next phase as 🎯 Next
 - [ ] Phase Plan document created with:
   - [ ] All decisions numbered (D-XXX)
   - [ ] Widget architecture defined
@@ -285,7 +285,7 @@ export function ...
 - [ ] All increments implemented
 - [ ] All tests passing
 - [ ] Documentation updated:
-  - [ ] `docs/ll_li.md`
-  - [ ] `docs/decisions.md`
-  - [ ] `docs/current_state.md`
+  - [ ] `docs/LL_LI.md`
+  - [ ] `docs/DECISIONS.md`
+  - [ ] `docs/CURRENT_STATE.md`
 - [ ] Ready for next planning session

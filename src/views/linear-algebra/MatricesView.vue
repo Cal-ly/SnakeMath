@@ -158,11 +158,11 @@ print(transformed_sprite)`
         </p>
 
         <div class="grid gap-4 sm:grid-cols-2 mb-4">
-          <div class="p-4 bg-surface-alt rounded-lg border border-border">
+          <div class="p-4 rounded-lg border border-border">
             <h4 class="font-semibold text-primary mb-2">Mathematical Notation</h4>
             <MathBlock formula="A = \begin{bmatrix} a & b \\ c & d \end{bmatrix}" display />
           </div>
-          <div class="p-4 bg-surface-alt rounded-lg border border-border">
+          <div class="p-4 rounded-lg border border-border">
             <h4 class="font-semibold text-primary mb-2">Python Code</h4>
             <code class="text-sm font-mono">A = np.array([[a, b], [c, d]])</code>
           </div>
@@ -181,7 +181,8 @@ print(transformed_sprite)`
         </div>
 
         <CodeExample
-          title="Creating Matrices in Python"
+          id="linalg-matrices-basics"
+          title="matrix_basics.py"
           language="python"
           :code="matrixBasicsCode"
           :collapsible="true"
@@ -211,7 +212,7 @@ print(transformed_sprite)`
         </p>
 
         <div class="grid gap-4 sm:grid-cols-2 mb-4">
-          <div class="p-4 bg-surface-alt rounded-lg border border-border">
+          <div class="p-4 rounded-lg border border-border">
             <h4 class="font-semibold text-primary mb-2">
               <i class="fa-solid fa-rotate mr-2" aria-hidden="true" />
               Rotation
@@ -220,7 +221,7 @@ print(transformed_sprite)`
             <p class="text-sm text-text-muted mt-2">Rotates counter-clockwise by θ. Preserves lengths and area.</p>
           </div>
 
-          <div class="p-4 bg-surface-alt rounded-lg border border-border">
+          <div class="p-4 rounded-lg border border-border">
             <h4 class="font-semibold text-primary mb-2">
               <i class="fa-solid fa-expand mr-2" aria-hidden="true" />
               Scale
@@ -229,7 +230,7 @@ print(transformed_sprite)`
             <p class="text-sm text-text-muted mt-2">Stretches by sₓ horizontally and sᵧ vertically.</p>
           </div>
 
-          <div class="p-4 bg-surface-alt rounded-lg border border-border">
+          <div class="p-4 rounded-lg border border-border">
             <h4 class="font-semibold text-primary mb-2">
               <i class="fa-solid fa-italic mr-2" aria-hidden="true" />
               Shear
@@ -238,7 +239,7 @@ print(transformed_sprite)`
             <p class="text-sm text-text-muted mt-2">Slants horizontally. Area is preserved (det = 1).</p>
           </div>
 
-          <div class="p-4 bg-surface-alt rounded-lg border border-border">
+          <div class="p-4 rounded-lg border border-border">
             <h4 class="font-semibold text-primary mb-2">
               <i class="fa-solid fa-arrows-up-down mr-2" aria-hidden="true" />
               Reflection
@@ -249,7 +250,8 @@ print(transformed_sprite)`
         </div>
 
         <CodeExample
-          title="Transforming Vectors with Matrices"
+          id="linalg-matrices-transform"
+          title="matrix_transform.py"
           language="python"
           :code="transformVectorCode"
           :collapsible="true"
@@ -268,7 +270,7 @@ print(transformed_sprite)`
           The <strong>determinant</strong> of a 2×2 matrix tells you how the transformation affects area:
         </p>
 
-        <div class="p-4 bg-surface-alt rounded-lg border border-border mb-4">
+        <div class="p-4 rounded-lg border border-border mb-4">
           <MathBlock formula="\det(A) = \det\begin{bmatrix} a & b \\ c & d \end{bmatrix} = ad - bc" display />
         </div>
 
@@ -311,7 +313,8 @@ print(transformed_sprite)`
         </div>
 
         <CodeExample
-          title="Determinant and Area"
+          id="linalg-matrices-determinant"
+          title="determinant.py"
           language="python"
           :code="determinantCode"
           :collapsible="true"
@@ -343,7 +346,8 @@ print(transformed_sprite)`
         </div>
 
         <CodeExample
-          title="Composing Transformations"
+          id="linalg-matrices-composition"
+          title="composition.py"
           language="python"
           :code="compositionCode"
           :collapsible="true"
@@ -363,7 +367,7 @@ print(transformed_sprite)`
           Not all matrices have inverses — a matrix is invertible if and only if its determinant is non-zero.
         </p>
 
-        <div class="p-4 bg-surface-alt rounded-lg border border-border mb-4">
+        <div class="p-4 rounded-lg border border-border mb-4">
           <MathBlock
             formula="A^{-1} = \frac{1}{ad-bc} \begin{bmatrix} d & -b \\ -c & a \end{bmatrix}"
             display
@@ -371,7 +375,8 @@ print(transformed_sprite)`
         </div>
 
         <CodeExample
-          title="Matrix Inverse in Python"
+          id="linalg-matrices-inverse"
+          title="matrix_inverse.py"
           language="python"
           :code="inverseCode"
           :collapsible="true"
@@ -431,7 +436,8 @@ print(transformed_sprite)`
         </div>
 
         <CodeExample
-          title="2D Graphics Transformations"
+          id="linalg-matrices-graphics"
+          title="graphics_transforms.py"
           language="python"
           :code="graphicsCode"
           :collapsible="true"

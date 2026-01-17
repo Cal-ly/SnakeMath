@@ -122,18 +122,19 @@ print(f"king-apple: {cosine_similarity(king, apple):.3f}")  # ~0.43 (not similar
         </p>
 
         <div class="grid gap-4 sm:grid-cols-2 mb-4">
-          <div class="p-4 bg-surface-alt rounded-lg border border-border">
+          <div class="p-4 rounded-lg border border-border">
             <h4 class="font-semibold text-primary mb-2">Mathematical Notation</h4>
             <MathBlock formula="\vec{v} = \begin{bmatrix} 3 \\ 4 \end{bmatrix}" display />
           </div>
-          <div class="p-4 bg-surface-alt rounded-lg border border-border">
+          <div class="p-4 rounded-lg border border-border">
             <h4 class="font-semibold text-primary mb-2">Python Code</h4>
             <code class="text-sm font-mono">v = np.array([3, 4])</code>
           </div>
         </div>
 
         <CodeExample
-          title="Creating Vectors in Python"
+          id="linalg-vectors-basics"
+          title="vector_basics.py"
           language="python"
           :code="vectorBasicsCode"
           :collapsible="true"
@@ -163,7 +164,7 @@ print(f"king-apple: {cosine_similarity(king, apple):.3f}")  # ~0.43 (not similar
           it's the "parallelogram law" — place vectors head-to-tail.
         </p>
 
-        <div class="p-4 bg-surface-alt rounded-lg border border-border mb-4">
+        <div class="p-4 rounded-lg border border-border mb-4">
           <MathBlock
             formula="\vec{a} + \vec{b} = \begin{bmatrix} a_1 + b_1 \\ a_2 + b_2 \end{bmatrix}"
             display
@@ -171,7 +172,8 @@ print(f"king-apple: {cosine_similarity(king, apple):.3f}")  # ~0.43 (not similar
         </div>
 
         <CodeExample
-          title="Vector Operations in Python"
+          id="linalg-vectors-operations"
+          title="vector_operations.py"
           language="python"
           :code="vectorOpsCode"
           :collapsible="true"
@@ -192,11 +194,11 @@ print(f"king-apple: {cosine_similarity(king, apple):.3f}")  # ~0.43 (not similar
         </p>
 
         <div class="grid gap-4 sm:grid-cols-2 mb-4">
-          <div class="p-4 bg-surface-alt rounded-lg border border-border">
+          <div class="p-4 rounded-lg border border-border">
             <h4 class="font-semibold text-text-muted text-sm mb-2">Algebraic Form</h4>
             <MathBlock formula="\vec{a} \cdot \vec{b} = a_1 b_1 + a_2 b_2" display />
           </div>
-          <div class="p-4 bg-surface-alt rounded-lg border border-border">
+          <div class="p-4 rounded-lg border border-border">
             <h4 class="font-semibold text-text-muted text-sm mb-2">Geometric Form</h4>
             <MathBlock formula="\vec{a} \cdot \vec{b} = |\vec{a}| |\vec{b}| \cos\theta" display />
           </div>
@@ -215,7 +217,8 @@ print(f"king-apple: {cosine_similarity(king, apple):.3f}")  # ~0.43 (not similar
         </div>
 
         <CodeExample
-          title="Dot Product in Python"
+          id="linalg-vectors-dotproduct"
+          title="dot_product.py"
           language="python"
           :code="dotProductCode"
           :collapsible="true"
@@ -236,18 +239,19 @@ print(f"king-apple: {cosine_similarity(king, apple):.3f}")  # ~0.43 (not similar
         </p>
 
         <div class="grid gap-4 sm:grid-cols-2 mb-4">
-          <div class="p-4 bg-surface-alt rounded-lg border border-border">
+          <div class="p-4 rounded-lg border border-border">
             <h4 class="font-semibold text-text-muted text-sm mb-2">Magnitude</h4>
             <MathBlock formula="|\vec{v}| = \sqrt{x^2 + y^2}" display />
           </div>
-          <div class="p-4 bg-surface-alt rounded-lg border border-border">
+          <div class="p-4 rounded-lg border border-border">
             <h4 class="font-semibold text-text-muted text-sm mb-2">Unit Vector</h4>
             <MathBlock formula="\hat{v} = \frac{\vec{v}}{|\vec{v}|}" display />
           </div>
         </div>
 
         <CodeExample
-          title="Magnitude and Normalization"
+          id="linalg-vectors-magnitude"
+          title="magnitude_normalize.py"
           language="python"
           :code="magnitudeCode"
           :collapsible="true"
@@ -266,7 +270,7 @@ print(f"king-apple: {cosine_similarity(king, apple):.3f}")  # ~0.43 (not similar
           The angle between two vectors can be found by rearranging the geometric dot product formula:
         </p>
 
-        <div class="p-4 bg-surface-alt rounded-lg border border-border mb-4">
+        <div class="p-4 rounded-lg border border-border mb-4">
           <MathBlock
             formula="\theta = \arccos\left(\frac{\vec{a} \cdot \vec{b}}{|\vec{a}| |\vec{b}|}\right)"
             display
@@ -274,7 +278,8 @@ print(f"king-apple: {cosine_similarity(king, apple):.3f}")  # ~0.43 (not similar
         </div>
 
         <CodeExample
-          title="Finding the Angle"
+          id="linalg-vectors-angle"
+          title="vector_angle.py"
           language="python"
           :code="angleCode"
           :collapsible="true"
@@ -335,7 +340,8 @@ print(f"king-apple: {cosine_similarity(king, apple):.3f}")  # ~0.43 (not similar
         </div>
 
         <CodeExample
-          title="Cosine Similarity for Semantic Search"
+          id="linalg-vectors-cosinesim"
+          title="cosine_similarity.py"
           language="python"
           :code="mlApplicationsCode"
           :collapsible="true"

@@ -123,7 +123,7 @@ src/
 
 After completing all increments, update the following documents:
 
-### 1. Lessons Learned / Lessons Identified (`docs/ll_li.md`)
+### 1. Lessons Learned / Lessons Identified (`docs/LL_LI.md`)
 
 Add a new section for the phase:
 
@@ -154,7 +154,7 @@ Add a new section for the phase:
 2. Summary point
 ```
 
-### 2. Decisions (`docs/decisions.md`)
+### 2. Decisions (`docs/DECISIONS.md`)
 
 Add decisions made during implementation:
 
@@ -174,7 +174,7 @@ Add decisions made during implementation:
 ```code example if helpful```
 ```
 
-### 3. Current State (`docs/current_state.md`)
+### 3. Current State (`docs/CURRENT_STATE.md`)
 
 Update the following sections:
 
@@ -185,7 +185,7 @@ Update the following sections:
 - **Key Files**: Add new important files
 - **Phase Completion Summary**: Add detailed summary
 
-### 4. Roadmap (`ROADMAP_V2.md`)
+### 4. Roadmap (`docs/ROADMAP.md`)
 
 Update if needed:
 
@@ -195,7 +195,7 @@ Update if needed:
 - Decision Log: Add any roadmap-level decisions (R-XXX)
 - Document History: Add completion entry
 
-### 5. Design System (`docs/design-system.md`)
+### 5. Design System (`docs/DESIGN_SYSTEM.md`)
 
 Update if new patterns were established:
 
@@ -235,11 +235,11 @@ Before declaring phase complete:
 - [ ] Widget URL sync works
 - [ ] Mobile responsive
 - [ ] Documentation updated:
-  - [ ] `docs/ll_li.md`
-  - [ ] `docs/decisions.md`
-  - [ ] `docs/current_state.md`
-  - [ ] `ROADMAP_V2.md`
-  - [ ] `docs/design-system.md` (if applicable)
+  - [ ] `docs/LL_LI.md`
+  - [ ] `docs/DECISIONS.md`
+  - [ ] `docs/CURRENT_STATE.md`
+  - [ ] `docs/ROADMAP.md`
+  - [ ] `docs/DESIGN_SYSTEM.md` (if applicable)
 
 ---
 
@@ -247,14 +247,15 @@ Before declaring phase complete:
 
 | Purpose | Path |
 |---------|------|
-| Phase Plans | Provided in conversation or `/docs/phases/` |
-| Roadmap | `ROADMAP_V2.md` |
-| Current State | `docs/current_state.md` |
-| Decisions | `docs/decisions.md` |
-| Lessons Learned | `docs/ll_li.md` |
-| Design System | `docs/design-system.md` |
+| Phase Plans | Provided in conversation |
+| Roadmap | `docs/ROADMAP.md` |
+| Current State | `docs/CURRENT_STATE.md` |
+| Decisions | `docs/DECISIONS.md` |
+| Lessons Learned | `docs/LL_LI.md` |
+| Design System | `docs/DESIGN_SYSTEM.md` |
 | Archive Content | `archive/snake-math/docs/` |
 | Archive Components | `archive/snake-math/docs/.vitepress/theme/components/` |
+| Old SnakeMath Docs | `archive/SnakeMath/` |
 | Navigation Data | `src/data/navigation.ts` |
 | Routes | `src/router/index.ts` |
 | Math Types | `src/types/math.ts` |

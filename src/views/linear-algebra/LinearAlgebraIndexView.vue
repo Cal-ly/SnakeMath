@@ -37,7 +37,7 @@ const topic = topics.find((t) => t.id === 'linear-algebra')!
       <!-- Key Concepts Preview -->
       <ContentSection id="concepts" title="Core Concepts" icon="fa-solid fa-cubes">
         <div class="grid gap-4 sm:grid-cols-2">
-          <div class="p-4 bg-surface-alt rounded-lg border border-border">
+          <div class="p-4 rounded-lg border border-border">
             <h4 class="font-semibold text-primary mb-2">
               <i class="fa-solid fa-arrow-right mr-2" aria-hidden="true" />
               Vectors
@@ -48,7 +48,7 @@ const topic = topics.find((t) => t.id === 'linear-algebra')!
             <MathBlock formula="\vec{v} = \begin{bmatrix} x \\ y \end{bmatrix}" />
           </div>
 
-          <div class="p-4 bg-surface-alt rounded-lg border border-border">
+          <div class="p-4 rounded-lg border border-border">
             <h4 class="font-semibold text-primary mb-2">
               <i class="fa-solid fa-table-cells mr-2" aria-hidden="true" />
               Matrices
@@ -59,7 +59,7 @@ const topic = topics.find((t) => t.id === 'linear-algebra')!
             <MathBlock formula="A = \begin{bmatrix} a & b \\ c & d \end{bmatrix}" />
           </div>
 
-          <div class="p-4 bg-surface-alt rounded-lg border border-border">
+          <div class="p-4 rounded-lg border border-border">
             <h4 class="font-semibold text-primary mb-2">
               <i class="fa-solid fa-circle-dot mr-2" aria-hidden="true" />
               Dot Product
@@ -70,7 +70,7 @@ const topic = topics.find((t) => t.id === 'linear-algebra')!
             <MathBlock formula="\vec{a} \cdot \vec{b} = a_1 b_1 + a_2 b_2" />
           </div>
 
-          <div class="p-4 bg-surface-alt rounded-lg border border-border">
+          <div class="p-4 rounded-lg border border-border">
             <h4 class="font-semibold text-primary mb-2">
               <i class="fa-solid fa-rotate mr-2" aria-hidden="true" />
               Transformations
@@ -133,7 +133,7 @@ const topic = topics.find((t) => t.id === 'linear-algebra')!
           NumPy is the Python library for linear algebra. Everything we explore visually translates
           directly to NumPy code:
         </p>
-        <div class="p-4 bg-surface-alt rounded-lg border border-border font-mono text-sm">
+        <div class="p-4 rounded-lg border border-border font-mono text-sm">
           <pre class="text-text-secondary"><span class="text-blue-500">import</span> numpy <span class="text-blue-500">as</span> np
 
 <span class="text-text-muted"># Vectors</span>

@@ -120,7 +120,7 @@ const router = createRouter({
       component: () => import('@/views/NotFoundView.vue'),
     },
   ],
-  scrollBehavior(to, _from, savedPosition) {
+  scrollBehavior(to, from, savedPosition) {
     // Handle hash anchors
     if (to.hash) {
       return {
@@ -131,6 +131,10 @@ const router = createRouter({
     // Restore scroll position on back/forward
     if (savedPosition) {
       return savedPosition
+    }
+    // Don't scroll when only query params change (same path)
+    if (to.path === from.path) {
+      return false
     }
     // Scroll to top on new navigation
     return { top: 0 }

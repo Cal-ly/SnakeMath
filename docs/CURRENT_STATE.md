@@ -107,8 +107,8 @@ npm run build        # Production build
 | Project guide | `CLAUDE.md` |
 | Testing docs | `docs/TESTING.md` |
 | Visual testing docs | `docs/VISUAL_TESTING.md` |
-| Decisions | `docs/decisions.md` |
-| Lessons learned | `docs/ll_li.md` |
+| Decisions | `docs/DECISIONS.md` |
+| Lessons learned | `docs/LL_LI.md` |
 | Routes | `src/router/index.ts` |
 | Navigation data | `src/data/navigation.ts` |
 | Type definitions | `src/types/index.ts` |
@@ -158,8 +158,8 @@ Phase completion summaries are in `docs/archive/`:
 
 ## How to Resume Development
 
-1. **Check todo list**: `docs/todo.md` for known issues and ideas
-2. **Read decisions**: `docs/decisions.md` for architectural context
+1. **Check todo list**: `docs/TODO.md` for known issues and ideas
+2. **Read decisions**: `docs/DECISIONS.md` for architectural context
 3. **Start dev server**: `npm run dev`
 4. **Verify before commits**:
    ```bash
