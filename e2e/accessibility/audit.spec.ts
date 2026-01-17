@@ -14,6 +14,7 @@ const pagesToAudit = [
   { name: 'Unit Circle', path: `${BASE}/trigonometry/unit-circle` },
   { name: 'Linear Algebra Index', path: `${BASE}/linear-algebra` },
   { name: 'Vectors', path: `${BASE}/linear-algebra/vectors` },
+  { name: 'Matrices', path: `${BASE}/linear-algebra/matrices` },
   { name: 'Statistics Index', path: `${BASE}/statistics` },
   { name: 'Descriptive Statistics', path: `${BASE}/statistics/descriptive` },
 ]
@@ -219,6 +220,66 @@ test.describe('Accessibility - Keyboard Navigation @a11y', () => {
 
   test('Vector operations preset selector is keyboard accessible', async ({ page }) => {
     await page.goto(`${BASE}/linear-algebra/vectors`)
+    await page.waitForLoadState('networkidle')
+
+    // Tab to reach preset selector
+    let foundSelector = false
+    for (let i = 0; i < 30; i++) {
+      await page.keyboard.press('Tab')
+      const focused = page.locator(':focus')
+      const testId = await focused.getAttribute('data-testid')
+      if (testId === 'preset-select') {
+        foundSelector = true
+        break
+      }
+    }
+
+    expect(foundSelector).toBe(true)
+  })
+
+  test('Matrix transformation type buttons are keyboard accessible', async ({ page }) => {
+    await page.goto(`${BASE}/linear-algebra/matrices`)
+    await page.waitForLoadState('networkidle')
+
+    // Tab to reach transformation buttons
+    let foundButton = false
+    for (let i = 0; i < 30; i++) {
+      await page.keyboard.press('Tab')
+      const focused = page.locator(':focus')
+      const testId = await focused.getAttribute('data-testid')
+      if (testId?.startsWith('transform-')) {
+        foundButton = true
+        break
+      }
+    }
+
+    expect(foundButton).toBe(true)
+  })
+
+  test('Matrix angle slider is keyboard accessible', async ({ page }) => {
+    await page.goto(`${BASE}/linear-algebra/matrices`)
+    await page.waitForLoadState('networkidle')
+
+    // Click rotation first to show slider
+    await page.locator('[data-testid="transform-rotation"]').click()
+
+    // Tab to reach angle slider
+    let foundSlider = false
+    for (let i = 0; i < 30; i++) {
+      await page.keyboard.press('Tab')
+      const focused = page.locator(':focus')
+      const testId = await focused.getAttribute('data-testid')
+      if (testId === 'angle-slider') {
+        foundSlider = true
+        break
+      }
+    }
+
+    expect(foundSlider).toBe(true)
+  })
+
+  test('Matrix preset selector is keyboard accessible', async ({ page }) => {
+    await page.goto(`${BASE}/linear-algebra/matrices`)
     await page.waitForLoadState('networkidle')
 
     // Tab to reach preset selector

@@ -188,3 +188,56 @@ export type VectorOperation =
   | 'angle'
   | 'scalar'
   | 'normalize'
+
+// ============================================================================
+// Matrix Types (Phase 12)
+// ============================================================================
+
+/**
+ * 2×2 Matrix for 2D linear transformations.
+ * Represented as: | a  b |
+ *                 | c  d |
+ */
+export interface Matrix2x2 {
+  /** Element at row 0, column 0 */
+  a: number
+  /** Element at row 0, column 1 */
+  b: number
+  /** Element at row 1, column 0 */
+  c: number
+  /** Element at row 1, column 1 */
+  d: number
+}
+
+/**
+ * Types of 2D linear transformations.
+ */
+export type TransformationType =
+  | 'identity'
+  | 'rotation'
+  | 'scale'
+  | 'uniformScale'
+  | 'shearX'
+  | 'shearY'
+  | 'reflectX'
+  | 'reflectY'
+  | 'reflectOrigin'
+  | 'custom'
+
+/**
+ * A preset transformation with its associated matrix and metadata.
+ */
+export interface TransformationPreset {
+  /** Unique identifier */
+  id: string
+  /** Display name */
+  name: string
+  /** Brief description of the transformation */
+  description: string
+  /** Classification of transformation type */
+  type: TransformationType
+  /** The 2×2 transformation matrix */
+  matrix: Matrix2x2
+  /** Optional parameters used to generate this matrix */
+  parameters?: Record<string, number>
+}

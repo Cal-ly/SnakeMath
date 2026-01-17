@@ -142,6 +142,13 @@ export const topics: NavTopic[] = [
         path: '/linear-algebra/vectors',
         faIcon: 'fa-solid fa-arrow-right',
       },
+      {
+        id: 'matrices',
+        title: 'Matrices',
+        description: '2D transformations and operations',
+        path: '/linear-algebra/matrices',
+        faIcon: 'fa-solid fa-table-cells',
+      },
     ],
   },
   {

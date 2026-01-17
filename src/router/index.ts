@@ -97,6 +97,11 @@ const router = createRouter({
       name: 'linear-algebra-vectors',
       component: () => import('@/views/linear-algebra/VectorsView.vue'),
     },
+    {
+      path: '/linear-algebra/matrices',
+      name: 'linear-algebra-matrices',
+      component: () => import('@/views/linear-algebra/MatricesView.vue'),
+    },
     // Statistics section
     {
       path: '/statistics',
