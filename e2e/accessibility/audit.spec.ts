@@ -12,6 +12,8 @@ const pagesToAudit = [
   { name: 'Summation', path: `${BASE}/algebra/summation` },
   { name: 'Trigonometry Index', path: `${BASE}/trigonometry` },
   { name: 'Unit Circle', path: `${BASE}/trigonometry/unit-circle` },
+  { name: 'Linear Algebra Index', path: `${BASE}/linear-algebra` },
+  { name: 'Vectors', path: `${BASE}/linear-algebra/vectors` },
   { name: 'Statistics Index', path: `${BASE}/statistics` },
   { name: 'Descriptive Statistics', path: `${BASE}/statistics/descriptive` },
 ]
@@ -194,6 +196,44 @@ test.describe('Accessibility - Keyboard Navigation @a11y', () => {
     }
 
     expect(foundSlider).toBe(true)
+  })
+
+  test('Vector operations widget inputs are keyboard accessible', async ({ page }) => {
+    await page.goto(`${BASE}/linear-algebra/vectors`)
+    await page.waitForLoadState('networkidle')
+
+    // Tab to reach vector A x input
+    let foundInput = false
+    for (let i = 0; i < 30; i++) {
+      await page.keyboard.press('Tab')
+      const focused = page.locator(':focus')
+      const testId = await focused.getAttribute('data-testid')
+      if (testId === 'vector-a-x') {
+        foundInput = true
+        break
+      }
+    }
+
+    expect(foundInput).toBe(true)
+  })
+
+  test('Vector operations preset selector is keyboard accessible', async ({ page }) => {
+    await page.goto(`${BASE}/linear-algebra/vectors`)
+    await page.waitForLoadState('networkidle')
+
+    // Tab to reach preset selector
+    let foundSelector = false
+    for (let i = 0; i < 30; i++) {
+      await page.keyboard.press('Tab')
+      const focused = page.locator(':focus')
+      const testId = await focused.getAttribute('data-testid')
+      if (testId === 'preset-select') {
+        foundSelector = true
+        break
+      }
+    }
+
+    expect(foundSelector).toBe(true)
   })
 })
 

@@ -86,6 +86,17 @@ const router = createRouter({
       name: 'trigonometry-unit-circle',
       component: () => import('@/views/trigonometry/UnitCircleView.vue'),
     },
+    // Linear Algebra section
+    {
+      path: '/linear-algebra',
+      name: 'linear-algebra',
+      component: () => import('@/views/linear-algebra/LinearAlgebraIndexView.vue'),
+    },
+    {
+      path: '/linear-algebra/vectors',
+      name: 'linear-algebra-vectors',
+      component: () => import('@/views/linear-algebra/VectorsView.vue'),
+    },
     // Statistics section
     {
       path: '/statistics',

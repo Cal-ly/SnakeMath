@@ -1605,3 +1605,160 @@ const fullFormula = computed(() => {
 <!-- After (works correctly) -->
 <li>m &lt; 0: line goes down</li>
 ```
+
+---
+
+## Phase 11 Decisions
+
+### D-088: 2D Vectors Only (No 3D)
+**Decision**: Limit vector visualization and operations to 2D vectors only.
+
+**Rationale**:
+- 2D is easier to visualize and understand
+- Core concepts (addition, dot product, angles) transfer directly to higher dimensions
+- 3D visualization requires more complex rendering (perspective, rotation controls)
+- Keeps the widget focused on fundamental concepts
+- 3D can be added in a future phase if needed
+
+**Trade-off**: Cannot demonstrate cross product (3D-specific) or concepts unique to higher dimensions.
+
+---
+
+### D-089: Widget Defaults to Addition Operation
+**Decision**: The VectorOperations widget starts with the "Add" operation selected by default.
+
+**Rationale**:
+- Addition is the most intuitive vector operation
+- Parallelogram law provides immediate visual feedback
+- Natural starting point for exploration
+- Most users will understand A + B conceptually
+
+**Implementation**:
+```typescript
+const operation = ref<VectorOperation>('add')
+```
+
+---
+
+### D-090: Angles Displayed in Degrees with Radians in Parentheses
+**Decision**: Show angles primarily in degrees with radians as supplementary information.
+
+**Rationale**:
+- Degrees are more intuitive for most users
+- Programmers may need radians for code (Math.atan2 returns radians)
+- Showing both educates users about the relationship
+- Consistent with UnitCircleExplorer pattern
+
+**Implementation**:
+```vue
+<span>45° (0.79 rad)</span>
+```
+
+---
+
+### D-091: Fixed Coordinate System Range (-5 to +5)
+**Decision**: Use a fixed coordinate system range of -5 to +5 for both axes.
+
+**Rationale**:
+- Predictable, consistent visual space
+- Inputs are clamped to this range
+- Grid lines and labels remain readable
+- Avoids complexity of auto-scaling
+- Educational focus: understand vectors in a bounded space
+
+**Trade-off**: Cannot visualize very large vectors. Acceptable for educational purposes.
+
+**Implementation**:
+```typescript
+export const VECTOR_COORDINATE_RANGE = { min: -5, max: 5 }
+```
+
+---
+
+### D-092: Composable Pattern for Vector State (useVectors)
+**Decision**: Create a dedicated `useVectors` composable for vector widget state management.
+
+**Rationale**:
+- Consistent with established patterns (useUnitCircle, useStatistics)
+- Separates state logic from presentation
+- Supports optional URL synchronization
+- Computed properties handle derived values (magnitudes, relationships, results)
+- Testable independently of components
+
+**Implementation**:
+```typescript
+export function useVectors(options: UseVectorsOptions = {}) {
+  // State
+  const vectorA = ref<Vector2D>({ x: 3, y: 2 })
+  const vectorB = ref<Vector2D>({ x: 1, y: 4 })
+  const operation = ref<VectorOperation>('add')
+  const scalar = ref(2)
+
+  // Computed
+  const operationResult = computed(() => calculateResult())
+  const areParallel = computed(() => isParallel(vectorA.value, vectorB.value))
+  const arePerpendicular = computed(() => isPerpendicular(vectorA.value, vectorB.value))
+
+  // URL sync
+  if (options.syncUrl) { ... }
+
+  return { vectorA, vectorB, operation, scalar, operationResult, ... }
+}
+```
+
+---
+
+### D-093: Modular Widget Component Architecture
+**Decision**: Build VectorOperations from discrete sub-components following established patterns.
+
+**Rationale**:
+- Each component has single responsibility
+- Easier to test and maintain
+- Components can be reused elsewhere
+- Consistent with QuadraticExplorer, StatisticsCalculator patterns
+
+**Structure**:
+```
+VectorOperations/ (orchestrator)
+├── VectorInputPanel.vue (coordinate inputs with color coding)
+├── VectorCanvas.vue (SVG visualization)
+├── OperationSelector.vue (operation buttons)
+├── ResultDisplay.vue (results with badges)
+├── VectorPresets.vue (preset selector + swap button)
+└── index.ts (exports)
+```
+
+---
+
+### D-094: Vector Presets with Educational Context
+**Decision**: Provide 5 presets demonstrating key vector relationships.
+
+**Presets**:
+| ID | Name | Vectors | Purpose |
+|----|------|---------|---------|
+| unit-vectors | Unit Vectors | î, ĵ | Standard basis vectors |
+| perpendicular | Perpendicular | (3,0), (0,4) | Demonstrate dot product = 0 |
+| parallel | Parallel | (2,1), (4,2) | Same direction, different magnitude |
+| opposite | Opposite | (3,2), (-3,-2) | Parallel but opposite direction |
+| arbitrary | Arbitrary | (3,2), (1,4) | General case for exploration |
+
+**Rationale**:
+- Each preset demonstrates a specific mathematical concept
+- Unit vectors show basis concept
+- Perpendicular preset makes dot product = 0 obvious
+- Parallel/opposite show scalar relationships
+- Covers common educational scenarios
+
+---
+
+### D-095: Parallelogram Law Visualization for Addition
+**Decision**: Show dashed parallelogram lines when displaying vector addition results.
+
+**Rationale**:
+- Visual proof of the parallelogram law
+- Shows A + B geometrically as diagonal of parallelogram
+- Demonstrates commutativity visually
+- Common in educational materials
+- Enhances understanding beyond just showing the result vector
+
+**Implementation**: Dashed lines from tip of A to result and tip of B to result when operation is "add".

@@ -612,7 +612,7 @@ print(f"Normalized mean: {normalized.mean():.4f}, std: {normalized.std():.4f}")`
                 <td class="p-2 text-red-600 dark:text-red-400">No</td>
               </tr>
               <tr class="border-b border-border/50">
-                <td class="p-2 font-medium">IQR</td>
+                <td class="p-2 font-medium">Interquartile Range (IQR)</td>
                 <td class="p-2">Middle 50% spread</td>
                 <td class="p-2 text-green-700 dark:text-green-400">Yes</td>
               </tr>

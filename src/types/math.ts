@@ -157,3 +157,34 @@ export interface ProductResult {
  * Identifier for product preset formulas
  */
 export type ProductPresetId = 'factorial' | 'evenNumbers' | 'oddNumbers' | 'powers' | 'fractions'
+
+/**
+ * 2D Vector representation
+ */
+export interface Vector2D {
+  x: number
+  y: number
+}
+
+/**
+ * Preset vector pair for educational demonstrations
+ */
+export interface VectorPreset {
+  id: string
+  name: string
+  description: string
+  vectorA: Vector2D
+  vectorB: Vector2D
+}
+
+/**
+ * Available vector operations
+ */
+export type VectorOperation =
+  | 'add'
+  | 'subtract'
+  | 'dot'
+  | 'magnitude'
+  | 'angle'
+  | 'scalar'
+  | 'normalize'

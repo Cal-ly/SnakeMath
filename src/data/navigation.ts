@@ -129,6 +129,22 @@ export const topics: NavTopic[] = [
     ],
   },
   {
+    id: 'linear-algebra',
+    title: 'Linear Algebra',
+    description: 'Vectors, matrices, and the math of machine learning',
+    faIcon: 'fa-solid fa-arrows-up-down-left-right',
+    path: '/linear-algebra',
+    subtopics: [
+      {
+        id: 'vectors',
+        title: 'Vectors',
+        description: 'Points, directions, and operations in 2D space',
+        path: '/linear-algebra/vectors',
+        faIcon: 'fa-solid fa-arrow-right',
+      },
+    ],
+  },
+  {
     id: 'statistics',
     title: 'Statistics',
     description: 'Describing and analyzing data through numbers',

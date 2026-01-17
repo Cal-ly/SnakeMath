@@ -1,0 +1,6 @@
+export { default as VectorOperations } from './VectorOperations.vue'
+export { default as VectorInputPanel } from './VectorInputPanel.vue'
+export { default as VectorCanvas } from './VectorCanvas.vue'
+export { default as OperationSelector } from './OperationSelector.vue'
+export { default as ResultDisplay } from './ResultDisplay.vue'
+export { default as VectorPresets } from './VectorPresets.vue'

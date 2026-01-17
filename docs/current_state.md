@@ -5,13 +5,13 @@ This document outlines the current state of the project for easy resumption afte
 
 ---
 
-## Current Status: Post-Phase 10 - Algebra Expansion
+## Current Status: Phase 11 Complete - Linear Algebra Vectors
 
 **Last Updated**: 2026-01-17
 
 ### Project Summary
 
-SnakeMath is an educational mathematics website for programmers. Ten phases of development have established:
+SnakeMath is an educational mathematics website for programmers. Eleven phases of development have established:
 
 | Phase | Focus | Key Deliverables | Status |
 |-------|-------|------------------|--------|
@@ -25,6 +25,7 @@ SnakeMath is an educational mathematics website for programmers. Ten phases of d
 | 8 | Exponentials & Logarithms | ExponentialExplorer, complexity comparison | Complete |
 | 9 | Trigonometry + Testing Refinement | UnitCircleExplorer, WaveGraphs, tiered CI | Complete |
 | 10 | Statistics Foundation | StatisticsCalculator, histogram, box plot | Complete |
+| 11 | Linear Algebra — Vectors | VectorOperations, SVG canvas, presets | Complete |
 
 ### What's Live
 
@@ -38,13 +39,14 @@ SnakeMath is an educational mathematics website for programmers. Ten phases of d
   - Order of Operations (PEMDAS)
 - `/algebra` - Five subtopics:
   - Summation notation (SummationExplorer widget)
-  - **Product Notation (Π)** - factorial, permutations, combinations
-  - **Linear Equations** - single equations, systems, NumPy integration
+  - Product Notation (Π) - factorial, permutations, combinations
+  - Linear Equations - single equations, systems, NumPy integration
   - Quadratic Functions (QuadraticExplorer widget)
   - Exponentials & Logarithms (ExponentialExplorer widget)
 - `/trigonometry` - Unit Circle (UnitCircleExplorer widget with WaveGraphs)
-- `/statistics` - **New section**:
-  - **Descriptive Statistics (StatisticsCalculator widget with histogram & box plot)**
+- `/linear-algebra` - **New section**:
+  - **Vectors (VectorOperations widget with SVG canvas)**
+- `/statistics` - Descriptive Statistics (StatisticsCalculator widget with histogram & box plot)
 
 **Interactive Widgets**:
 - **NumberTypeExplorer**: Classify numbers, Venn diagram, number line, set membership
@@ -54,6 +56,7 @@ SnakeMath is an educational mathematics website for programmers. Ten phases of d
 - **ExponentialExplorer**: Function explorer tab (exp/log plotting, growth/decay analysis), complexity comparison tab (O(1) to O(2^n))
 - **UnitCircleExplorer**: Angle controls (slider, input), special angle buttons, SVG unit circle with point/arc/projections, trig values display, quadrant/reference angle info, optional wave graphs (sin θ, cos θ)
 - **StatisticsCalculator**: Dataset presets, custom data input, central tendency (mean/median/mode), spread (variance/std dev/range), quartiles (Q1/Q2/Q3/IQR), outlier detection (Tukey's fences), skewness analysis, histogram with adjustable bins, box plot visualization
+- **VectorOperations**: Vector inputs with coordinate sliders, 7 operations (add, subtract, dot product, magnitude, angle, scalar multiply, normalize), SVG canvas with grid/arrows/parallelogram law, 5 educational presets, parallel/perpendicular badges, URL state sync
 
 **Visualization Components**:
 - **CoordinateSystem**: Reusable SVG coordinate system with axes, grid, labels
@@ -64,7 +67,7 @@ SnakeMath is an educational mathematics website for programmers. Ten phases of d
 - **BoxPlotChart**: SVG box plot with quartiles, whiskers, and outlier markers
 
 **Testing Infrastructure**:
-- 397+ unit tests (Vitest) - including product notation utilities (22 new tests)
+- 475+ unit tests (Vitest) - including 78 vector utility tests
 - E2E tests (Playwright) with tiered CI approach
 - Visual regression tests (Playwright screenshot comparison) - local only
 - WCAG 2.1 AA accessibility audits via axe-core
@@ -111,6 +114,8 @@ npm run build        # Production build
 | Statistics utilities | `src/utils/math/statistics.ts` |
 | Statistics composable | `src/composables/useStatistics.ts` |
 | Product utilities | `src/utils/math/product.ts` |
+| Vector utilities | `src/utils/math/vector.ts` |
+| Vector composable | `src/composables/useVectors.ts` |
 
 ### Archived Documentation
 Phase completion summaries are in `docs/archive/`:
@@ -122,8 +127,8 @@ Phase completion summaries are in `docs/archive/`:
 
 ## Test Coverage
 
-### Unit Tests (397+ tests)
-- Math utilities (number classification, parsing, quadratic, exponential, trigonometry, statistics, product functions)
+### Unit Tests (475+ tests)
+- Math utilities (number classification, parsing, quadratic, exponential, trigonometry, statistics, product, vector functions)
 - Data validation (symbols, navigation)
 - Component logic (via composables)
 
@@ -133,8 +138,9 @@ Phase completion summaries are in `docs/archive/`:
 - SummationExplorer (presets, bounds, animation, URL sync)
 - QuadraticExplorer (presets, coefficients, equation forms, roots)
 - UnitCircleExplorer (angle controls, special angles, trig values, wave graphs)
-- **StatisticsCalculator** (datasets, custom data, histograms, box plots, URL sync)
-- Accessibility (WCAG 2.1 AA audits for all pages including statistics)
+- StatisticsCalculator (datasets, custom data, histograms, box plots, URL sync)
+- **VectorOperations** (inputs, operations, presets, canvas, URL sync)
+- Accessibility (WCAG 2.1 AA audits for all pages including linear algebra)
 
 ### Visual Regression Tests (Local Only)
 - All pages baseline screenshots
@@ -169,6 +175,67 @@ Phase completion summaries are in `docs/archive/`:
 
 - **Chunk Size Warnings**: Shiki produces large language chunks (lazy-loaded, acceptable)
 - **v-html Warnings**: ESLint warns about v-html in MathBlock/CodeExample (expected, trusted content)
+
+---
+
+## Phase 11 Completion Summary
+
+Phase 11 accomplished:
+
+1. **Vector Math Utilities** (11A)
+   - Created `src/utils/math/vector.ts` with 78 comprehensive tests
+   - Types: `Vector2D`, `VectorPreset`, `VectorOperation`
+   - Functions: `vectorAdd`, `vectorSubtract`, `scalarMultiply`, `dotProduct`, `magnitude`, `normalize`, `angleBetween`
+   - Functions: `isZeroVector`, `isParallel`, `isPerpendicular`, `isValidVector`, `clampVectorToRange`
+   - Constants: `VECTOR_TOLERANCE = 1e-10`, `VECTOR_COORDINATE_RANGE = { min: -5, max: 5 }`
+   - 5 presets: unit-vectors, perpendicular, parallel, opposite, arbitrary
+
+2. **VectorOperations Widget Core** (11B)
+   - Created `src/composables/useVectors.ts` for state management + URL sync
+   - Built modular component architecture in `src/components/widgets/VectorOperations/`:
+     - `VectorOperations.vue` - main orchestrator component
+     - `VectorInputPanel.vue` - coordinate inputs with color coding
+     - `VectorCanvas.vue` - SVG visualization with grid, arrows, parallelogram
+
+3. **Operations & Results** (11C)
+   - Created `OperationSelector.vue` - 7 operation buttons with radio group semantics
+   - Created `ResultDisplay.vue` - results with LaTeX formulas and relationship badges
+   - Created `VectorPresets.vue` - preset selector and swap button
+
+4. **Content Pages** (11D)
+   - Created `src/views/linear-algebra/LinearAlgebraIndexView.vue` section landing page
+     - ML context: why linear algebra matters for machine learning
+     - Core concepts preview (vectors, matrices, dot product, transformations)
+     - Python/NumPy preview code
+   - Created `src/views/linear-algebra/VectorsView.vue` comprehensive content page
+     - Interactive VectorOperations widget with URL sync
+     - Collapsible sections: Introduction, Addition, Dot Product, Magnitude, Angle, ML Applications
+     - Python code examples throughout
+
+5. **E2E Tests & Polish** (11E)
+   - Created `e2e/linear-algebra/vector-operations.spec.ts` with 14 E2E tests
+   - Added linear algebra pages to accessibility audits
+   - Added keyboard accessibility tests for vector widget
+
+**Key Architectural Decisions**:
+- D-088: 2D vectors only (no 3D)
+- D-089: Widget defaults to Addition operation
+- D-090: Angles in degrees with radians in parentheses
+- D-091: Fixed coordinate system range (-5 to +5)
+- D-092: Composable pattern for vector state (useVectors)
+- D-093: Modular widget component architecture
+- D-094: Vector presets with educational context
+- D-095: Parallelogram law visualization for addition
+
+**Lessons Learned**:
+- LL-043: Floating point precision at tolerance boundary
+- LL-044: ESLint unused variables in composables
+
+**Lessons Identified**:
+- LI-044: SVG arrow markers for vector visualization
+- LI-045: Parallelogram law visualization for vector addition
+- LI-046: Operation result types with discriminated unions
+- LI-047: Relationship badges for mathematical properties
 
 ---
 

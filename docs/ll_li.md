@@ -1939,3 +1939,172 @@ export function combinations(n: number, r: number): number { ... }
 3. Move complex dynamic formulas to computed properties for cleaner code
 4. RelatedTopics component improves content discoverability
 5. Product notation utilities follow the same patterns as summation utilities
+
+---
+
+## Phase 11: Linear Algebra — Vectors
+
+### LL-043: Floating Point Precision at Tolerance Boundary
+**Issue**: Unit test for `isParallel` floating point handling failed because the test used a precision value (`1e-10`) exactly at the `VECTOR_TOLERANCE` boundary.
+
+**Code**:
+```typescript
+// Failed - precision exactly at tolerance boundary
+const v1: Vector2D = { x: 1, y: 2 }
+const v2: Vector2D = { x: 2 + 1e-10, y: 4 + 1e-10 }
+expect(isParallel(v1, v2)).toBe(true)
+```
+
+**Resolution**: Use a precision value safely within the tolerance:
+```typescript
+// Works - precision safely within tolerance
+const v2: Vector2D = { x: 2 + 1e-12, y: 4 + 1e-12 }
+```
+
+**Lesson**: When testing floating point tolerance, use values well within the tolerance boundary, not at the exact boundary where floating point arithmetic could cause unexpected results.
+
+---
+
+### LL-044: ESLint Unused Variables in Composables
+**Issue**: When computing results for multiple operations in a composable, intermediate calculations may not all be used in every code path.
+
+**Code**:
+```typescript
+// ESLint error: 'magB' is assigned but never used
+const magB = magnitude(vectorB.value)
+switch (operation.value) {
+  case 'magnitude':
+    return { type: 'scalar', value: magA }  // magB unused!
+}
+```
+
+**Resolution**: Only compute values when needed, or structure code to avoid unused assignments:
+```typescript
+case 'magnitude':
+  return { type: 'scalar', value: magnitude(vectorA.value) }
+```
+
+**Lesson**: Be mindful of variable scope in switch statements. Compute values inside case blocks when they're only needed for that specific case.
+
+---
+
+### LI-044: SVG Arrow Markers for Vector Visualization
+**Identified**: SVG `<marker>` elements provide reusable arrowheads for vector visualization.
+
+**Pattern**:
+```vue
+<defs>
+  <marker
+    id="arrowhead-a"
+    markerWidth="10"
+    markerHeight="7"
+    refX="9"
+    refY="3.5"
+    orient="auto"
+  >
+    <polygon points="0 0, 10 3.5, 0 7" fill="currentColor" />
+  </marker>
+</defs>
+
+<line
+  :x1="x1" :y1="y1" :x2="x2" :y2="y2"
+  marker-end="url(#arrowhead-a)"
+/>
+```
+
+**Benefits**:
+- Arrowheads automatically orient to line direction
+- Single definition, reused across multiple vectors
+- `refX`/`refY` control arrow positioning relative to line endpoint
+- `currentColor` inherits from parent element's color
+
+---
+
+### LI-045: Parallelogram Law Visualization for Vector Addition
+**Identified**: Showing the parallelogram formed by two vectors and their sum enhances understanding of vector addition.
+
+**Pattern**:
+```typescript
+// Draw dashed lines from vector endpoints to result
+const parallelogramPath = computed(() => {
+  // Line from tip of A to tip of result (parallel to B)
+  // Line from tip of B to tip of result (parallel to A)
+  return `M ${tipA.x} ${tipA.y} L ${result.x} ${result.y} M ${tipB.x} ${tipB.y} L ${result.x} ${result.y}`
+})
+```
+
+**Benefits**:
+- Visual proof that A + B = B + A (commutativity)
+- Shows how the result vector is formed geometrically
+- Reinforces "tip-to-tail" addition concept
+
+---
+
+### LI-046: Operation Result Types with Discriminated Unions
+**Identified**: Using discriminated unions for operation results enables type-safe handling of different result types.
+
+**Pattern**:
+```typescript
+type OperationResult =
+  | { type: 'vector'; value: Vector2D }
+  | { type: 'scalar'; value: number }
+  | { type: 'angle'; value: number; radians: number }
+  | { type: 'none' }
+
+// Type-safe handling in template
+<template v-if="result.type === 'vector'">
+  ({{ result.value.x }}, {{ result.value.y }})
+</template>
+<template v-else-if="result.type === 'scalar'">
+  {{ result.value }}
+</template>
+```
+
+**Benefits**:
+- TypeScript ensures all result types are handled
+- Clear distinction between vector results (2D) and scalar results (single value)
+- Angle results can include both degrees and radians
+
+---
+
+### LI-047: Relationship Badges for Mathematical Properties
+**Identified**: Displaying badges for mathematical relationships (parallel, perpendicular) provides immediate visual feedback.
+
+**Pattern**:
+```vue
+<span
+  v-if="arePerpendicular"
+  data-testid="perpendicular-badge"
+  class="inline-flex items-center px-2 py-1 rounded-full text-xs bg-purple-100 text-purple-800"
+>
+  ⊥ Perpendicular
+</span>
+```
+
+**Benefits**:
+- Immediate visual feedback on vector relationships
+- Educational: highlights important mathematical properties
+- Uses consistent badge styling from design system
+- `data-testid` attributes enable E2E testing
+
+---
+
+## Phase 11 Summary
+
+**Lessons Learned (LL)**:
+- LL-043: Floating point precision at tolerance boundary
+- LL-044: ESLint unused variables in composables
+
+**Lessons Identified (LI)**:
+- LI-044: SVG arrow markers for vector visualization
+- LI-045: Parallelogram law visualization for vector addition
+- LI-046: Operation result types with discriminated unions
+- LI-047: Relationship badges for mathematical properties
+
+**Key Takeaways**:
+1. Test floating point tolerance with values well within the boundary, not at the edge
+2. Compute values inside switch case blocks when they're case-specific
+3. SVG markers with `orient="auto"` automatically rotate arrowheads
+4. Parallelogram visualization reinforces vector addition concepts
+5. Discriminated unions enable type-safe handling of different result types
+6. Visual badges for perpendicular/parallel provide immediate educational feedback
