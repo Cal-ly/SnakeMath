@@ -113,6 +113,22 @@ const router = createRouter({
       name: 'statistics-descriptive',
       component: () => import('@/views/statistics/DescriptiveStatsView.vue'),
     },
+    // Calculus section
+    {
+      path: '/calculus',
+      name: 'calculus',
+      component: () => import('@/views/calculus/CalculusIndexView.vue'),
+    },
+    {
+      path: '/calculus/limits',
+      name: 'calculus-limits',
+      component: () => import('@/views/calculus/LimitsView.vue'),
+    },
+    {
+      path: '/calculus/derivatives',
+      name: 'calculus-derivatives',
+      component: () => import('@/views/calculus/DerivativesView.vue'),
+    },
     // Catch-all 404
     {
       path: '/:pathMatch(.*)*',

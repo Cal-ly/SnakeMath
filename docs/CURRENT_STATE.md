@@ -5,13 +5,13 @@ This document outlines the current state of the project for easy resumption afte
 
 ---
 
-## Current Status: Phase 12 Complete - Linear Algebra Matrices
+## Current Status: Phase 14 Complete - Calculus Derivatives
 
 **Last Updated**: 2026-01-17
 
 ### Project Summary
 
-SnakeMath is an educational mathematics website for programmers. Twelve phases of development have established:
+SnakeMath is an educational mathematics website for programmers. Fourteen phases of development have established:
 
 | Phase | Focus | Key Deliverables | Status |
 |-------|-------|------------------|--------|
@@ -27,6 +27,8 @@ SnakeMath is an educational mathematics website for programmers. Twelve phases o
 | 10 | Statistics Foundation | StatisticsCalculator, histogram, box plot | Complete |
 | 11 | Linear Algebra — Vectors | VectorOperations, SVG canvas, presets | Complete |
 | 12 | Linear Algebra — Matrices | MatrixTransformations, unit square viz, presets | Complete |
+| 13 | Calculus — Limits | LimitsExplorer, epsilon-delta viz, continuity | Complete |
+| 14 | Calculus — Derivatives | DerivativeVisualizer, tangent lines, secant animation | Complete |
 
 ### What's Live
 
@@ -49,6 +51,9 @@ SnakeMath is an educational mathematics website for programmers. Twelve phases o
   - Vectors (VectorOperations widget with SVG canvas)
   - **Matrices (MatrixTransformations widget with unit square visualization)**
 - `/statistics` - Descriptive Statistics (StatisticsCalculator widget with histogram & box plot)
+- `/calculus` - Calculus section:
+  - Limits (LimitsExplorer widget with epsilon-delta visualization)
+  - **Derivatives (DerivativeVisualizer widget with tangent lines and secant animation)**
 
 **Interactive Widgets**:
 - **NumberTypeExplorer**: Classify numbers, Venn diagram, number line, set membership
@@ -60,6 +65,8 @@ SnakeMath is an educational mathematics website for programmers. Twelve phases o
 - **StatisticsCalculator**: Dataset presets, custom data input, central tendency (mean/median/mode), spread (variance/std dev/range), quartiles (Q1/Q2/Q3/IQR), outlier detection (Tukey's fences), skewness analysis, histogram with adjustable bins, box plot visualization
 - **VectorOperations**: Vector inputs with coordinate sliders, 7 operations (add, subtract, dot product, magnitude, angle, scalar multiply, normalize), SVG canvas with grid/arrows/parallelogram law, 5 educational presets, parallel/perpendicular badges, URL state sync
 - **MatrixTransformations**: 10 transformation types (rotation, scale, shear, reflection, etc.), SVG canvas with unit square/basis vectors, custom matrix input, 8 educational presets, determinant-based property badges, URL state sync
+- **LimitsExplorer**: 8 preset functions with different limit behaviors, SVG function curve rendering, approach point slider/drag, direction toggle (left/right/both), epsilon-delta band visualization with sliders, numerical approximation animation, continuity status display, URL state sync
+- **DerivativeVisualizer**: 8 preset functions, SVG function curve with tangent line, movable point of tangency, secant line overlay with h-value slider, secant-to-tangent animation showing limit definition, derivative curve toggle, derivative value display with slope interpretation, URL state sync
 
 **Visualization Components**:
 - **CoordinateSystem**: Reusable SVG coordinate system with axes, grid, labels
@@ -70,8 +77,8 @@ SnakeMath is an educational mathematics website for programmers. Twelve phases o
 - **BoxPlotChart**: SVG box plot with quartiles, whiskers, and outlier markers
 
 **Testing Infrastructure**:
-- 525+ unit tests (Vitest) - including 78 vector and 50+ matrix utility tests
-- E2E tests (Playwright) with tiered CI approach - 23 matrix transformation tests added
+- 721+ unit tests (Vitest) - including 67 derivative utility tests
+- E2E tests (Playwright) with tiered CI approach - 40+ derivative visualizer tests added
 - Visual regression tests (Playwright screenshot comparison) - local only
 - WCAG 2.1 AA accessibility audits via axe-core
 - **Tiered CI workflow**: quick-check (push), full-test (PR only)
@@ -121,6 +128,10 @@ npm run build        # Production build
 | Vector composable | `src/composables/useVectors.ts` |
 | Matrix utilities | `src/utils/math/matrix.ts` |
 | Matrix composable | `src/composables/useMatrixTransformations.ts` |
+| Limits utilities | `src/utils/math/limits.ts` |
+| Limits composable | `src/composables/useLimits.ts` |
+| Derivative utilities | `src/utils/math/derivative.ts` |
+| Derivative composable | `src/composables/useDerivative.ts` |
 
 ### Archived Documentation
 Phase completion summaries are in `docs/archive/`:
@@ -132,8 +143,8 @@ Phase completion summaries are in `docs/archive/`:
 
 ## Test Coverage
 
-### Unit Tests (525+ tests)
-- Math utilities (number classification, parsing, quadratic, exponential, trigonometry, statistics, product, vector, matrix functions)
+### Unit Tests (721+ tests)
+- Math utilities (number classification, parsing, quadratic, exponential, trigonometry, statistics, product, vector, matrix, limits, derivative functions)
 - Data validation (symbols, navigation)
 - Component logic (via composables)
 
@@ -146,7 +157,9 @@ Phase completion summaries are in `docs/archive/`:
 - StatisticsCalculator (datasets, custom data, histograms, box plots, URL sync)
 - **VectorOperations** (inputs, operations, presets, canvas, URL sync)
 - **MatrixTransformations** (transformation types, sliders, presets, custom matrix, URL sync)
-- Accessibility (WCAG 2.1 AA audits for all pages including matrices)
+- **LimitsExplorer** (preset functions, approach point, direction toggle, epsilon-delta controls, animation, URL sync)
+- **DerivativeVisualizer** (preset functions, point of tangency, secant controls, animation, derivative curve, URL sync)
+- Accessibility (WCAG 2.1 AA audits for all pages including calculus)
 
 ### Visual Regression Tests (Local Only)
 - All pages baseline screenshots
@@ -181,6 +194,128 @@ Phase completion summaries are in `docs/archive/`:
 
 - **Chunk Size Warnings**: Shiki produces large language chunks (lazy-loaded, acceptable)
 - **v-html Warnings**: ESLint warns about v-html in MathBlock/CodeExample (expected, trusted content)
+
+---
+
+## Phase 14 Completion Summary
+
+Phase 14 accomplished:
+
+1. **Derivative Math Utilities** (14A)
+   - Created `src/utils/math/derivative.ts` with 67 comprehensive tests
+   - Types: `DerivativeResult`, `TangentLine`, `SecantLine`, `DerivativeFunctionPreset`, `DerivativeInterestingPoint`, `CriticalPointType`, `CriticalPoint`
+   - Functions: `centralDifference`, `forwardDifference`, `backwardDifference` (numerical differentiation)
+   - Functions: `evaluateDerivative`, `calculateTangentLine`, `calculateSecantLine`, `generateSecantSequence`
+   - Functions: `derivativeExists`, `findCriticalPoints`, `classifyCriticalPoint`, `analyzeCriticalPoints`
+   - 8 preset functions: linear, quadratic, cubic, polynomial, sine, cosine, exponential, logarithm
+   - Constants: `DEFAULT_H`, `DERIVATIVE_TOLERANCE`, `SECANT_H_VALUES`
+
+2. **DerivativeVisualizer Widget Core** (14B)
+   - Created `src/composables/useDerivative.ts` for state management + URL sync
+   - Built modular component architecture in `src/components/widgets/DerivativeVisualizer/`:
+     - `DerivativeVisualizer.vue` - main orchestrator component
+     - `FunctionSelector.vue` - preset function selection with MathBlock display
+     - `DerivativeCanvas.vue` - SVG canvas with function curve, tangent line, secant line
+     - `DerivativeDisplay.vue` - derivative value with slope interpretation
+
+3. **Secant Line & Animation** (14C)
+   - Created `SecantControls.vue` - h-value slider with convergence indicator
+   - Created `SecantAnimation.vue` - play/pause animation of secant→tangent limit
+   - Visual demonstration of limit definition: lim(h→0) [f(x+h) - f(x)] / h
+
+4. **Content Pages** (14D)
+   - Updated `src/views/calculus/CalculusIndexView.vue` with derivatives link
+   - Created `src/views/calculus/DerivativesView.vue` comprehensive content page
+     - Three analogies: speedometer (everyday), finite difference (programming), tangent slope (visual)
+     - Interactive DerivativeVisualizer widget with URL sync
+     - Collapsible sections: Introduction, Secants to Tangents, Rules, Critical Points, Applications
+     - Python code examples: numerical differentiation, gradient descent, linear approximation, autodiff
+     - Gradient descent section highlighted for ML relevance
+
+5. **E2E Tests & Polish** (14E)
+   - Created `e2e/widgets/derivative-visualizer.spec.ts` with 40+ E2E tests
+   - Added derivatives page to accessibility audits
+   - Tests cover widget rendering, function selection, point interaction, secant controls, animation, URL sync
+
+**Key Architectural Decisions**:
+- D-112: Visual intuition over formal calculus
+- D-113: Preset functions rather than arbitrary user input
+- D-114: Numerical differentiation (central difference primary)
+- D-115: Secant-to-tangent animation for limit definition
+- D-116: Composable pattern for derivative state (useDerivative)
+- D-117: Tangent line equation display with slope interpretation
+
+**Lessons Learned**:
+- LL-049: Numerical differentiation tolerance needs adjustment for different h values (forward/backward less precise than central)
+- LL-050: vitest/no-conditional-expect rule requires restructuring tests to filter valid cases first
+
+**Lessons Identified**:
+- LI-056: Secant-to-tangent animation effectively demonstrates limit definition of derivative
+- LI-057: Derivative value interpretation (increasing/decreasing/horizontal) aids understanding
+- LI-058: Preset-based function selection pattern continues to work well for calculus widgets
+
+---
+
+## Phase 13 Completion Summary
+
+Phase 13 accomplished:
+
+1. **Limits Math Utilities** (13A)
+   - Created `src/utils/math/limits.ts` with 58 comprehensive tests
+   - Types: `LimitResult`, `ContinuityResult`, `LimitFunctionPreset`, `ApproachDirection`, `LimitApproximationStep`
+   - Functions: `evaluateLeftLimit`, `evaluateRightLimit`, `evaluateLimit` (numerical approximation)
+   - Functions: `checkContinuity` (detects removable, jump, infinite, oscillating discontinuities)
+   - Functions: `numericalLimitApproximation`, `findDeltaForEpsilon`, `isValidApproachPoint`, `getLimitPreset`
+   - 8 preset functions: polynomial, rational, step (floor), reciprocal, sinc, sign, oscillating, piecewise
+   - Constants: `LIMIT_TOLERANCE`, `DEFAULT_EPSILON`, `DEFAULT_DELTA`
+
+2. **LimitsExplorer Widget Core** (13B)
+   - Created `src/composables/useLimits.ts` for state management + URL sync
+   - Built modular component architecture in `src/components/widgets/LimitsExplorer/`:
+     - `LimitsExplorer.vue` - main orchestrator component
+     - `FunctionSelector.vue` - preset function selection with ARIA roles
+     - `LimitCanvas.vue` - SVG function curve rendering with approach point
+     - `LimitDisplay.vue` - limit value and continuity status display
+
+3. **Epsilon-Delta Visualization** (13C)
+   - Created `EpsilonDeltaControls.vue` - sliders for epsilon and delta with accessible labels
+   - Created `EpsilonDeltaBands.vue` - SVG visualization of epsilon-delta bands
+   - Created `ApproachAnimation.vue` - numerical approximation sequence animation
+   - Visual indication of whether delta satisfies epsilon condition
+
+4. **Content Pages** (13D)
+   - Created `src/views/calculus/CalculusIndexView.vue` section landing page
+     - Three pillars: limits, derivatives, integrals (latter two "Coming Soon")
+     - Why programmers need calculus (ML, games, graphics, etc.)
+     - Gradient descent Python example
+   - Created `src/views/calculus/LimitsView.vue` comprehensive content page
+     - Interactive LimitsExplorer widget with URL sync
+     - Collapsible sections: Introduction, Epsilon-Delta, One-Sided Limits, Discontinuities, Famous Limits, Applications
+     - Python code examples throughout
+
+5. **E2E Tests & Polish** (13E)
+   - Created `e2e/widgets/limits-explorer.spec.ts` with 50+ E2E tests
+   - Created `e2e/accessibility/calculus.spec.ts` for WCAG compliance
+   - Added ARIA labels and roles for accessibility
+   - Added accessible slider labels with descriptions
+
+**Key Architectural Decisions**:
+- D-106: Visual intuition over formal proofs
+- D-107: Preset functions rather than arbitrary user input (safer evaluation)
+- D-108: Numerical limit approximation (not symbolic)
+- D-109: Epsilon-delta visualization with toggle (advanced feature)
+- D-110: Composable pattern for limits state (useLimits)
+- D-111: Continuity classification (removable, jump, infinite, oscillating)
+
+**Lessons Learned**:
+- LL-047: Infinite limit detection requires checking monotonic divergence pattern
+- LL-048: Numerical precision for limits needs both absolute and relative tolerance
+
+**Lessons Identified**:
+- LI-052: Preset-based function selection for safe limit evaluation
+- LI-053: Epsilon-delta band visualization for formal definition intuition
+- LI-054: Numerical approximation animation for approaching concept
+- LI-055: Continuity classification based on one-sided limit comparison
 
 ---
 

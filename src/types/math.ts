@@ -241,3 +241,173 @@ export interface TransformationPreset {
   /** Optional parameters used to generate this matrix */
   parameters?: Record<string, number>
 }
+
+// ============================================================================
+// Limits Types (Phase 13)
+// ============================================================================
+
+/**
+ * Result of evaluating a limit
+ */
+export interface LimitResult {
+  /** Whether the limit exists (left and right limits are equal) */
+  exists: boolean
+  /** The limit value if it exists, null otherwise */
+  value: number | null
+  /** The left-sided limit (x → a⁻) */
+  leftLimit: number | null
+  /** The right-sided limit (x → a⁺) */
+  rightLimit: number | null
+  /** Classification of the limit type */
+  limitType: 'finite' | 'infinite' | 'does-not-exist'
+}
+
+/**
+ * Result of checking continuity at a point
+ */
+export interface ContinuityResult {
+  /** Whether the function is continuous at the point */
+  isContinuous: boolean
+  /** Type of discontinuity if not continuous */
+  discontinuityType: 'none' | 'removable' | 'jump' | 'infinite' | 'oscillating'
+  /** Human-readable description */
+  description: string
+}
+
+/**
+ * A preset function for the LimitsExplorer widget
+ * D-107: Use preset functions rather than arbitrary input
+ */
+export interface LimitFunctionPreset {
+  /** Unique identifier */
+  id: string
+  /** Display name */
+  name: string
+  /** Educational description */
+  description: string
+  /** The function itself */
+  fn: (x: number) => number
+  /** Recommended viewing domain */
+  domain: { min: number; max: number }
+  /** Points where limits are interesting to explore */
+  interestingPoints: number[]
+  /** LaTeX representation for display */
+  latex: string
+  /** Expected behavior at interesting points */
+  expectedBehavior: string
+}
+
+/**
+ * Direction from which to approach the limit point
+ */
+export type ApproachDirection = 'both' | 'left' | 'right'
+
+/**
+ * A step in the numerical limit approximation sequence
+ */
+export interface LimitApproximationStep {
+  /** The x value approaching the target */
+  x: number
+  /** The function value f(x) */
+  fx: number
+  /** Distance from the approach point |x - a| */
+  distance: number
+}
+
+// ============================================================================
+// Derivative Types (Phase 14)
+// ============================================================================
+
+/**
+ * Result of computing a derivative at a point
+ */
+export interface DerivativeResult {
+  /** The derivative value (numerical or exact) */
+  value: number
+  /** The exact derivative value if known symbolically */
+  exactValue?: number
+  /** Method used to compute the derivative */
+  method: 'numerical' | 'exact'
+  /** Whether the derivative exists at this point */
+  exists: boolean
+}
+
+/**
+ * Tangent line at a point on a curve
+ * Equation: y = slope * (x - point.x) + point.y
+ */
+export interface TangentLine {
+  /** Slope of the tangent line (the derivative value) */
+  slope: number
+  /** Y-intercept of the tangent line */
+  yIntercept: number
+  /** Point of tangency on the curve */
+  point: { x: number; y: number }
+}
+
+/**
+ * Secant line connecting two points on a curve
+ * Used to visualize the limit definition of derivatives
+ */
+export interface SecantLine {
+  /** Slope of the secant line: (f(x+h) - f(x)) / h */
+  slope: number
+  /** The h value (distance between points) */
+  h: number
+  /** First point on the curve */
+  point1: { x: number; y: number }
+  /** Second point on the curve */
+  point2: { x: number; y: number }
+}
+
+/**
+ * A preset function for the DerivativeVisualizer widget
+ * D-113: Use preset functions consistent with D-107 (LimitsExplorer)
+ */
+export interface DerivativeFunctionPreset {
+  /** Unique identifier */
+  id: string
+  /** Display name */
+  name: string
+  /** Educational description */
+  description: string
+  /** The function itself */
+  fn: (x: number) => number
+  /** The exact derivative function (for comparison) */
+  derivative: (x: number) => number
+  /** LaTeX representation of f(x) */
+  latex: string
+  /** LaTeX representation of f'(x) */
+  derivativeLatex: string
+  /** Recommended viewing domain */
+  domain: { min: number; max: number }
+  /** Points with interesting derivative behavior */
+  interestingPoints: DerivativeInterestingPoint[]
+}
+
+/**
+ * A point of interest for exploring derivatives
+ */
+export interface DerivativeInterestingPoint {
+  /** X coordinate */
+  x: number
+  /** Description of what's interesting at this point */
+  description: string
+}
+
+/**
+ * Classification of a critical point
+ */
+export type CriticalPointType = 'local-min' | 'local-max' | 'inflection' | 'saddle' | 'none'
+
+/**
+ * Information about a critical point where f'(x) = 0
+ */
+export interface CriticalPoint {
+  /** X coordinate of the critical point */
+  x: number
+  /** Function value at the critical point */
+  y: number
+  /** Classification of the critical point */
+  type: CriticalPointType
+}

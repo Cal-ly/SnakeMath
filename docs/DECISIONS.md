@@ -1945,3 +1945,244 @@ MatrixTransformations/ (orchestrator)
 /linear-algebra/matrices?type=rotation&angle=45
 /linear-algebra/matrices?type=scale&sx=1.5&sy=2
 ```
+
+---
+
+## Phase 13 Decisions
+
+### D-106: Visual Intuition Over Formal Proofs
+**Decision**: Focus on visual/numerical intuition for limits rather than formal epsilon-delta proofs.
+
+**Rationale**:
+- Target audience (programmers) benefits more from visual understanding
+- Numerical approximation mirrors how computers actually evaluate limits
+- Formal proofs can be introduced later for interested users
+- Interactive visualization provides immediate feedback
+
+**Trade-off**: Less mathematical rigor, but more accessible and programmer-relevant.
+
+---
+
+### D-107: Preset Functions Rather Than Arbitrary User Input
+**Decision**: Use 8 preset functions for the LimitsExplorer rather than allowing arbitrary function input.
+
+**Rationale**:
+- Consistent with established widget pattern (SummationExplorer, QuadraticExplorer)
+- Safer: no need to parse/evaluate arbitrary expressions
+- Educational: each preset demonstrates specific limit behaviors
+- Curated examples cover all discontinuity types
+
+**Presets**:
+| ID | Name | Educational Purpose |
+|----|------|---------------------|
+| polynomial | Polynomial | Continuous everywhere |
+| rational | Rational | Removable discontinuity |
+| step | Floor | Jump discontinuity |
+| reciprocal | Reciprocal | Infinite discontinuity (vertical asymptote) |
+| oscillating | Oscillating | DNE (oscillation) |
+| exponential | Exponential | Continuous, rapid growth |
+| logarithmic | Logarithmic | Domain restriction |
+| piecewise | Piecewise | Defined discontinuity |
+
+---
+
+### D-108: Numerical Limit Approximation (Not Symbolic)
+**Decision**: Calculate limits numerically by evaluating function at points approaching the target.
+
+**Rationale**:
+- Matches how programmers think about limits ("what happens as x gets closer?")
+- Demonstrates the actual computational approach
+- Avoids complexity of symbolic computation
+- Animation of approaching values reinforces the concept
+
+**Implementation**:
+```typescript
+function calculateLimit(fn: (x: number) => number, point: number, direction: 'left' | 'right' | 'both'): LimitResult {
+  // Evaluate at increasingly close points: 0.1, 0.01, 0.001, ...
+  const deltas = [0.1, 0.01, 0.001, 0.0001, 0.00001]
+  // Check if values converge
+}
+```
+
+---
+
+### D-109: Epsilon-Delta Visualization with Toggle
+**Decision**: Include epsilon-delta visualization as an optional "advanced" feature, hidden by default.
+
+**Rationale**:
+- Not all users need/want the formal definition visualization
+- Keeps initial widget view focused and uncluttered
+- Advanced users can explore the ε-δ relationship
+- Progressive disclosure pattern
+
+**Implementation**: "Show Advanced" button reveals epsilon/delta sliders and band visualization.
+
+---
+
+### D-110: Composable Pattern for Limits State (useLimits)
+**Decision**: Create `useLimits` composable following established patterns.
+
+**Rationale**:
+- Consistent with useVectors, useMatrixTransformations, useUnitCircle
+- Separates state logic from presentation
+- Supports optional URL state synchronization
+- Computed properties handle derived values (limit result, continuity status)
+- Testable independently of components
+
+**Implementation**:
+```typescript
+export function useLimits(options: UseLimitsOptions = {}) {
+  // State: selectedPreset, approachPoint, direction, epsilon, delta
+  // Computed: limitResult, continuityType, isValidDelta
+  // Optional URL sync
+}
+```
+
+---
+
+### D-111: Continuity Classification Types
+**Decision**: Classify discontinuities into four types: continuous, removable, jump, infinite.
+
+**Rationale**:
+- Standard mathematical classification
+- Each type has distinct visual characteristics
+- Educational: helps users understand why limits don't exist
+- Maps to specific preset functions for demonstration
+
+**Classification Logic**:
+| Type | Condition | Example |
+|------|-----------|---------|
+| Continuous | Limit exists and equals f(a) | Polynomial |
+| Removable | Limit exists but ≠ f(a) or f(a) undefined | (x²-1)/(x-1) at x=1 |
+| Jump | Left and right limits exist but differ | Floor function at integers |
+| Infinite | One or both sided limits are ±∞ | 1/x at x=0 |
+
+---
+
+## Phase 14 Decisions
+
+### D-112: Visual Intuition Over Formal Calculus
+**Decision**: Focus on visual/numerical intuition for derivatives rather than formal limit proofs.
+
+**Rationale**:
+- Target audience (programmers) benefits more from visual understanding
+- Numerical differentiation mirrors how computers actually compute derivatives
+- Tangent line visualization is immediately intuitive
+- Formal calculus can be introduced later for interested users
+
+**Trade-off**: Less mathematical rigor, but more accessible and programmer-relevant.
+
+---
+
+### D-113: Preset Functions Rather Than Arbitrary User Input
+**Decision**: Use 8 preset functions for the DerivativeVisualizer rather than allowing arbitrary function input.
+
+**Rationale**:
+- Consistent with established widget pattern (LimitsExplorer, SummationExplorer)
+- Safer: no need to parse/evaluate arbitrary expressions
+- Educational: each preset demonstrates specific derivative behaviors
+- Curated examples cover linear, polynomial, trigonometric, exponential cases
+
+**Presets**:
+| ID | Name | Educational Purpose |
+|----|------|---------------------|
+| linear | Linear | Constant derivative |
+| quadratic | Quadratic | Linear derivative, critical point |
+| cubic | Cubic | Quadratic derivative, inflection point |
+| polynomial | Polynomial | Multiple critical points |
+| sine | Sine | cos(x) derivative, periodic behavior |
+| cosine | Cosine | -sin(x) derivative |
+| exponential | Exponential | Self-derivative (e^x) |
+| logarithm | Logarithm | 1/x derivative, domain restriction |
+
+---
+
+### D-114: Numerical Differentiation with Central Difference Primary
+**Decision**: Use central difference as the primary numerical differentiation method with forward/backward as alternatives.
+
+**Rationale**:
+- Central difference provides O(h²) accuracy vs O(h) for forward/backward
+- Demonstrates the trade-off between different methods
+- Matches computational approaches used in real-world applications
+- h parameter allows exploring convergence
+
+**Implementation**:
+```typescript
+// Central difference (primary): f'(x) ≈ (f(x+h) - f(x-h)) / 2h
+// Forward difference: f'(x) ≈ (f(x+h) - f(x)) / h
+// Backward difference: f'(x) ≈ (f(x) - f(x-h)) / h
+```
+
+---
+
+### D-115: Secant-to-Tangent Animation for Limit Definition
+**Decision**: Include animated secant line that approaches the tangent line as h→0.
+
+**Rationale**:
+- Directly visualizes the limit definition of derivative
+- Connects Phase 13 (Limits) to Phase 14 (Derivatives)
+- Shows how slope of secant converges to slope of tangent
+- Interactive: users can control h value or watch animation
+
+**Implementation**:
+- Secant line drawn from (x, f(x)) to (x+h, f(x+h))
+- h-value slider from 0.001 to 2
+- Animation cycles through decreasing h values
+- Numerical comparison table shows convergence
+
+---
+
+### D-116: Composable Pattern for Derivative State (useDerivative)
+**Decision**: Create `useDerivative` composable following established patterns.
+
+**Rationale**:
+- Consistent with useLimits, useVectors, useMatrixTransformations
+- Separates state logic from presentation
+- Supports optional URL state synchronization
+- Computed properties handle derived values (tangent line, secant line, derivative value)
+- Testable independently of components
+
+**Implementation**:
+```typescript
+export function useDerivative(options: UseDerivativeOptions = {}) {
+  // State: selectedPresetId, pointX, hValue, showSecantLines, showDerivativeCurve, viewDomain
+  // Computed: selectedPreset, derivativeResult, tangentLine, secantLine, secantSequence, functionPoints, derivativePoints
+  // Methods: selectPreset, setPointX, setHValue, selectInterestingPoint, resetToDefaults
+  // Optional URL sync via options.syncUrl
+}
+```
+
+---
+
+### D-117: Tangent Line Equation Display with Slope Interpretation
+**Decision**: Display the tangent line equation along with slope interpretation (increasing/decreasing/horizontal).
+
+**Rationale**:
+- Tangent line equation (y = mx + b) reinforces linear approximation concept
+- Slope interpretation helps users understand derivative meaning
+- "Increasing" (positive slope), "Decreasing" (negative slope), "Horizontal" (zero slope)
+- Critical point detection enhanced with interpretation
+
+**Implementation**:
+```vue
+<div class="derivative-display">
+  <span>f'(x) = {{ derivativeValue.toFixed(4) }}</span>
+  <span v-if="derivativeValue > 0">↗ Increasing</span>
+  <span v-else-if="derivativeValue < 0">↘ Decreasing</span>
+  <span v-else>→ Horizontal (critical point)</span>
+  <span>Tangent: y = {{ slope.toFixed(2) }}x + {{ intercept.toFixed(2) }}</span>
+</div>
+```
+
+---
+
+### D-118: Derivative Curve Toggle
+**Decision**: Include optional overlay showing the derivative function f'(x) alongside the original function f(x).
+
+**Rationale**:
+- Visualizes the relationship between function and its derivative
+- Shows where f'(x) = 0 corresponds to critical points of f(x)
+- Educational: students can see the "speed" of the function
+- Hidden by default to reduce initial complexity (progressive disclosure)
+
+**Implementation**: Checkbox toggle to show/hide derivative curve in different color (purple).

@@ -11,13 +11,21 @@ const relatedTopics = [
     title: 'Statistics Overview',
     path: '/statistics',
     description: 'All statistics topics',
-    faIcon: 'fa-solid fa-chart-pie',
   },
   {
     title: 'Summation',
     path: '/algebra/summation',
-    description: 'The math behind calculating sums',
-    faIcon: 'fa-solid fa-plus',
+    description: 'The math behind calculating means and totals',
+  },
+  {
+    title: 'Functions',
+    path: '/basics/functions',
+    description: 'Understanding transformations like z-score normalization',
+  },
+  {
+    title: 'Number Types',
+    path: '/basics/number-types',
+    description: 'Integer vs float precision in statistical calculations',
   },
 ]
 
@@ -140,10 +148,58 @@ print(f"Normalized mean: {normalized.mean():.4f}, std: {normalized.std():.4f}")`
           </div>
         </div>
 
-        <p class="text-text-secondary">
+        <!-- Three analogies -->
+        <div class="grid gap-4 sm:grid-cols-3 mb-4">
+          <div class="p-4 bg-surface-alt rounded-lg border border-border">
+            <h4 class="font-semibold text-amber-600 mb-2">
+              <i class="fa-solid fa-utensils mr-2" aria-hidden="true" />
+              Everyday Analogy
+            </h4>
+            <p class="text-sm text-text-secondary">
+              Like a restaurant review: the mean rating is the average experience, the standard
+              deviation tells you how much opinions varied, and the median is the "typical" visit.
+            </p>
+          </div>
+          <div class="p-4 bg-surface-alt rounded-lg border border-border">
+            <h4 class="font-semibold text-emerald-600 mb-2">
+              <i class="fa-solid fa-code mr-2" aria-hidden="true" />
+              Programming Analogy
+            </h4>
+            <p class="text-sm text-text-secondary">
+              Your data's metadata: just as files have size/date/type, datasets have mean/median/std.
+              These stats are the first thing you compute before any analysis.
+            </p>
+          </div>
+          <div class="p-4 bg-surface-alt rounded-lg border border-border">
+            <h4 class="font-semibold text-blue-600 mb-2">
+              <i class="fa-solid fa-chart-box mr-2" aria-hidden="true" />
+              Visual Intuition
+            </h4>
+            <p class="text-sm text-text-secondary">
+              A box plot is the "5-number summary" at a glance: min, Q1, median, Q3, max—plus any
+              outliers floating outside. One picture, all the key facts.
+            </p>
+          </div>
+        </div>
+
+        <p class="mb-4 text-text-secondary">
           For programmers, descriptive statistics are essential for data preprocessing, exploratory
           data analysis, feature engineering, and understanding model outputs.
         </p>
+
+        <div
+          class="p-4 bg-amber-50 dark:bg-amber-900/30 border border-amber-200 dark:border-amber-800 rounded-lg"
+        >
+          <p class="font-semibold text-amber-700 dark:text-amber-300 mb-2">
+            <i class="fa-solid fa-triangle-exclamation mr-2" aria-hidden="true" />
+            Common Pitfall: Don't Use Mean for Skewed Data
+          </p>
+          <p class="text-sm text-amber-600 dark:text-amber-400">
+            When data is skewed (like income or response times), the mean gets "pulled" toward
+            outliers. A CEO's salary can make the "average" salary look great while most employees
+            earn far less. Use <strong>median</strong> for skewed data—it tells you what's typical.
+          </p>
+        </div>
       </ContentSection>
 
       <!-- Interactive Calculator -->

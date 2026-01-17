@@ -36,6 +36,7 @@ The "Coming Soon" section has been removed from AlgebraIndex.vue.
 - [ ] "Code Equivalent" sections for all relevant code examples (like in `algebra/summation` where there is also a switch between Python and JavaScript)
 - [ ] Write "for" in cursive to visually connect to for-loop concept or otherwise visually differentiate
 
+
 ### Site Features
 - [ ] Tech stack section with "why" documentation. The intent is for the site to double as a portfolio piece
 - [ ] Add SEO (meta tags, structured data, sitemap)

@@ -2294,3 +2294,384 @@ const TRANSFORMATION_PRESETS = [
 4. Determinant provides rich information for educational badges (area, orientation)
 5. Unit square visualization makes abstract matrix operations concrete
 6. Named presets ("90° Rotation") are more educational than raw parameters
+
+---
+
+## Phase 13: Calculus — Limits
+
+### LL-047: Infinite Limit Detection Requires Monotonic Divergence Check
+**Issue**: Initial infinite limit detection only checked if values became very large, but this also triggered for oscillating functions near discontinuities.
+
+**Context**: At x=0, sin(1/x) oscillates rapidly with large values appearing sporadically, incorrectly flagged as infinite.
+
+**Resolution**: Check that values are consistently increasing (or decreasing) as they approach the point:
+```typescript
+function isInfiniteLimit(values: number[]): boolean {
+  // Check if values are monotonically diverging, not just occasionally large
+  const isMonotonic = values.every((v, i) =>
+    i === 0 || Math.abs(v) >= Math.abs(values[i-1])
+  )
+  return isMonotonic && Math.abs(values[values.length - 1]) > 1e6
+}
+```
+
+**Lesson**: When detecting mathematical properties numerically, check for consistent patterns rather than point-in-time values.
+
+---
+
+### LL-048: Numerical Precision for Limits Needs Both Absolute and Relative Tolerance
+**Issue**: Using only absolute tolerance (e.g., |a - b| < 0.0001) failed for limits near zero and for very large limits.
+
+**Context**: For f(x) = x² approaching 0, values like 0.0001 and 0.00001 are "close" but differ by 10x relatively.
+
+**Resolution**: Use both absolute and relative tolerance:
+```typescript
+function areValuesConverging(values: number[]): boolean {
+  const last = values[values.length - 1]
+  const prev = values[values.length - 2]
+
+  const absDiff = Math.abs(last - prev)
+  const relDiff = Math.abs(last) > 1e-10 ? absDiff / Math.abs(last) : absDiff
+
+  return absDiff < 1e-6 || relDiff < 1e-4
+}
+```
+
+**Lesson**: Numerical convergence detection requires both absolute tolerance (for values near zero) and relative tolerance (for large values).
+
+---
+
+### LI-052: Preset Functions with Interesting Points
+**Identified**: Each limit preset should define "interesting points" where educational discontinuities occur.
+
+**Pattern**:
+```typescript
+interface LimitPreset {
+  id: string
+  name: string
+  fn: (x: number) => number
+  interestingPoints: number[]  // Points with educational value
+  defaultPoint: number
+  description: string
+}
+
+const LIMIT_PRESETS: LimitPreset[] = [
+  {
+    id: 'rational',
+    name: 'Rational',
+    fn: (x) => (x * x - 1) / (x - 1),
+    interestingPoints: [1],  // Removable discontinuity at x=1
+    defaultPoint: 1,
+    description: 'Removable discontinuity example'
+  },
+  // ...
+]
+```
+
+**Benefits**:
+- Quick navigation to educational examples
+- Each preset demonstrates specific limit behavior
+- Default point is the most interesting case
+
+---
+
+### LI-053: Epsilon-Delta Visualization with Band Overlays
+**Identified**: SVG band overlays effectively visualize the ε-δ definition of limits.
+
+**Pattern**:
+```vue
+<!-- Epsilon band (horizontal) around limit value L -->
+<rect
+  :x="0"
+  :y="scaleY(L + epsilon)"
+  :width="width"
+  :height="scaleY(L - epsilon) - scaleY(L + epsilon)"
+  fill="rgba(59, 130, 246, 0.2)"
+  stroke="#3b82f6"
+/>
+
+<!-- Delta band (vertical) around approach point a -->
+<rect
+  :x="scaleX(a - delta)"
+  :y="0"
+  :width="scaleX(a + delta) - scaleX(a - delta)"
+  :height="height"
+  fill="rgba(34, 197, 94, 0.2)"
+  stroke="#22c55e"
+/>
+```
+
+**Benefits**:
+- Visual proof that for any ε, there exists δ
+- Interactive adjustment shows relationship
+- "Find δ" button demonstrates existence
+
+---
+
+### LI-054: Numerical Animation Shows Approach Pattern
+**Identified**: Animating numerical values approaching the limit reinforces the concept.
+
+**Pattern**:
+```typescript
+const approachValues = computed(() => {
+  const deltas = [0.5, 0.2, 0.1, 0.05, 0.01, 0.005, 0.001]
+  return deltas.map(d => ({
+    x: point - d,  // or point + d for right approach
+    fx: fn(point - d),
+    delta: d
+  }))
+})
+
+// Animate rows appearing one by one
+function playAnimation() {
+  visibleRows.value = 0
+  const interval = setInterval(() => {
+    if (visibleRows.value >= approachValues.value.length) {
+      clearInterval(interval)
+    } else {
+      visibleRows.value++
+    }
+  }, 400)
+}
+```
+
+**Benefits**:
+- Shows convergence pattern visually
+- Reinforces "getting closer and closer"
+- Table format mirrors numerical limit calculation
+
+---
+
+### LI-055: Continuity Classification as Visual Feedback
+**Identified**: Displaying continuity type as a badge provides immediate educational feedback.
+
+**Pattern**:
+```typescript
+type ContinuityType = 'continuous' | 'removable' | 'jump' | 'infinite' | 'oscillating'
+
+const continuityInfo = computed((): { type: ContinuityType; message: string } => {
+  if (!limitResult.value) return { type: 'continuous', message: 'Evaluating...' }
+
+  const { leftLimit, rightLimit, functionValue } = limitResult.value
+
+  if (leftLimit === null || rightLimit === null) {
+    return { type: 'oscillating', message: 'Limit does not exist (oscillation)' }
+  }
+  if (!isFinite(leftLimit) || !isFinite(rightLimit)) {
+    return { type: 'infinite', message: 'Infinite discontinuity' }
+  }
+  if (Math.abs(leftLimit - rightLimit) > 1e-6) {
+    return { type: 'jump', message: 'Jump discontinuity' }
+  }
+  if (functionValue === undefined || Math.abs(leftLimit - functionValue) > 1e-6) {
+    return { type: 'removable', message: 'Removable discontinuity' }
+  }
+  return { type: 'continuous', message: 'Continuous at this point' }
+})
+```
+
+**Benefits**:
+- Immediate feedback on function behavior
+- Educational: teaches discontinuity types
+- Color-coded badges for quick identification
+
+---
+
+## Phase 13 Summary
+
+**Lessons Learned (LL)**:
+- LL-047: Infinite limit detection requires monotonic divergence check
+- LL-048: Numerical precision for limits needs both absolute and relative tolerance
+
+**Lessons Identified (LI)**:
+- LI-052: Preset functions with interesting points
+- LI-053: Epsilon-delta visualization with band overlays
+- LI-054: Numerical animation shows approach pattern
+- LI-055: Continuity classification as visual feedback
+
+**Key Takeaways**:
+1. Detect infinite limits by checking monotonic divergence, not just large values
+2. Use both absolute and relative tolerance for numerical convergence
+3. Interesting points in presets guide users to educational examples
+4. ε-δ bands make the formal definition visual and interactive
+5. Animated numerical approach reinforces the limit concept
+6. Continuity classification badges provide immediate educational feedback
+
+---
+
+## Phase 14: Calculus — Derivatives
+
+### LL-049: Numerical Differentiation Tolerance Varies by Method
+**Issue**: Unit tests for forward/backward difference methods expected 4 decimal places of precision, but only achieved 3.
+
+**Context**: Central difference has O(h²) error while forward/backward have O(h) error. With h=0.0001:
+- Central difference: ~8 decimal places accurate
+- Forward/backward: ~4 decimal places accurate
+
+**Resolution**: Adjusted test tolerances from `toBeCloseTo(expected, 4)` to `toBeCloseTo(expected, 3)` for forward/backward methods.
+
+**Lesson**: Different numerical methods have different accuracy characteristics. Tests should reflect the actual precision achievable by each method, not an arbitrary uniform standard.
+
+---
+
+### LL-050: vitest/no-conditional-expect Requires Test Restructuring
+**Issue**: Vitest's `no-conditional-expect` lint rule flagged expects inside conditional statements in loops.
+
+**Context**: Testing derivative presets required filtering out invalid test points (where function or derivative is undefined/infinite) before running assertions:
+```typescript
+// Flagged by linter
+for (const x of testPoints) {
+  if (isFinite(fn(x)) && isFinite(derivative(x))) {
+    expect(numerical).toBeCloseTo(exact, 3)  // conditional expect
+  }
+}
+```
+
+**Resolution**: Restructure to filter valid test points first, then run assertions unconditionally:
+```typescript
+// Valid: filter first, then assert
+const validTestPoints = testPoints.filter(x =>
+  isFinite(fn(x)) && isFinite(derivative(x))
+)
+for (const x of validTestPoints) {
+  expect(numerical).toBeCloseTo(exact, 3)  // unconditional
+}
+```
+
+**Lesson**: Separate data filtering from assertions. The lint rule prevents flaky tests where assertions may or may not run depending on runtime conditions.
+
+---
+
+### LI-056: Secant-to-Tangent Animation for Limit Definition
+**Identified**: Animating the secant line approaching the tangent line effectively demonstrates the limit definition of derivative.
+
+**Pattern**:
+```typescript
+const SECANT_H_VALUES = [1, 0.5, 0.2, 0.1, 0.05, 0.02, 0.01, 0.005, 0.001]
+
+const secantSequence = computed(() => {
+  if (!selectedPreset.value) return []
+  return SECANT_H_VALUES.map(h => calculateSecantLine(
+    selectedPreset.value.fn,
+    pointX.value,
+    h
+  ))
+})
+
+// Animation cycles through h values
+function playAnimation() {
+  currentIndex.value = 0
+  const interval = setInterval(() => {
+    if (currentIndex.value >= SECANT_H_VALUES.length - 1) {
+      clearInterval(interval)
+    } else {
+      currentIndex.value++
+    }
+  }, 500)
+}
+```
+
+**Benefits**:
+- Directly visualizes lim(h→0) [f(x+h) - f(x)] / h
+- Connects Phase 13 (Limits) to Phase 14 (Derivatives)
+- Table shows numerical convergence alongside visual
+- Interactive h-slider allows manual exploration
+
+---
+
+### LI-057: Slope Interpretation Badges Aid Understanding
+**Identified**: Displaying derivative value with interpretation (increasing/decreasing/horizontal) provides immediate educational feedback.
+
+**Pattern**:
+```typescript
+const slopeInterpretation = computed(() => {
+  const slope = derivativeResult.value?.value ?? 0
+  const tolerance = 0.01
+
+  if (Math.abs(slope) < tolerance) {
+    return {
+      label: 'Horizontal',
+      description: 'Critical point - potential maximum, minimum, or inflection',
+      icon: '→',
+      class: 'text-yellow-600'
+    }
+  }
+  if (slope > 0) {
+    return {
+      label: 'Increasing',
+      description: 'Function is going up',
+      icon: '↗',
+      class: 'text-green-600'
+    }
+  }
+  return {
+    label: 'Decreasing',
+    description: 'Function is going down',
+    icon: '↘',
+    class: 'text-red-600'
+  }
+})
+```
+
+**Benefits**:
+- Immediate visual feedback on function behavior
+- Color-coded badges for quick recognition
+- Connects abstract derivative value to geometric meaning
+
+---
+
+### LI-058: Preset Interesting Points Guide Exploration
+**Identified**: Including "interesting points" in function presets guides users to educational examples.
+
+**Pattern**:
+```typescript
+interface DerivativeFunctionPreset {
+  id: string
+  name: string
+  fn: (x: number) => number
+  derivative: (x: number) => number
+  interestingPoints: Array<{
+    x: number
+    label: string
+    description: string
+  }>
+}
+
+// Example preset
+const quadratic: DerivativeFunctionPreset = {
+  id: 'quadratic',
+  name: 'Quadratic',
+  fn: x => x * x,
+  derivative: x => 2 * x,
+  interestingPoints: [
+    { x: 0, label: 'x = 0', description: 'Minimum (f\'(0) = 0)' },
+    { x: 1, label: 'x = 1', description: 'Positive slope (f\'(1) = 2)' },
+    { x: -1, label: 'x = -1', description: 'Negative slope (f\'(-1) = -2)' }
+  ]
+}
+```
+
+**Benefits**:
+- Quick access to pedagogically important points
+- Buttons guide users to explore critical points, inflection points, etc.
+- Consistent pattern with LimitsExplorer presets
+
+---
+
+## Phase 14 Summary
+
+**Lessons Learned (LL)**:
+- LL-049: Numerical differentiation tolerance varies by method (central > forward/backward)
+- LL-050: vitest/no-conditional-expect requires filtering before assertions
+
+**Lessons Identified (LI)**:
+- LI-056: Secant-to-tangent animation visualizes limit definition
+- LI-057: Slope interpretation badges aid understanding
+- LI-058: Preset interesting points guide exploration
+
+**Key Takeaways**:
+1. Central difference is more accurate than forward/backward - test tolerances should reflect this
+2. Lint rules like no-conditional-expect improve test reliability - restructure rather than disable
+3. The secant→tangent animation powerfully demonstrates derivative as limit of difference quotient
+4. Slope interpretation (increasing/decreasing/horizontal) bridges abstract values to geometric meaning
+5. Interesting points in presets create a guided learning experience

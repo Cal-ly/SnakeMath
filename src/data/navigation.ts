@@ -161,9 +161,32 @@ export const topics: NavTopic[] = [
       {
         id: 'descriptive',
         title: 'Descriptive Statistics',
-        description: 'Mean, median, variance, and data visualization',
+        description: "Summarize any dataset's personality with a few key numbers",
         path: '/statistics/descriptive',
         faIcon: 'fa-solid fa-chart-simple',
+      },
+    ],
+  },
+  {
+    id: 'calculus',
+    title: 'Calculus',
+    description: 'The mathematics of change and accumulation',
+    faIcon: 'fa-solid fa-infinity',
+    path: '/calculus',
+    subtopics: [
+      {
+        id: 'limits',
+        title: 'Limits',
+        description: 'What happens when we get really, really close?',
+        path: '/calculus/limits',
+        faIcon: 'fa-solid fa-arrows-to-dot',
+      },
+      {
+        id: 'derivatives',
+        title: 'Derivatives',
+        description: 'Slopes, rates of change, and optimization',
+        path: '/calculus/derivatives',
+        faIcon: 'fa-solid fa-chart-line',
       },
     ],
   },

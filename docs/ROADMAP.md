@@ -42,9 +42,9 @@ Each topic builds toward machine learning foundations:
 | 10 | Statistics Foundation + Algebra Expansion | StatisticsCalculator | Statistics: Descriptive + Product/Linear | âœ… Complete |
 | 11 | Linear Algebra: Vectors | VectorOperations | Linear Algebra: Vectors | ✅ Complete |
 | 12 | Linear Algebra: Matrices | MatrixTransformations | Linear Algebra: Matrices | ✅ Complete |
-| **13** | **Calculus: Limits** | **LimitsExplorer** | **Calculus: Limits** | 🎯 Next |
-| 14 | Calculus: Derivatives | DerivativeVisualizer | Calculus: Derivatives | Planned |
-| 15+ | AI/ML Foundations | Various | ML Bridge Content | Future |
+| 13 | Calculus: Limits | LimitsExplorer | Calculus: Limits | ✅ Complete |
+| 14 | Calculus: Derivatives | DerivativeVisualizer | Calculus: Derivatives | ✅ Complete |
+| **15+** | **AI/ML Foundations** | **Various** | **ML Bridge Content** | 🎯 Next |
 
 ---
 
@@ -375,6 +375,7 @@ Decisions made during roadmap planning:
 | R-014 | 2D vectors only in Phase 11 | Clearer visualization; 3D deferred to future enhancement |
 | R-015 | 2×2 matrices only in Phase 12 | Focus on 2D transformations; higher dimensions deferred |
 | R-016 | Unit square visualization for matrix transformations | Intuitive demonstration of linear transformation effects |
+| R-017 | Secant-to-tangent animation in Phase 14 | Directly visualizes limit definition of derivative; connects Phase 13→14 |
 
 ---
 
@@ -445,7 +446,9 @@ Phase 14: Tangent lines, derivative graphs
 | 8 | Mobile experience acceptable? | âœ… Yes - widgets responsive; touch interactions work |
 | 10 | Performance acceptable? Ready for more complex visualizations? | âœ… Yes - panel architecture scales well; histogram/box plot performant |
 | 12 | Linear algebra approach working? Ready for calculus? | ✅ Yes - vectors + matrices complete; composable pattern proven |
-| 14 | Calculus complete. Evaluate AI/ML phase scope. | — |
+| 13 | Limits visualization effective? Epsilon-delta approach working? | ✅ Yes - numerical approach intuitive; ε-δ bands educational |
+| 14 | Derivatives visualization effective? Secant animation working? | ✅ Yes - tangent lines clear; secant→tangent animation demonstrates limit definition well |
+| 15+ | Calculus foundation complete. Evaluate AI/ML phase scope. | — |
 
 ---
 
@@ -476,6 +479,8 @@ Phase 14: Tangent lines, derivative graphs
 | 2026-01-17 | Phase 10 complete: StatisticsCalculator, histogram/box plot, algebra expansion (Product Notation, Linear Equations) |
 | 2026-01-17 | Phase 11 complete: VectorOperations widget, SVG canvas, vector utilities (78 tests), linear algebra section |
 | 2026-01-17 | Phase 12 complete: MatrixTransformations widget, unit square visualization, matrix utilities (50+ tests), matrices content page |
+| 2026-01-17 | Phase 13 complete: LimitsExplorer widget, ε-δ visualization, limits utilities (40+ tests), calculus section with Limits page |
+| 2026-01-17 | Phase 14 complete: DerivativeVisualizer widget, tangent lines, secant-to-tangent animation, derivative utilities (67 tests), derivatives page with gradient descent focus |
 
 ---
 
