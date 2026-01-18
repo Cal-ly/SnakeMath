@@ -22,7 +22,8 @@ New features include:
 ## Fixes (Known Issues)
 
 - [x] **Scroll position issue**: Fixed in router scrollBehavior - query param changes no longer scroll to top
-- [ ] Rename URL mapping between Vector 2D and Matrices 2D
+- [x] **3D coordinate system orientation**: Fixed isometric projection to face the user - Z-axis now points toward viewer (lower-right) instead of away (upper-left)
+- [ ] The Vectors in 3D "Right-hand rule" needs to be either better animated or removed, because right now it causes more confusion due to the 2D nature and placement of vectorarrows.
 
 ---
 
@@ -92,6 +93,7 @@ Fixed compliance issues in Trigonometry content:
 - [ ] PEMDAS step-by-step calculator widget for Order of Operations page
 - [ ] Snake Math Game, a small Snake game in browser, where the user has to navigate the snake around and take the right answer to a proposed math question (e.g. 81 + 7 = ?, and then the user has to navigate to the Square with "88")
 - [ ] Vectors and Matrices in n'th dimension
+- [ ] Rename URL mapping between Vector 2D and Matrices 2D
 
 ## Archived
 

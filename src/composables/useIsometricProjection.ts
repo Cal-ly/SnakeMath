@@ -4,10 +4,10 @@
  * Uses a standard isometric projection with configurable scale and origin.
  * Right-handed, Y-up coordinate system (D-122).
  *
- * Isometric projection angles:
+ * Isometric projection angles (facing user):
  * - X-axis: 30° below horizontal, going right
  * - Y-axis: Straight up
- * - Z-axis: 30° below horizontal, going left
+ * - Z-axis: 30° below horizontal, going right (toward viewer)
  */
 
 import { computed, unref, type MaybeRef } from 'vue'
@@ -77,11 +77,12 @@ export function useIsometricProjection(config?: MaybeRef<Partial<IsometricConfig
   /**
    * Convert a 3D point to 2D screen coordinates
    *
-   * Isometric projection formula (Y-up, right-handed):
-   * screenX = origin.x + scale * (x * cos(angle) - z * cos(angle))
-   * screenY = origin.y - scale * (y + x * sin(angle) + z * sin(angle))
+   * Isometric projection formula (Y-up, right-handed, facing viewer):
+   * screenX = origin.x + scale * (x * cos(angle) + z * cos(angle))
+   * screenY = origin.y - scale * (y + x * sin(angle) - z * sin(angle))
    *
    * The Y is negated because SVG Y increases downward.
+   * Z is added to X (not subtracted) so positive Z goes toward the viewer (lower-right).
    */
   function toScreen(point: Vector3D): ScreenPoint {
     const { scale, origin } = resolvedConfig.value
@@ -89,8 +90,8 @@ export function useIsometricProjection(config?: MaybeRef<Partial<IsometricConfig
     const sin = sinAngle.value
 
     return {
-      x: origin.x + scale * (point.x * cos - point.z * cos),
-      y: origin.y - scale * (point.y + point.x * sin + point.z * sin),
+      x: origin.x + scale * (point.x * cos + point.z * cos),
+      y: origin.y - scale * (point.y + point.x * sin - point.z * sin),
     }
   }
 
@@ -103,26 +104,26 @@ export function useIsometricProjection(config?: MaybeRef<Partial<IsometricConfig
     const cos = cosAngle.value
     const sin = sinAngle.value
 
-    // Invert the projection equations for y=0:
-    // screenX - origin.x = scale * (x * cos - z * cos)
-    // origin.y - screenY = scale * (x * sin + z * sin)
+    // Invert the projection equations for y=0 (facing viewer):
+    // screenX - origin.x = scale * (x * cos + z * cos)
+    // origin.y - screenY = scale * (x * sin - z * sin)
     //
     // Let dx = (screenX - origin.x) / scale
     // Let dy = (origin.y - screenY) / scale
     //
-    // dx = x * cos - z * cos = (x - z) * cos
-    // dy = x * sin + z * sin = (x + z) * sin
+    // dx = x * cos + z * cos = (x + z) * cos
+    // dy = x * sin - z * sin = (x - z) * sin
     //
-    // From these: x - z = dx / cos
-    //             x + z = dy / sin
+    // From these: x + z = dx / cos
+    //             x - z = dy / sin
     // Solving:    2x = dx/cos + dy/sin
-    //             2z = dy/sin - dx/cos
+    //             2z = dx/cos - dy/sin
 
     const dx = (screenX - origin.x) / scale
     const dy = (origin.y - screenY) / scale
 
     const x = (dx / cos + dy / sin) / 2
-    const z = (dy / sin - dx / cos) / 2
+    const z = (dx / cos - dy / sin) / 2
 
     return { x, y: 0, z }
   }

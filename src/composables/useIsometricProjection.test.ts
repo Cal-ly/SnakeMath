@@ -25,11 +25,12 @@ describe('useIsometricProjection', () => {
       expect(yPositive.y).toBeLessThan(origin.y)
     })
 
-    it('projects positive Z to the left', () => {
+    it('projects positive Z to the right (toward viewer)', () => {
       const { toScreen } = useIsometricProjection({ origin: { x: 200, y: 200 }, scale: 35 })
       const origin = toScreen({ x: 0, y: 0, z: 0 })
       const zPositive = toScreen({ x: 0, y: 0, z: 1 })
-      expect(zPositive.x).toBeLessThan(origin.x)
+      // Z now goes to the right (toward viewer) in the new projection
+      expect(zPositive.x).toBeGreaterThan(origin.x)
     })
 
     it('respects scale parameter', () => {
@@ -59,7 +60,7 @@ describe('useIsometricProjection', () => {
       expect(yPoint2.x).toBeCloseTo(yPoint0.x)
     })
 
-    it('X and Z have same slope magnitude (symmetric isometric)', () => {
+    it('X and Z have same horizontal displacement (symmetric isometric facing viewer)', () => {
       const { toScreen } = useIsometricProjection({ origin: { x: 200, y: 200 }, scale: 35 })
       const origin = toScreen({ x: 0, y: 0, z: 0 })
       const xUnit = toScreen({ x: 1, y: 0, z: 0 })
@@ -70,9 +71,10 @@ describe('useIsometricProjection', () => {
       const zDeltaX = zUnit.x - origin.x
       const zDeltaY = zUnit.y - origin.y
 
-      // X and Z should mirror horizontally
-      expect(xDeltaX).toBeCloseTo(-zDeltaX)
-      expect(xDeltaY).toBeCloseTo(zDeltaY)
+      // X and Z both go right with same horizontal displacement
+      expect(xDeltaX).toBeCloseTo(zDeltaX)
+      // But X goes down while Z goes up (mirrored vertically)
+      expect(xDeltaY).toBeCloseTo(-zDeltaY)
     })
   })
 
