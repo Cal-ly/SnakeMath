@@ -133,6 +133,13 @@ export const topics: NavTopic[] = [
         path: '/trigonometry/right-triangles',
         faIcon: 'fa-solid fa-draw-polygon',
       },
+      {
+        id: 'identities',
+        title: 'Trig Identities',
+        description: 'Equations that are always true—the cheat codes of trig',
+        path: '/trigonometry/identities',
+        faIcon: 'fa-solid fa-equals',
+      },
     ],
   },
   {

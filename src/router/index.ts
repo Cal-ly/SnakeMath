@@ -91,6 +91,11 @@ const router = createRouter({
       name: 'trigonometry-right-triangles',
       component: () => import('@/views/trigonometry/RightTrianglesView.vue'),
     },
+    {
+      path: '/trigonometry/identities',
+      name: 'trigonometry-identities',
+      component: () => import('@/views/trigonometry/TrigIdentitiesView.vue'),
+    },
     // Linear Algebra section
     {
       path: '/linear-algebra',
