@@ -8,7 +8,7 @@ import { MatrixTransformations } from '@/components/widgets'
 
 const relatedTopics = [
   { title: 'Linear Algebra Overview', path: '/linear-algebra', description: 'All linear algebra topics' },
-  { title: 'Vectors', path: '/linear-algebra/vectors', description: 'What matrices transform' },
+  { title: 'Vectors in 2D', path: '/linear-algebra/vectors', description: 'What matrices transform' },
   { title: 'Unit Circle', path: '/trigonometry/unit-circle', description: 'Sin/cos power rotation matrices' },
   { title: 'Functions', path: '/basics/functions', description: 'Matrices as linear functions' },
 ]
@@ -146,8 +146,8 @@ print(transformed_sprite)`
 
 <template>
   <TopicPage
-    title="Matrices"
-    description="2D arrays that transform vectors — the foundation of computer graphics and neural networks."
+    title="Matrices in 2D"
+    description="2×2 arrays that transform vectors — the foundation of computer graphics and neural networks."
   >
     <div class="space-y-8">
       <!-- Introduction -->

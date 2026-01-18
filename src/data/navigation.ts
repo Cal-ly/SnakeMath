@@ -165,17 +165,31 @@ export const topics: NavTopic[] = [
     subtopics: [
       {
         id: 'vectors',
-        title: 'Vectors',
+        title: 'Vectors in 2D',
         description: 'Arrows with purpose—magnitude and direction in one package',
         path: '/linear-algebra/vectors',
         faIcon: 'fa-solid fa-arrow-right',
       },
       {
         id: 'matrices',
-        title: 'Matrices',
+        title: 'Matrices in 2D',
         description: 'Spreadsheets with superpowers—transform, rotate, reshape',
         path: '/linear-algebra/matrices',
         faIcon: 'fa-solid fa-table-cells',
+      },
+      {
+        id: 'vectors-3d',
+        title: 'Vectors in 3D',
+        description: 'Cross products, right-hand rule, and physics applications',
+        path: '/linear-algebra/vectors-3d',
+        faIcon: 'fa-solid fa-cube',
+      },
+      {
+        id: 'matrices-3d',
+        title: 'Matrices in 3D',
+        description: 'Rotation matrices, Euler angles, and 3D transformations',
+        path: '/linear-algebra/matrices-3d',
+        faIcon: 'fa-solid fa-cubes',
       },
     ],
   },

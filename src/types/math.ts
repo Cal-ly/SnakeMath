@@ -243,6 +243,86 @@ export interface TransformationPreset {
 }
 
 // ============================================================================
+// 3D Vector Types (Phase 16)
+// ============================================================================
+
+/**
+ * 3D Vector representation
+ */
+export interface Vector3D {
+  x: number
+  y: number
+  z: number
+}
+
+/**
+ * Preset 3D vector pair for educational demonstrations
+ */
+export interface Vector3DPreset {
+  id: string
+  name: string
+  description: string
+  vectorA: Vector3D
+  vectorB: Vector3D
+}
+
+/**
+ * Available 3D vector operations
+ */
+export type Vector3DOperation =
+  | 'add'
+  | 'subtract'
+  | 'dot'
+  | 'cross'
+  | 'magnitude'
+  | 'angle'
+  | 'scalar'
+  | 'normalize'
+
+// ============================================================================
+// 3D Matrix Types (Phase 16)
+// ============================================================================
+
+/**
+ * 3×3 Matrix for 3D linear transformations.
+ * Represented as a 2D array: [[row0], [row1], [row2]]
+ */
+export type Matrix3x3 = [
+  [number, number, number],
+  [number, number, number],
+  [number, number, number]
+]
+
+/**
+ * Types of 3D rotation transformations.
+ */
+export type Rotation3DType =
+  | 'identity'
+  | 'rotationX'
+  | 'rotationY'
+  | 'rotationZ'
+  | 'combined'
+  | 'scale'
+
+/**
+ * A preset 3D rotation transformation with its associated matrix and metadata.
+ */
+export interface Rotation3DPreset {
+  /** Unique identifier */
+  id: string
+  /** Display name */
+  name: string
+  /** Brief description of the transformation */
+  description: string
+  /** Classification of transformation type */
+  type: Rotation3DType
+  /** The 3×3 transformation matrix */
+  matrix: Matrix3x3
+  /** Optional parameters used to generate this matrix */
+  parameters?: Record<string, number>
+}
+
+// ============================================================================
 // Limits Types (Phase 13)
 // ============================================================================
 

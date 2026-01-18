@@ -122,6 +122,16 @@ const router = createRouter({
       name: 'linear-algebra-matrices',
       component: () => import('@/views/linear-algebra/MatricesView.vue'),
     },
+    {
+      path: '/linear-algebra/vectors-3d',
+      name: 'linear-algebra-vectors-3d',
+      component: () => import('@/views/linear-algebra/Vectors3DView.vue'),
+    },
+    {
+      path: '/linear-algebra/matrices-3d',
+      name: 'linear-algebra-matrices-3d',
+      component: () => import('@/views/linear-algebra/Matrices3DView.vue'),
+    },
     // Statistics section
     {
       path: '/statistics',

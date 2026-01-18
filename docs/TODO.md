@@ -20,6 +20,7 @@ The "Coming Soon" section has been removed from TrigonometryIndexView.vue.
 ## Fixes (Known Issues)
 
 - [x] **Scroll position issue**: Fixed in router scrollBehavior - query param changes no longer scroll to top
+- [ ] Rename URL mapping between Vector 2D and Matrices 2D
 
 ---
 
@@ -80,6 +81,7 @@ The "Coming Soon" section has been removed from TrigonometryIndexView.vue.
 - [ ] Expression builder widget for Variables & Expressions page
 - [ ] PEMDAS step-by-step calculator widget for Order of Operations page
 - [ ] Snake Math Game, a small Snake game in browser, where the user has to navigate the snake around and take the right answer to a proposed math question (e.g. 81 + 7 = ?, and then the user has to navigate to the Square with "88")
+- [ ] Vectors and Matrices in n'th dimension
 
 ## Archived
 

@@ -1,0 +1,6 @@
+export { default as MatrixTransformations3D } from './MatrixTransformations3D.vue'
+export { default as UnitCubeCanvas3D } from './UnitCubeCanvas3D.vue'
+export { default as Transform3DSelector } from './Transform3DSelector.vue'
+export { default as Transform3DControls } from './Transform3DControls.vue'
+export { default as Matrix3DDisplay } from './Matrix3DDisplay.vue'
+export { default as Transform3DInfo } from './Transform3DInfo.vue'

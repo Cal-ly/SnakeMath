@@ -8,7 +8,7 @@ import { VectorOperations } from '@/components/widgets'
 
 const relatedTopics = [
   { title: 'Linear Algebra Overview', path: '/linear-algebra', description: 'All linear algebra topics' },
-  { title: 'Matrices', path: '/linear-algebra/matrices', description: 'Transform and rotate vectors' },
+  { title: 'Matrices in 2D', path: '/linear-algebra/matrices', description: 'Transform and rotate vectors' },
   { title: 'Unit Circle', path: '/trigonometry/unit-circle', description: 'Unit vectors and angle calculations' },
   { title: 'Summation', path: '/algebra/summation', description: 'Vector sums and sigma notation' },
 ]
@@ -110,8 +110,8 @@ print(f"king-apple: {cosine_similarity(king, apple):.3f}")  # ~0.43 (not similar
 
 <template>
   <TopicPage
-    title="Vectors"
-    description="Arrows in space, lists of numbers, and the foundation of machine learning."
+    title="Vectors in 2D"
+    description="Arrows in 2D space, lists of numbers, and the foundation of machine learning."
   >
     <div class="space-y-8">
       <!-- Introduction -->
