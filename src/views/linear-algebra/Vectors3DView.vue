@@ -126,6 +126,53 @@ print(f"Light intensity: {intensity}")  # 1.0 (max)`
           </div>
         </div>
 
+        <!-- Three Analogies -->
+        <div class="grid gap-4 sm:grid-cols-3 mt-6 mb-4">
+          <div class="p-4 bg-surface-alt rounded-lg border border-border">
+            <h4 class="font-semibold text-amber-600 dark:text-amber-400 mb-2">
+              <i class="fa-solid fa-compass mr-2" aria-hidden="true" />
+              Everyday Analogy
+            </h4>
+            <p class="text-sm text-text-secondary">
+              Like giving directions: "go 3 blocks east, 4 blocks north, then up 2 floors."
+              Three numbers describe any point in space.
+            </p>
+          </div>
+          <div class="p-4 bg-surface-alt rounded-lg border border-border">
+            <h4 class="font-semibold text-emerald-600 dark:text-emerald-400 mb-2">
+              <i class="fa-solid fa-code mr-2" aria-hidden="true" />
+              Programming Analogy
+            </h4>
+            <p class="text-sm text-text-secondary">
+              A 3D vector is just <code>[x, y, z]</code> &mdash; an array of three floats.
+              Cross product is <code>np.cross()</code>, one function call.
+            </p>
+          </div>
+          <div class="p-4 bg-surface-alt rounded-lg border border-border">
+            <h4 class="font-semibold text-blue-600 dark:text-blue-400 mb-2">
+              <i class="fa-solid fa-chart-line mr-2" aria-hidden="true" />
+              Visual Intuition
+            </h4>
+            <p class="text-sm text-text-secondary">
+              An arrow in 3D space with a head (direction) and length (magnitude).
+              Cross product gives the "perpendicular up" direction.
+            </p>
+          </div>
+        </div>
+
+        <!-- Common Pitfall -->
+        <div class="p-4 bg-amber-50 dark:bg-amber-900/30 border border-amber-200 dark:border-amber-800 rounded-lg mb-4">
+          <p class="font-semibold text-amber-700 dark:text-amber-300 mb-2">
+            <i class="fa-solid fa-triangle-exclamation mr-2" aria-hidden="true" />
+            Common Pitfall: Cross Product Order Matters
+          </p>
+          <p class="text-sm text-amber-600 dark:text-amber-400">
+            Unlike the dot product, <code>a &times; b &ne; b &times; a</code>. In fact,
+            <code>a &times; b = -(b &times; a)</code>. Swap the order and you flip the direction.
+            This trips up many programmers when calculating surface normals!
+          </p>
+        </div>
+
         <CodeExample
           id="linalg-vectors3d-basics"
           title="vector3d_basics.py"
@@ -134,39 +181,6 @@ print(f"Light intensity: {intensity}")  # 1.0 (max)`
           :collapsible="true"
           :default-expanded="false"
         />
-
-        <div class="grid gap-4 sm:grid-cols-3 mt-4 mb-4">
-          <div class="p-4 bg-surface-alt rounded-lg border border-border">
-            <h4 class="font-semibold text-amber-600 mb-2">
-              <i class="fa-solid fa-video mr-2" aria-hidden="true" />
-              Games &amp; Graphics
-            </h4>
-            <p class="text-sm text-text-secondary">
-              3D positions, camera directions, surface normals for lighting,
-              collision detection &mdash; all vectors.
-            </p>
-          </div>
-          <div class="p-4 bg-surface-alt rounded-lg border border-border">
-            <h4 class="font-semibold text-emerald-600 mb-2">
-              <i class="fa-solid fa-atom mr-2" aria-hidden="true" />
-              Physics Simulations
-            </h4>
-            <p class="text-sm text-text-secondary">
-              Forces, velocities, accelerations, torque, angular momentum &mdash;
-              the language of mechanics.
-            </p>
-          </div>
-          <div class="p-4 bg-surface-alt rounded-lg border border-border">
-            <h4 class="font-semibold text-blue-600 mb-2">
-              <i class="fa-solid fa-robot mr-2" aria-hidden="true" />
-              Robotics &amp; Control
-            </h4>
-            <p class="text-sm text-text-secondary">
-              Robot arm positions, end-effector orientation, path planning &mdash;
-              all 3D vector math.
-            </p>
-          </div>
-        </div>
       </ContentSection>
 
       <!-- Interactive Explorer -->

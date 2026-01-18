@@ -45,7 +45,8 @@ Each topic builds toward machine learning foundations:
 | 13 | Calculus: Limits | LimitsExplorer | Calculus: Limits | ✅ Complete |
 | 14 | Calculus: Derivatives | DerivativeVisualizer | Calculus: Derivatives | ✅ Complete |
 | 15 | Trigonometry: Remaining Topics | InverseTrigExplorer, TrigCodePlayground | Trig: Identities, Inverse Functions, Trig in Code | ✅ Complete |
-| **16+** | **AI/ML Foundations** | **Various** | **ML Bridge Content** | 🎯 Next |
+| 16 | Linear Algebra: 3D | VectorOperations3D, MatrixTransformations3D | LinAlg: Vectors 3D, Matrices 3D | ✅ Complete |
+| **17+** | **AI/ML Foundations** | **Various** | **ML Bridge Content** | 🎯 Next |
 
 ---
 
@@ -321,20 +322,55 @@ Each topic builds toward machine learning foundations:
 
 ---
 
-## Future Horizons (Phase 16+)
+### Phase 16: Linear Algebra — 3D
+*Into the Third Dimension*
 
-Lower detail, higher flexibility. Evaluated after Phase 15.
+**Goal**: Extend linear algebra coverage with 3D vectors and 3D transformation matrices.
+
+| Track | Deliverables |
+|-------|--------------|
+| Content | Vectors 3D (cross product, 3D operations), Matrices 3D (rotation matrices, Euler angles) |
+| Widget | VectorOperations3D (isometric projection, cross product, right-hand rule), MatrixTransformations3D (3×3 rotation matrices, unit cube) |
+| Polish | Isometric projection composable, reusable 3D visualization infrastructure |
+
+**Widget Features**:
+
+*VectorOperations3D*:
+- 3D vector inputs with coordinate sliders
+- 8 operations: add, subtract, dot product, cross product, magnitude, angle, scalar multiply, normalize
+- Isometric SVG canvas with grid and vector arrows
+- Cross product with right-hand rule demo
+- 5 educational presets
+
+*MatrixTransformations3D*:
+- 6 transformation types: identity, rotateX, rotateY, rotateZ, combined, scale
+- Isometric SVG canvas with unit cube and transformed cube
+- Basis vector visualization (î, ĵ, k̂)
+- Euler angle composition (Rx → Ry → Rz)
+- 8 educational presets
+- Determinant-based property badges (orthogonal, rotation, orientation)
+
+**Technical Achievements**:
+- Isometric projection composable (useIsometricProjection)
+- Right-handed, Y-up coordinate system
+- SVG-based 3D visualization without WebGL
+
+---
+
+## Future Horizons (Phase 17+)
+
+Lower detail, higher flexibility. Evaluated after Phase 16.
 
 | Phase | Possible Focus |
 |-------|----------------|
-| 16 | AI/ML Foundations: Neural network intuition |
-| 17 | Probability distributions and sampling |
-| 18 | Gradient descent visualization |
-| 19 | PWA features: offline support, installability |
-| 20 | Search functionality, content discovery |
-| 21 | User progress tracking (local storage) |
-| 22 | Practice problems / quiz system |
-| 23 | Community contributions framework |
+| 17 | AI/ML Foundations: Neural network intuition |
+| 18 | Probability distributions and sampling |
+| 19 | Gradient descent visualization |
+| 20 | PWA features: offline support, installability |
+| 21 | Search functionality, content discovery |
+| 22 | User progress tracking (local storage) |
+| 23 | Practice problems / quiz system |
+| 24 | Community contributions framework |
 
 ---
 
@@ -419,6 +455,8 @@ Decisions made during roadmap planning:
 | R-018 | Multi-demo composable architecture (Phase 15) | Single useTrigPlayground composable manages rotation, waves, circular motion, projectile demos with shared state patterns |
 | R-019 | Principal value convention for inverse trig (Phase 15) | Match standard library behavior: arcsin/arccos return [-π/2, π/2] and [0, π]; atan2 returns full [-π, π] |
 | R-020 | Underscore prefix for intentionally unused variables | ESLint `@typescript-eslint/no-unused-vars` ignores variables matching `/^_/u`; prevents CI failures |
+| R-021 | Isometric projection for 3D visualization | SVG-based approach avoids WebGL complexity; 30° angles provide clear depth cues |
+| R-022 | Cross product as default 3D vector operation | Unique to 3D; demonstrates right-hand rule effectively |
 
 ---
 
@@ -450,6 +488,8 @@ Phase 13: LimitsExplorer          (ε-δ visualization)
 Phase 14: DerivativeVisualizer    (tangent lines, slopes)
 Phase 15: InverseTrigExplorer     (arcsin/arccos/arctan, domain/range)
 Phase 15: TrigCodePlayground      (rotation, waves, circular motion, projectiles)
+Phase 16: VectorOperations3D      (3D vectors, cross product, isometric projection)
+Phase 16: MatrixTransformations3D (3D rotation matrices, Euler angles, unit cube)
 ```
 
 ### Technical Capability Building
@@ -465,6 +505,7 @@ Phase 12: Transformation matrices, composition
 Phase 13: Epsilon-delta bands, limit visualization
 Phase 14: Tangent lines, derivative graphs
 Phase 15: Multi-demo composables, requestAnimationFrame animations, domain validation
+Phase 16: Isometric projection, 3D coordinate systems, SVG-based 3D visualization
 ```
 
 ---
@@ -473,8 +514,8 @@ Phase 15: Multi-demo composables, requestAnimationFrame animations, domain valid
 
 | Metric | Target | Measured By |
 |--------|--------|-------------|
-| Content Coverage | All archive content migrated | Phase 15 |
-| Widget Count | 12+ major interactive widgets | Phase 15 |
+| Content Coverage | All archive content migrated | Phase 16 |
+| Widget Count | 14+ major interactive widgets | Phase 16 |
 | Test Coverage | All utilities tested, E2E for all widgets | Ongoing |
 | Accessibility | WCAG 2.1 AA compliance | axe-core audits |
 | Performance | Lighthouse >90 | Phase 10 audit |
@@ -495,7 +536,8 @@ Phase 15: Multi-demo composables, requestAnimationFrame animations, domain valid
 | 13 | Limits visualization effective? Epsilon-delta approach working? | ✅ Yes - numerical approach intuitive; ε-δ bands educational |
 | 14 | Derivatives visualization effective? Secant animation working? | ✅ Yes - tangent lines clear; secant→tangent animation demonstrates limit definition well |
 | 15 | Trigonometry section complete? All subtopics covered? | ✅ Yes - 5 subtopics (Unit Circle, Right Triangle, Identities, Inverse Functions, Trig in Code); comprehensive coverage |
-| 16+ | Core math sections complete. Evaluate AI/ML phase scope. | — |
+| 16 | 3D linear algebra effective? Isometric projection working? | ✅ Yes - isometric SVG visualization works well; cross product with right-hand rule demo; Euler angles clearly demonstrated |
+| 17+ | Core math sections complete. Evaluate AI/ML phase scope. | — |
 
 ---
 
@@ -529,6 +571,7 @@ Phase 15: Multi-demo composables, requestAnimationFrame animations, domain valid
 | 2026-01-17 | Phase 13 complete: LimitsExplorer widget, ε-δ visualization, limits utilities (40+ tests), calculus section with Limits page |
 | 2026-01-17 | Phase 14 complete: DerivativeVisualizer widget, tangent lines, secant-to-tangent animation, derivative utilities (67 tests), derivatives page with gradient descent focus |
 | 2026-01-18 | Phase 15 complete: TrigIdentityExplorer (21 identities), InverseTrigExplorer (arcsin/arccos/arctan/atan2), TrigCodePlayground (rotation/waves/circular motion/projectiles); trigonometry section finished with 5 subtopics; 1048 tests total |
+| 2026-01-18 | Phase 16 complete: VectorOperations3D (8 operations, cross product, right-hand rule), MatrixTransformations3D (3×3 rotation matrices, Euler angles, unit cube); isometric projection composable; 1252 tests total |
 
 ---
 

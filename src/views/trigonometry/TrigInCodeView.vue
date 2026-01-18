@@ -3,7 +3,31 @@ import TopicPage from '@/components/content/TopicPage.vue'
 import ContentSection from '@/components/content/ContentSection.vue'
 import MathBlock from '@/components/content/MathBlock.vue'
 import CodeExample from '@/components/content/CodeExample.vue'
+import RelatedTopics from '@/components/content/RelatedTopics.vue'
 import { TrigCodePlayground } from '@/components/widgets/TrigCodePlayground'
+
+const relatedTopics = [
+  {
+    title: 'Trigonometry Overview',
+    path: '/trigonometry',
+    description: 'All trigonometry topics',
+  },
+  {
+    title: 'Unit Circle',
+    path: '/trigonometry/unit-circle',
+    description: 'The foundation - where sin and cos come from',
+  },
+  {
+    title: 'Inverse Trig Functions',
+    path: '/trigonometry/inverse-functions',
+    description: 'Finding angles from coordinates with atan2',
+  },
+  {
+    title: 'Vectors',
+    path: '/linear-algebra/vectors',
+    description: 'Direction and magnitude calculations',
+  },
+]
 
 const rotationCode = `import math
 
@@ -127,6 +151,53 @@ for frame in range(frames + 1):
           every game mechanic that involves angles or circles uses sine and cosine under the hood.
         </p>
 
+        <!-- Three analogies -->
+        <div class="grid gap-4 sm:grid-cols-3 mb-6">
+          <div class="p-4 bg-surface-alt rounded-lg border border-border">
+            <h4 class="font-semibold text-amber-600 dark:text-amber-400 mb-2">
+              <i class="fa-solid fa-gamepad mr-2" aria-hidden="true" />
+              Everyday Analogy
+            </h4>
+            <p class="text-sm text-text-secondary">
+              Trig in code is like a universal translator between "which direction?" and "how far
+              left/right and up/down?" Every time you aim in a game, that translation happens.
+            </p>
+          </div>
+          <div class="p-4 bg-surface-alt rounded-lg border border-border">
+            <h4 class="font-semibold text-emerald-600 dark:text-emerald-400 mb-2">
+              <i class="fa-solid fa-code mr-2" aria-hidden="true" />
+              Programming Analogy
+            </h4>
+            <p class="text-sm text-text-secondary">
+              Think of sin/cos as coordinate converters: <code>angle → (x, y)</code>. And atan2 as the
+              reverse: <code>(x, y) → angle</code>. These are your core APIs for anything circular.
+            </p>
+          </div>
+          <div class="p-4 bg-surface-alt rounded-lg border border-border">
+            <h4 class="font-semibold text-blue-600 dark:text-blue-400 mb-2">
+              <i class="fa-solid fa-circle-notch mr-2" aria-hidden="true" />
+              Visual Intuition
+            </h4>
+            <p class="text-sm text-text-secondary">
+              Picture a clock hand. As time passes, it sweeps in a circle. At any moment,
+              cos(angle) tells you how far right it is, sin(angle) tells you how far up.
+            </p>
+          </div>
+        </div>
+
+        <!-- Common pitfall -->
+        <div class="p-4 bg-amber-50 dark:bg-amber-900/30 border border-amber-200 dark:border-amber-800 rounded-lg mb-6">
+          <p class="font-semibold text-amber-700 dark:text-amber-300 mb-2">
+            <i class="fa-solid fa-triangle-exclamation mr-2" aria-hidden="true" />
+            Common Pitfall: Screen Y is Inverted!
+          </p>
+          <p class="text-sm text-amber-600 dark:text-amber-400">
+            In math, Y increases upward. In most screen/canvas systems, Y increases <em>downward</em>.
+            This flips your angles! A positive rotation in math goes counter-clockwise, but on screen
+            it goes clockwise. Always check your coordinate system.
+          </p>
+        </div>
+
         <div class="grid gap-4 md:grid-cols-2">
           <div class="p-4 rounded-lg border border-border">
             <p class="font-medium text-text-primary mb-2">
@@ -181,7 +252,13 @@ for frame in range(frames + 1):
       </ContentSection>
 
       <!-- 2D Rotation -->
-      <ContentSection id="rotation" title="2D Rotation" icon="fa-solid fa-sync">
+      <ContentSection
+        id="rotation"
+        title="2D Rotation"
+        icon="fa-solid fa-sync"
+        :default-expanded="false"
+        collapsible
+      >
         <p class="mb-4">
           The rotation formula is one of the most useful things you'll learn. To rotate a point
           <MathBlock formula="(x, y)" /> by angle <MathBlock formula="\theta" /> around the origin:
@@ -220,12 +297,18 @@ for frame in range(frames + 1):
         </div>
 
         <div class="mt-4">
-          <CodeExample language="python" :code="rotationCode" />
+          <CodeExample id="trig-code-rotation" title="rotate_point.py" language="python" :code="rotationCode" />
         </div>
       </ContentSection>
 
       <!-- Wave Generation -->
-      <ContentSection id="waves" title="Wave Generation" icon="fa-solid fa-wave-square">
+      <ContentSection
+        id="waves"
+        title="Wave Generation"
+        icon="fa-solid fa-wave-square"
+        :default-expanded="false"
+        collapsible
+      >
         <p class="mb-4">
           Sine waves are the building blocks of audio, animation, and signal processing.
           The general form is:
@@ -256,11 +339,17 @@ for frame in range(frames + 1):
           smooth pulsing effects.
         </p>
 
-        <CodeExample language="python" :code="waveCode" />
+        <CodeExample id="trig-code-wave" title="sine_wave.py" language="python" :code="waveCode" />
       </ContentSection>
 
       <!-- Circular Motion -->
-      <ContentSection id="circular" title="Circular Motion" icon="fa-solid fa-circle-notch">
+      <ContentSection
+        id="circular"
+        title="Circular Motion"
+        icon="fa-solid fa-circle-notch"
+        :default-expanded="false"
+        collapsible
+      >
         <p class="mb-4">
           Moving an object in a circle is just evaluating sine and cosine at increasing angles:
         </p>
@@ -293,12 +382,18 @@ for frame in range(frames + 1):
         </div>
 
         <div class="mt-4">
-          <CodeExample language="python" :code="circularCode" />
+          <CodeExample id="trig-code-circular" title="circular_motion.py" language="python" :code="circularCode" />
         </div>
       </ContentSection>
 
       <!-- Projectile Motion -->
-      <ContentSection id="projectile" title="Projectile Motion" icon="fa-solid fa-basketball">
+      <ContentSection
+        id="projectile"
+        title="Projectile Motion"
+        icon="fa-solid fa-basketball"
+        :default-expanded="false"
+        collapsible
+      >
         <p class="mb-4">
           Every ball throw, arrow shot, or jump arc in games uses projectile physics.
           The key equations decompose velocity into horizontal and vertical components:
@@ -340,11 +435,17 @@ for frame in range(frames + 1):
           </p>
         </div>
 
-        <CodeExample language="python" :code="projectileCode" />
+        <CodeExample id="trig-code-projectile" title="projectile.py" language="python" :code="projectileCode" />
       </ContentSection>
 
       <!-- Animation Easing -->
-      <ContentSection id="easing" title="Animation Easing" icon="fa-solid fa-bezier-curve">
+      <ContentSection
+        id="easing"
+        title="Animation Easing"
+        icon="fa-solid fa-bezier-curve"
+        :default-expanded="false"
+        collapsible
+      >
         <p class="mb-4">
           Trig functions create smooth, natural-feeling animations. Linear motion looks robotic;
           easing makes things feel alive.
@@ -384,7 +485,7 @@ for frame in range(frames + 1):
           </div>
         </div>
 
-        <CodeExample language="python" :code="easingCode" />
+        <CodeExample id="trig-code-easing" title="easing.py" language="python" :code="easingCode" />
       </ContentSection>
 
       <!-- Summary -->
@@ -432,6 +533,9 @@ for frame in range(frames + 1):
           </div>
         </div>
       </ContentSection>
+
+      <!-- Related Topics -->
+      <RelatedTopics :topics="relatedTopics" />
     </div>
   </TopicPage>
 </template>

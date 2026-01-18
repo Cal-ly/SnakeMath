@@ -3329,3 +3329,98 @@ npm run build        # Production build succeeds
 - Catches issues locally before CI
 - Faster feedback loop than waiting for CI
 - Reduces failed CI runs and re-commits
+
+---
+
+## Design System Compliance (2026-01-18)
+
+### LL-074: Design System Drift in Content Pages
+**Issue**: Trigonometry content pages drifted from DESIGN_SYSTEM.md patterns over time. Issues found:
+- Missing three-analogy blocks or wrong styling (colored backgrounds instead of `bg-surface-alt`)
+- Missing or incorrectly styled Common Pitfall callouts (red instead of amber)
+- CodeExample components missing required `id` and `title` props
+- Advanced/supplementary sections not marked as collapsible
+- Missing RelatedTopics sections
+- Missing TopicPage wrapper component
+
+**Resolution**: Conducted full audit of all 6 trig views against DESIGN_SYSTEM.md checklist, fixed 15+ issues across 3 files.
+
+**Lesson**: Design system compliance requires active enforcement. Content created in isolation tends to drift from standards. See LI-074 for prevention strategies.
+
+---
+
+### LI-074: Design System Compliance Strategies
+**Identified**: Several strategies can prevent design system drift:
+
+**1. Content Page Template**
+Create a starter template file that authors copy when creating new content pages:
+```vue
+<!-- src/templates/ContentPageTemplate.vue -->
+<template>
+  <TopicPage title="[TITLE]" description="[DESCRIPTION]">
+    <div class="space-y-8">
+      <ContentSection id="intro" title="[INTRO TITLE]" icon="fa-solid fa-[ICON]">
+        <!-- Introduction paragraph -->
+
+        <!-- Three analogies (REQUIRED) -->
+        <div class="grid gap-4 sm:grid-cols-3 mb-6">...</div>
+
+        <!-- Common pitfall (REQUIRED) -->
+        <div class="p-4 bg-amber-50 dark:bg-amber-900/30 ...">...</div>
+      </ContentSection>
+
+      <!-- Additional sections... -->
+
+      <RelatedTopics :topics="relatedTopics" />
+    </div>
+  </TopicPage>
+</template>
+```
+
+**2. Periodic Audits**
+Schedule design system audits after each phase completion:
+- Run checklist from DESIGN_SYSTEM.md against new content
+- Check: analogies, pitfalls, collapsibles, RelatedTopics, CodeExample props
+- Fix issues before moving to next phase
+
+**3. Grep-Based Compliance Checks**
+Quick commands to verify compliance:
+```bash
+# Find pages missing RelatedTopics
+grep -rL "RelatedTopics" src/views/*/
+
+# Find CodeExamples missing id prop
+grep -rn "CodeExample" src/views/ | grep -v 'id="'
+
+# Find pages missing TopicPage wrapper
+grep -rL "TopicPage" src/views/*/*View.vue
+
+# Count collapsible sections per file
+grep -rc "collapsible" src/views/
+```
+
+**4. PR/Review Checklist**
+Add to review process for content pages:
+- [ ] TopicPage wrapper with title and description
+- [ ] Three-analogy block present with `bg-surface-alt` backgrounds
+- [ ] Common Pitfall callout with amber styling
+- [ ] All CodeExamples have `id` and `title` props
+- [ ] Advanced sections have `collapsible :default-expanded="false"`
+- [ ] RelatedTopics section at bottom with 3-4 items
+- [ ] Dark mode variants on colored text (`dark:text-amber-400` etc.)
+
+**5. Phase Plan Checklist**
+Add to phase planning documents:
+```markdown
+## Design System Compliance
+Before marking phase complete, verify new content against DESIGN_SYSTEM.md:
+- [ ] Run grep checks (see LI-074)
+- [ ] Visual review in both light and dark mode
+- [ ] Check all required elements present
+```
+
+**Benefits**:
+- Catches issues early in development cycle
+- Reduces batch fix-up work
+- Maintains consistent user experience across all content
+- Makes onboarding new contributors easier

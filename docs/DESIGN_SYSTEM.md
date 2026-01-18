@@ -402,7 +402,56 @@ When creating new components, verify:
 
 When creating new content pages, additionally verify:
 
-- [ ] Three-Analogy Block: Amber/Emerald/Blue cards after introduction
+- [ ] TopicPage wrapper: With `title` and `description` props
+- [ ] Three-Analogy Block: Amber/Emerald/Blue cards with `bg-surface-alt` backgrounds
 - [ ] Pitfall Callout: Amber warning box with specific error name
+- [ ] Collapsible sections: Advanced content has `collapsible :default-expanded="false"`
+- [ ] CodeExample props: All have `id` (format: `section-topic-descriptor`) and `title` (filename.py style)
 - [ ] RelatedTopics: 3-4 items including parent index and cross-section links
+- [ ] Dark mode: Color text has `dark:` variant (e.g., `text-amber-600 dark:text-amber-400`)
 - [ ] Navigation description: Engaging hook under 60 characters
+
+---
+
+## Compliance Verification
+
+### Quick Grep Checks
+
+Run these commands to verify design system compliance across content:
+
+```bash
+# Find pages missing RelatedTopics
+grep -rL "RelatedTopics" src/views/*/
+
+# Find CodeExamples missing id prop
+grep -rn "<CodeExample" src/views/ | grep -v 'id="'
+
+# Find pages missing TopicPage wrapper
+grep -rL "TopicPage" src/views/*/*View.vue
+
+# Find pages missing three-analogy block
+grep -rL "Everyday Analogy" src/views/*/*View.vue
+
+# Find pages missing pitfall callout
+grep -rL "Common Pitfall" src/views/*/*View.vue
+```
+
+### Phase Completion Checklist
+
+Before marking any phase complete, verify new content:
+
+1. **Run grep checks** above - fix any missing elements
+2. **Visual review** in both light and dark mode
+3. **Check collapsible states** - primary content expanded, advanced collapsed
+4. **Verify CodeExample props** - unique IDs, filename-style titles
+5. **Test RelatedTopics links** - all paths valid, 3-4 topics included
+
+### Common Issues to Watch For
+
+| Issue | Symptom | Fix |
+|-------|---------|-----|
+| Wrong analogy background | Colored `bg-amber-50` instead of neutral | Use `bg-surface-alt` |
+| Missing dark mode | Text invisible in dark mode | Add `dark:text-{color}-400` variant |
+| Pitfall wrong color | Red styling instead of amber | Use `bg-amber-50 dark:bg-amber-900/30` |
+| CodeExample no ID | Can't cross-reference examples | Add `id="section-topic-descriptor"` |
+| All sections expanded | Page feels overwhelming | Add `collapsible :default-expanded="false"` to advanced sections |

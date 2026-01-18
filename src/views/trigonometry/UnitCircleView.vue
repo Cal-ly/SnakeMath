@@ -131,7 +131,7 @@ print(f"Rotated point: ({result[0]:.2f}, {result[1]:.2f})")`
         <!-- Three analogies -->
         <div class="grid gap-4 sm:grid-cols-3 mb-4">
           <div class="p-4 bg-surface-alt rounded-lg border border-border">
-            <h4 class="font-semibold text-amber-600 mb-2">
+            <h4 class="font-semibold text-amber-600 dark:text-amber-400 mb-2">
               <i class="fa-solid fa-clock mr-2" aria-hidden="true" />
               Everyday Analogy
             </h4>
@@ -141,7 +141,7 @@ print(f"Rotated point: ({result[0]:.2f}, {result[1]:.2f})")`
             </p>
           </div>
           <div class="p-4 bg-surface-alt rounded-lg border border-border">
-            <h4 class="font-semibold text-emerald-600 mb-2">
+            <h4 class="font-semibold text-emerald-600 dark:text-emerald-400 mb-2">
               <i class="fa-solid fa-code mr-2" aria-hidden="true" />
               Programming Analogy
             </h4>
@@ -151,7 +151,7 @@ print(f"Rotated point: ({result[0]:.2f}, {result[1]:.2f})")`
             </p>
           </div>
           <div class="p-4 bg-surface-alt rounded-lg border border-border">
-            <h4 class="font-semibold text-blue-600 mb-2">
+            <h4 class="font-semibold text-blue-600 dark:text-blue-400 mb-2">
               <i class="fa-solid fa-wave-square mr-2" aria-hidden="true" />
               Visual Intuition
             </h4>
@@ -160,6 +160,20 @@ print(f"Rotated point: ({result[0]:.2f}, {result[1]:.2f})")`
               y-coordinate traces a sine wave. Circular motion = two waves in sync.
             </p>
           </div>
+        </div>
+
+        <!-- Common pitfall -->
+        <div class="p-4 bg-amber-50 dark:bg-amber-900/30 border border-amber-200 dark:border-amber-800 rounded-lg">
+          <p class="font-semibold text-amber-700 dark:text-amber-300 mb-2">
+            <i class="fa-solid fa-triangle-exclamation mr-2" aria-hidden="true" />
+            Common Pitfall: Radians vs Degrees
+          </p>
+          <p class="text-sm text-amber-600 dark:text-amber-400">
+            Python's <code>math.sin()</code> and <code>math.cos()</code> expect <strong>radians</strong>,
+            not degrees! <code>math.sin(90)</code> does NOT give you 1 — it gives ~0.894.
+            Always use <code>math.radians(90)</code> or <code>math.sin(math.pi/2)</code> to get the
+            expected result.
+          </p>
         </div>
       </ContentSection>
 

@@ -1,4 +1,5 @@
 <script setup lang="ts">
+import TopicPage from '@/components/content/TopicPage.vue'
 import ContentSection from '@/components/content/ContentSection.vue'
 import MathBlock from '@/components/content/MathBlock.vue'
 import CodeExample from '@/components/content/CodeExample.vue'
@@ -135,9 +136,13 @@ print(f"Mouse angle: {angle:.2f}°")  # ~36.87° (toward top-right)`
 </script>
 
 <template>
-  <div class="inverse-trig-view">
-    <!-- Introduction -->
-    <ContentSection id="introduction" title="From Coordinates to Angles">
+  <TopicPage
+    title="Inverse Trig Functions"
+    description="Finding angles from coordinates - the reverse lookup that programmers actually need."
+  >
+    <div class="space-y-8">
+      <!-- Introduction -->
+      <ContentSection id="introduction" title="From Coordinates to Angles" icon="fa-solid fa-rotate-left">
       <p class="text-lg mb-4">
         The <strong>inverse trigonometric functions</strong> solve the reverse problem: given a trig
         value, find the angle that produced it. If <MathBlock formula="\sin(\theta) = 0.5" />, what is
@@ -145,38 +150,38 @@ print(f"Mouse angle: {angle:.2f}°")  # ~36.87° (toward top-right)`
       </p>
 
       <!-- Three-analogy block -->
-      <div class="grid md:grid-cols-3 gap-4 my-6">
+      <div class="grid gap-4 sm:grid-cols-3 my-6">
         <!-- Everyday analogy -->
-        <div class="p-4 rounded-lg bg-amber-50 dark:bg-amber-900/20 border border-amber-200 dark:border-amber-800">
-          <div class="flex items-center gap-2 mb-2">
-            <i class="fa-solid fa-lightbulb text-amber-600" aria-hidden="true" />
-            <span class="font-semibold text-amber-800 dark:text-amber-200">Everyday</span>
-          </div>
-          <p class="text-sm text-amber-900 dark:text-amber-100">
+        <div class="p-4 bg-surface-alt rounded-lg border border-border">
+          <h4 class="font-semibold text-amber-600 dark:text-amber-400 mb-2">
+            <i class="fa-solid fa-lightbulb mr-2" aria-hidden="true" />
+            Everyday Analogy
+          </h4>
+          <p class="text-sm text-text-secondary">
             Like looking up a word by its definition instead of alphabetically. You know "happiness"
             means "joyful feeling"—but which word means "joyful feeling"? That's the reverse lookup.
           </p>
         </div>
 
         <!-- Programming analogy -->
-        <div class="p-4 rounded-lg bg-emerald-50 dark:bg-emerald-900/20 border border-emerald-200 dark:border-emerald-800">
-          <div class="flex items-center gap-2 mb-2">
-            <i class="fa-solid fa-code text-emerald-600" aria-hidden="true" />
-            <span class="font-semibold text-emerald-800 dark:text-emerald-200">Programming</span>
-          </div>
-          <p class="text-sm text-emerald-900 dark:text-emerald-100">
+        <div class="p-4 bg-surface-alt rounded-lg border border-border">
+          <h4 class="font-semibold text-emerald-600 dark:text-emerald-400 mb-2">
+            <i class="fa-solid fa-code mr-2" aria-hidden="true" />
+            Programming Analogy
+          </h4>
+          <p class="text-sm text-text-secondary">
             Forward lookup is <code>dict[key]</code> → value. Inverse is finding which key has that
             value. In games: given a player's (x, y), what angle are they facing?
           </p>
         </div>
 
         <!-- Visual intuition -->
-        <div class="p-4 rounded-lg bg-blue-50 dark:bg-blue-900/20 border border-blue-200 dark:border-blue-800">
-          <div class="flex items-center gap-2 mb-2">
-            <i class="fa-solid fa-eye text-blue-600" aria-hidden="true" />
-            <span class="font-semibold text-blue-800 dark:text-blue-200">Visual</span>
-          </div>
-          <p class="text-sm text-blue-900 dark:text-blue-100">
+        <div class="p-4 bg-surface-alt rounded-lg border border-border">
+          <h4 class="font-semibold text-blue-600 dark:text-blue-400 mb-2">
+            <i class="fa-solid fa-eye mr-2" aria-hidden="true" />
+            Visual Intuition
+          </h4>
+          <p class="text-sm text-text-secondary">
             On the unit circle, sin gives you the y-coordinate from an angle. Arcsin goes backward:
             given a y-coordinate, find which angle got you there.
           </p>
@@ -184,26 +189,22 @@ print(f"Mouse angle: {angle:.2f}°")  # ~36.87° (toward top-right)`
       </div>
 
       <!-- Common pitfall -->
-      <div class="p-4 rounded-lg bg-red-50 dark:bg-red-900/20 border border-red-300 dark:border-red-800 my-6">
-        <div class="flex items-start gap-3">
-          <i class="fa-solid fa-triangle-exclamation text-red-600 mt-1" aria-hidden="true" />
-          <div>
-            <div class="font-semibold text-red-800 dark:text-red-200 mb-1">
-              Pitfall: Principal Value Surprise
-            </div>
-            <p class="text-sm text-red-900 dark:text-red-100">
-              <code>arcsin(sin(150°)) ≠ 150°</code>. It's 30°! Why? Because arcsin only returns
-              values in [-90°, 90°]. The angle 150° is <em>not</em> in that range, so you get the
-              "equivalent" angle 30° (since sin(150°) = sin(30°) = 0.5).
-            </p>
-          </div>
-        </div>
+      <div class="p-4 bg-amber-50 dark:bg-amber-900/30 border border-amber-200 dark:border-amber-800 rounded-lg my-6">
+        <p class="font-semibold text-amber-700 dark:text-amber-300 mb-2">
+          <i class="fa-solid fa-triangle-exclamation mr-2" aria-hidden="true" />
+          Common Pitfall: Principal Value Surprise
+        </p>
+        <p class="text-sm text-amber-600 dark:text-amber-400">
+          <code>arcsin(sin(150°)) ≠ 150°</code>. It's 30°! Why? Because arcsin only returns
+          values in [-90°, 90°]. The angle 150° is <em>not</em> in that range, so you get the
+          "equivalent" angle 30° (since sin(150°) = sin(30°) = 0.5).
+        </p>
       </div>
     </ContentSection>
 
-    <!-- Interactive Widget -->
-    <ContentSection id="explorer" title="Interactive Explorer">
-      <p class="mb-4">
+      <!-- Interactive Widget -->
+      <ContentSection id="explorer" title="Interactive Explorer" icon="fa-solid fa-sliders">
+        <p class="mb-4">
         Explore all four inverse trig functions. Notice how <strong>atan2</strong> (marked with ★)
         handles all quadrants correctly—it's the one programmers actually use!
       </p>
@@ -385,33 +386,32 @@ print(f"Mouse angle: {angle:.2f}°")  # ~36.87° (toward top-right)`
           Calculate the angle from one point to another—essential for enemy AI, homing missiles, and
           "look at" mechanics.
         </p>
-        <CodeExample id="angle-to-target" language="python" :code="angleToTargetCode" />
+        <CodeExample id="trig-inverse-angle-target" title="angle_to_target.py" language="python" :code="angleToTargetCode" />
 
         <h4 class="font-semibold">Cartesian to Polar Coordinates</h4>
         <p class="text-sm text-text-muted mb-2">
           Convert between (x, y) and (r, θ) representations. Useful for circular UI elements, radar
           displays, and physics simulations.
         </p>
-        <CodeExample id="cartesian-polar" language="python" :code="cartesianToPolarCode" />
+        <CodeExample id="trig-inverse-cartesian-polar" title="cartesian_polar.py" language="python" :code="cartesianToPolarCode" />
 
         <h4 class="font-semibold">Look At / Face Toward</h4>
         <p class="text-sm text-text-muted mb-2">
           Make game entities face and move toward targets. The foundation of most 2D game AI.
         </p>
-        <CodeExample id="look-at" language="python" :code="lookAtCode" />
+        <CodeExample id="trig-inverse-look-at" title="look_at.py" language="python" :code="lookAtCode" />
 
         <h4 class="font-semibold">Mouse Angle from Screen Center</h4>
         <p class="text-sm text-text-muted mb-2">
           Calculate angle from screen center to mouse position—used for turret games, cursor
           effects, and radial menus.
         </p>
-        <CodeExample id="mouse-angle" language="python" :code="mouseAngleCode" />
+        <CodeExample id="trig-inverse-mouse-angle" title="mouse_angle.py" language="python" :code="mouseAngleCode" />
       </div>
     </CollapsiblePanel>
 
-    <!-- Related Topics -->
-    <ContentSection id="related" title="Related Topics">
+      <!-- Related Topics -->
       <RelatedTopics :topics="relatedTopics" />
-    </ContentSection>
-  </div>
+    </div>
+  </TopicPage>
 </template>

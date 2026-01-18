@@ -5,13 +5,13 @@ This document outlines the current state of the project for easy resumption afte
 
 ---
 
-## Current Status: Phase 15 Complete
+## Current Status: Phase 16 Complete
 
 **Last Updated**: 2026-01-18
 
 ### Project Summary
 
-SnakeMath is an educational mathematics website for programmers. Fifteen phases of development have established:
+SnakeMath is an educational mathematics website for programmers. Sixteen phases of development have established:
 
 | Phase | Focus | Key Deliverables | Status |
 |-------|-------|------------------|--------|
@@ -31,6 +31,7 @@ SnakeMath is an educational mathematics website for programmers. Fifteen phases 
 | 14 | Calculus — Derivatives | DerivativeVisualizer, tangent lines, secant animation | Complete |
 | — | Content Review | Three-analogy blocks, pitfall callouts, RelatedTopics | Complete |
 | 15 | Trigonometry — Remaining Topics | Right Triangle, Identities, Inverse, Trig in Code | Complete |
+| 16 | Linear Algebra — 3D | VectorOperations3D, MatrixTransformations3D, isometric projection | Complete |
 
 ### What's Live
 
@@ -56,7 +57,9 @@ SnakeMath is an educational mathematics website for programmers. Fifteen phases 
   - **Trig in Code (TrigCodePlayground widget with 4 demo types)**
 - `/linear-algebra` - Linear Algebra section:
   - Vectors (VectorOperations widget with SVG canvas)
-  - **Matrices (MatrixTransformations widget with unit square visualization)**
+  - Matrices (MatrixTransformations widget with unit square visualization)
+  - **Vectors 3D (VectorOperations3D widget with isometric projection, cross product, right-hand rule)**
+  - **Matrices 3D (MatrixTransformations3D widget with 3×3 rotation matrices, Euler angles)**
 - `/statistics` - Descriptive Statistics (StatisticsCalculator widget with histogram & box plot)
 - `/calculus` - Calculus section:
   - Limits (LimitsExplorer widget with epsilon-delta visualization)
@@ -78,6 +81,8 @@ SnakeMath is an educational mathematics website for programmers. Fifteen phases 
 - **TrigIdentityExplorer**: 21 identities across 6 categories (Pythagorean, Quotient, Reciprocal, Sum/Difference, Double Angle, Half Angle), category tabs, identity cards with expandable proof steps, numerical verification at custom angles, Python code examples, URL state sync
 - **InverseTrigExplorer**: arcsin/arccos/arctan/atan2 functions, domain validation with error messages, exact angle detection (30°, 45°, 60°, etc.), unit circle visualization showing resulting angle, atan2 vs atan comparison display, 10 educational presets, quadrant indicator, Python code examples, URL state sync
 - **TrigCodePlayground**: 4 demo types (rotation, wave, circular motion, projectile), tab-based navigation, rotation demo with angle slider and matrix display, wave demo with frequency/amplitude/phase controls, circular motion with play/pause animation, projectile physics with trajectory visualization, dynamic Python code generation, 12 presets across demo types, URL state sync
+- **VectorOperations3D**: 3D vector inputs with coordinate sliders, 8 operations (add, subtract, dot product, cross product, magnitude, angle, scalar multiply, normalize), isometric SVG canvas with grid/arrows, cross product with right-hand rule demo, 5 educational presets, parallel/perpendicular badges, URL state sync
+- **MatrixTransformations3D**: 6 transformation types (identity, rotateX, rotateY, rotateZ, combined, scale), isometric SVG canvas with unit cube and basis vectors, Euler angle composition, 8 educational presets, determinant-based property badges (orthogonal, rotation, orientation), URL state sync
 
 **Visualization Components**:
 - **CoordinateSystem**: Reusable SVG coordinate system with axes, grid, labels
@@ -88,7 +93,7 @@ SnakeMath is an educational mathematics website for programmers. Fifteen phases 
 - **BoxPlotChart**: SVG box plot with quartiles, whiskers, and outlier markers
 
 **Testing Infrastructure**:
-- 1048 unit tests (Vitest) - including inverseTrig (83) and trigApplications (83) tests
+- 1252 unit tests (Vitest) - including vector3d (92), matrix3d (112), and isometricProjection tests
 - E2E tests (Playwright) with tiered CI approach
 - Visual regression tests (Playwright screenshot comparison) - local only
 - WCAG 2.1 AA accessibility audits via axe-core
@@ -150,6 +155,11 @@ npm run build        # Production build
 | Inverse Trig composable | `src/composables/useInverseTrig.ts` |
 | Trig Applications utilities | `src/utils/math/trigApplications.ts` |
 | Trig Playground composable | `src/composables/useTrigPlayground.ts` |
+| Vector 3D utilities | `src/utils/math/vector3d.ts` |
+| Vector 3D composable | `src/composables/useVectors3D.ts` |
+| Matrix 3D utilities | `src/utils/math/matrix3d.ts` |
+| Matrix 3D composable | `src/composables/useMatrixTransformations3D.ts` |
+| Isometric projection composable | `src/composables/useIsometricProjection.ts` |
 
 ### Archived Documentation
 Phase completion summaries are in `docs/archive/`:
@@ -161,8 +171,8 @@ Phase completion summaries are in `docs/archive/`:
 
 ## Test Coverage
 
-### Unit Tests (1048 tests)
-- Math utilities (number classification, parsing, quadratic, exponential, trigonometry, statistics, product, vector, matrix, limits, derivative, rightTriangle, trigIdentities, inverseTrig, trigApplications functions)
+### Unit Tests (1252 tests)
+- Math utilities (number classification, parsing, quadratic, exponential, trigonometry, statistics, product, vector, matrix, limits, derivative, rightTriangle, trigIdentities, inverseTrig, trigApplications, vector3d, matrix3d functions)
 - Data validation (symbols, navigation)
 - Component logic (via composables)
 
@@ -177,7 +187,9 @@ Phase completion summaries are in `docs/archive/`:
 - **MatrixTransformations** (transformation types, sliders, presets, custom matrix, URL sync)
 - **LimitsExplorer** (preset functions, approach point, direction toggle, epsilon-delta controls, animation, URL sync)
 - **DerivativeVisualizer** (preset functions, point of tangency, secant controls, animation, derivative curve, URL sync)
-- Accessibility (WCAG 2.1 AA audits for all pages including calculus)
+- **VectorOperations3D** (inputs, operations, presets, canvas, cross product, right-hand rule, URL sync)
+- **MatrixTransformations3D** (transformation types, sliders, presets, matrix display, unit cube, URL sync)
+- Accessibility (WCAG 2.1 AA audits for all pages including calculus and linear algebra 3D)
 
 ### Visual Regression Tests (Local Only)
 - All pages baseline screenshots
@@ -212,6 +224,86 @@ Phase completion summaries are in `docs/archive/`:
 
 - **Chunk Size Warnings**: Shiki produces large language chunks (lazy-loaded, acceptable)
 - **v-html Warnings**: ESLint warns about v-html in MathBlock/CodeExample (expected, trusted content)
+
+---
+
+## Phase 16 Completion Summary
+
+Phase 16 implemented Linear Algebra in 3D: 3D vector operations with cross product and 3D matrix transformations with rotation matrices.
+
+### Completed Increments
+
+**Increment 16A: 3D Vector Math Utilities**
+- Created `src/utils/math/vector3d.ts` with 92 comprehensive tests
+- Types: `Vector3D`, `Vector3DOperation`, `Vector3DPreset`
+- Functions: `vector3DAdd`, `vector3DSubtract`, `vector3DScalarMultiply`, `vector3DDotProduct`, `vector3DCrossProduct`
+- Functions: `vector3DMagnitude`, `vector3DNormalize`, `vector3DAngleBetween`
+- Functions: `isZeroVector3D`, `isParallel3D`, `isPerpendicular3D`, `isValidVector3D`, `clampVector3DToRange`
+- 5 educational presets: standard-basis, cross-demo, dot-perpendicular, parallel, space-diagonal
+
+**Increment 16B: VectorOperations3D Widget + Content Page**
+- Created `src/composables/useVectors3D.ts` for state management + URL sync
+- Built widget in `src/components/widgets/VectorOperations3D/`:
+  - `VectorOperations3D.vue` - main orchestrator component
+  - `Vector3DInputPanel.vue` - 3D coordinate inputs with color coding
+  - `Operation3DSelector.vue` - 8 operation buttons with radio group semantics
+  - `Result3DDisplay.vue` - results with LaTeX formulas and relationship badges
+  - `Vector3DPresets.vue` - preset selector and swap button
+  - `IsometricCanvas3D.vue` - SVG isometric projection canvas
+  - `RightHandRuleDemo.vue` - visual demo for cross product orientation
+- Created `src/views/linear-algebra/Vectors3DView.vue` content page
+- Updated routes and navigation
+
+**Increment 16C: 3D Matrix Math Utilities**
+- Created `src/utils/math/matrix3d.ts` with 112 comprehensive tests
+- Types: `Matrix3x3`, `Rotation3DType`, `Transform3DPreset`
+- Functions: `identityMatrix3x3`, `rotationMatrixX`, `rotationMatrixY`, `rotationMatrixZ`, `combinedRotationMatrix`
+- Functions: `scaleMatrix3x3`, `uniformScaleMatrix3x3`
+- Functions: `matrix3x3Multiply`, `matrix3x3VectorMultiply`, `determinant3x3`
+- Functions: `isOrthogonal3x3`, `isRotationMatrix`, `formatMatrix3x3`
+- 8 educational presets: rotate-x-90, rotate-y-45, rotate-z-30, rotate-combined, scale-2x, scale-half, flip-y, custom
+
+**Increment 16D: MatrixTransformations3D Widget + Content Page**
+- Created `src/composables/useMatrixTransformations3D.ts` for state management + URL sync
+- Built widget in `src/components/widgets/MatrixTransformations3D/`:
+  - `MatrixTransformations3D.vue` - main orchestrator component
+  - `Transform3DControls.vue` - transformation type buttons with sliders for angles/scale
+  - `Matrix3DDisplay.vue` - 3×3 matrix display
+  - `Transform3DInfo.vue` - determinant display with property badges
+  - `UnitCubeCanvas3D.vue` - SVG isometric projection of unit cube transformation
+  - `Transform3DPresets.vue` - preset selector
+- Created `src/views/linear-algebra/Matrices3DView.vue` content page
+- Updated routes and navigation
+
+**Increment 16E: Isometric Projection Composable**
+- Created `src/composables/useIsometricProjection.ts` with comprehensive tests
+- Standard isometric projection (30° angles)
+- Functions: `toScreen`, `toWorld`, `generateGridLines`, `generateGridPath`
+- Functions: `generateMarkers`, `generateAxes`, `generateVectorPath`
+- Functions: `projectToXZPlane`, `generateDropLine`
+- Right-handed, Y-up coordinate system
+
+**Increment 16F: E2E Tests**
+- Created `e2e/widgets/vector-operations-3d.spec.ts` with comprehensive tests
+- Created `e2e/widgets/matrix-transformations-3d.spec.ts` with comprehensive tests
+- Tests cover widget rendering, operation selection, presets, canvas visualization, URL sync, responsive design
+
+### Key Architectural Decisions (Phase 16)
+- D-133: Isometric projection for 3D visualization (30° angles, Y-up coordinate system)
+- D-134: Cross product as default operation for 3D vectors (unique to 3D)
+- D-135: Right-hand rule demo component for cross product education
+- D-136: Euler angle composition (Rx → Ry → Rz order)
+- D-137: Unit cube visualization for 3D matrix transformations
+- D-138: Reusable isometric projection composable
+
+### Lessons Learned (Phase 16)
+- LL-051: Isometric projection requires careful coordinate system handling (SVG Y-axis inverted)
+- LL-052: Cross product visualization benefits from drop lines showing height above XZ plane
+
+### Lessons Identified (Phase 16)
+- LI-063: Isometric projection composable pattern for reusable 3D visualization
+- LI-064: Unit cube with basis vectors effectively demonstrates 3D transformations
+- LI-065: Right-hand rule demo essential for cross product understanding
 
 ---
 

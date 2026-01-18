@@ -184,7 +184,54 @@ print(f"Transformed point: {transformed[:3]}")  # [1, 0, 0]
           </div>
         </div>
 
-        <div class="grid gap-4 sm:grid-cols-3 mt-4 mb-4">
+        <!-- Three Analogies -->
+        <div class="grid gap-4 sm:grid-cols-3 mt-6 mb-4">
+          <div class="p-4 bg-surface-alt rounded-lg border border-border">
+            <h4 class="font-semibold text-amber-600 dark:text-amber-400 mb-2">
+              <i class="fa-solid fa-plane mr-2" aria-hidden="true" />
+              Everyday Analogy
+            </h4>
+            <p class="text-sm text-text-secondary">
+              Like an airplane: pitch tilts the nose up/down, yaw turns left/right,
+              roll tilts the wings. Three rotations describe any orientation.
+            </p>
+          </div>
+          <div class="p-4 bg-surface-alt rounded-lg border border-border">
+            <h4 class="font-semibold text-emerald-600 dark:text-emerald-400 mb-2">
+              <i class="fa-solid fa-code mr-2" aria-hidden="true" />
+              Programming Analogy
+            </h4>
+            <p class="text-sm text-text-secondary">
+              A 3&times;3 array that transforms vectors: <code>np.array([[...],[...],[...]])</code>.
+              Matrix multiplication chains transformations.
+            </p>
+          </div>
+          <div class="p-4 bg-surface-alt rounded-lg border border-border">
+            <h4 class="font-semibold text-blue-600 dark:text-blue-400 mb-2">
+              <i class="fa-solid fa-chart-line mr-2" aria-hidden="true" />
+              Visual Intuition
+            </h4>
+            <p class="text-sm text-text-secondary">
+              Watch how the unit cube transforms: rotation preserves shape and size,
+              while scaling stretches. The determinant measures volume change.
+            </p>
+          </div>
+        </div>
+
+        <!-- Common Pitfall -->
+        <div class="p-4 bg-amber-50 dark:bg-amber-900/30 border border-amber-200 dark:border-amber-800 rounded-lg mb-4">
+          <p class="font-semibold text-amber-700 dark:text-amber-300 mb-2">
+            <i class="fa-solid fa-triangle-exclamation mr-2" aria-hidden="true" />
+            Common Pitfall: Rotation Order Matters
+          </p>
+          <p class="text-sm text-amber-600 dark:text-amber-400">
+            Matrix multiplication is not commutative: <code>Rx @ Ry &ne; Ry @ Rx</code>.
+            Rotating 90&deg; around X then Y gives a different result than Y then X.
+            Always be explicit about which order you apply rotations!
+          </p>
+        </div>
+
+        <div class="grid gap-4 sm:grid-cols-3 mb-4">
           <div class="p-4 bg-surface-alt rounded-lg border border-border">
             <h4 class="font-semibold text-red-500 mb-2">
               <i class="fa-solid fa-rotate mr-2" aria-hidden="true" />

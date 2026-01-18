@@ -4,16 +4,18 @@
 
 ---
 
-## Current: Phase 15 Complete - Trigonometry Section Finished
+## Current: Phase 16 Complete - Linear Algebra 3D
 
-Phase 15 (Trigonometry Remaining Topics) is complete. The Trigonometry section now has all 5 subtopics:
-- ✅ Unit Circle (UnitCircleExplorer widget)
-- ✅ Right Triangle (RightTriangleSolver widget)
-- ✅ Trig Identities (TrigIdentityExplorer widget - 21 identities)
-- ✅ Inverse Functions (InverseTrigExplorer widget - arcsin/arccos/arctan/atan2)
-- ✅ Trig in Code (TrigCodePlayground widget - rotation, waves, circular motion, projectiles)
+Phase 16 (Linear Algebra in 3D) is complete. The Linear Algebra section now includes 3D content:
+- ✅ Vectors 3D (VectorOperations3D widget - 8 operations including cross product)
+- ✅ Matrices 3D (MatrixTransformations3D widget - 3D rotation matrices, Euler angles)
 
-The "Coming Soon" section has been removed from TrigonometryIndexView.vue.
+New features include:
+- Isometric SVG projection for 3D visualization
+- Cross product with right-hand rule demo
+- 3×3 rotation matrices (Rx, Ry, Rz, combined)
+- Euler angle composition
+- E2E tests for both 3D widgets
 
 ---
 
@@ -27,6 +29,7 @@ The "Coming Soon" section has been removed from TrigonometryIndexView.vue.
 ## Review Items
 
 - [ ] **Code example repetition**: In `algebra/summation`, the same code example appears three times in quick succession; consolidate or differentiate
+- [x] **Trigonometry design system compliance**: Audited all 6 trig views against DESIGN_SYSTEM.md, fixed issues in UnitCircleView, InverseTrigView, TrigInCodeView
 
 ---
 
@@ -62,6 +65,7 @@ The "Coming Soon" section has been removed from TrigonometryIndexView.vue.
 | 13 | Calculus — Limits | ✅ Complete |
 | 14 | Calculus — Derivatives | ✅ Complete |
 | 15 | Trigonometry — Remaining Topics | ✅ Complete |
+| 16 | Linear Algebra — 3D | ✅ Complete |
 | — | Design System Standardization | ✅ Complete |
 | — | Content Review (Three-Analogy, Pitfalls) | ✅ Complete |
 | — | Algebra Expansion (Product Notation, Linear Equations) | ✅ Complete |
@@ -69,11 +73,17 @@ The "Coming Soon" section has been removed from TrigonometryIndexView.vue.
 *Detailed completion summaries are in `docs/CURRENT_STATE.md`*
 
 ### Design System Standardization (Completed)
-- Created `docs/design-system.md` with comprehensive UI/UX guidelines
+- Created `docs/DESIGN_SYSTEM.md` with comprehensive UI/UX guidelines
 - Added unique IDs to all 53+ CodeExample components for cross-referencing
 - Fixed card styling: navigational vs informational patterns
 - Standardized collapsible behavior (teaching content expanded, supplementary collapsed)
 - Added SVG hover affordances to UnitCircleExplorer
+
+### Trigonometry Design System Audit (2026-01-18)
+Fixed compliance issues in Trigonometry content:
+- **UnitCircleView**: Added missing Common Pitfall callout (radians vs degrees)
+- **InverseTrigView**: Fixed analogy backgrounds (`bg-surface-alt`), pitfall styling (amber), added TopicPage wrapper, fixed CodeExample props
+- **TrigInCodeView**: Added three-analogy block, pitfall callout, RelatedTopics, made sections collapsible, added CodeExample id/title props
 
 ---
 
