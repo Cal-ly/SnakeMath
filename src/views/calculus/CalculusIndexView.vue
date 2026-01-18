@@ -207,14 +207,15 @@ print(f"f(minimum) = {f(minimum):.4f}")  # Should be 1.0`
             </p>
           </div>
         </div>
-
+        
+        <!-- NOTE: Commented out; might move.
         <CodeExample
           title="Gradient Descent: Calculus in Machine Learning"
           language="python"
           :code="gradientDescentCode"
           :collapsible="true"
           :default-expanded="false"
-        />
+        /> -->
       </ContentSection>
 
       <!-- Topics Grid -->

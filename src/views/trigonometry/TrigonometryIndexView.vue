@@ -124,7 +124,7 @@ const topic = topics.find((t) => t.id === 'trigonometry')!
           We're expanding our trigonometry coverage. Here's what's in the pipeline:
         </p>
 
-        <div class="grid gap-3 md:grid-cols-2">
+        <div class="grid gap-3 md:grid-cols-3">
           <div class="p-3 rounded-lg border border-border">
             <p class="font-medium text-text-primary">
               <i class="fa-solid fa-equals text-text-muted mr-2" aria-hidden="true" />
@@ -132,16 +132,6 @@ const topic = topics.find((t) => t.id === 'trigonometry')!
             </p>
             <p class="text-sm text-text-muted mt-1">
               The fundamental relationships that simplify complex expressions.
-            </p>
-          </div>
-
-          <div class="p-3 rounded-lg border border-border">
-            <p class="font-medium text-text-primary">
-              <i class="fa-solid fa-triangle text-text-muted mr-2" aria-hidden="true" />
-              Right Triangle Trig
-            </p>
-            <p class="text-sm text-text-muted mt-1">
-              SOHCAHTOA and solving triangles — the practical applications.
             </p>
           </div>
 

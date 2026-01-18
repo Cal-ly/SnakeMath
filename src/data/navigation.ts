@@ -126,6 +126,13 @@ export const topics: NavTopic[] = [
         path: '/trigonometry/unit-circle',
         faIcon: 'fa-solid fa-circle',
       },
+      {
+        id: 'right-triangles',
+        title: 'Right Triangle Trig',
+        description: 'SOHCAHTOA—the gateway to understanding angles',
+        path: '/trigonometry/right-triangles',
+        faIcon: 'fa-solid fa-draw-polygon',
+      },
     ],
   },
   {
