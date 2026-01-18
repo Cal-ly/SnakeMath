@@ -56,18 +56,8 @@ const ariaLabel = computed(() => {
 </script>
 
 <template>
-  <!-- eslint-disable-next-line vue/no-v-html -- KaTeX output is safe, generated from LaTeX math -->
-  <span
-    v-if="renderResult.html && !renderResult.error"
-    :class="[
-      'math-block',
-      display ? 'math-display' : 'math-inline',
-      props.class,
-    ]"
-    role="img"
-    :aria-label="ariaLabel"
-    v-html="renderResult.html"
-  />
+  <!-- eslint-disable-next-line vue/no-v-html -- KaTeX output is safe (generated from LaTeX, not user HTML) -->
+  <span v-if="renderResult.html && !renderResult.error" :class="['math-block', display ? 'math-display' : 'math-inline', props.class]" role="img" :aria-label="ariaLabel" v-html="renderResult.html" />
 
   <span
     v-else

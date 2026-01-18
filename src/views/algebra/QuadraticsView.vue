@@ -147,7 +147,7 @@ print(f"Ball hits ground at t = {t:.2f} seconds")`
           Common Pitfall: Negative Discriminant
         </p>
         <p class="text-sm text-amber-600 dark:text-amber-400">
-          When <code>b² - 4ac < 0</code>, the roots are complex numbers—<code>math.sqrt()</code>
+          When <code>b² - 4ac &lt; 0</code>, the roots are complex numbers—<code>math.sqrt()</code>
           will raise an error! Use <code>cmath.sqrt()</code> or check the discriminant first.
           Real parabolas that never cross the x-axis have imaginary roots.
         </p>

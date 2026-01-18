@@ -33,10 +33,10 @@ test.describe('Accessibility Audits - WCAG 2.1 AA @a11y', () => {
 
       // Log violations for debugging
       if (results.violations.length > 0) {
-        console.log(`Accessibility violations on ${name}:`)
+        console.warn(`Accessibility violations on ${name}:`)
         results.violations.forEach((v) => {
-          console.log(`  - ${v.id}: ${v.description}`)
-          v.nodes.forEach((n) => console.log(`    ${n.html}`))
+          console.warn(`  - ${v.id}: ${v.description}`)
+          v.nodes.forEach((n) => console.warn(`    ${n.html}`))
         })
       }
 

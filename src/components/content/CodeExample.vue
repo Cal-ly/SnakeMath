@@ -153,11 +153,7 @@ function toggleCollapse() {
           Loading...
         </div>
         <!-- eslint-disable-next-line vue/no-v-html -- Shiki output is safe -->
-        <div
-          v-else
-          class="highlighted-code"
-          v-html="highlightedCode"
-        />
+        <div v-else class="highlighted-code" v-html="highlightedCode" />
       </div>
     </div>
   </div>
