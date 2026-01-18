@@ -400,7 +400,7 @@ for i in range(1, n+1):
             </div>
 
             <!-- Result -->
-            <div class="p-4 bg-surface-alt rounded-lg">
+            <div class="p-4 rounded-lg border border-border">
               <p class="text-sm text-text-muted mb-2">Formula</p>
               <MathBlock :formula="fullFormula" display />
 
@@ -536,7 +536,7 @@ for i in range(1, n+1):
           Watch the cancellation:
         </p>
 
-        <div class="p-4 bg-surface-alt rounded-lg font-mono text-center mb-4">
+        <div class="p-4 rounded-lg border border-border font-mono text-center mb-4">
           <p class="text-text-secondary">
             <span class="text-primary">1</span>/2 × <span class="line-through text-text-muted">2</span>/3 ×
             <span class="line-through text-text-muted">3</span>/4 × <span class="line-through text-text-muted">4</span>/5

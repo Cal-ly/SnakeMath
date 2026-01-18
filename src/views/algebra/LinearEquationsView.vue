@@ -355,7 +355,7 @@ print(f"Rank: {rank}")  # If rank = number of unknowns, unique solution
           Solving <MathBlock formula="ax + b = c" /> for x is like running operations in reverse:
         </p>
 
-        <div class="p-4 bg-surface-alt rounded-lg mb-6">
+        <div class="p-4 rounded-lg border border-border mb-6">
           <ol class="space-y-2 text-text-secondary">
             <li class="flex items-start gap-2">
               <span class="w-6 h-6 rounded-full bg-primary/20 text-primary text-sm flex items-center justify-center flex-shrink-0">1</span>
@@ -541,7 +541,7 @@ print(f"Rank: {rank}")  # If rank = number of unknowns, unique solution
           This is where linear equations connect to <strong>linear algebra</strong>.
         </p>
 
-        <div class="p-4 bg-surface-alt rounded-lg mb-6">
+        <div class="p-4 rounded-lg border border-border mb-6">
           <p class="text-sm text-text-muted mb-2">Example system:</p>
           <div class="flex flex-wrap items-center gap-4 justify-center">
             <div>

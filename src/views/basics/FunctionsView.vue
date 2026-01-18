@@ -146,7 +146,7 @@ print(impure_increment(5))  # 7 (counter is now 2)
           processing, and you get something out. The same input always produces the same output.
         </p>
 
-        <div class="flex flex-col md:flex-row items-center justify-center gap-4 p-6 bg-surface-alt rounded-lg mb-4">
+        <div class="flex flex-col md:flex-row items-center justify-center gap-4 p-6 rounded-lg border border-border mb-4">
           <div class="text-center">
             <div class="text-3xl mb-2">📥</div>
             <div class="font-mono text-primary">Input (x)</div>
