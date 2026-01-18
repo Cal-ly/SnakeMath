@@ -72,6 +72,7 @@ The "Coming Soon" section has been removed from AlgebraIndex.vue.
 ## Ideas on hold
 - [ ] Expression builder widget for Variables & Expressions page
 - [ ] PEMDAS step-by-step calculator widget for Order of Operations page
+- [ ] Snake Math Game, a small Snake game in browser, where the user has to navigate the snake around and take the right answer to a proposed math question (e.g. 81 + 7 = ?, and then the user has to navigate to the Square with "88")
 
 ## Archived
 

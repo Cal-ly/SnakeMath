@@ -118,34 +118,6 @@ const topic = topics.find((t) => t.id === 'trigonometry')!
         </div>
       </ContentSection>
 
-      <!-- Coming Soon -->
-      <ContentSection id="coming-soon" title="Coming Soon" icon="fa-solid fa-clock">
-        <p class="mb-4 text-text-secondary">
-          We're expanding our trigonometry coverage. Here's what's in the pipeline:
-        </p>
-
-        <div class="grid gap-3 md:grid-cols-2">
-          <div class="p-3 rounded-lg border border-border">
-            <p class="font-medium text-text-primary">
-              <i class="fa-solid fa-arrows-spin text-text-muted mr-2" aria-hidden="true" />
-              Inverse Trig Functions
-            </p>
-            <p class="text-sm text-text-muted mt-1">
-              Going from coordinates back to angles with arcsin, arccos, and arctan.
-            </p>
-          </div>
-
-          <div class="p-3 rounded-lg border border-border">
-            <p class="font-medium text-text-primary">
-              <i class="fa-solid fa-code text-text-muted mr-2" aria-hidden="true" />
-              Trig in Code
-            </p>
-            <p class="text-sm text-text-muted mt-1">
-              Practical implementations: rotate_point(), wave generators, and more.
-            </p>
-          </div>
-        </div>
-      </ContentSection>
     </div>
   </TopicPage>
 </template>

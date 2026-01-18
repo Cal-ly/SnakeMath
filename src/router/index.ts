@@ -96,6 +96,16 @@ const router = createRouter({
       name: 'trigonometry-identities',
       component: () => import('@/views/trigonometry/TrigIdentitiesView.vue'),
     },
+    {
+      path: '/trigonometry/inverse-functions',
+      name: 'trigonometry-inverse-functions',
+      component: () => import('@/views/trigonometry/InverseTrigView.vue'),
+    },
+    {
+      path: '/trigonometry/trig-in-code',
+      name: 'trigonometry-trig-in-code',
+      component: () => import('@/views/trigonometry/TrigInCodeView.vue'),
+    },
     // Linear Algebra section
     {
       path: '/linear-algebra',

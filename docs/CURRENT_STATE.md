@@ -5,13 +5,13 @@ This document outlines the current state of the project for easy resumption afte
 
 ---
 
-## Current Status: Phase 14 Complete + Content Review
+## Current Status: Phase 15 In Progress (Increments 15A-15C Complete)
 
 **Last Updated**: 2026-01-18
 
 ### Project Summary
 
-SnakeMath is an educational mathematics website for programmers. Fourteen phases of development plus a content review pass have established:
+SnakeMath is an educational mathematics website for programmers. Fifteen phases of development (Phase 15 partially complete) have established:
 
 | Phase | Focus | Key Deliverables | Status |
 |-------|-------|------------------|--------|
@@ -30,6 +30,7 @@ SnakeMath is an educational mathematics website for programmers. Fourteen phases
 | 13 | Calculus — Limits | LimitsExplorer, epsilon-delta viz, continuity | Complete |
 | 14 | Calculus — Derivatives | DerivativeVisualizer, tangent lines, secant animation | Complete |
 | — | Content Review | Three-analogy blocks, pitfall callouts, RelatedTopics | Complete |
+| 15 | Trigonometry — Remaining Topics | Right Triangle, Trig Identities | In Progress |
 
 ### What's Live
 
@@ -47,7 +48,10 @@ SnakeMath is an educational mathematics website for programmers. Fourteen phases
   - Linear Equations - single equations, systems, NumPy integration
   - Quadratic Functions (QuadraticExplorer widget)
   - Exponentials & Logarithms (ExponentialExplorer widget)
-- `/trigonometry` - Unit Circle (UnitCircleExplorer widget with WaveGraphs)
+- `/trigonometry` - Trigonometry section:
+  - Unit Circle (UnitCircleExplorer widget with WaveGraphs)
+  - **Right Triangle (RightTriangleSolver widget with SVG diagram)**
+  - **Trig Identities (TrigIdentityExplorer widget with 21 identities)**
 - `/linear-algebra` - Linear Algebra section:
   - Vectors (VectorOperations widget with SVG canvas)
   - **Matrices (MatrixTransformations widget with unit square visualization)**
@@ -68,6 +72,8 @@ SnakeMath is an educational mathematics website for programmers. Fourteen phases
 - **MatrixTransformations**: 10 transformation types (rotation, scale, shear, reflection, etc.), SVG canvas with unit square/basis vectors, custom matrix input, 8 educational presets, determinant-based property badges, URL state sync
 - **LimitsExplorer**: 8 preset functions with different limit behaviors, SVG function curve rendering, approach point slider/drag, direction toggle (left/right/both), epsilon-delta band visualization with sliders, numerical approximation animation, continuity status display, URL state sync
 - **DerivativeVisualizer**: 8 preset functions, SVG function curve with tangent line, movable point of tangency, secant line overlay with h-value slider, secant-to-tangent animation showing limit definition, derivative curve toggle, derivative value display with slope interpretation, URL state sync
+- **RightTriangleSolver**: Input modes (side-side, side-angle), proportional SVG diagram with labeled sides/angles, step-by-step solution display, 5 educational presets, angle unit toggle (degrees/radians), solved values panel, URL state sync
+- **TrigIdentityExplorer**: 21 identities across 6 categories (Pythagorean, Quotient, Reciprocal, Sum/Difference, Double Angle, Half Angle), category tabs, identity cards with expandable proof steps, numerical verification at custom angles, Python code examples, URL state sync
 
 **Visualization Components**:
 - **CoordinateSystem**: Reusable SVG coordinate system with axes, grid, labels
@@ -78,7 +84,7 @@ SnakeMath is an educational mathematics website for programmers. Fourteen phases
 - **BoxPlotChart**: SVG box plot with quartiles, whiskers, and outlier markers
 
 **Testing Infrastructure**:
-- 721+ unit tests (Vitest) - including 67 derivative utility tests
+- 882+ unit tests (Vitest) - including rightTriangle (30+) and trigIdentities (82) tests
 - E2E tests (Playwright) with tiered CI approach - 40+ derivative visualizer tests added
 - Visual regression tests (Playwright screenshot comparison) - local only
 - WCAG 2.1 AA accessibility audits via axe-core
@@ -133,6 +139,9 @@ npm run build        # Production build
 | Limits composable | `src/composables/useLimits.ts` |
 | Derivative utilities | `src/utils/math/derivative.ts` |
 | Derivative composable | `src/composables/useDerivative.ts` |
+| Right Triangle utilities | `src/utils/math/rightTriangle.ts` |
+| Right Triangle composable | `src/composables/useRightTriangle.ts` |
+| Trig Identities utilities | `src/utils/math/trigIdentities.ts` |
 
 ### Archived Documentation
 Phase completion summaries are in `docs/archive/`:
@@ -144,8 +153,8 @@ Phase completion summaries are in `docs/archive/`:
 
 ## Test Coverage
 
-### Unit Tests (721+ tests)
-- Math utilities (number classification, parsing, quadratic, exponential, trigonometry, statistics, product, vector, matrix, limits, derivative functions)
+### Unit Tests (882+ tests)
+- Math utilities (number classification, parsing, quadratic, exponential, trigonometry, statistics, product, vector, matrix, limits, derivative, rightTriangle, trigIdentities functions)
 - Data validation (symbols, navigation)
 - Component logic (via composables)
 
@@ -195,6 +204,65 @@ Phase completion summaries are in `docs/archive/`:
 
 - **Chunk Size Warnings**: Shiki produces large language chunks (lazy-loaded, acceptable)
 - **v-html Warnings**: ESLint warns about v-html in MathBlock/CodeExample (expected, trusted content)
+
+---
+
+## Phase 15 Progress Summary (In Progress)
+
+Phase 15 is implementing remaining trigonometry topics: Right Triangle Trigonometry, Trig Identities, Inverse Functions, and Trig in Code.
+
+### Completed Increments
+
+**Increment 15A: Right Triangle Math Utilities**
+- Created `src/utils/math/rightTriangle.ts` with 30+ comprehensive tests
+- Types: `RightTriangle`, `TriangleSolveResult`, `SolveStep`, `InputMode`, `RightTrianglePreset`
+- Functions: `solveRightTriangle`, `solveFromTwoSides`, `solveFromSideAndAngle`
+- Functions: `calculateArea`, `calculatePerimeter`, `isValidTriangle`, `formatAngle`, `formatSide`
+- 5 educational presets: 3-4-5, isoceles-right, 30-60-90, 45-45-90, pythagorean-5-12-13
+
+**Increment 15B: RightTriangleSolver Widget + Content Page**
+- Created `src/composables/useRightTriangle.ts` for state management + URL sync
+- Built widget in `src/components/widgets/RightTriangleSolver/`:
+  - `RightTriangleSolver.vue` - main orchestrator
+  - `TriangleCanvas.vue` - proportional SVG diagram with labels
+  - `TriangleInputs.vue` - input mode selection and value controls
+  - `TriangleSolution.vue` - step-by-step solution display
+  - `TrianglePresets.vue` - preset selector buttons
+- Created `src/views/trigonometry/RightTriangleView.vue` content page
+- Updated routes and navigation
+
+**Increment 15C: Trig Identities Utilities + Widget + Content Page**
+- Created `src/utils/math/trigIdentities.ts` with 82 comprehensive tests
+- 21 identities across 6 categories:
+  - Pythagorean (3): sin²+cos²=1, 1+tan²=sec², 1+cot²=csc²
+  - Quotient (2): tan=sin/cos, cot=cos/sin
+  - Reciprocal (3): csc=1/sin, sec=1/cos, cot=1/tan
+  - Sum/Difference (5): sin(A±B), cos(A±B), tan(A+B)
+  - Double Angle (5): sin(2θ), cos(2θ) 3 forms, tan(2θ)
+  - Half Angle (3): sin(θ/2), cos(θ/2), tan(θ/2)
+- Each identity has: verify function, LaTeX formula, proof steps, Python code
+- Built widget in `src/components/widgets/TrigIdentityExplorer/`:
+  - `TrigIdentityExplorer.vue` - category tabs and angle controls
+  - `IdentityCard.vue` - identity display with expandable sections
+  - `IdentityProof.vue` - step-by-step algebraic proof
+  - `IdentityVerifier.vue` - numerical verification at given angle
+- Created `src/views/trigonometry/TrigIdentitiesView.vue` content page
+- Updated routes and navigation
+
+### Remaining Increments
+- 15D-15F: Inverse Trigonometric Functions (utilities, widget, content)
+- 15G-15I: Trig in Code / Applications (utilities, widget, content)
+- 15J-15L: Polish, E2E tests, documentation
+
+### Key Architectural Decisions (Phase 15)
+- D-119: Reusing existing widget patterns (composable + orchestrator + sub-components)
+- D-120: Step-by-step solution display for right triangle solver
+- D-121: Proportional SVG triangle diagram with automatic scaling
+- D-122: Preset examples for common right triangles
+- D-123: Category-based identity organization with tabs
+- D-124: Identity verification functions with tolerance-based comparison
+- D-125: Proof steps with LaTeX rendering for each identity
+- D-126: Two-angle identities default second angle to 30°
 
 ---
 

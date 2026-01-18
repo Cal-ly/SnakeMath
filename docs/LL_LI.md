@@ -2832,3 +2832,196 @@ const relatedTopics = [
 3. Proactive pitfall warnings are as valuable as teaching concepts
 4. Navigation descriptions are marketing copy—hook the user with insight
 5. Cross-section links in RelatedTopics improve content discoverability
+
+---
+
+## Phase 15: Trigonometry Expansion (In Progress)
+
+### LL-051: defineModel vs Props/Emits Pattern
+**Issue**: ValueInputs.vue initially used Vue's `defineModel` macro alongside `defineProps` and `defineEmits`, causing runtime errors.
+
+**Code**:
+```typescript
+// Error: mixing patterns causes issues
+const values = defineModel<PartialTriangle>('values', { required: true })
+const emit = defineEmits<{ change: [values: PartialTriangle] }>()
+```
+
+**Resolution**: Use consistent props/emits pattern instead of mixing with defineModel:
+```typescript
+interface Props {
+  values: PartialTriangle
+  // ...
+}
+const props = defineProps<Props>()
+const emit = defineEmits<{ 'update:values': [PartialTriangle] }>()
+```
+
+**Lesson**: Don't mix `defineModel` with manual `defineEmits`. Choose one pattern consistently. Props/emits is safer and more explicit.
+
+---
+
+### LL-052: TypeScript Null Coalescing for Object Lookups
+**Issue**: Accessing objects by key (like `SPECIAL_TRIANGLES['30-60-90']`) returns possibly undefined, even when the key is known to exist.
+
+**Code**:
+```typescript
+// TS error: Object is possibly 'undefined'
+const triangle = SPECIAL_TRIANGLES['30-60-90']
+return { name: triangle.name }  // Error
+```
+
+**Resolution**: Create local variables with non-null assertion or use null coalescing:
+```typescript
+const triangle306090 = SPECIAL_TRIANGLES['30-60-90']!
+// Or in functions:
+return SPECIAL_TRIANGLES[key] ?? null
+```
+
+**Lesson**: When accessing known dictionary keys in TypeScript, either use non-null assertion (`!`) if you're certain the key exists, or handle the undefined case with null coalescing.
+
+---
+
+### LL-053: Null Check Operators (== vs ===)
+**Issue**: Using `!== undefined` missed null values when checking optional parameters.
+
+**Code**:
+```typescript
+// Misses null values
+if (values.a !== undefined) { ... }
+```
+
+**Resolution**: Use loose equality for null/undefined check:
+```typescript
+// Catches both null and undefined
+if (values.a != null) { ... }
+```
+
+**Lesson**: Use `!= null` (loose inequality) to check for both null and undefined in a single comparison. This is one of the few cases where loose equality is preferred.
+
+---
+
+### LL-054: Array Index Access in Tests
+**Issue**: TypeScript strict mode flags array index access as possibly undefined in test files.
+
+**Code**:
+```typescript
+// TS error in tests
+for (const [a, b] of testPairs) {
+  identity.verify(a, b)  // Error: a possibly undefined
+}
+```
+
+**Resolution**: Add non-null assertions in test code where values are known:
+```typescript
+for (const [a, b] of testPairs) {
+  identity.verify(a!, b)
+}
+```
+
+**Lesson**: Test files often have controlled data where we know values exist. Using `!` assertions is acceptable in tests when the test data is well-defined.
+
+---
+
+### LI-063: Right Triangle Solving Algorithm
+**Identified**: The right triangle solver needs to handle multiple input combinations systematically.
+
+**Pattern**:
+```typescript
+// Priority order for solving:
+// 1. Two sides → Pythagorean for third, inverse trig for angle
+// 2. One side + one angle → trig ratios for other sides
+// 3. Track each step with formula used
+
+function solveRightTriangle(known: PartialTriangle): TriangleSolution {
+  const steps: SolutionStep[] = []
+
+  // If we have two sides, find the third
+  if (hasTwo([a, b, c])) {
+    // Pythagorean theorem
+    steps.push({ formulaName: 'Pythagorean Theorem', ... })
+  }
+
+  // Then find angles using inverse trig
+  // ...
+  return { triangle, steps }
+}
+```
+
+**Benefits**:
+- Step-by-step solution is educational
+- Each step documents which formula was used
+- Users learn the solving process, not just answers
+
+---
+
+### LI-064: Comprehensive Identity Test Coverage
+**Identified**: Testing 21 trig identities requires systematic organization.
+
+**Pattern**:
+```typescript
+// Test angles that avoid singularities
+const TEST_ANGLES = [0, 30, 45, 60, 90, 120, 135, 150, 180, 210, 225, 270, 315, 360]
+const AVOID_COS_ZERO = [90, 270]  // For tan, sec identities
+const AVOID_SIN_ZERO = [0, 180, 360]  // For cot, csc identities
+
+function safeAngles(exclude: number[]): number[] {
+  return TEST_ANGLES.filter(a => !exclude.includes(a))
+}
+
+// Test each identity at safe angles
+for (const angle of safeAngles(AVOID_COS_ZERO)) {
+  expect(identity.verify(angle).isEqual).toBe(true)
+}
+```
+
+**Benefits**:
+- Systematic coverage of all angles
+- Explicit handling of singularities
+- Clear documentation of which angles are unsafe for which identities
+
+---
+
+### LI-065: Category-Based Widget Navigation
+**Identified**: Widget with category tabs benefits from URL state sync for deep linking.
+
+**Pattern**:
+```typescript
+// TrigIdentityExplorer state
+const selectedCategory = ref<IdentityCategory>('pythagorean')
+const selectedIdentityId = ref<string>('pythagorean-main')
+
+// When category changes, select first identity in that category
+function selectCategory(category: IdentityCategory) {
+  selectedCategory.value = category
+  const identities = getIdentitiesByCategory(category)
+  if (identities.length > 0 && identities[0]) {
+    selectedIdentityId.value = identities[0].id
+  }
+  updateUrl()
+}
+```
+
+**Benefits**:
+- Users can share links to specific identity categories
+- Tab state persists across page refreshes
+- Clean category → identity selection flow
+
+---
+
+### LI-066: Identity Verification Display Pattern
+**Identified**: Showing left side = right side verification is more educational than just "verified".
+
+**Pattern**:
+```vue
+<div class="verification">
+  <div>Left side: {{ identity.latexLeft }} = {{ result.leftSideFormatted }}</div>
+  <div>Right side: {{ identity.latexRight }} = {{ result.rightSideFormatted }}</div>
+  <div v-if="result.isEqual" class="text-green-600">Equal ✓</div>
+</div>
+```
+
+**Benefits**:
+- Users see actual computed values
+- Reinforces that both expressions evaluate to same number
+- Shows tolerance-based equality (floating point awareness)

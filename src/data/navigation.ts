@@ -140,6 +140,20 @@ export const topics: NavTopic[] = [
         path: '/trigonometry/identities',
         faIcon: 'fa-solid fa-equals',
       },
+      {
+        id: 'inverse-functions',
+        title: 'Inverse Functions',
+        description: 'From coordinates to angles—atan2 is your best friend',
+        path: '/trigonometry/inverse-functions',
+        faIcon: 'fa-solid fa-rotate-left',
+      },
+      {
+        id: 'trig-in-code',
+        title: 'Trig in Code',
+        description: 'Practical implementations: rotation, waves, physics, and more',
+        path: '/trigonometry/trig-in-code',
+        faIcon: 'fa-solid fa-code',
+      },
     ],
   },
   {

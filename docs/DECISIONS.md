@@ -2186,3 +2186,176 @@ export function useDerivative(options: UseDerivativeOptions = {}) {
 - Hidden by default to reduce initial complexity (progressive disclosure)
 
 **Implementation**: Checkbox toggle to show/hide derivative curve in different color (purple).
+
+---
+
+## Phase 15 Decisions
+
+### D-119: Reusing Existing Right Triangle Patterns
+**Decision**: Build RightTriangleSolver widget following established patterns from UnitCircleExplorer and other Phase 9+ widgets.
+
+**Rationale**:
+- Consistent user experience across trigonometry section
+- Composable pattern (useRightTriangle) matches useUnitCircle, useVectors, etc.
+- Component architecture follows established orchestrator + sub-components pattern
+- URL state sync for shareable triangle configurations
+
+**Implementation**:
+```
+RightTriangleSolver/ (orchestrator)
+├── ValueInputs.vue (checkbox + input for each value)
+├── TriangleDiagram.vue (SVG proportional diagram)
+├── SolutionDisplay.vue (results with step-by-step formulas)
+└── index.ts (exports)
+```
+
+---
+
+### D-120: Step-by-Step Solution Display for Right Triangles
+**Decision**: Show step-by-step solution with formulas used rather than just final values.
+
+**Rationale**:
+- Educational: users learn which formula applies to their inputs
+- Each step shows: what is being found, the formula, the calculation
+- MathBlock renders formulas in proper LaTeX
+- Reinforces SOHCAHTOA and Pythagorean theorem connections
+
+**Implementation**:
+```typescript
+interface SolutionStep {
+  finding: 'a' | 'b' | 'c' | 'A' | 'B'
+  formulaName: string        // "Pythagorean Theorem", "SOHCAHTOA (sin)"
+  formula: string            // LaTeX formula
+  calculation: string        // Numeric substitution
+  result: number
+}
+```
+
+---
+
+### D-121: Proportional SVG Triangle Diagram
+**Decision**: Scale the SVG triangle diagram proportionally based on actual side lengths.
+
+**Rationale**:
+- Accurate visual representation of the triangle shape
+- Users can see how 30-60-90 differs from 45-45-90
+- Default 3-4-5 proportions when no solution yet
+- Maintains fixed SVG dimensions with internal scaling
+
+**Implementation**:
+```typescript
+const vertices = computed(() => {
+  const aRatio = triangle.a / Math.max(triangle.a, triangle.b)
+  const bRatio = triangle.b / Math.max(triangle.a, triangle.b)
+  // Scale and position within fixed SVG bounds
+})
+```
+
+---
+
+### D-122: Preset Examples for Right Triangle Widget
+**Decision**: Provide preset example buttons for common right triangles (3-4-5, 5-12-13, 30°, 45°, 60°).
+
+**Rationale**:
+- Quick exploration without manual input
+- Educational: showcases special triangles
+- Demonstrates widget capabilities
+- URL-shareable via preset parameters
+
+**Presets**:
+| ID | Description | Inputs |
+|----|-------------|--------|
+| 3-4-5 | Pythagorean triple | a=3, b=4 |
+| 5-12-13 | Larger Pythagorean triple | a=5, b=12 |
+| 30-60 | 30-60-90 special | c=10, A=30 |
+| 45-45 | Isoceles right | c=10, A=45 |
+| 60-30 | 30-60-90 reversed | c=10, A=60 |
+
+---
+
+### D-123: Category-Based Trig Identity Organization
+**Decision**: Organize trig identities into 6 categories: pythagorean, quotient, reciprocal, sum-diff, double, half.
+
+**Rationale**:
+- Matches standard mathematical classification
+- Enables category tabs in the widget for focused exploration
+- Each category has distinct educational purpose
+- Supports filtering and navigation
+
+**Categories**:
+| Category | Count | Examples |
+|----------|-------|----------|
+| pythagorean | 3 | sin²θ + cos²θ = 1, 1 + tan²θ = sec²θ |
+| quotient | 2 | tan θ = sin θ / cos θ |
+| reciprocal | 3 | csc θ = 1 / sin θ |
+| sum-diff | 5 | sin(A + B), cos(A - B), tan(A + B) |
+| double | 5 | sin(2θ), cos(2θ) (3 forms), tan(2θ) |
+| half | 3 | sin(θ/2), cos(θ/2), tan(θ/2) |
+
+---
+
+### D-124: Identity Verification Functions
+**Decision**: Each TrigIdentity includes a verify function that checks equality at a given angle.
+
+**Rationale**:
+- Interactive verification reinforces understanding
+- Users can slide angle and see both sides equal
+- Tolerance-based comparison handles floating point
+- Educational: demonstrates identities are "always true"
+
+**Implementation**:
+```typescript
+interface TrigIdentity {
+  // ...
+  verify: (angleDeg: number, angleDeg2?: number) => VerificationResult
+}
+
+interface VerificationResult {
+  leftSide: number
+  rightSide: number
+  leftSideFormatted: string
+  rightSideFormatted: string
+  isEqual: boolean
+  tolerance: number
+  angleDeg: number
+}
+```
+
+---
+
+### D-125: Proof Steps with LaTeX and Explanation
+**Decision**: Each identity includes step-by-step algebraic proof with LaTeX and plain English explanation.
+
+**Rationale**:
+- Shows derivation from first principles
+- Connects identities to each other (e.g., double angle from sum formula)
+- Users can expand/collapse proof as needed
+- MathBlock renders steps properly
+
+**Implementation**:
+```typescript
+interface ProofStep {
+  step: number
+  latex: string        // Mathematical step in LaTeX
+  explanation: string  // Plain English explanation
+}
+```
+
+---
+
+### D-126: Two-Angle Identities Default Second Angle
+**Decision**: Sum/difference identities use a default second angle (B = 30°) when not specified.
+
+**Rationale**:
+- Single-angle slider UI for most identities
+- Sum/diff identities need two angles
+- Default B = 30° gives interesting results (sin 75° = sin(45+30))
+- Second angle slider shown only when applicable
+
+**Implementation**:
+```typescript
+verify: (angleDegA: number, angleDegB?: number) => {
+  const B = angleDegB ?? 30  // Default to 30° if not provided
+  // ...
+}
+```
