@@ -36,8 +36,8 @@ const currentIdentities = computed(() => {
   return getIdentitiesByCategory(selectedCategory.value)
 })
 
-// Get selected identity
-const selectedIdentity = computed(() => {
+// Get selected identity (used for future expansion, keeping for reference)
+const _selectedIdentity = computed(() => {
   return ALL_IDENTITIES.find(i => i.id === selectedIdentityId.value)
 })
 

@@ -21,11 +21,9 @@ import {
   angularDifference,
   // Projectile
   projectilePosition,
-  projectileVelocity,
   projectileTrajectory,
   projectileRange,
   projectileMaxHeight,
-  projectileFlightTime,
   optimalLaunchAngle,
   // Easing
   easeInOutSine,
@@ -44,7 +42,6 @@ import {
   TRIG_DEMO_PRESETS,
   getTrigDemoPreset,
   getPresetsByType,
-  DEFAULT_GRAVITY,
 } from './trigApplications'
 
 const TOLERANCE = 1e-6

@@ -1,16 +1,19 @@
 # SnakeMath ToDo List
 
-**Last Updated**: 2026-01-17
+**Last Updated**: 2026-01-18
 
 ---
 
-## Current: Post-Phase 10 - Algebra Expansion Complete
+## Current: Phase 15 Complete - Trigonometry Section Finished
 
-Phase 10 (Statistics Foundation) is complete. Algebra section has been expanded with:
-- ✅ Product Notation (Π) - factorial, permutations, combinations
-- ✅ Linear Equations - single equations, systems, NumPy
+Phase 15 (Trigonometry Remaining Topics) is complete. The Trigonometry section now has all 5 subtopics:
+- ✅ Unit Circle (UnitCircleExplorer widget)
+- ✅ Right Triangle (RightTriangleSolver widget)
+- ✅ Trig Identities (TrigIdentityExplorer widget - 21 identities)
+- ✅ Inverse Functions (InverseTrigExplorer widget - arcsin/arccos/arctan/atan2)
+- ✅ Trig in Code (TrigCodePlayground widget - rotation, waves, circular motion, projectiles)
 
-The "Coming Soon" section has been removed from AlgebraIndex.vue.
+The "Coming Soon" section has been removed from TrigonometryIndexView.vue.
 
 ---
 
@@ -55,7 +58,11 @@ The "Coming Soon" section has been removed from AlgebraIndex.vue.
 | 10 | Statistics Foundation | ✅ Complete |
 | 11 | Linear Algebra — Vectors | ✅ Complete |
 | 12 | Linear Algebra — Matrices | ✅ Complete |
+| 13 | Calculus — Limits | ✅ Complete |
+| 14 | Calculus — Derivatives | ✅ Complete |
+| 15 | Trigonometry — Remaining Topics | ✅ Complete |
 | — | Design System Standardization | ✅ Complete |
+| — | Content Review (Three-Analogy, Pitfalls) | ✅ Complete |
 | — | Algebra Expansion (Product Notation, Linear Equations) | ✅ Complete |
 
 *Detailed completion summaries are in `docs/CURRENT_STATE.md`*

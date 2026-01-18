@@ -19,10 +19,6 @@ import {
   verifyAllIdentities,
   getCategoryLabel,
   getAllCategories,
-  // Types
-  type TrigIdentity,
-  type VerificationResult,
-  type IdentityCategory,
 } from './trigIdentities'
 
 // ============= Test Data =============

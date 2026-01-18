@@ -2359,3 +2359,144 @@ verify: (angleDegA: number, angleDegB?: number) => {
   // ...
 }
 ```
+
+---
+
+### D-127: Inverse Trig Function Range Conventions
+**Decision**: Follow standard mathematical conventions for inverse trig function ranges.
+
+**Rationale**:
+- arcsin: [-90°, 90°] (principal value)
+- arccos: [0°, 180°] (principal value)
+- arctan: (-90°, 90°) (principal value)
+- atan2: (-180°, 180°] (full quadrant-aware range)
+- Consistent with Math.asin, Math.acos, Math.atan, Math.atan2
+
+**Implementation**:
+```typescript
+// atan2 differs from atan by returning the correct quadrant
+// atan2(y, x) considers signs of both x and y
+```
+
+---
+
+### D-128: Exact Angle Detection for Inverse Functions
+**Decision**: Detect and display exact values for special inverse trig results.
+
+**Rationale**:
+- arcsin(0.5) = 30° is more meaningful than 29.99999...°
+- Special values (0°, 30°, 45°, 60°, 90°, etc.) deserve exact display
+- Tolerance-based comparison (1e-10) handles floating point
+
+**Implementation**:
+```typescript
+function findExactAngle(radians: number): ExactAngle | null {
+  const EXACT_ANGLES = [0, Math.PI/6, Math.PI/4, Math.PI/3, Math.PI/2, ...]
+  for (const exact of EXACT_ANGLES) {
+    if (Math.abs(radians - exact) < 1e-10) return { radians: exact, ... }
+  }
+  return null
+}
+```
+
+---
+
+### D-129: atan2 vs atan Comparison Display
+**Decision**: Show side-by-side comparison of atan2 and atan results to highlight quadrant awareness.
+
+**Rationale**:
+- atan2's quadrant awareness is its key advantage over atan
+- Showing both results clarifies when they differ
+- Visual quadrant indicator reinforces the concept
+- "When to use atan2" tips in UI
+
+**Implementation**: ResultDisplay shows both atan2(y, x) and atan(y/x) with difference indicator.
+
+---
+
+### D-130: Practical Trig Applications Organization
+**Decision**: Organize "Trig in Code" content around 4 demo types: rotation, wave, circular, projectile.
+
+**Rationale**:
+- Each demo type represents a common programming use case
+- Rotation: game sprites, UI transforms, coordinate systems
+- Wave: audio synthesis, animations, oscillations
+- Circular: orbits, clocks, radar sweeps
+- Projectile: physics, ballistics, jump arcs
+
+**Implementation**: Tab-based interface with each demo having its own visualization and Python code.
+
+---
+
+### D-131: Demo-Specific Python Code Generation
+**Decision**: Each demo generates contextual Python code reflecting current parameter values.
+
+**Rationale**:
+- Static code examples don't show parameter relationships
+- Dynamic code with current values is immediately runnable
+- Users see how changing parameters affects code
+- Reinforces the math→code connection
+
+**Implementation**:
+```typescript
+const pythonCode = computed(() => `import math
+
+def rotate_point(x, y, angle_deg):
+    rad = math.radians(angle_deg)
+    # ... with ${props.angle} substituted
+`)
+```
+
+---
+
+### D-132: Composable Animation Pattern with requestAnimationFrame
+**Decision**: Use requestAnimationFrame with delta time for smooth animations in circular motion demo.
+
+**Rationale**:
+- requestAnimationFrame is frame-rate independent
+- Delta time ensures consistent speed across devices
+- Play/pause/reset controls for user interaction
+- Cleanup on unmount prevents memory leaks
+
+**Implementation**:
+```typescript
+function startAnimation() {
+  let lastTime = performance.now()
+  function animate(currentTime: number) {
+    const deltaTime = (currentTime - lastTime) / 1000
+    lastTime = currentTime
+    circularTime.value += deltaTime
+    if (isAnimating.value) {
+      animationFrame = requestAnimationFrame(animate)
+    }
+  }
+  animationFrame = requestAnimationFrame(animate)
+}
+```
+
+---
+
+### D-133: Underscore Prefix for Intentionally Unused Variables
+**Decision**: Use underscore prefix (`_variableName`) for variables that are intentionally unused but should be kept in the codebase.
+
+**Rationale**:
+- ESLint's `@typescript-eslint/no-unused-vars` rule is configured with pattern `/^_/u`
+- Allows keeping code for future use, API completeness, or documentation
+- Makes intent explicit to code reviewers
+- Consistent with TypeScript/JavaScript conventions
+
+**Examples**:
+```typescript
+// Computed kept for potential future use
+const _selectedIdentity = computed(() => ...)
+
+// Helper function not yet called but part of module API
+function _getQuadrant(degrees: number): 1 | 2 | 3 | 4
+
+// Destructuring tuple where only first element is needed
+for (const [angle, _latex] of specialAngles) { ... }
+```
+
+**When to use underscore vs remove**:
+- Use underscore: Variable may be needed soon, documents a pattern, or is part of a larger API
+- Remove entirely: Truly dead code with no foreseeable use

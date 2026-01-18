@@ -44,7 +44,8 @@ Each topic builds toward machine learning foundations:
 | 12 | Linear Algebra: Matrices | MatrixTransformations | Linear Algebra: Matrices | ✅ Complete |
 | 13 | Calculus: Limits | LimitsExplorer | Calculus: Limits | ✅ Complete |
 | 14 | Calculus: Derivatives | DerivativeVisualizer | Calculus: Derivatives | ✅ Complete |
-| **15+** | **AI/ML Foundations** | **Various** | **ML Bridge Content** | 🎯 Next |
+| 15 | Trigonometry: Remaining Topics | InverseTrigExplorer, TrigCodePlayground | Trig: Identities, Inverse Functions, Trig in Code | ✅ Complete |
+| **16+** | **AI/ML Foundations** | **Various** | **ML Bridge Content** | 🎯 Next |
 
 ---
 
@@ -281,20 +282,59 @@ Each topic builds toward machine learning foundations:
 
 ---
 
-## Future Horizons (Phase 15+)
+### Phase 15: Trigonometry — Remaining Topics
+*Completing the Circle*
 
-Lower detail, higher flexibility. Evaluated after Phase 14.
+**Goal**: Complete the trigonometry section with identities, inverse functions, and practical applications.
+
+| Track | Deliverables |
+|-------|--------------|
+| Content | Trig Identities, Inverse Trig Functions, Trig in Code |
+| Widget | TrigIdentityExplorer (21 identities), InverseTrigExplorer (arcsin/arccos/arctan/atan2), TrigCodePlayground (rotation/waves/circular motion/projectiles) |
+| Polish | Multi-demo architecture, animation patterns |
+
+**Widget Features**:
+
+*TrigIdentityExplorer*:
+- 21 identities across 6 categories (Pythagorean, reciprocal, quotient, cofunction, even/odd, sum/difference)
+- Visual proof with unit circle
+- Numerical verification at any angle
+- Random angle testing
+
+*InverseTrigExplorer*:
+- Domain/range visualization for arcsin, arccos, arctan
+- Principal value highlighting
+- atan2 comparison with interactive quadrant display
+- Exact angle detection (π/6, π/4, π/3, etc.)
+
+*TrigCodePlayground*:
+- Rotation demo: Point rotation around origin
+- Wave demo: Sine wave generation with frequency/amplitude/phase
+- Circular motion: Orbital animation with radius/period controls
+- Projectile motion: Trajectory visualization with range/max height formulas
+
+**Technical Achievements**:
+- Multi-demo composable pattern (useTrigPlayground)
+- requestAnimationFrame with delta time for smooth animations
+- Domain validation for inverse functions
+- Floating-point comparison with epsilon tolerance
+
+---
+
+## Future Horizons (Phase 16+)
+
+Lower detail, higher flexibility. Evaluated after Phase 15.
 
 | Phase | Possible Focus |
 |-------|----------------|
-| 15 | AI/ML Foundations: Neural network intuition |
-| 16 | Probability distributions and sampling |
-| 17 | Gradient descent visualization |
-| 18 | PWA features: offline support, installability |
-| 19 | Search functionality, content discovery |
-| 20 | User progress tracking (local storage) |
-| 21 | Practice problems / quiz system |
-| 22 | Community contributions framework |
+| 16 | AI/ML Foundations: Neural network intuition |
+| 17 | Probability distributions and sampling |
+| 18 | Gradient descent visualization |
+| 19 | PWA features: offline support, installability |
+| 20 | Search functionality, content discovery |
+| 21 | User progress tracking (local storage) |
+| 22 | Practice problems / quiz system |
+| 23 | Community contributions framework |
 
 ---
 
@@ -376,6 +416,9 @@ Decisions made during roadmap planning:
 | R-015 | 2×2 matrices only in Phase 12 | Focus on 2D transformations; higher dimensions deferred |
 | R-016 | Unit square visualization for matrix transformations | Intuitive demonstration of linear transformation effects |
 | R-017 | Secant-to-tangent animation in Phase 14 | Directly visualizes limit definition of derivative; connects Phase 13→14 |
+| R-018 | Multi-demo composable architecture (Phase 15) | Single useTrigPlayground composable manages rotation, waves, circular motion, projectile demos with shared state patterns |
+| R-019 | Principal value convention for inverse trig (Phase 15) | Match standard library behavior: arcsin/arccos return [-π/2, π/2] and [0, π]; atan2 returns full [-π, π] |
+| R-020 | Underscore prefix for intentionally unused variables | ESLint `@typescript-eslint/no-unused-vars` ignores variables matching `/^_/u`; prevents CI failures |
 
 ---
 
@@ -403,8 +446,10 @@ Phase 9:  UnitCircleExplorer      (circle, synchronized waves)
 Phase 10: StatisticsCalculator    (histogram, box plot)
 Phase 11: VectorOperations        (arrow diagrams)
 Phase 12: MatrixTransformations   (transformation visualization)
-Phase 13: LimitsExplorer          (ÃŽÂµ-ÃŽÂ´ visualization)
+Phase 13: LimitsExplorer          (ε-δ visualization)
 Phase 14: DerivativeVisualizer    (tangent lines, slopes)
+Phase 15: InverseTrigExplorer     (arcsin/arccos/arctan, domain/range)
+Phase 15: TrigCodePlayground      (rotation, waves, circular motion, projectiles)
 ```
 
 ### Technical Capability Building
@@ -417,8 +462,9 @@ Phase 9:  Circular geometry, synchronized animations
 Phase 10: Data visualization (histogram, box plot)
 Phase 11: Vector arrows, 2D/3D representation
 Phase 12: Transformation matrices, composition
-Phase 13: Epsilon-delta bands, limit visualization  
+Phase 13: Epsilon-delta bands, limit visualization
 Phase 14: Tangent lines, derivative graphs
+Phase 15: Multi-demo composables, requestAnimationFrame animations, domain validation
 ```
 
 ---
@@ -427,8 +473,8 @@ Phase 14: Tangent lines, derivative graphs
 
 | Metric | Target | Measured By |
 |--------|--------|-------------|
-| Content Coverage | All archive content migrated | Phase 14 |
-| Widget Count | 10+ major interactive widgets | Phase 14 |
+| Content Coverage | All archive content migrated | Phase 15 |
+| Widget Count | 12+ major interactive widgets | Phase 15 |
 | Test Coverage | All utilities tested, E2E for all widgets | Ongoing |
 | Accessibility | WCAG 2.1 AA compliance | axe-core audits |
 | Performance | Lighthouse >90 | Phase 10 audit |
@@ -448,7 +494,8 @@ Phase 14: Tangent lines, derivative graphs
 | 12 | Linear algebra approach working? Ready for calculus? | ✅ Yes - vectors + matrices complete; composable pattern proven |
 | 13 | Limits visualization effective? Epsilon-delta approach working? | ✅ Yes - numerical approach intuitive; ε-δ bands educational |
 | 14 | Derivatives visualization effective? Secant animation working? | ✅ Yes - tangent lines clear; secant→tangent animation demonstrates limit definition well |
-| 15+ | Calculus foundation complete. Evaluate AI/ML phase scope. | — |
+| 15 | Trigonometry section complete? All subtopics covered? | ✅ Yes - 5 subtopics (Unit Circle, Right Triangle, Identities, Inverse Functions, Trig in Code); comprehensive coverage |
+| 16+ | Core math sections complete. Evaluate AI/ML phase scope. | — |
 
 ---
 
@@ -481,6 +528,7 @@ Phase 14: Tangent lines, derivative graphs
 | 2026-01-17 | Phase 12 complete: MatrixTransformations widget, unit square visualization, matrix utilities (50+ tests), matrices content page |
 | 2026-01-17 | Phase 13 complete: LimitsExplorer widget, ε-δ visualization, limits utilities (40+ tests), calculus section with Limits page |
 | 2026-01-17 | Phase 14 complete: DerivativeVisualizer widget, tangent lines, secant-to-tangent animation, derivative utilities (67 tests), derivatives page with gradient descent focus |
+| 2026-01-18 | Phase 15 complete: TrigIdentityExplorer (21 identities), InverseTrigExplorer (arcsin/arccos/arctan/atan2), TrigCodePlayground (rotation/waves/circular motion/projectiles); trigonometry section finished with 5 subtopics; 1048 tests total |
 
 ---
 

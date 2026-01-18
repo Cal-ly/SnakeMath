@@ -3025,3 +3025,307 @@ function selectCategory(category: IdentityCategory) {
 - Users see actual computed values
 - Reinforces that both expressions evaluate to same number
 - Shows tolerance-based equality (floating point awareness)
+
+---
+
+## Phase 15 Continued: Inverse Functions & Trig in Code
+
+### LL-055: Floating Point Comparison in Tests with toContain
+**Issue**: Using `expect(solutions).toContain(30)` failed when the array contained `30.000000000000004`.
+
+**Code**:
+```typescript
+// Failed test
+const result = findAllSolutions('arcsin', 0.5, [0, 360])
+expect(result.solutions).toContain(30)  // Failed: array had 30.000000000000004
+```
+
+**Resolution**: Use tolerance-based comparison:
+```typescript
+const TOLERANCE = 1e-10
+expect(result.solutions.some(s => Math.abs(s - 30) < TOLERANCE)).toBe(true)
+```
+
+**Lesson**: Never use `toContain` for floating point values. Always use tolerance-based comparison.
+
+---
+
+### LL-056: JavaScript's -0 vs 0 Equality
+**Issue**: `expect(normalizeAngle(-360)).toBe(0)` failed because the result was `-0`, which fails `Object.is` equality.
+
+**Context**: `toBe` uses `Object.is` which distinguishes -0 from 0 (unlike `===`).
+
+**Resolution**: Use `toBeCloseTo` for numerical comparisons:
+```typescript
+// Before (failed with -0)
+expect(normalizeAngle(-360)).toBe(0)
+
+// After (works correctly)
+expect(normalizeAngle(-360)).toBeCloseTo(0, 10)
+```
+
+**Lesson**: Use `toBeCloseTo` for any numerical value comparison in tests to handle -0 and floating point edge cases.
+
+---
+
+### LL-057: TypeScript Tuple Type Annotation for Array Destructuring
+**Issue**: TypeScript error "Argument of type 'number | undefined' is not assignable" when destructuring array elements.
+
+**Code**:
+```typescript
+// Error: possibly undefined
+const testPairs = [[0, 1], [30, 45]]
+for (const [a, b] of testPairs) {
+  func(a, b)  // Error on 'a' and 'b'
+}
+```
+
+**Resolution**: Add explicit tuple type annotation:
+```typescript
+const testPairs: [number, number][] = [[0, 1], [30, 45]]
+for (const [a, b] of testPairs) {
+  func(a, b)  // Works: a and b are definitely number
+}
+```
+
+**Lesson**: TypeScript's array indexing is conservative. Use tuple types (`[T, T][]`) when you know the exact structure.
+
+---
+
+### LI-067: Inverse Function Domain Validation
+**Identified**: Each inverse trig function has specific domain constraints that must be validated.
+
+**Pattern**:
+```typescript
+function arcsin(value: number): InverseResult {
+  // Domain: [-1, 1]
+  if (value < -1 || value > 1) {
+    return {
+      valid: false,
+      error: 'arcsin domain: -1 ≤ x ≤ 1',
+      inputValue: value,
+    }
+  }
+  // ...
+}
+```
+
+**Domains**:
+| Function | Domain |
+|----------|--------|
+| arcsin | [-1, 1] |
+| arccos | [-1, 1] |
+| arctan | (-∞, +∞) |
+| atan2 | x=0 and y=0 is undefined |
+
+**Benefits**:
+- Clear error messages for out-of-domain inputs
+- Prevents NaN propagation
+- Educational: teaches domain restrictions
+
+---
+
+### LI-068: atan2 Quadrant-Aware Result Display
+**Identified**: atan2's key advantage is quadrant awareness, which should be highlighted in the UI.
+
+**Pattern**:
+```typescript
+interface Atan2Result {
+  angleDeg: number
+  angleRad: number
+  quadrant: 1 | 2 | 3 | 4 | null  // null for axis points
+
+  // Comparison with atan
+  atanAngleDeg: number
+  differenceFromAtan: number
+}
+```
+
+**Benefits**:
+- Shows when atan2 differs from atan(y/x)
+- Visual quadrant indicator
+- Practical for game dev / graphics programming
+
+---
+
+### LI-069: Multi-Demo Composable Architecture
+**Identified**: A widget with multiple demo types benefits from unified state management.
+
+**Pattern**:
+```typescript
+export function useTrigPlayground() {
+  // Active demo type
+  const activeDemo = ref<DemoType>('rotation')
+
+  // Demo-specific state (only relevant when that demo is active)
+  const rotationAngle = ref(45)  // rotation
+  const waveFrequency = ref(1)   // wave
+  const circularRadius = ref(80) // circular
+  const projectileSpeed = ref(20) // projectile
+
+  // Computed values per demo type
+  const rotatedPoint = computed(() => ...)
+  const wavePoints = computed(() => ...)
+  const circularPosition = computed(() => ...)
+  const trajectory = computed(() => ...)
+
+  // URL params include demo type for proper state loading
+  function updateUrl() {
+    const params = { demo: activeDemo.value }
+    switch (activeDemo.value) {
+      case 'rotation': params.angle = rotationAngle.value; break
+      // ...
+    }
+  }
+}
+```
+
+**Benefits**:
+- Single composable manages all demos
+- URL state includes demo type for proper sharing
+- Clean separation between demo types
+- Easy to add new demo types
+
+---
+
+### LI-070: Animated Demo with Play/Pause/Reset Controls
+**Identified**: Time-based demos benefit from standard animation controls.
+
+**Pattern**:
+```typescript
+// State
+const time = ref(0)
+const isAnimating = ref(false)
+let animationFrame: number | null = null
+
+// Controls
+function toggleAnimation() {
+  isAnimating.value = !isAnimating.value
+  if (isAnimating.value) startAnimation()
+  else stopAnimation()
+}
+
+function resetTime() {
+  time.value = 0
+}
+
+// Cleanup
+onUnmounted(() => {
+  if (animationFrame) cancelAnimationFrame(animationFrame)
+})
+```
+
+**Benefits**:
+- Consistent animation behavior
+- Proper cleanup prevents memory leaks
+- User control over animation state
+
+---
+
+### LI-071: Projectile Physics Formula Set
+**Identified**: Projectile motion has a standard set of formulas programmers commonly need.
+
+**Formulas implemented**:
+```typescript
+// Position at time t
+x(t) = v * cos(θ) * t
+y(t) = v * sin(θ) * t - 0.5 * g * t²
+
+// Range (horizontal distance)
+R = v² * sin(2θ) / g
+
+// Maximum height
+H = (v * sin(θ))² / (2g)
+
+// Flight time
+T = 2 * v * sin(θ) / g
+
+// Optimal angle for max range
+θ_optimal = 45°
+```
+
+**Benefits**:
+- Complete formula set for game physics
+- Derived formulas save computation
+- 45° optimal angle is educational highlight
+
+---
+
+## CI/CD: ESLint Unused Variable Fixes
+
+### LL-058: ESLint Strict Unused Variable Rule in CI
+**Issue**: GitHub Actions CI failed due to 14 ESLint `@typescript-eslint/no-unused-vars` errors that weren't caught during local development.
+
+**Context**: The project enforces `no-unused-vars` with pattern `/^_/u` for intentionally unused variables. Local development may not always run full ESLint checks before committing.
+
+**Resolution**: Fixed all 14 errors across 6 files:
+- Removed truly unused imports (e.g., `CodeExample`, `onMounted`, unused type imports)
+- Prefixed intentionally unused variables with underscore (e.g., `_selectedIdentity`, `_getQuadrant`, `_latex`)
+- Removed unused code blocks entirely (e.g., `gradientDescentCode` variable)
+
+**Lesson**: Always run `npm run lint` before committing, especially after refactoring. Consider adding pre-commit hooks to catch these issues locally.
+
+---
+
+### LL-059: Unused Imports After Refactoring
+**Issue**: When removing features or refactoring code, imports often become orphaned but aren't immediately obvious.
+
+**Examples from this fix**:
+```typescript
+// Removed - no longer used after removing code example
+import CodeExample from '@/components/content/CodeExample.vue'
+
+// Removed - functions defined but never called
+import { sineWave, projectilePosition } from '@/utils/math/trigApplications'
+
+// Removed - types imported for documentation but not used in code
+import type { TrigIdentity, VerificationResult, IdentityCategory }
+```
+
+**Lesson**: When removing UI elements or features, trace backwards to find and remove all related imports, variables, and types.
+
+---
+
+### LI-072: Underscore Prefix Convention for Intentionally Unused Variables
+**Identified**: The ESLint pattern `/^_/u` allows keeping variables that are intentionally unused but serve a purpose.
+
+**Use Cases**:
+```typescript
+// Computed property kept for future use or API completeness
+const _selectedIdentity = computed(() => ...)
+
+// Helper function defined for internal use, not yet called
+function _getQuadrant(degrees: number): 1 | 2 | 3 | 4
+
+// Destructuring where you need one value but not another
+for (const [angle, _latex] of specialAngles) {
+  // Only using 'angle', but need to destructure the tuple
+}
+```
+
+**Benefits**:
+- Documents intent: "I know this is unused, it's intentional"
+- Keeps code that may be needed soon
+- Satisfies linter without removing potentially useful code
+- Makes code review easier (reviewer knows it's intentional)
+
+---
+
+### LI-073: Pre-commit Checklist for CI Success
+**Identified**: A consistent pre-commit routine prevents CI failures.
+
+**Recommended Checklist**:
+```bash
+# Before every commit
+npm run type-check   # TypeScript errors
+npm run lint         # ESLint (catches unused vars)
+npm run test         # Unit tests still pass
+
+# Before pushing
+npm run build        # Production build succeeds
+```
+
+**Benefits**:
+- Catches issues locally before CI
+- Faster feedback loop than waiting for CI
+- Reduces failed CI runs and re-commits

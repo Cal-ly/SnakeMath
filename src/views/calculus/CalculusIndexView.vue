@@ -12,7 +12,6 @@ import TopicPage from '@/components/content/TopicPage.vue'
 import ContentSection from '@/components/content/ContentSection.vue'
 import RelatedTopics from '@/components/content/RelatedTopics.vue'
 import MathBlock from '@/components/content/MathBlock.vue'
-import CodeExample from '@/components/content/CodeExample.vue'
 
 // ============================================================================
 // Data
@@ -59,38 +58,6 @@ const relatedTopics = [
     description: 'e and exponential growth in calculus',
   },
 ]
-
-// Python code example
-const gradientDescentCode = `# Calculus in action: Gradient Descent
-# Used in machine learning to find optimal parameters
-
-def gradient_descent(f, df, x0, learning_rate=0.01, iterations=100):
-    """
-    Find minimum of function f using its derivative df.
-
-    The derivative tells us which direction is "downhill"
-    - If df(x) > 0: function increasing, move left
-    - If df(x) < 0: function decreasing, move right
-    - If df(x) = 0: at minimum (or maximum)
-    """
-    x = x0
-    history = [x]
-
-    for _ in range(iterations):
-        gradient = df(x)      # Calculate slope at current point
-        x = x - learning_rate * gradient  # Step opposite to slope
-        history.append(x)
-
-    return x, history
-
-# Example: Find minimum of f(x) = x^2 - 4x + 5
-# Derivative: f'(x) = 2x - 4
-f = lambda x: x**2 - 4*x + 5
-df = lambda x: 2*x - 4
-
-minimum, path = gradient_descent(f, df, x0=0)
-print(f"Minimum at x = {minimum:.4f}")  # Should be ~2.0
-print(f"f(minimum) = {f(minimum):.4f}")  # Should be 1.0`
 </script>
 
 <template>

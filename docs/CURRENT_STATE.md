@@ -5,13 +5,13 @@ This document outlines the current state of the project for easy resumption afte
 
 ---
 
-## Current Status: Phase 15 In Progress (Increments 15A-15C Complete)
+## Current Status: Phase 15 Complete
 
 **Last Updated**: 2026-01-18
 
 ### Project Summary
 
-SnakeMath is an educational mathematics website for programmers. Fifteen phases of development (Phase 15 partially complete) have established:
+SnakeMath is an educational mathematics website for programmers. Fifteen phases of development have established:
 
 | Phase | Focus | Key Deliverables | Status |
 |-------|-------|------------------|--------|
@@ -30,7 +30,7 @@ SnakeMath is an educational mathematics website for programmers. Fifteen phases 
 | 13 | Calculus — Limits | LimitsExplorer, epsilon-delta viz, continuity | Complete |
 | 14 | Calculus — Derivatives | DerivativeVisualizer, tangent lines, secant animation | Complete |
 | — | Content Review | Three-analogy blocks, pitfall callouts, RelatedTopics | Complete |
-| 15 | Trigonometry — Remaining Topics | Right Triangle, Trig Identities | In Progress |
+| 15 | Trigonometry — Remaining Topics | Right Triangle, Identities, Inverse, Trig in Code | Complete |
 
 ### What's Live
 
@@ -48,10 +48,12 @@ SnakeMath is an educational mathematics website for programmers. Fifteen phases 
   - Linear Equations - single equations, systems, NumPy integration
   - Quadratic Functions (QuadraticExplorer widget)
   - Exponentials & Logarithms (ExponentialExplorer widget)
-- `/trigonometry` - Trigonometry section:
+- `/trigonometry` - Trigonometry section (5 subtopics):
   - Unit Circle (UnitCircleExplorer widget with WaveGraphs)
-  - **Right Triangle (RightTriangleSolver widget with SVG diagram)**
-  - **Trig Identities (TrigIdentityExplorer widget with 21 identities)**
+  - Right Triangle (RightTriangleSolver widget with SVG diagram)
+  - Trig Identities (TrigIdentityExplorer widget with 21 identities)
+  - **Inverse Functions (InverseTrigExplorer widget with atan2 vs atan comparison)**
+  - **Trig in Code (TrigCodePlayground widget with 4 demo types)**
 - `/linear-algebra` - Linear Algebra section:
   - Vectors (VectorOperations widget with SVG canvas)
   - **Matrices (MatrixTransformations widget with unit square visualization)**
@@ -74,6 +76,8 @@ SnakeMath is an educational mathematics website for programmers. Fifteen phases 
 - **DerivativeVisualizer**: 8 preset functions, SVG function curve with tangent line, movable point of tangency, secant line overlay with h-value slider, secant-to-tangent animation showing limit definition, derivative curve toggle, derivative value display with slope interpretation, URL state sync
 - **RightTriangleSolver**: Input modes (side-side, side-angle), proportional SVG diagram with labeled sides/angles, step-by-step solution display, 5 educational presets, angle unit toggle (degrees/radians), solved values panel, URL state sync
 - **TrigIdentityExplorer**: 21 identities across 6 categories (Pythagorean, Quotient, Reciprocal, Sum/Difference, Double Angle, Half Angle), category tabs, identity cards with expandable proof steps, numerical verification at custom angles, Python code examples, URL state sync
+- **InverseTrigExplorer**: arcsin/arccos/arctan/atan2 functions, domain validation with error messages, exact angle detection (30°, 45°, 60°, etc.), unit circle visualization showing resulting angle, atan2 vs atan comparison display, 10 educational presets, quadrant indicator, Python code examples, URL state sync
+- **TrigCodePlayground**: 4 demo types (rotation, wave, circular motion, projectile), tab-based navigation, rotation demo with angle slider and matrix display, wave demo with frequency/amplitude/phase controls, circular motion with play/pause animation, projectile physics with trajectory visualization, dynamic Python code generation, 12 presets across demo types, URL state sync
 
 **Visualization Components**:
 - **CoordinateSystem**: Reusable SVG coordinate system with axes, grid, labels
@@ -84,8 +88,8 @@ SnakeMath is an educational mathematics website for programmers. Fifteen phases 
 - **BoxPlotChart**: SVG box plot with quartiles, whiskers, and outlier markers
 
 **Testing Infrastructure**:
-- 882+ unit tests (Vitest) - including rightTriangle (30+) and trigIdentities (82) tests
-- E2E tests (Playwright) with tiered CI approach - 40+ derivative visualizer tests added
+- 1048 unit tests (Vitest) - including inverseTrig (83) and trigApplications (83) tests
+- E2E tests (Playwright) with tiered CI approach
 - Visual regression tests (Playwright screenshot comparison) - local only
 - WCAG 2.1 AA accessibility audits via axe-core
 - **Tiered CI workflow**: quick-check (push), full-test (PR only)
@@ -142,6 +146,10 @@ npm run build        # Production build
 | Right Triangle utilities | `src/utils/math/rightTriangle.ts` |
 | Right Triangle composable | `src/composables/useRightTriangle.ts` |
 | Trig Identities utilities | `src/utils/math/trigIdentities.ts` |
+| Inverse Trig utilities | `src/utils/math/inverseTrig.ts` |
+| Inverse Trig composable | `src/composables/useInverseTrig.ts` |
+| Trig Applications utilities | `src/utils/math/trigApplications.ts` |
+| Trig Playground composable | `src/composables/useTrigPlayground.ts` |
 
 ### Archived Documentation
 Phase completion summaries are in `docs/archive/`:
@@ -153,8 +161,8 @@ Phase completion summaries are in `docs/archive/`:
 
 ## Test Coverage
 
-### Unit Tests (882+ tests)
-- Math utilities (number classification, parsing, quadratic, exponential, trigonometry, statistics, product, vector, matrix, limits, derivative, rightTriangle, trigIdentities functions)
+### Unit Tests (1048 tests)
+- Math utilities (number classification, parsing, quadratic, exponential, trigonometry, statistics, product, vector, matrix, limits, derivative, rightTriangle, trigIdentities, inverseTrig, trigApplications functions)
 - Data validation (symbols, navigation)
 - Component logic (via composables)
 
@@ -207,9 +215,9 @@ Phase completion summaries are in `docs/archive/`:
 
 ---
 
-## Phase 15 Progress Summary (In Progress)
+## Phase 15 Completion Summary
 
-Phase 15 is implementing remaining trigonometry topics: Right Triangle Trigonometry, Trig Identities, Inverse Functions, and Trig in Code.
+Phase 15 implemented remaining trigonometry topics: Right Triangle Trigonometry, Trig Identities, Inverse Functions, and Trig in Code.
 
 ### Completed Increments
 
@@ -222,47 +230,61 @@ Phase 15 is implementing remaining trigonometry topics: Right Triangle Trigonome
 
 **Increment 15B: RightTriangleSolver Widget + Content Page**
 - Created `src/composables/useRightTriangle.ts` for state management + URL sync
-- Built widget in `src/components/widgets/RightTriangleSolver/`:
-  - `RightTriangleSolver.vue` - main orchestrator
-  - `TriangleCanvas.vue` - proportional SVG diagram with labels
-  - `TriangleInputs.vue` - input mode selection and value controls
-  - `TriangleSolution.vue` - step-by-step solution display
-  - `TrianglePresets.vue` - preset selector buttons
+- Built widget in `src/components/widgets/RightTriangleSolver/`
 - Created `src/views/trigonometry/RightTriangleView.vue` content page
 - Updated routes and navigation
 
 **Increment 15C: Trig Identities Utilities + Widget + Content Page**
 - Created `src/utils/math/trigIdentities.ts` with 82 comprehensive tests
-- 21 identities across 6 categories:
-  - Pythagorean (3): sin²+cos²=1, 1+tan²=sec², 1+cot²=csc²
-  - Quotient (2): tan=sin/cos, cot=cos/sin
-  - Reciprocal (3): csc=1/sin, sec=1/cos, cot=1/tan
-  - Sum/Difference (5): sin(A±B), cos(A±B), tan(A+B)
-  - Double Angle (5): sin(2θ), cos(2θ) 3 forms, tan(2θ)
-  - Half Angle (3): sin(θ/2), cos(θ/2), tan(θ/2)
-- Each identity has: verify function, LaTeX formula, proof steps, Python code
-- Built widget in `src/components/widgets/TrigIdentityExplorer/`:
-  - `TrigIdentityExplorer.vue` - category tabs and angle controls
-  - `IdentityCard.vue` - identity display with expandable sections
-  - `IdentityProof.vue` - step-by-step algebraic proof
-  - `IdentityVerifier.vue` - numerical verification at given angle
+- 21 identities across 6 categories (Pythagorean, Quotient, Reciprocal, Sum/Difference, Double Angle, Half Angle)
+- Built widget in `src/components/widgets/TrigIdentityExplorer/`
 - Created `src/views/trigonometry/TrigIdentitiesView.vue` content page
-- Updated routes and navigation
 
-### Remaining Increments
-- 15D-15F: Inverse Trigonometric Functions (utilities, widget, content)
-- 15G-15I: Trig in Code / Applications (utilities, widget, content)
-- 15J-15L: Polish, E2E tests, documentation
+**Increment 15D-15F: Inverse Trigonometric Functions**
+- Created `src/utils/math/inverseTrig.ts` with 83 comprehensive tests
+- Types: `InverseResult`, `Atan2Result`, `InverseFunctionId`, `ExactAngle`
+- Functions: `arcsin`, `arccos`, `arctan`, `atan2`, `evaluateInverse`, `findAllSolutions`, `findExactAngle`
+- Domain validation with clear error messages
+- Exact angle detection for special values (0°, 30°, 45°, 60°, 90°, etc.)
+- 10 educational presets covering all inverse functions
+- Created `src/composables/useInverseTrig.ts` for state management + URL sync
+- Built widget in `src/components/widgets/InverseTrigExplorer/`:
+  - `InverseTrigExplorer.vue` - main orchestrator with function tabs
+  - `FunctionSelector.vue` - arcsin/arccos/arctan/atan2 selector
+  - `ValueInput.vue` - inputs with atan2 dual-input support
+  - `InverseVisualization.vue` - SVG unit circle showing resulting angle
+  - `ResultDisplay.vue` - results with atan2 vs atan comparison
+  - `PresetSelector.vue` - quick example buttons
+- Created `src/views/trigonometry/InverseTrigView.vue` content page with three-analogy block and atan2 pitfall
+
+**Increment 15G-15K: Trig in Code / Applications**
+- Created `src/utils/math/trigApplications.ts` with 83 comprehensive tests
+- Types: `Point2D`, `Vector2D`, `WaveParams`, `ProjectileParams`, `ProjectileState`, `DemoType`
+- Rotation functions: `rotatePoint`, `rotatePointAround`, `rotationMatrix`
+- Circular motion: `circularMotion`, `orbitPosition`, `generateCirclePath`
+- Wave functions: `sineWave`, `cosineWave`, `generateWavePoints`, `combineWaves`
+- Angle functions: `angleToTarget`, `angleBetweenVectors`, `normalizeAngle`, `angularDifference`
+- Projectile motion: `projectilePosition`, `projectileVelocity`, `projectileTrajectory`, `projectileRange`, `projectileMaxHeight`, `projectileFlightTime`
+- Animation easing: `easeInOutSine`, `easeInSine`, `easeOutSine`, `bounce`, `pendulum`, `elastic`
+- 12 presets across 4 demo types
+- Created `src/composables/useTrigPlayground.ts` for multi-demo state management + animation + URL sync
+- Built widget in `src/components/widgets/TrigCodePlayground/`:
+  - `TrigCodePlayground.vue` - main orchestrator with demo tabs
+  - `DemoTabs.vue` - rotation/wave/circular/projectile tab selector
+  - `RotationDemo.vue` - interactive point rotation with matrix display
+  - `WaveDemo.vue` - sine wave with frequency/amplitude/phase controls
+  - `CircularDemo.vue` - orbital motion with play/pause animation
+  - `ProjectileDemo.vue` - projectile trajectory with speed/angle controls
+- Created `src/views/trigonometry/TrigInCodeView.vue` comprehensive content page with all practical applications
 
 ### Key Architectural Decisions (Phase 15)
-- D-119: Reusing existing widget patterns (composable + orchestrator + sub-components)
-- D-120: Step-by-step solution display for right triangle solver
-- D-121: Proportional SVG triangle diagram with automatic scaling
-- D-122: Preset examples for common right triangles
-- D-123: Category-based identity organization with tabs
-- D-124: Identity verification functions with tolerance-based comparison
-- D-125: Proof steps with LaTeX rendering for each identity
-- D-126: Two-angle identities default second angle to 30°
+- D-119 through D-126: Right Triangle and Trig Identities patterns
+- D-127: Inverse trig function range conventions (standard mathematical)
+- D-128: Exact angle detection for special inverse trig results
+- D-129: atan2 vs atan comparison display for quadrant awareness
+- D-130: Practical trig applications organized into 4 demo types
+- D-131: Demo-specific Python code generation with current parameter values
+- D-132: Composable animation pattern with requestAnimationFrame
 
 ---
 

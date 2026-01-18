@@ -1,12 +1,10 @@
-import { ref, computed, watch, onMounted, onUnmounted } from 'vue'
+import { ref, computed, watch, onUnmounted } from 'vue'
 import { useRoute, useRouter } from 'vue-router'
 import type { DemoType, Point2D, WaveParams, ProjectileParams } from '@/utils/math/trigApplications'
 import {
   rotatePoint,
   circularMotion,
-  sineWave,
   generateWavePoints,
-  projectilePosition,
   projectileTrajectory,
   projectileRange,
   projectileMaxHeight,

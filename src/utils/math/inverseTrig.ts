@@ -206,7 +206,7 @@ function normalizeAngle(degrees: number): number {
 /**
  * Get quadrant from angle in degrees
  */
-function getQuadrant(degrees: number): 1 | 2 | 3 | 4 {
+function _getQuadrant(degrees: number): 1 | 2 | 3 | 4 {
   const normalized = normalizeAngle(degrees)
   if (normalized >= 0 && normalized < 90) return 1
   if (normalized >= 90 && normalized < 180) return 2
@@ -465,7 +465,7 @@ export function atan2(y: number, x: number): Atan2Result {
   // More accurate exact value calculation
   if (degrees < 0) {
     const posAngle = 360 + degrees
-    for (const [angle, latex] of specialAngles) {
+    for (const [angle, _latex] of specialAngles) {
       if (Math.abs(posAngle - angle) < TOLERANCE) {
         // Express as negative angle
         const negAngle = angle - 360
