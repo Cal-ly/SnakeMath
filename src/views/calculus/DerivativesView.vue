@@ -234,7 +234,7 @@ print(f"f'(2) = {result.derivative}") # 7
           change.
         </p>
 
-        <div class="p-4 bg-surface-alt rounded-lg border border-border mb-4">
+        <div class="p-4 rounded-lg border border-border mb-4">
           <MathBlock formula="f'(x) = \lim_{h \to 0} \frac{f(x+h) - f(x)}{h}" display />
           <p class="text-sm text-text-secondary text-center mt-2">
             "The derivative of f at x equals the limit as h approaches 0 of the difference quotient"
@@ -306,7 +306,7 @@ print(f"f'(2) = {result.derivative}") # 7
 
         <DerivativeVisualizer sync-url />
 
-        <div class="mt-4 p-4 bg-surface-alt rounded-lg border border-border">
+        <div class="mt-4 p-4 rounded-lg border border-border">
           <h4 class="font-semibold text-primary mb-2">
             <i class="fa-solid fa-lightbulb mr-2" aria-hidden="true" />
             Try These Experiments
@@ -437,7 +437,7 @@ print(f"f'(2) = {result.derivative}") # 7
           </table>
         </div>
 
-        <div class="p-4 bg-surface-alt rounded-lg border border-border">
+        <div class="p-4 rounded-lg border border-border">
           <h4 class="font-semibold text-primary mb-2">Common Derivatives to Know</h4>
           <div class="grid gap-2 sm:grid-cols-2 text-sm">
             <div><MathBlock formula="\frac{d}{dx}\sin(x) = \cos(x)" /></div>
@@ -512,7 +512,7 @@ print(f"f'(2) = {result.derivative}") # 7
           to find the minimum.
         </p>
 
-        <div class="p-4 bg-surface-alt rounded-lg border border-border mb-4">
+        <div class="p-4 rounded-lg border border-border mb-4">
           <MathBlock formula="x_{\text{new}} = x - \alpha \cdot f'(x)" display />
           <p class="text-sm text-text-secondary text-center mt-2">
             Update rule: move opposite to the derivative, scaled by learning rate alpha
@@ -520,7 +520,7 @@ print(f"f'(2) = {result.derivative}") # 7
         </div>
 
         <div class="grid gap-4 sm:grid-cols-2 mb-4">
-          <div class="p-4 bg-surface-alt rounded-lg border border-border">
+          <div class="p-4 rounded-lg border border-border">
             <h4 class="font-semibold text-amber-600 mb-2">
               <i class="fa-solid fa-gauge mr-2" aria-hidden="true" />
               Everyday Analogy
@@ -531,7 +531,7 @@ print(f"f'(2) = {result.derivative}") # 7
               direction. Repeat until it's flat.
             </p>
           </div>
-          <div class="p-4 bg-surface-alt rounded-lg border border-border">
+          <div class="p-4 rounded-lg border border-border">
             <h4 class="font-semibold text-emerald-600 mb-2">
               <i class="fa-solid fa-mountain-sun mr-2" aria-hidden="true" />
               Visual Intuition
@@ -563,7 +563,7 @@ print(f"f'(2) = {result.derivative}") # 7
         <p class="mb-4">Beyond gradient descent, derivatives appear everywhere in programming:</p>
 
         <div class="grid gap-4 sm:grid-cols-2 mb-4">
-          <div class="p-4 bg-surface-alt rounded-lg border border-border">
+          <div class="p-4 rounded-lg border border-border">
             <h4 class="font-semibold text-emerald-600 mb-2">
               <i class="fa-solid fa-ruler mr-2" aria-hidden="true" />
               Linear Approximation
@@ -573,7 +573,7 @@ print(f"f'(2) = {result.derivative}") # 7
               quick estimate!
             </p>
           </div>
-          <div class="p-4 bg-surface-alt rounded-lg border border-border">
+          <div class="p-4 rounded-lg border border-border">
             <h4 class="font-semibold text-blue-600 mb-2">
               <i class="fa-solid fa-bolt mr-2" aria-hidden="true" />
               Physics Simulations
@@ -583,7 +583,7 @@ print(f"f'(2) = {result.derivative}") # 7
               game physics work!
             </p>
           </div>
-          <div class="p-4 bg-surface-alt rounded-lg border border-border">
+          <div class="p-4 rounded-lg border border-border">
             <h4 class="font-semibold text-purple-600 mb-2">
               <i class="fa-solid fa-robot mr-2" aria-hidden="true" />
               Automatic Differentiation
@@ -592,7 +592,7 @@ print(f"f'(2) = {result.derivative}") # 7
               PyTorch, TensorFlow, JAX automatically compute derivatives. No manual math needed!
             </p>
           </div>
-          <div class="p-4 bg-surface-alt rounded-lg border border-border">
+          <div class="p-4 rounded-lg border border-border">
             <h4 class="font-semibold text-amber-600 mb-2">
               <i class="fa-solid fa-crosshairs mr-2" aria-hidden="true" />
               Sensitivity Analysis

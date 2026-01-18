@@ -6,8 +6,10 @@ import ContentSection from '@/components/content/ContentSection.vue'
 import CodeExample from '@/components/content/CodeExample.vue'
 
 const relatedTopics = [
-  { title: 'Variables', path: '/basics/variables', description: 'Named values' },
-  { title: 'Functions', path: '/basics/functions', description: 'f(x) notation' },
+  { title: 'Basics Overview', path: '/basics', description: 'All basics topics' },
+  { title: 'Variables', path: '/basics/variables', description: 'Expressions combine variables' },
+  { title: 'Functions', path: '/basics/functions', description: 'f(x) acts like high-precedence parentheses' },
+  { title: 'Exponentials', path: '/algebra/exponentials', description: 'Power and precedence' },
 ]
 
 // Operator precedence data
@@ -176,6 +178,53 @@ print(f"Future value: \${A:.2f}")  # $1,647.01
         </p>
 
         <CodeExample id="basics-orderops-matters" :code="whyOrderMattersCode" language="python" title="order_matters.py" />
+
+        <!-- Three Analogies -->
+        <div class="grid gap-4 sm:grid-cols-3 mt-6 mb-4">
+          <div class="p-4 bg-surface-alt rounded-lg border border-border">
+            <h4 class="font-semibold text-amber-600 dark:text-amber-400 mb-2">
+              <i class="fa-solid fa-shirt mr-2" aria-hidden="true" />
+              Everyday Analogy
+            </h4>
+            <p class="text-sm text-text-secondary">
+              Getting dressed has an order: underwear before pants, socks before shoes. Math operations
+              have an order too—multiplication before addition, exponents before everything else.
+            </p>
+          </div>
+          <div class="p-4 bg-surface-alt rounded-lg border border-border">
+            <h4 class="font-semibold text-emerald-600 dark:text-emerald-400 mb-2">
+              <i class="fa-solid fa-code mr-2" aria-hidden="true" />
+              Programming Analogy
+            </h4>
+            <p class="text-sm text-text-secondary">
+              Operator precedence is like function call nesting. Higher precedence means "gets called first,
+              returns value to the outer expression." Parentheses explicitly control this nesting.
+            </p>
+          </div>
+          <div class="p-4 bg-surface-alt rounded-lg border border-border">
+            <h4 class="font-semibold text-blue-600 dark:text-blue-400 mb-2">
+              <i class="fa-solid fa-tree mr-2" aria-hidden="true" />
+              Visual Intuition
+            </h4>
+            <p class="text-sm text-text-secondary">
+              Think of an expression as a tree: higher-precedence operators are closer to the leaves,
+              lower-precedence operators are closer to the root. Evaluate from leaves up.
+            </p>
+          </div>
+        </div>
+
+        <!-- Pitfall Callout -->
+        <div class="p-4 bg-amber-50 dark:bg-amber-900/30 border border-amber-200 dark:border-amber-800 rounded-lg">
+          <p class="font-semibold text-amber-700 dark:text-amber-300 mb-2">
+            <i class="fa-solid fa-triangle-exclamation mr-2" aria-hidden="true" />
+            Common Pitfall: -3**2 = -9, Not 9!
+          </p>
+          <p class="text-sm text-amber-600 dark:text-amber-400">
+            Exponentiation has higher precedence than unary minus. Python reads <code>-3**2</code> as
+            <code>-(3**2)</code>, giving -9. To square negative three, write <code>(-3)**2</code>.
+            This trips up almost everyone the first time!
+          </p>
+        </div>
       </ContentSection>
 
       <!-- PEMDAS -->

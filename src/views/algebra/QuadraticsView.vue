@@ -8,8 +8,9 @@ import { QuadraticExplorer } from '@/components/widgets/QuadraticExplorer'
 
 const relatedTopics = [
   { title: 'Algebra Overview', path: '/algebra', description: 'All algebra topics' },
-  { title: 'Number Types', path: '/basics/number-types', description: 'Complex numbers for roots' },
-  { title: 'Functions', path: '/basics/functions', description: 'Understanding f(x)' },
+  { title: 'Linear Equations', path: '/algebra/linear-equations', description: 'Simpler: degree 1 polynomials' },
+  { title: 'Number Types', path: '/basics/number-types', description: 'Complex numbers for imaginary roots' },
+  { title: 'Derivatives', path: '/calculus/derivatives', description: 'Finding the vertex via calculus' },
 ]
 
 // Code examples
@@ -98,12 +99,59 @@ print(f"Ball hits ground at t = {t:.2f} seconds")`
 
       <h3 class="text-lg font-semibold mt-6 mb-3">Why Programmers Care</h3>
 
-      <p>
+      <p class="mb-4">
         Quadratics appear everywhere in programming: physics engines use them for projectile
         motion, game developers use them for jump arcs and trajectories, and optimization
         algorithms often work with quadratic cost functions. Understanding how to analyze and
         manipulate parabolas is a fundamental skill.
       </p>
+
+      <!-- Three Analogies -->
+      <div class="grid gap-4 sm:grid-cols-3 mt-6 mb-4">
+        <div class="p-4 bg-surface-alt rounded-lg border border-border">
+          <h4 class="font-semibold text-amber-600 dark:text-amber-400 mb-2">
+            <i class="fa-solid fa-basketball mr-2" aria-hidden="true" />
+            Everyday Analogy
+          </h4>
+          <p class="text-sm text-text-secondary">
+            Throwing a ball follows a parabola. The vertex is the peak height, the roots are where
+            it leaves your hand and lands. Quadratics are the math of arcs.
+          </p>
+        </div>
+        <div class="p-4 bg-surface-alt rounded-lg border border-border">
+          <h4 class="font-semibold text-emerald-600 dark:text-emerald-400 mb-2">
+            <i class="fa-solid fa-code mr-2" aria-hidden="true" />
+            Programming Analogy
+          </h4>
+          <p class="text-sm text-text-secondary">
+            Quadratics are the "DNA of curves"—the simplest non-linear function. Neural networks
+            learn by following quadratic error surfaces to find the minimum loss at the vertex.
+          </p>
+        </div>
+        <div class="p-4 bg-surface-alt rounded-lg border border-border">
+          <h4 class="font-semibold text-blue-600 dark:text-blue-400 mb-2">
+            <i class="fa-solid fa-chart-line mr-2" aria-hidden="true" />
+            Visual Intuition
+          </h4>
+          <p class="text-sm text-text-secondary">
+            The parabola is symmetric around its vertex. The vertex is either the max (frown) or
+            min (smile) depending on whether a is negative or positive.
+          </p>
+        </div>
+      </div>
+
+      <!-- Pitfall Callout -->
+      <div class="p-4 bg-amber-50 dark:bg-amber-900/30 border border-amber-200 dark:border-amber-800 rounded-lg">
+        <p class="font-semibold text-amber-700 dark:text-amber-300 mb-2">
+          <i class="fa-solid fa-triangle-exclamation mr-2" aria-hidden="true" />
+          Common Pitfall: Negative Discriminant
+        </p>
+        <p class="text-sm text-amber-600 dark:text-amber-400">
+          When <code>b² - 4ac < 0</code>, the roots are complex numbers—<code>math.sqrt()</code>
+          will raise an error! Use <code>cmath.sqrt()</code> or check the discriminant first.
+          Real parabolas that never cross the x-axis have imaginary roots.
+        </p>
+      </div>
     </ContentSection>
 
     <!-- Interactive Explorer -->

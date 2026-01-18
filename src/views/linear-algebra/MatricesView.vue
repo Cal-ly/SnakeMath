@@ -8,8 +8,9 @@ import { MatrixTransformations } from '@/components/widgets'
 
 const relatedTopics = [
   { title: 'Linear Algebra Overview', path: '/linear-algebra', description: 'All linear algebra topics' },
-  { title: 'Vectors', path: '/linear-algebra/vectors', description: 'Vector operations and visualization' },
-  { title: 'Unit Circle', path: '/trigonometry/unit-circle', description: 'Sin/cos in rotation matrices' },
+  { title: 'Vectors', path: '/linear-algebra/vectors', description: 'What matrices transform' },
+  { title: 'Unit Circle', path: '/trigonometry/unit-circle', description: 'Sin/cos power rotation matrices' },
+  { title: 'Functions', path: '/basics/functions', description: 'Matrices as linear functions' },
 ]
 
 // Code examples
@@ -188,6 +189,55 @@ print(transformed_sprite)`
           :collapsible="true"
           :default-expanded="false"
         />
+
+        <!-- Three analogies -->
+        <div class="grid gap-4 sm:grid-cols-3 mt-4 mb-4">
+          <div class="p-4 bg-surface-alt rounded-lg border border-border">
+            <h4 class="font-semibold text-amber-600 mb-2">
+              <i class="fa-solid fa-table mr-2" aria-hidden="true" />
+              Everyday Analogy
+            </h4>
+            <p class="text-sm text-text-secondary">
+              Spreadsheets with superpowers. A spreadsheet stores data in rows and columns;
+              a matrix does the same but can transform, rotate, and reshape other data.
+            </p>
+          </div>
+          <div class="p-4 bg-surface-alt rounded-lg border border-border">
+            <h4 class="font-semibold text-emerald-600 mb-2">
+              <i class="fa-solid fa-code mr-2" aria-hidden="true" />
+              Programming Analogy
+            </h4>
+            <p class="text-sm text-text-secondary">
+              An array of arrays with mathematical operations. In NumPy,
+              <code>A @ B</code> multiplies matrices—the same operation that powers
+              every neural network layer.
+            </p>
+          </div>
+          <div class="p-4 bg-surface-alt rounded-lg border border-border">
+            <h4 class="font-semibold text-blue-600 mb-2">
+              <i class="fa-solid fa-arrows-rotate mr-2" aria-hidden="true" />
+              Visual Intuition
+            </h4>
+            <p class="text-sm text-text-secondary">
+              Each column of a matrix shows where the basis vectors land after transformation.
+              The first column is where (1,0) goes; the second is where (0,1) goes.
+            </p>
+          </div>
+        </div>
+
+        <div
+          class="p-4 bg-amber-50 dark:bg-amber-900/30 border border-amber-200 dark:border-amber-800 rounded-lg"
+        >
+          <p class="font-semibold text-amber-700 dark:text-amber-300 mb-2">
+            <i class="fa-solid fa-triangle-exclamation mr-2" aria-hidden="true" />
+            Common Pitfall: Don't Invert, Solve Instead
+          </p>
+          <p class="text-sm text-amber-600 dark:text-amber-400">
+            To solve <code>Ax = b</code>, use <code>np.linalg.solve(A, b)</code>, not
+            <code>np.linalg.inv(A) @ b</code>. Computing the inverse is slower, less accurate,
+            and can fail badly for nearly-singular matrices. Always prefer <code>solve()</code>.
+          </p>
+        </div>
       </ContentSection>
 
       <!-- Interactive Explorer -->

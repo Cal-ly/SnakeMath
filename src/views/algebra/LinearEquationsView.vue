@@ -7,24 +7,10 @@ import ContentSection from '@/components/content/ContentSection.vue'
 import CodeExample from '@/components/content/CodeExample.vue'
 
 const relatedTopics = [
-  {
-    title: 'Algebra Overview',
-    path: '/algebra',
-    description: 'All algebra topics',
-    faIcon: 'fa-solid fa-superscript',
-  },
-  {
-    title: 'Quadratic Functions',
-    path: '/algebra/quadratics',
-    description: 'Parabolas and the quadratic formula',
-    faIcon: 'fa-solid fa-chart-line',
-  },
-  {
-    title: 'Variables & Expressions',
-    path: '/basics/variables',
-    description: 'The building blocks of equations',
-    faIcon: 'fa-solid fa-box-archive',
-  },
+  { title: 'Algebra Overview', path: '/algebra', description: 'All algebra topics' },
+  { title: 'Matrices', path: '/linear-algebra/matrices', description: 'Systems become Ax = b' },
+  { title: 'Quadratics', path: '/algebra/quadratics', description: 'When lines become curves' },
+  { title: 'Variables', path: '/basics/variables', description: 'The building blocks of equations' },
 ]
 
 // Interactive linear equation solver
@@ -308,6 +294,53 @@ print(f"Rank: {rank}")  # If rank = number of unknowns, unique solution
             Linear equations are everywhere in code: unit conversions, cost calculations, physics,
             and interpolation. They're also the foundation of NumPy, machine learning, and computer
             graphics.
+          </p>
+        </div>
+
+        <!-- Three Analogies -->
+        <div class="grid gap-4 sm:grid-cols-3 mt-6 mb-4">
+          <div class="p-4 bg-surface-alt rounded-lg border border-border">
+            <h4 class="font-semibold text-amber-600 dark:text-amber-400 mb-2">
+              <i class="fa-solid fa-location-crosshairs mr-2" aria-hidden="true" />
+              Everyday Analogy
+            </h4>
+            <p class="text-sm text-text-secondary">
+              Linear equations are like GPS: given your starting point and speed, they tell you exactly
+              where you'll be at any time. Constant rate of change means straight-line paths.
+            </p>
+          </div>
+          <div class="p-4 bg-surface-alt rounded-lg border border-border">
+            <h4 class="font-semibold text-emerald-600 dark:text-emerald-400 mb-2">
+              <i class="fa-solid fa-code mr-2" aria-hidden="true" />
+              Programming Analogy
+            </h4>
+            <p class="text-sm text-text-secondary">
+              A linear equation is a lookup function: <code>y = m*x + b</code>. Given any x, you get
+              exactly one y. Systems of equations are just matrix multiplication: <code>A @ x = b</code>.
+            </p>
+          </div>
+          <div class="p-4 bg-surface-alt rounded-lg border border-border">
+            <h4 class="font-semibold text-blue-600 dark:text-blue-400 mb-2">
+              <i class="fa-solid fa-chart-line mr-2" aria-hidden="true" />
+              Visual Intuition
+            </h4>
+            <p class="text-sm text-text-secondary">
+              Every linear equation is a straight line. Two equations = two lines. Their intersection
+              (if it exists) is the solution. Parallel lines mean no solution.
+            </p>
+          </div>
+        </div>
+
+        <!-- Pitfall Callout -->
+        <div class="p-4 bg-amber-50 dark:bg-amber-900/30 border border-amber-200 dark:border-amber-800 rounded-lg">
+          <p class="font-semibold text-amber-700 dark:text-amber-300 mb-2">
+            <i class="fa-solid fa-triangle-exclamation mr-2" aria-hidden="true" />
+            Common Pitfall: Division by Coefficient
+          </p>
+          <p class="text-sm text-amber-600 dark:text-amber-400">
+            When solving <code>ax + b = c</code>, you divide by <code>a</code>. If <code>a = 0</code>,
+            you don't have a linear equation at all—it's either a contradiction (no solution) or an
+            identity (infinite solutions). Always check <code>a ≠ 0</code> before dividing.
           </p>
         </div>
       </ContentSection>

@@ -229,7 +229,7 @@ check_one_sided_limits(sign, 0)`
           closer and closer to some point a?"
         </p>
 
-        <div class="p-4 bg-surface-alt rounded-lg border border-border mb-4">
+        <div class="p-4 rounded-lg border border-border mb-4">
           <MathBlock formula="\lim_{x \to a} f(x) = L" display />
           <p class="text-sm text-text-secondary text-center mt-2">
             "The limit of f(x) as x approaches a equals L"
@@ -315,7 +315,7 @@ check_one_sided_limits(sign, 0)`
 
         <LimitsExplorer sync-url />
 
-        <div class="mt-4 p-4 bg-surface-alt rounded-lg border border-border">
+        <div class="mt-4 p-4 rounded-lg border border-border">
           <h4 class="font-semibold text-primary mb-2">
             <i class="fa-solid fa-lightbulb mr-2" aria-hidden="true" />
             Try These Experiments
@@ -383,7 +383,7 @@ check_one_sided_limits(sign, 0)`
           to L, and delta for how close x must be to a.
         </p>
 
-        <div class="p-4 bg-surface-alt rounded-lg border border-border mb-4">
+        <div class="p-4 rounded-lg border border-border mb-4">
           <p class="text-sm text-text-secondary mb-3">
             We say
             <MathBlock formula="\lim_{x \to a} f(x) = L" />
@@ -445,12 +445,12 @@ check_one_sided_limits(sign, 0)`
         </p>
 
         <div class="grid gap-4 sm:grid-cols-2 mb-4">
-          <div class="p-4 bg-surface-alt rounded-lg border border-border">
+          <div class="p-4 rounded-lg border border-border">
             <h4 class="font-semibold text-orange-600 mb-2">Left Limit (x to a minus)</h4>
             <MathBlock formula="\lim_{x \to a^-} f(x)" />
             <p class="text-sm text-text-secondary mt-2">Approaching from values less than a</p>
           </div>
-          <div class="p-4 bg-surface-alt rounded-lg border border-border">
+          <div class="p-4 rounded-lg border border-border">
             <h4 class="font-semibold text-green-600 mb-2">Right Limit (x to a plus)</h4>
             <MathBlock formula="\lim_{x \to a^+} f(x)" />
             <p class="text-sm text-text-secondary mt-2">Approaching from values greater than a</p>
@@ -564,7 +564,7 @@ check_one_sided_limits(sign, 0)`
         </p>
 
         <div class="space-y-4 mb-4">
-          <div class="p-4 bg-surface-alt rounded-lg border border-border">
+          <div class="p-4 rounded-lg border border-border">
             <div class="flex justify-between items-center mb-2">
               <h4 class="font-semibold text-primary">The Sine Limit</h4>
               <span class="text-xs text-text-muted">Fundamental in calculus</span>
@@ -575,7 +575,7 @@ check_one_sided_limits(sign, 0)`
             </p>
           </div>
 
-          <div class="p-4 bg-surface-alt rounded-lg border border-border">
+          <div class="p-4 rounded-lg border border-border">
             <div class="flex justify-between items-center mb-2">
               <h4 class="font-semibold text-primary">The Definition of e</h4>
               <span class="text-xs text-text-muted">Natural exponential base</span>
@@ -589,7 +589,7 @@ check_one_sided_limits(sign, 0)`
             </p>
           </div>
 
-          <div class="p-4 bg-surface-alt rounded-lg border border-border">
+          <div class="p-4 rounded-lg border border-border">
             <div class="flex justify-between items-center mb-2">
               <h4 class="font-semibold text-primary">Exponential Growth Rate</h4>
               <span class="text-xs text-text-muted">Why e is special</span>
@@ -613,7 +613,7 @@ check_one_sided_limits(sign, 0)`
         </p>
 
         <div class="grid gap-4 sm:grid-cols-2 mb-4">
-          <div class="p-4 bg-surface-alt rounded-lg border border-border">
+          <div class="p-4 rounded-lg border border-border">
             <h4 class="font-semibold text-emerald-600 mb-2">
               <i class="fa-solid fa-repeat mr-2" aria-hidden="true" />
               Convergence Checks
@@ -626,7 +626,7 @@ check_one_sided_limits(sign, 0)`
               )
             </p>
           </div>
-          <div class="p-4 bg-surface-alt rounded-lg border border-border">
+          <div class="p-4 rounded-lg border border-border">
             <h4 class="font-semibold text-blue-600 mb-2">
               <i class="fa-solid fa-brain mr-2" aria-hidden="true" />
               Gradient Descent
@@ -635,7 +635,7 @@ check_one_sided_limits(sign, 0)`
               ML optimization uses derivatives (limits!) to find minimum loss
             </p>
           </div>
-          <div class="p-4 bg-surface-alt rounded-lg border border-border">
+          <div class="p-4 rounded-lg border border-border">
             <h4 class="font-semibold text-purple-600 mb-2">
               <i class="fa-solid fa-calculator mr-2" aria-hidden="true" />
               Numerical Methods
@@ -644,7 +644,7 @@ check_one_sided_limits(sign, 0)`
               Root finding, integration, solving ODEs all use limit-like approximations
             </p>
           </div>
-          <div class="p-4 bg-surface-alt rounded-lg border border-border">
+          <div class="p-4 rounded-lg border border-border">
             <h4 class="font-semibold text-amber-600 mb-2">
               <i class="fa-solid fa-triangle-exclamation mr-2" aria-hidden="true" />
               Error Bounds

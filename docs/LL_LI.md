@@ -2675,3 +2675,160 @@ const quadratic: DerivativeFunctionPreset = {
 3. The secant→tangent animation powerfully demonstrates derivative as limit of difference quotient
 4. Slope interpretation (increasing/decreasing/horizontal) bridges abstract values to geometric meaning
 5. Interesting points in presets create a guided learning experience
+
+---
+
+## Interim: Content Review Phase
+
+**Date**: 2026-01-18
+
+This phase systematically reviewed and upgraded existing topic pages with consistent patterns.
+
+### LI-059: Three-Analogy Pattern for Topic Pages
+**Identified**: Every topic page benefits from three perspectives on the concept.
+
+**Pattern**:
+```vue
+<div class="grid gap-4 sm:grid-cols-3 mt-6 mb-4">
+  <!-- Everyday Analogy (amber) -->
+  <div class="p-4 bg-surface-alt rounded-lg border border-border">
+    <h4 class="font-semibold text-amber-600 dark:text-amber-400 mb-2">
+      <i class="fa-solid fa-icon mr-2" aria-hidden="true" />
+      Everyday Analogy
+    </h4>
+    <p class="text-sm text-text-secondary">Real-world metaphor...</p>
+  </div>
+  <!-- Programming Analogy (emerald) -->
+  <div class="p-4 bg-surface-alt rounded-lg border border-border">
+    <h4 class="font-semibold text-emerald-600 dark:text-emerald-400 mb-2">
+      <i class="fa-solid fa-code mr-2" aria-hidden="true" />
+      Programming Analogy
+    </h4>
+    <p class="text-sm text-text-secondary">Code/CS connection...</p>
+  </div>
+  <!-- Visual Intuition (blue) -->
+  <div class="p-4 bg-surface-alt rounded-lg border border-border">
+    <h4 class="font-semibold text-blue-600 dark:text-blue-400 mb-2">
+      <i class="fa-solid fa-chart-line mr-2" aria-hidden="true" />
+      Visual Intuition
+    </h4>
+    <p class="text-sm text-text-secondary">Geometric insight...</p>
+  </div>
+</div>
+```
+
+**Benefits**:
+- Different learners connect with different perspectives
+- Consistent visual structure across all topic pages
+- Color coding creates recognizable pattern (amber=everyday, emerald=programming, blue=visual)
+
+---
+
+### LI-060: Common Pitfall Callout Pattern
+**Identified**: Every topic page should highlight a common misconception or error.
+
+**Pattern**:
+```vue
+<div class="p-4 bg-amber-50 dark:bg-amber-900/30 border border-amber-200 dark:border-amber-800 rounded-lg">
+  <p class="font-semibold text-amber-700 dark:text-amber-300 mb-2">
+    <i class="fa-solid fa-triangle-exclamation mr-2" aria-hidden="true" />
+    Common Pitfall: [Specific Error Name]
+  </p>
+  <p class="text-sm text-amber-600 dark:text-amber-400">
+    Explanation with <code>code_example()</code> if relevant.
+  </p>
+</div>
+```
+
+**Benefits**:
+- Prevents common errors before they happen
+- Warning styling ensures visibility
+- Code snippets show what goes wrong and how to fix it
+
+**Good pitfall examples from review**:
+- "0.1 + 0.2 ≠ 0.3" (floating point precision)
+- "= Means Assignment, Not Equality" (Python vs math notation)
+- "-3**2 = -9, Not 9!" (operator precedence)
+- "log(0) and log(negative)" (domain errors)
+- "Negative Discriminant" (complex roots)
+- "Division by Coefficient" (degenerate cases)
+
+---
+
+### LI-061: Navigation Descriptions as Engaging Hooks
+**Identified**: Navigation descriptions should be engaging hooks, not dry summaries.
+
+**Good examples**:
+- "Sigma is just a for loop" (not "Learn summation notation")
+- "Every angle tells a story through its coordinates" (not "Sine and cosine")
+- "Nested sets from counting numbers to complex—pick the right container" (not "Number classification")
+- "What happens when we get really, really close?" (not "Understanding limits")
+- "Labeled boxes for values, recipes that combine them" (not "Variable assignment")
+- "PEMDAS: the dressing order for math operations" (not "Operator precedence")
+
+**Guidelines**:
+- Keep under 60 characters
+- Reference the core insight or "aha moment"
+- Avoid generic phrases like "Learn about X"
+- Use metaphors from the content itself
+
+---
+
+### LI-062: RelatedTopics Cross-Section Linking
+**Identified**: RelatedTopics should include 3-4 items with at least one cross-section link.
+
+**Pattern**:
+```typescript
+const relatedTopics = [
+  { title: 'Section Overview', path: '/section', description: 'All topics in this section' },
+  { title: 'Related Topic 1', path: '/section/topic1', description: 'Connection to this concept' },
+  { title: 'Cross-Section Topic', path: '/other-section/topic', description: 'How this connects to other areas' },
+  { title: 'Related Topic 2', path: '/section/topic2', description: 'Another related concept' },
+]
+```
+
+**Benefits**:
+- Always link back to parent index for navigation
+- Cross-section links help users discover related content
+- Descriptions explain the relationship, not just the topic name
+
+---
+
+## Content Review Summary
+
+**Topics Reviewed**: 15 topic pages
+
+- /calculus/limits
+- /statistics/descriptive
+- /trigonometry/unit-circle
+- /linear-algebra/vectors
+- /linear-algebra/matrices
+- /algebra/summation
+- /algebra/product-notation
+- /basics/functions
+- /basics/number-types
+- /basics/variables
+- /basics/order-of-operations
+- /basics/foundations
+- /algebra/linear-equations
+- /algebra/quadratics
+- /algebra/exponentials
+
+**Patterns Applied**:
+- Three-Analogy Block: Amber/Emerald/Blue cards
+- Common Pitfall Callout: Amber warning box
+- RelatedTopics: 3-4 items with cross-section links
+- Navigation descriptions: Engaging hooks under 60 chars
+
+**Lessons Identified (LI)**:
+- LI-059: Three-analogy pattern for topic pages
+- LI-060: Common pitfall callout pattern
+- LI-061: Navigation descriptions as engaging hooks
+- LI-062: RelatedTopics cross-section linking
+
+**Key Takeaways**:
+1. Consistent visual patterns help users recognize and navigate content
+2. Multiple perspectives (everyday, programming, visual) serve different learning styles
+3. Proactive pitfall warnings are as valuable as teaching concepts
+4. Navigation descriptions are marketing copy—hook the user with insight
+5. Cross-section links in RelatedTopics improve content discoverability

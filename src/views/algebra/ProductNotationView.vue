@@ -16,18 +16,10 @@ import {
 import type { ProductPresetId } from '@/types/math'
 
 const relatedTopics = [
-  {
-    title: 'Algebra Overview',
-    path: '/algebra',
-    description: 'All algebra topics',
-    faIcon: 'fa-solid fa-superscript',
-  },
-  {
-    title: 'Summation',
-    path: '/algebra/summation',
-    description: 'Sigma notation for addition',
-    faIcon: 'fa-solid fa-plus',
-  },
+  { title: 'Algebra Overview', path: '/algebra', description: 'All algebra topics' },
+  { title: 'Summation', path: '/algebra/summation', description: 'Σ is the additive cousin of Π' },
+  { title: 'Exponentials', path: '/algebra/exponentials', description: 'Logs convert products to sums' },
+  { title: 'Descriptive Statistics', path: '/statistics/descriptive', description: 'Variance uses squared products' },
 ]
 
 // Interactive explorer state
@@ -250,6 +242,54 @@ print(f"P(4) = {polynomial_from_roots(roots, 4)}")  # (4-1)(4-2)(4-3) = 6`
             If you understood summation, you already understand products! Just replace
             <code class="text-primary">total += term</code> with
             <code class="text-primary">product *= factor</code>.
+          </p>
+        </div>
+
+        <!-- Three analogies -->
+        <div class="grid gap-4 sm:grid-cols-3 mt-6 mb-4">
+          <div class="p-4 bg-surface-alt rounded-lg border border-border">
+            <h4 class="font-semibold text-amber-600 mb-2">
+              <i class="fa-solid fa-industry mr-2" aria-hidden="true" />
+              Everyday Analogy
+            </h4>
+            <p class="text-sm text-text-secondary">
+              An assembly line where each station multiplies by some factor. Raw material goes in,
+              and the final output is everything multiplied together.
+            </p>
+          </div>
+          <div class="p-4 bg-surface-alt rounded-lg border border-border">
+            <h4 class="font-semibold text-emerald-600 mb-2">
+              <i class="fa-solid fa-code mr-2" aria-hidden="true" />
+              Programming Analogy
+            </h4>
+            <p class="text-sm text-text-secondary">
+              A for-loop that uses <code>*=</code> instead of <code>+=</code>. Start with 1
+              (not 0!), then multiply by each term. That's all Π means.
+            </p>
+          </div>
+          <div class="p-4 bg-surface-alt rounded-lg border border-border">
+            <h4 class="font-semibold text-blue-600 mb-2">
+              <i class="fa-solid fa-link mr-2" aria-hidden="true" />
+              Visual Intuition
+            </h4>
+            <p class="text-sm text-text-secondary">
+              A chain of multiplications. Each link is a factor; the product is the whole chain.
+              Remove one link (factor = 0) and everything collapses to zero.
+            </p>
+          </div>
+        </div>
+
+        <div
+          class="p-4 bg-amber-50 dark:bg-amber-900/30 border border-amber-200 dark:border-amber-800 rounded-lg"
+        >
+          <p class="font-semibold text-amber-700 dark:text-amber-300 mb-2">
+            <i class="fa-solid fa-triangle-exclamation mr-2" aria-hidden="true" />
+            Common Pitfall: Underflow with Many Small Numbers
+          </p>
+          <p class="text-sm text-amber-600 dark:text-amber-400">
+            Multiplying many small probabilities (like 0.001 × 0.001 × ...) quickly underflows to 0.
+            In ML and stats, use the <strong>log-sum trick</strong>: convert Π to Σ via
+            <code>log(∏ aᵢ) = Σ log(aᵢ)</code>, then exponentiate at the end.
           </p>
         </div>
       </ContentSection>

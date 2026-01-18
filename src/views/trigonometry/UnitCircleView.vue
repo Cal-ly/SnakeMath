@@ -11,13 +11,21 @@ const relatedTopics = [
     title: 'Trigonometry Overview',
     path: '/trigonometry',
     description: 'All trigonometry topics',
-    faIcon: 'fa-solid fa-circle-notch',
+  },
+  {
+    title: 'Vectors',
+    path: '/linear-algebra/vectors',
+    description: 'Unit vectors and direction calculations use trig',
+  },
+  {
+    title: 'Limits',
+    path: '/calculus/limits',
+    description: 'The famous sin(x)/x limit equals 1',
   },
   {
     title: 'Functions',
     path: '/basics/functions',
-    description: 'Input, output, and notation',
-    faIcon: 'fa-solid fa-arrow-right-arrow-left',
+    description: 'Trig functions map angles to coordinates',
   },
 ]
 
@@ -116,8 +124,42 @@ print(f"Rotated point: ({result[0]:.2f}, {result[1]:.2f})")`
           In Python terms: <code>point = (math.cos(angle), math.sin(angle))</code>
         </p>
 
-        <div class="text-center">
+        <div class="text-center mb-4">
           <MathBlock formula="(\cos\theta, \sin\theta) \text{ lies on the circle } x^2 + y^2 = 1" display />
+        </div>
+
+        <!-- Three analogies -->
+        <div class="grid gap-4 sm:grid-cols-3 mb-4">
+          <div class="p-4 bg-surface-alt rounded-lg border border-border">
+            <h4 class="font-semibold text-amber-600 mb-2">
+              <i class="fa-solid fa-clock mr-2" aria-hidden="true" />
+              Everyday Analogy
+            </h4>
+            <p class="text-sm text-text-secondary">
+              Think of it like a clock face where every "time" (angle) has a unique fingerprint given
+              by its (x, y) coordinates. The hour hand's tip traces out the unit circle.
+            </p>
+          </div>
+          <div class="p-4 bg-surface-alt rounded-lg border border-border">
+            <h4 class="font-semibold text-emerald-600 mb-2">
+              <i class="fa-solid fa-code mr-2" aria-hidden="true" />
+              Programming Analogy
+            </h4>
+            <p class="text-sm text-text-secondary">
+              It's a lookup table from angle → (x, y). Feed in any angle, get back the exact
+              coordinates for rotation, animation, or direction calculations.
+            </p>
+          </div>
+          <div class="p-4 bg-surface-alt rounded-lg border border-border">
+            <h4 class="font-semibold text-blue-600 mb-2">
+              <i class="fa-solid fa-wave-square mr-2" aria-hidden="true" />
+              Visual Intuition
+            </h4>
+            <p class="text-sm text-text-secondary">
+              As you walk around the circle, the x-coordinate traces a cosine wave and the
+              y-coordinate traces a sine wave. Circular motion = two waves in sync.
+            </p>
+          </div>
         </div>
       </ContentSection>
 

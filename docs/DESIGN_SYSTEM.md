@@ -280,6 +280,114 @@ Use `filter: drop-shadow()` for glow effects on hover.
 
 ---
 
+## Content Page Patterns
+
+### Three-Analogy Block (Required)
+
+**Use for**: Every topic page introduction section. Provides three perspectives on the concept.
+
+**Design rationale**: Different learners connect with different analogies. The three perspectives (everyday, programming, visual) ensure at least one resonates with each user.
+
+**Required structure**: Three-column grid with consistent color coding.
+
+| Analogy Type | Header Color | Icon Color | Purpose |
+|--------------|--------------|------------|---------|
+| Everyday Analogy | `text-amber-600 dark:text-amber-400` | amber | Real-world metaphor |
+| Programming Analogy | `text-emerald-600 dark:text-emerald-400` | emerald | Code/CS connection |
+| Visual Intuition | `text-blue-600 dark:text-blue-400` | blue | Geometric/graphical insight |
+
+**Pattern**:
+```vue
+<!-- Three Analogies - place after introduction content -->
+<div class="grid gap-4 sm:grid-cols-3 mt-6 mb-4">
+  <div class="p-4 bg-surface-alt rounded-lg border border-border">
+    <h4 class="font-semibold text-amber-600 dark:text-amber-400 mb-2">
+      <i class="fa-solid fa-icon mr-2" aria-hidden="true" />
+      Everyday Analogy
+    </h4>
+    <p class="text-sm text-text-secondary">
+      Real-world metaphor that connects the concept to familiar experience.
+    </p>
+  </div>
+  <div class="p-4 bg-surface-alt rounded-lg border border-border">
+    <h4 class="font-semibold text-emerald-600 dark:text-emerald-400 mb-2">
+      <i class="fa-solid fa-code mr-2" aria-hidden="true" />
+      Programming Analogy
+    </h4>
+    <p class="text-sm text-text-secondary">
+      Connection to programming concepts, data structures, or algorithms.
+    </p>
+  </div>
+  <div class="p-4 bg-surface-alt rounded-lg border border-border">
+    <h4 class="font-semibold text-blue-600 dark:text-blue-400 mb-2">
+      <i class="fa-solid fa-chart-line mr-2" aria-hidden="true" />
+      Visual Intuition
+    </h4>
+    <p class="text-sm text-text-secondary">
+      Geometric or graphical way to understand the concept.
+    </p>
+  </div>
+</div>
+```
+
+**Guidelines**:
+- Always use `bg-surface-alt` for card backgrounds
+- Keep text concise (2-3 sentences max)
+- Choose icons that match the analogy content
+- Programming analogy should reference code, CS concepts, or algorithms
+- Visual intuition should describe a picture or mental model
+
+### Common Pitfall Callout (Required)
+
+**Use for**: Every topic page introduction section. Highlights a frequent misconception or error.
+
+**Design rationale**: Preventing errors is as valuable as teaching concepts. The warning style ensures visibility.
+
+**Pattern**:
+```vue
+<!-- Pitfall Callout - place after the three analogies -->
+<div class="p-4 bg-amber-50 dark:bg-amber-900/30 border border-amber-200 dark:border-amber-800 rounded-lg">
+  <p class="font-semibold text-amber-700 dark:text-amber-300 mb-2">
+    <i class="fa-solid fa-triangle-exclamation mr-2" aria-hidden="true" />
+    Common Pitfall: [Specific Error Name]
+  </p>
+  <p class="text-sm text-amber-600 dark:text-amber-400">
+    Explanation of what goes wrong and how to avoid it. Include code snippets
+    if relevant: <code>example_code()</code>.
+  </p>
+</div>
+```
+
+**Guidelines**:
+- Title should be specific (e.g., "Division by Zero" not "Common Mistakes")
+- Include code examples when the pitfall is code-related
+- Mention what error users will see (e.g., `ZeroDivisionError`, `ValueError`)
+- Provide the fix or workaround, not just the problem
+
+**Good pitfall examples**:
+- "0.1 + 0.2 ≠ 0.3" (floating point)
+- "log(0) and log(negative)" (domain errors)
+- "= Means Assignment, Not Equality" (Python vs math)
+- "-3**2 = -9, Not 9!" (operator precedence)
+
+### Navigation Descriptions
+
+**Use for**: The `description` field in `navigation.ts` entries.
+
+**Guidelines**:
+- Keep descriptions under 60 characters
+- Use engaging hooks, not dry summaries
+- Reference the core insight or "aha moment"
+- Avoid generic phrases like "Learn about X"
+
+**Good examples**:
+- "Sigma is just a for loop" (not "Learn summation notation")
+- "Every angle tells a story through its coordinates" (not "Sine and cosine")
+- "Nested sets from counting numbers to complex" (not "Number classification")
+- "What happens when we get really, really close?" (not "Understanding limits")
+
+---
+
 ## Component Checklist
 
 When creating new components, verify:
@@ -291,3 +399,10 @@ When creating new components, verify:
 - [ ] Colors: Uses semantic color classes
 - [ ] Responsive: Works on mobile, enhanced on desktop
 - [ ] Related Topics: Subpages have RelatedTopics section at bottom
+
+When creating new content pages, additionally verify:
+
+- [ ] Three-Analogy Block: Amber/Emerald/Blue cards after introduction
+- [ ] Pitfall Callout: Amber warning box with specific error name
+- [ ] RelatedTopics: 3-4 items including parent index and cross-section links
+- [ ] Navigation description: Engaging hook under 60 characters

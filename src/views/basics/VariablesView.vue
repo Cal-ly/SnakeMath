@@ -6,8 +6,10 @@ import ContentSection from '@/components/content/ContentSection.vue'
 import CodeExample from '@/components/content/CodeExample.vue'
 
 const relatedTopics = [
-  { title: 'Functions', path: '/basics/functions', description: 'Input and output' },
-  { title: 'Order of Operations', path: '/basics/order-of-operations', description: 'PEMDAS' },
+  { title: 'Basics Overview', path: '/basics', description: 'All basics topics' },
+  { title: 'Functions', path: '/basics/functions', description: 'Variables as inputs and outputs' },
+  { title: 'Order of Operations', path: '/basics/order-of-operations', description: 'How expressions are evaluated' },
+  { title: 'Number Types', path: '/basics/number-types', description: 'What values variables can hold' },
 ]
 
 // Code examples
@@ -177,9 +179,51 @@ str_value = str(42)        # "42"`
 
         <CodeExample id="basics-variables-assignment" :code="basicAssignmentCode" language="python" title="assignment.py" />
 
-        <div class="mt-4 p-3 bg-math-highlight rounded-lg">
-          <strong>Important:</strong> In math, <MathBlock formula="x = 5" /> is a statement of
-          equality. In Python, <code>x = 5</code> is an action: "assign 5 to x."
+        <!-- Three Analogies -->
+        <div class="grid gap-4 sm:grid-cols-3 mt-6 mb-4">
+          <div class="p-4 bg-surface-alt rounded-lg border border-border">
+            <h4 class="font-semibold text-amber-600 dark:text-amber-400 mb-2">
+              <i class="fa-solid fa-box mr-2" aria-hidden="true" />
+              Everyday Analogy
+            </h4>
+            <p class="text-sm text-text-secondary">
+              Think of variables as labeled boxes. The name is the label, the value is what's inside.
+              You can look at the contents anytime and swap in new items.
+            </p>
+          </div>
+          <div class="p-4 bg-surface-alt rounded-lg border border-border">
+            <h4 class="font-semibold text-emerald-600 dark:text-emerald-400 mb-2">
+              <i class="fa-solid fa-code mr-2" aria-hidden="true" />
+              Programming Analogy
+            </h4>
+            <p class="text-sm text-text-secondary">
+              Variables are like memory addresses with friendly names. Instead of "store 5 at address
+              0x7fff", you write <code>x = 5</code>. Expressions are recipes that combine ingredients.
+            </p>
+          </div>
+          <div class="p-4 bg-surface-alt rounded-lg border border-border">
+            <h4 class="font-semibold text-blue-600 dark:text-blue-400 mb-2">
+              <i class="fa-solid fa-pen-fancy mr-2" aria-hidden="true" />
+              Visual Intuition
+            </h4>
+            <p class="text-sm text-text-secondary">
+              Variables are nouns, expressions are sentences. <code>x = 5</code> defines a noun;
+              <code>2*x + 3</code> is a sentence that says "double x, then add 3."
+            </p>
+          </div>
+        </div>
+
+        <!-- Pitfall Callout -->
+        <div class="p-4 bg-amber-50 dark:bg-amber-900/30 border border-amber-200 dark:border-amber-800 rounded-lg">
+          <p class="font-semibold text-amber-700 dark:text-amber-300 mb-2">
+            <i class="fa-solid fa-triangle-exclamation mr-2" aria-hidden="true" />
+            Common Pitfall: = Means Assignment, Not Equality
+          </p>
+          <p class="text-sm text-amber-600 dark:text-amber-400">
+            In math, <code>x = 5</code> is a statement of fact. In Python, it's an action: "put 5 into x."
+            For equality testing, use <code>==</code> (two equals signs). Writing <code>if x = 5:</code>
+            is a syntax error—you want <code>if x == 5:</code>.
+          </p>
         </div>
       </ContentSection>
 

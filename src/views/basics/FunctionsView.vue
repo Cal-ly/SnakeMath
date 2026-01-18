@@ -7,8 +7,10 @@ import CodeExample from '@/components/content/CodeExample.vue'
 import SimpleFunctionDemo from '@/components/widgets/SimpleFunctionDemo.vue'
 
 const relatedTopics = [
-  { title: 'Variables', path: '/basics/variables', description: 'Named values' },
-  { title: 'Number Types', path: '/basics/number-types', description: 'Understanding numbers' },
+  { title: 'Basics Overview', path: '/basics', description: 'All foundational topics' },
+  { title: 'Variables', path: '/basics/variables', description: 'The values functions work with' },
+  { title: 'Matrices', path: '/linear-algebra/matrices', description: 'Matrices as linear functions' },
+  { title: 'Limits', path: '/calculus/limits', description: 'What happens as inputs approach a value' },
 ]
 
 // Code examples
@@ -174,6 +176,54 @@ print(impure_increment(5))  # 7 (counter is now 2)
         </p>
 
         <CodeExample id="basics-functions-basic" :code="basicFunctionCode" language="python" title="basic_function.py" />
+
+        <!-- Three analogies -->
+        <div class="grid gap-4 sm:grid-cols-3 mt-6 mb-4">
+          <div class="p-4 bg-surface-alt rounded-lg border border-border">
+            <h4 class="font-semibold text-amber-600 mb-2">
+              <i class="fa-solid fa-cookie-bite mr-2" aria-hidden="true" />
+              Everyday Analogy
+            </h4>
+            <p class="text-sm text-text-secondary">
+              A vending machine: put in money (input), press a button (function), get a snack
+              (output). Same button always gives the same snack.
+            </p>
+          </div>
+          <div class="p-4 bg-surface-alt rounded-lg border border-border">
+            <h4 class="font-semibold text-emerald-600 mb-2">
+              <i class="fa-solid fa-code mr-2" aria-hidden="true" />
+              Programming Analogy
+            </h4>
+            <p class="text-sm text-text-secondary">
+              A <code>def</code> block with a <code>return</code>. Parameters go in, a value
+              comes out. The body is the "how"—callers only see the "what."
+            </p>
+          </div>
+          <div class="p-4 bg-surface-alt rounded-lg border border-border">
+            <h4 class="font-semibold text-blue-600 mb-2">
+              <i class="fa-solid fa-diagram-project mr-2" aria-hidden="true" />
+              Visual Intuition
+            </h4>
+            <p class="text-sm text-text-secondary">
+              A box with an arrow in and an arrow out. What happens inside the box is the rule;
+              the arrows are input and output. f(x) = y.
+            </p>
+          </div>
+        </div>
+
+        <div
+          class="p-4 bg-amber-50 dark:bg-amber-900/30 border border-amber-200 dark:border-amber-800 rounded-lg"
+        >
+          <p class="font-semibold text-amber-700 dark:text-amber-300 mb-2">
+            <i class="fa-solid fa-triangle-exclamation mr-2" aria-hidden="true" />
+            Common Pitfall: Mutable Default Arguments
+          </p>
+          <p class="text-sm text-amber-600 dark:text-amber-400">
+            Never use <code>def f(items=[])</code>—the list is shared across calls! Use
+            <code>def f(items=None)</code> and set <code>items = items or []</code> inside.
+            This Python gotcha breaks the "same input, same output" rule.
+          </p>
+        </div>
       </ContentSection>
 
       <!-- Interactive Demo -->

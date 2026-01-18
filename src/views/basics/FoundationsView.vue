@@ -6,8 +6,10 @@ import CodeExample from '@/components/content/CodeExample.vue'
 import ContentSection from '@/components/content/ContentSection.vue'
 
 const relatedTopics = [
-  { title: 'Math Symbols', path: '/basics/symbols', description: 'Symbol reference' },
-  { title: 'Number Types', path: '/basics/number-types', description: 'N, Z, Q, R, C' },
+  { title: 'Basics Overview', path: '/basics', description: 'All basics topics' },
+  { title: 'Math Symbols', path: '/basics/symbols', description: 'Translate notation to operations' },
+  { title: 'Order of Operations', path: '/basics/order-of-operations', description: 'How to combine the four operators' },
+  { title: 'Summation', path: '/algebra/summation', description: 'Σ is just repeated addition' },
 ]
 
 const basicOperatorsCode = `# The four basic operators in Python
@@ -115,6 +117,52 @@ result = math.prod(range(1, 6))  # 120`
           language="python"
           title="basic_operators.py"
         />
+
+        <!-- Three Analogies -->
+        <div class="grid gap-4 sm:grid-cols-3 mt-6 mb-4">
+          <div class="p-4 bg-surface-alt rounded-lg border border-border">
+            <h4 class="font-semibold text-amber-600 dark:text-amber-400 mb-2">
+              <i class="fa-solid fa-hammer mr-2" aria-hidden="true" />
+              Everyday Analogy
+            </h4>
+            <p class="text-sm text-text-secondary">
+              A master chef uses just salt, acid, fat, and heat. A mathematician uses just +, -, ×, and ÷.
+              Everything else is a recipe combining these basic ingredients.
+            </p>
+          </div>
+          <div class="p-4 bg-surface-alt rounded-lg border border-border">
+            <h4 class="font-semibold text-emerald-600 dark:text-emerald-400 mb-2">
+              <i class="fa-solid fa-code mr-2" aria-hidden="true" />
+              Programming Analogy
+            </h4>
+            <p class="text-sm text-text-secondary">
+              Every program compiles to simple CPU instructions. Every math formula compiles to
+              add/subtract/multiply/divide. Fancy notation is just syntactic sugar.
+            </p>
+          </div>
+          <div class="p-4 bg-surface-alt rounded-lg border border-border">
+            <h4 class="font-semibold text-blue-600 dark:text-blue-400 mb-2">
+              <i class="fa-solid fa-building mr-2" aria-hidden="true" />
+              Visual Intuition
+            </h4>
+            <p class="text-sm text-text-secondary">
+              A skyscraper looks complex, but it's built from simple bricks, steel, and concrete.
+              Math symbols look complex, but they're built from the same four operations.
+            </p>
+          </div>
+        </div>
+
+        <!-- Pitfall Callout -->
+        <div class="p-4 bg-amber-50 dark:bg-amber-900/30 border border-amber-200 dark:border-amber-800 rounded-lg">
+          <p class="font-semibold text-amber-700 dark:text-amber-300 mb-2">
+            <i class="fa-solid fa-triangle-exclamation mr-2" aria-hidden="true" />
+            Common Pitfall: Division by Zero
+          </p>
+          <p class="text-sm text-amber-600 dark:text-amber-400">
+            Division is powerful but dangerous—you can't divide by zero. Python raises <code>ZeroDivisionError</code>,
+            math says "undefined." Always guard divisions: <code>if b != 0: result = a / b</code>.
+          </p>
+        </div>
       </ContentSection>
 
       <!-- Summation -->

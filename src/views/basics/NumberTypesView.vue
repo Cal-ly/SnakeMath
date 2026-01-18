@@ -7,7 +7,9 @@ import CodeExample from '@/components/content/CodeExample.vue'
 import NumberTypeExplorer from '@/components/widgets/NumberTypeExplorer.vue'
 
 const relatedTopics = [
-  { title: 'Foundations', path: '/basics/foundations', description: 'Core concepts' },
+  { title: 'Basics Overview', path: '/basics', description: 'All basics topics' },
+  { title: 'Variables', path: '/basics/variables', description: 'The containers that hold numbers' },
+  { title: 'Functions', path: '/basics/functions', description: 'Maps between number types' },
   { title: 'Math Symbols', path: '/basics/symbols', description: 'Notation guide' },
 ]
 
@@ -173,6 +175,54 @@ print(Decimal('0.1'))  # 0.1 (exact)`
           handle numbers! Understanding these sets helps you choose the right data types and avoid
           bugs.
         </p>
+
+        <!-- Three Analogies -->
+        <div class="grid gap-4 sm:grid-cols-3 mt-6 mb-4">
+          <div class="p-4 bg-surface-alt rounded-lg border border-border">
+            <h4 class="font-semibold text-amber-600 dark:text-amber-400 mb-2">
+              <i class="fa-solid fa-utensils mr-2" aria-hidden="true" />
+              Everyday Analogy
+            </h4>
+            <p class="text-sm text-text-secondary">
+              Just like a chef knows salt from sugar, programmers must know integers from floats.
+              Using the wrong type can turn a recipe into a disaster—or a calculation into a bug.
+            </p>
+          </div>
+          <div class="p-4 bg-surface-alt rounded-lg border border-border">
+            <h4 class="font-semibold text-emerald-600 dark:text-emerald-400 mb-2">
+              <i class="fa-solid fa-code mr-2" aria-hidden="true" />
+              Programming Analogy
+            </h4>
+            <p class="text-sm text-text-secondary">
+              Think of number types as different container sizes: <code>int</code> is a whole-number
+              box, <code>float</code> adds decimals, and <code>complex</code> adds another dimension.
+              Pick the right container for your data.
+            </p>
+          </div>
+          <div class="p-4 bg-surface-alt rounded-lg border border-border">
+            <h4 class="font-semibold text-blue-600 dark:text-blue-400 mb-2">
+              <i class="fa-solid fa-layer-group mr-2" aria-hidden="true" />
+              Visual Intuition
+            </h4>
+            <p class="text-sm text-text-secondary">
+              Picture nesting dolls: naturals fit inside integers, which fit inside rationals,
+              inside reals, inside complex numbers. Each layer adds new numbers the previous couldn't hold.
+            </p>
+          </div>
+        </div>
+
+        <!-- Pitfall Callout -->
+        <div class="p-4 bg-amber-50 dark:bg-amber-900/30 border border-amber-200 dark:border-amber-800 rounded-lg">
+          <p class="font-semibold text-amber-700 dark:text-amber-300 mb-2">
+            <i class="fa-solid fa-triangle-exclamation mr-2" aria-hidden="true" />
+            Common Pitfall: 0.1 + 0.2 ≠ 0.3
+          </p>
+          <p class="text-sm text-amber-600 dark:text-amber-400">
+            Floats are stored in binary, so <code>0.1</code> can't be represented exactly (like 1/3
+            can't be exact in decimal). Always use <code>math.isclose()</code> for float comparisons,
+            or <code>Decimal</code> for financial calculations where precision matters.
+          </p>
+        </div>
       </ContentSection>
 
       <!-- Interactive Explorer -->

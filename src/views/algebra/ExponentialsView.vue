@@ -8,8 +8,9 @@ import { ExponentialExplorer } from '@/components/widgets/ExponentialExplorer'
 
 const relatedTopics = [
   { title: 'Algebra Overview', path: '/algebra', description: 'All algebra topics' },
-  { title: 'Quadratic Functions', path: '/algebra/quadratics', description: 'Parabolas and polynomials' },
-  { title: 'Functions', path: '/basics/functions', description: 'Understanding f(x)' },
+  { title: 'Product Notation', path: '/algebra/product-notation', description: 'Logs convert products to sums' },
+  { title: 'Derivatives', path: '/calculus/derivatives', description: "e^x is its own derivative" },
+  { title: 'Limits', path: '/calculus/limits', description: 'How e is defined' },
 ]
 
 // Code examples
@@ -211,7 +212,7 @@ print(f"Concert: {watts_to_decibels(concert):.0f} dB")  # 110 dB
 
       <h3 class="text-lg font-semibold mt-6 mb-3">Why Programmers Care</h3>
 
-      <p>
+      <p class="mb-4">
         Exponentials are fundamental to algorithm analysis. The difference between
         <MathBlock formula="O(\log n)" /> and <MathBlock formula="O(2^n)" /> is the difference
         between a program that runs in milliseconds and one that takes longer than the age of the
@@ -219,6 +220,53 @@ print(f"Concert: {watts_to_decibels(concert):.0f} dB")  # 110 dB
       </p>
 
       <CodeExample id="algebra-exponentials-basic" language="python" title="powers_of_2.py" :code="basicExponentialCode" />
+
+      <!-- Three Analogies -->
+      <div class="grid gap-4 sm:grid-cols-3 mt-6 mb-4">
+        <div class="p-4 bg-surface-alt rounded-lg border border-border">
+          <h4 class="font-semibold text-amber-600 dark:text-amber-400 mb-2">
+            <i class="fa-solid fa-clock-rotate-left mr-2" aria-hidden="true" />
+            Everyday Analogy
+          </h4>
+          <p class="text-sm text-text-secondary">
+            Exponentials are "mathematical time machines"—they compress or expand time. Compound
+            interest, population growth, and viral spread all use exponential mechanics.
+          </p>
+        </div>
+        <div class="p-4 bg-surface-alt rounded-lg border border-border">
+          <h4 class="font-semibold text-emerald-600 dark:text-emerald-400 mb-2">
+            <i class="fa-solid fa-magnifying-glass mr-2" aria-hidden="true" />
+            Programming Analogy
+          </h4>
+          <p class="text-sm text-text-secondary">
+            Logarithms are "mathematical detectives"—they answer "how many times did we multiply?"
+            Binary search does log₂(n) comparisons because each step halves the search space.
+          </p>
+        </div>
+        <div class="p-4 bg-surface-alt rounded-lg border border-border">
+          <h4 class="font-semibold text-blue-600 dark:text-blue-400 mb-2">
+            <i class="fa-solid fa-chart-line mr-2" aria-hidden="true" />
+            Visual Intuition
+          </h4>
+          <p class="text-sm text-text-secondary">
+            Exponential curves start slow then explode upward (or decay toward zero). Log curves
+            start steep then flatten. They're mirror images around the line y = x.
+          </p>
+        </div>
+      </div>
+
+      <!-- Pitfall Callout -->
+      <div class="p-4 bg-amber-50 dark:bg-amber-900/30 border border-amber-200 dark:border-amber-800 rounded-lg">
+        <p class="font-semibold text-amber-700 dark:text-amber-300 mb-2">
+          <i class="fa-solid fa-triangle-exclamation mr-2" aria-hidden="true" />
+          Common Pitfall: log(0) and log(negative)
+        </p>
+        <p class="text-sm text-amber-600 dark:text-amber-400">
+          Logarithms are only defined for positive numbers. <code>math.log(0)</code> gives
+          <code>-inf</code>, and <code>math.log(-1)</code> raises <code>ValueError</code>. Always
+          check that your input is positive before taking logs—especially in ML loss functions!
+        </p>
+      </div>
     </ContentSection>
 
     <!-- Interactive Explorer -->

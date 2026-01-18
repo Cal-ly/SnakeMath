@@ -8,7 +8,9 @@ import { SummationExplorer } from '@/components/widgets'
 
 const relatedTopics = [
   { title: 'Algebra Overview', path: '/algebra', description: 'All algebra topics' },
-  { title: 'Number Types', path: '/basics/number-types', description: 'Number classification' },
+  { title: 'Product Notation', path: '/algebra/product-notation', description: 'Π is the multiplicative cousin of Σ' },
+  { title: 'Descriptive Statistics', path: '/statistics/descriptive', description: 'Means and totals use summation' },
+  { title: 'Vectors', path: '/linear-algebra/vectors', description: 'Vector sums combine components' },
 ]
 
 // Code examples
@@ -134,6 +136,54 @@ compare_methods(100_000_000)`
           <p class="text-text-secondary">
             If you've ever written a <code class="text-primary">for</code> loop, you already
             understand sigma notation. They're the same thing!
+          </p>
+        </div>
+
+        <!-- Three analogies -->
+        <div class="grid gap-4 sm:grid-cols-3 mt-6 mb-4">
+          <div class="p-4 bg-surface-alt rounded-lg border border-border">
+            <h4 class="font-semibold text-amber-600 mb-2">
+              <i class="fa-solid fa-receipt mr-2" aria-hidden="true" />
+              Everyday Analogy
+            </h4>
+            <p class="text-sm text-text-secondary">
+              Adding up a receipt: start at zero, go through each item, add its price to your running
+              total. Σ is just the math symbol for "add all these up."
+            </p>
+          </div>
+          <div class="p-4 bg-surface-alt rounded-lg border border-border">
+            <h4 class="font-semibold text-emerald-600 mb-2">
+              <i class="fa-solid fa-code mr-2" aria-hidden="true" />
+              Programming Analogy
+            </h4>
+            <p class="text-sm text-text-secondary">
+              A glorified for-loop with an accumulator. The lower bound is your start, the upper
+              bound is your end, and the expression is what you <code>+=</code> each iteration.
+            </p>
+          </div>
+          <div class="p-4 bg-surface-alt rounded-lg border border-border">
+            <h4 class="font-semibold text-blue-600 mb-2">
+              <i class="fa-solid fa-layer-group mr-2" aria-hidden="true" />
+              Visual Intuition
+            </h4>
+            <p class="text-sm text-text-secondary">
+              Stacking blocks one at a time. Each term adds a new block to your tower. The total
+              height is the sum—you can watch it grow step by step.
+            </p>
+          </div>
+        </div>
+
+        <div
+          class="p-4 bg-amber-50 dark:bg-amber-900/30 border border-amber-200 dark:border-amber-800 rounded-lg"
+        >
+          <p class="font-semibold text-amber-700 dark:text-amber-300 mb-2">
+            <i class="fa-solid fa-triangle-exclamation mr-2" aria-hidden="true" />
+            Common Pitfall: Off-by-One Errors
+          </p>
+          <p class="text-sm text-amber-600 dark:text-amber-400">
+            In math, Σ from i=1 to n includes n (it's <em>inclusive</em>). In Python,
+            <code>range(1, n)</code> excludes n. Always use <code>range(1, n+1)</code> to match
+            mathematical convention. This one-off difference causes countless bugs!
           </p>
         </div>
       </ContentSection>

@@ -108,7 +108,7 @@ print(f"f(minimum) = {f(minimum):.4f}")  # Should be 1.0`
         </p>
 
         <div class="grid gap-4 sm:grid-cols-2 mb-6">
-          <div class="p-4 bg-surface-alt rounded-lg border border-border">
+          <div class="p-4 rounded-lg border border-border">
             <h4 class="font-semibold text-primary mb-2">
               <i class="fa-solid fa-chart-line mr-2" aria-hidden="true" />
               Differential Calculus
@@ -116,7 +116,7 @@ print(f"f(minimum) = {f(minimum):.4f}")  # Should be 1.0`
             <p class="text-sm text-text-secondary mb-2">Study of rates of change and slopes</p>
             <MathBlock formula="\frac{df}{dx} = \lim_{h \to 0} \frac{f(x+h) - f(x)}{h}" />
           </div>
-          <div class="p-4 bg-surface-alt rounded-lg border border-border">
+          <div class="p-4 rounded-lg border border-border">
             <h4 class="font-semibold text-primary mb-2">
               <i class="fa-solid fa-chart-area mr-2" aria-hidden="true" />
               Integral Calculus
@@ -152,7 +152,7 @@ print(f"f(minimum) = {f(minimum):.4f}")  # Should be 1.0`
         </p>
 
         <div class="grid gap-4 sm:grid-cols-2 lg:grid-cols-3 mb-6">
-          <div class="p-4 bg-surface-alt rounded-lg border border-border">
+          <div class="p-4 rounded-lg border border-border">
             <h5 class="font-semibold text-amber-600 mb-2">
               <i class="fa-solid fa-robot mr-2" aria-hidden="true" />
               Machine Learning
@@ -161,7 +161,7 @@ print(f"f(minimum) = {f(minimum):.4f}")  # Should be 1.0`
               Gradient descent, backpropagation, and optimization all use derivatives
             </p>
           </div>
-          <div class="p-4 bg-surface-alt rounded-lg border border-border">
+          <div class="p-4 rounded-lg border border-border">
             <h5 class="font-semibold text-blue-600 mb-2">
               <i class="fa-solid fa-gamepad mr-2" aria-hidden="true" />
               Game Development
@@ -170,7 +170,7 @@ print(f"f(minimum) = {f(minimum):.4f}")  # Should be 1.0`
               Physics simulations, smooth animations, collision detection
             </p>
           </div>
-          <div class="p-4 bg-surface-alt rounded-lg border border-border">
+          <div class="p-4 rounded-lg border border-border">
             <h5 class="font-semibold text-green-600 mb-2">
               <i class="fa-solid fa-chart-pie mr-2" aria-hidden="true" />
               Data Science
@@ -179,7 +179,7 @@ print(f"f(minimum) = {f(minimum):.4f}")  # Should be 1.0`
               Probability distributions, statistical analysis, modeling
             </p>
           </div>
-          <div class="p-4 bg-surface-alt rounded-lg border border-border">
+          <div class="p-4 rounded-lg border border-border">
             <h5 class="font-semibold text-purple-600 mb-2">
               <i class="fa-solid fa-bezier-curve mr-2" aria-hidden="true" />
               Computer Graphics
@@ -188,7 +188,7 @@ print(f"f(minimum) = {f(minimum):.4f}")  # Should be 1.0`
               Bezier curves, surface rendering, lighting calculations
             </p>
           </div>
-          <div class="p-4 bg-surface-alt rounded-lg border border-border">
+          <div class="p-4 rounded-lg border border-border">
             <h5 class="font-semibold text-red-600 mb-2">
               <i class="fa-solid fa-signal mr-2" aria-hidden="true" />
               Signal Processing
@@ -197,7 +197,7 @@ print(f"f(minimum) = {f(minimum):.4f}")  # Should be 1.0`
               Audio processing, image filtering, Fourier transforms
             </p>
           </div>
-          <div class="p-4 bg-surface-alt rounded-lg border border-border">
+          <div class="p-4 rounded-lg border border-border">
             <h5 class="font-semibold text-cyan-600 mb-2">
               <i class="fa-solid fa-microchip mr-2" aria-hidden="true" />
               Numerical Methods
@@ -215,45 +215,6 @@ print(f"f(minimum) = {f(minimum):.4f}")  # Should be 1.0`
           :collapsible="true"
           :default-expanded="false"
         />
-      </ContentSection>
-
-      <!-- The Foundation: Limits -->
-      <ContentSection
-        id="limits-preview"
-        title="The Foundation: Limits"
-        icon="fa-solid fa-arrows-to-dot"
-      >
-        <p class="mb-4">
-          Before we can define derivatives or integrals, we need <strong>limits</strong>. Limits
-          answer the question: "What value does a function approach?"
-        </p>
-
-        <div class="p-4 bg-surface-alt rounded-lg border border-border mb-4">
-          <MathBlock formula="\lim_{x \to a} f(x) = L" display />
-          <p class="text-sm text-text-secondary text-center mt-2">
-            "The limit of f(x) as x approaches a equals L"
-          </p>
-        </div>
-
-        <p class="mb-4">
-          Think of it like this: you can get as close to a point as you want, without actually
-          reaching it. What happens to the function value?
-        </p>
-
-        <div
-          class="p-4 bg-emerald-50 dark:bg-emerald-900/30 border border-emerald-200 dark:border-emerald-800 rounded-lg"
-        >
-          <p class="font-semibold text-emerald-700 dark:text-emerald-300 mb-2">
-            <i class="fa-solid fa-code mr-2" aria-hidden="true" />
-            Programming Intuition
-          </p>
-          <p class="text-emerald-600 dark:text-emerald-400 text-sm">
-            Limits are like tolerance-based convergence checks:
-            <code class="bg-emerald-100 dark:bg-emerald-800 px-1 rounded">
-              while abs(x - target) > epsilon: approach()
-            </code>
-          </p>
-        </div>
       </ContentSection>
 
       <!-- Topics Grid -->
