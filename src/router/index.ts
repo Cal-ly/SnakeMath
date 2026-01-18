@@ -143,6 +143,11 @@ const router = createRouter({
       name: 'statistics-descriptive',
       component: () => import('@/views/statistics/DescriptiveStatsView.vue'),
     },
+    {
+      path: '/statistics/distributions',
+      name: 'statistics-distributions',
+      component: () => import('@/views/statistics/DistributionsView.vue'),
+    },
     // Calculus section
     {
       path: '/calculus',

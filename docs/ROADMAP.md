@@ -4,21 +4,21 @@
 
 **SnakeMath** teaches mathematics to programmers by revealing that mathematical notation is just code they already know. The long-term trajectory leads from foundational concepts through calculus to AI/ML fundamentals.
 
-**Core Philosophy**: "Sigma is just a for loop" Ã¢â‚¬â€ and every mathematical concept has a programming equivalent.
+**Core Philosophy**: "Sigma is just a for loop" — and every mathematical concept has a programming equivalent.
 
 ---
 
 ## Strategic Trajectory
 
 ```
-Basics Ã¢â€ â€™ Algebra Ã¢â€ â€™ Trigonometry Ã¢â€ â€™ Statistics Ã¢â€ â€™ Linear Algebra Ã¢â€ â€™ Calculus Ã¢â€ â€™ AI/ML
+Basics → Algebra → Trigonometry → Statistics → Linear Algebra → Calculus → AI/ML
 ```
 
 Each topic builds toward machine learning foundations:
 
 | Topic | ML Connection |
 |-------|---------------|
-| Summation (ÃŽÂ£) | Loss functions, gradient descent sums |
+| Summation (Σ) | Loss functions, gradient descent sums |
 | Exponentials/Logarithms | Activation functions, cross-entropy loss |
 | Statistics | Distributions, probability, Bayesian inference |
 | Linear Algebra | Neural network operations, embeddings, transformations |
@@ -30,23 +30,26 @@ Each topic builds toward machine learning foundations:
 
 | Phase | Focus | Widget | Content | Status |
 |-------|-------|--------|---------|--------|
-| 1 | Project Foundation | Ã¢â‚¬â€ | Ã¢â‚¬â€ | Ã¢Å“â€¦ Complete |
-| 2 | Layout & Navigation | Ã¢â‚¬â€ | Ã¢â‚¬â€ | Ã¢Å“â€¦ Complete |
-| 3 | Content Components | Ã¢â‚¬â€ | Ã¢â‚¬â€ | Ã¢Å“â€¦ Complete |
-| 4 | Number Types | NumberTypeExplorer | Basics: Number Types | Ã¢Å“â€¦ Complete |
-| 5 | Summation Notation | SummationExplorer | Algebra: Summation | Ã¢Å“â€¦ Complete |
-| 6 | Basics Completion + Testing | SimpleFunctionDemo | Basics: Functions, Variables, Order of Ops | Ã¢Å“â€¦ Complete |
-| 7 | Quadratic Functions | QuadraticExplorer | Algebra: Quadratics | Ã¢Å“â€¦ Complete |
-| 8 | Exponentials & Logarithms | ExponentialExplorer | Algebra: Exp/Log | âœ… Complete |
-| 9 | Trigonometry + Testing Refinement | UnitCircleExplorer | Trig: Unit Circle | âœ… Complete |
-| 10 | Statistics Foundation + Algebra Expansion | StatisticsCalculator | Statistics: Descriptive + Product/Linear | âœ… Complete |
+| 1 | Project Foundation | — | — | ✅ Complete |
+| 2 | Layout & Navigation | — | — | ✅ Complete |
+| 3 | Content Components | — | — | ✅ Complete |
+| 4 | Number Types | NumberTypeExplorer | Basics: Number Types | ✅ Complete |
+| 5 | Summation Notation | SummationExplorer | Algebra: Summation | ✅ Complete |
+| 6 | Basics Completion + Testing | SimpleFunctionDemo | Basics: Functions, Variables, Order of Ops | ✅ Complete |
+| 7 | Quadratic Functions | QuadraticExplorer | Algebra: Quadratics | ✅ Complete |
+| 8 | Exponentials & Logarithms | ExponentialExplorer | Algebra: Exp/Log | ✅ Complete |
+| 9 | Trigonometry + Testing Refinement | UnitCircleExplorer | Trig: Unit Circle | ✅ Complete |
+| 10 | Statistics Foundation + Algebra Expansion | StatisticsCalculator | Statistics: Descriptive + Product/Linear | ✅ Complete |
 | 11 | Linear Algebra: Vectors | VectorOperations | Linear Algebra: Vectors | ✅ Complete |
 | 12 | Linear Algebra: Matrices | MatrixTransformations | Linear Algebra: Matrices | ✅ Complete |
 | 13 | Calculus: Limits | LimitsExplorer | Calculus: Limits | ✅ Complete |
 | 14 | Calculus: Derivatives | DerivativeVisualizer | Calculus: Derivatives | ✅ Complete |
 | 15 | Trigonometry: Remaining Topics | InverseTrigExplorer, TrigCodePlayground | Trig: Identities, Inverse Functions, Trig in Code | ✅ Complete |
 | 16 | Linear Algebra: 3D | VectorOperations3D, MatrixTransformations3D | LinAlg: Vectors 3D, Matrices 3D | ✅ Complete |
-| **17+** | **AI/ML Foundations** | **Various** | **ML Bridge Content** | 🎯 Next |
+| 17 | Probability Distributions | DistributionExplorer | Statistics: Distributions, CLT | ✅ Complete |
+| **18** | **Sampling & Estimation** | **SamplingSimulator** | **Statistics: Sampling, CI, Bootstrap** | 🎯 Next |
+| **19** | **Hypothesis Testing** | **HypothesisTestingSimulator** | **Statistics: p-values, Power, A/B Testing** | 📋 Planned |
+| **20** | **Correlation & Regression** | **CorrelationExplorer** | **Statistics: Correlation, Linear Regression** | 📋 Planned |
 
 ---
 
@@ -59,17 +62,17 @@ Each topic builds toward machine learning foundations:
 
 | Track | Deliverables |
 |-------|--------------|
-| Content | Algebra section, Summation topic (intro Ã¢â€ â€™ formulas Ã¢â€ â€™ applications) |
+| Content | Algebra section, Summation topic (intro → formulas → applications) |
 | Widget | SummationExplorer: presets, bounds input, code parallel, bar chart, formula comparison |
 | Polish | Widget component architecture, animation patterns |
 
 **Key Features**:
-- Side-by-side math notation Ã¢â€ â€ Python/JavaScript code
+- Side-by-side math notation ↔ Python/JavaScript code
 - Animated bar chart showing term accumulation
 - Closed-form formula comparison (O(n) vs O(1))
 - URL state sync for shareable configurations
 
-**Success Metric**: User sees ÃŽÂ£ notation and immediately thinks "that's just a for loop!"
+**Success Metric**: User sees Σ notation and immediately thinks "that's just a for loop!"
 
 ---
 
@@ -86,9 +89,9 @@ Each topic builds toward machine learning foundations:
 | Infrastructure | **E2E testing (Playwright), Accessibility audits (axe-core)** |
 
 **Content Migration** (from archive):
-- `basics/functions.md` Ã¢â‚¬â€ Vending machine analogy, composition, inverse
-- `basics/variables-expressions.md` Ã¢â‚¬â€ Expression building, implementation methods
-- `basics/order-of-operations.md` Ã¢â‚¬â€ PEMDAS, precedence tables, AST concepts
+- `basics/functions.md` — Vending machine analogy, composition, inverse
+- `basics/variables-expressions.md` — Expression building, implementation methods
+- `basics/order-of-operations.md` — PEMDAS, precedence tables, AST concepts
 
 **Testing Additions**:
 - Playwright setup and configuration
@@ -113,7 +116,7 @@ Each topic builds toward machine learning foundations:
 **Widget Features**:
 - Coefficient sliders (a, b, c)
 - SVG parabola with vertex, roots, axis of symmetry
-- Form conversion display (standard Ã¢â€ â€ vertex Ã¢â€ â€ factored)
+- Form conversion display (standard ↔ vertex ↔ factored)
 - Discriminant analysis with root classification
 - Real-world presets (projectile motion, profit optimization)
 - Complex roots connection to NumberTypeExplorer
@@ -137,7 +140,7 @@ Each topic builds toward machine learning foundations:
 - Base selection (e, 2, 10, custom)
 - Growth/decay curve visualization
 - Doubling time / half-life calculator
-- **Algorithm complexity comparison** (O(1) Ã¢â€ â€™ O(log n) Ã¢â€ â€™ O(n) Ã¢â€ â€™ O(nÃ‚Â²) Ã¢â€ â€™ O(2^n))
+- **Algorithm complexity comparison** (O(1) → O(log n) → O(n) → O(n²) → O(2^n))
 
 **Programmer Relevance**:
 - Binary logarithms and CS applications
@@ -160,8 +163,8 @@ Each topic builds toward machine learning foundations:
 **Widget Features**:
 - Interactive unit circle with draggable angle
 - Real-time sin/cos/tan value display
-- Parallel wave graphs (sin ÃŽÂ¸, cos ÃŽÂ¸)
-- Special angle quick-select (0Ã‚Â°, 30Ã‚Â°, 45Ã‚Â°, 60Ã‚Â°, 90Ã‚Â°)
+- Parallel wave graphs (sin θ, cos θ)
+- Special angle quick-select (0°, 30°, 45°, 60°, 90°)
 - Quadrant sign indicators (ASTC mnemonic)
 - Radian/degree toggle
 
@@ -198,7 +201,7 @@ Each topic builds toward machine learning foundations:
 
 ---
 
-### Phase 11: Linear Algebra Ã¢â‚¬â€ Vectors
+### Phase 11: Linear Algebra — Vectors
 *The Language of ML*
 
 **Goal**: Visualize vector operations in 2D/3D space.
@@ -223,7 +226,7 @@ Each topic builds toward machine learning foundations:
 
 ---
 
-### Phase 12: Linear Algebra Ã¢â‚¬â€ Matrices
+### Phase 12: Linear Algebra — Matrices
 *Transformations and Systems*
 
 **Goal**: Visualize linear transformations and matrix operations.
@@ -242,15 +245,15 @@ Each topic builds toward machine learning foundations:
 
 ---
 
-### Phase 13: Calculus Ã¢â‚¬â€ Limits
+### Phase 13: Calculus — Limits
 *Approaching the Edge*
 
-**Goal**: Visualize limits and continuity with ÃŽÂµ-ÃŽÂ´ exploration.
+**Goal**: Visualize limits and continuity with ε-δ exploration.
 
 | Track | Deliverables |
 |-------|--------------|
 | Content | Limit definition, one-sided limits, continuity, discontinuity types |
-| Widget | LimitsExplorer: function selection, approach point, ÃŽÂµ-ÃŽÂ´ visualization |
+| Widget | LimitsExplorer: function selection, approach point, ε-δ visualization |
 
 **Widget Features**:
 - Function curve display
@@ -262,7 +265,7 @@ Each topic builds toward machine learning foundations:
 
 ---
 
-### Phase 14: Calculus Ã¢â‚¬â€ Derivatives
+### Phase 14: Calculus — Derivatives
 *Rate of Change*
 
 **Goal**: Visualize derivatives as slopes and rates of change.
@@ -357,20 +360,159 @@ Each topic builds toward machine learning foundations:
 
 ---
 
-## Future Horizons (Phase 17+)
+### Phase 17: Probability Distributions
+*The Shape of Randomness*
 
-Lower detail, higher flexibility. Evaluated after Phase 16.
+**Goal**: Build an interactive distribution explorer teaching programmers to recognize, parameterize, and apply probability distributions — with direct connections to random number generation and ML applications.
+
+| Track | Deliverables |
+|-------|--------------|
+| Content | Normal, binomial, Poisson, exponential, uniform distributions; CLT |
+| Widget | DistributionExplorer: distribution selector, parameter sliders, PDF/CDF visualization, probability calculator |
+| Polish | Histogram + curve overlays, CLT demonstration |
+
+**Widget Features**:
+
+*DistributionExplorer*:
+- 5 distributions: Normal, Binomial, Poisson, Exponential, Uniform
+- Parameter sliders with real-time PDF/CDF updates
+- Probability calculator (P(X < a), P(a < X < b))
+- Histogram from random samples
+- Distribution comparison mode
+- CLT demonstration panel
+
+**Math Utilities**: PDF/CDF functions, random sampling, quantiles (80+ tests)
+
+**Programmer Relevance**:
+- "Distributions are personality profiles for randomness"
+- Normal → ML weight initialization, noise
+- Binomial → A/B testing, feature flags
+- Poisson → request rates, error counts
+- Exponential → wait times, timeouts
+
+**Estimated Time**: ~6.5 hours (6 increments)
+
+---
+
+### Phase 18: Sampling & Estimation
+*Measure Some, Estimate All*
+
+**Goal**: Build an interactive sampling simulator demonstrating how sample statistics estimate population parameters — with confidence intervals and bootstrapping.
+
+| Track | Deliverables |
+|-------|--------------|
+| Content | Sampling methods, sampling distributions, standard error, confidence intervals, bootstrap |
+| Widget | SamplingSimulator: population visualization, sample drawing, CI demonstration, bootstrap panel |
+| Polish | Animation of sampling process, CI coverage demo |
+
+**Widget Features**:
+
+*SamplingSimulator*:
+- Population grid visualization (1000 items)
+- 4 sampling methods: simple random, systematic, stratified, cluster
+- Animated sample drawing
+- Sampling distribution histogram (many samples)
+- CI demonstration with capture rate
+- Bootstrap confidence intervals
+- Sample size calculator
+
+**Math Utilities**: Sampling functions, SE calculation, CI construction, bootstrap (60+ tests)
+
+**Programmer Relevance**:
+- "Sampling is like profiling — you can't trace every call"
+- Confidence intervals for A/B test results
+- Bootstrap for non-parametric estimation
+- Sample size planning for experiments
+
+**Estimated Time**: ~7 hours (7 increments)
+
+---
+
+### Phase 19: Hypothesis Testing
+*The Scientific Method, Formalized*
+
+**Goal**: Build an interactive hypothesis testing simulator teaching the logic of statistical inference — null hypotheses, p-values, significance, and Type I/II error trade-offs.
+
+| Track | Deliverables |
+|-------|--------------|
+| Content | Null/alternative hypotheses, p-values, significance, Type I/II errors, power analysis |
+| Widget | HypothesisTestingSimulator: test type selector, hypothesis setup, p-value visualization, power calculator |
+| Polish | Type I/II error demo, effect size display |
+
+**Widget Features**:
+
+*HypothesisTestingSimulator*:
+- 4 test types: one-sample t, two-sample t, one-proportion z, two-proportion z
+- Hypothesis configuration (H₀, H₁, α)
+- Distribution visualization with rejection region shading
+- p-value and decision display
+- Type I/II error interactive demo
+- Power analysis calculator
+- Effect size (Cohen's d) display
+- A/B testing preset
+
+**Math Utilities**: t-tests, z-tests, power analysis, effect size (80+ tests)
+
+**Programmer Relevance**:
+- "H₀ is like 'innocent until proven guilty'"
+- A/B testing for feature decisions
+- Type I = false positive (spam filter marking real email)
+- Type II = false negative (missing a real bug)
+- Power = probability of detecting a real effect
+
+**Estimated Time**: ~7.25 hours (7 increments)
+
+---
+
+### Phase 20: Correlation & Regression
+*Do Variables Move Together?*
+
+**Goal**: Build an interactive correlation and regression explorer teaching programmers to identify relationships between variables and fit linear models — bridging directly to ML.
+
+| Track | Deliverables |
+|-------|--------------|
+| Content | Correlation, causation, linear regression, R², residuals, multiple regression preview |
+| Widget | CorrelationExplorer: scatter plot with draggable points, regression line, residual visualization, outlier demo |
+| Polish | Real-time correlation updates, ML connection |
+
+**Widget Features**:
+
+*CorrelationExplorer*:
+- Interactive scatter plot with draggable points
+- Real-time correlation coefficient (r) display
+- Regression line with equation overlay
+- Residual visualization toggle
+- R² and standard error display
+- Outlier impact demonstration
+- Multiple regression preview (2 predictors, 3D)
+- "Correlation ≠ Causation" prominent warning
+- Dataset presets (Anscombe's quartet)
+
+**Math Utilities**: Pearson correlation, OLS regression, Cook's distance, R² (100+ tests)
+
+**Programmer Relevance**:
+- Feature selection: "Which inputs relate to output?"
+- Linear regression = simplest baseline ML model
+- "Multiple regression is literally a linear layer: ŷ = w₁x₁ + w₂x₂ + b"
+- Residuals = model errors to analyze
+
+**Estimated Time**: ~7.75 hours (8 increments)
+
+---
+
+## Future Horizons (Phase 21+)
+
+Lower detail, higher flexibility. Evaluated after Phase 20.
 
 | Phase | Possible Focus |
 |-------|----------------|
-| 17 | AI/ML Foundations: Neural network intuition |
-| 18 | Probability distributions and sampling |
-| 19 | Gradient descent visualization |
-| 20 | PWA features: offline support, installability |
-| 21 | Search functionality, content discovery |
-| 22 | User progress tracking (local storage) |
-| 23 | Practice problems / quiz system |
-| 24 | Community contributions framework |
+| 21 | AI/ML Foundations: Neural network intuition, gradient descent visualization |
+| 22 | Calculus: Integrals (area under curve, accumulation) |
+| 23 | PWA features: offline support, installability |
+| 24 | Search functionality, content discovery |
+| 25 | User progress tracking (local storage) |
+| 26 | Practice problems / quiz system |
+| 27 | Community contributions framework |
 
 ---
 
@@ -380,28 +522,33 @@ Lower detail, higher flexibility. Evaluated after Phase 16.
 
 | Layer | Tool | Purpose | Phase Added |
 |-------|------|---------|-------------|
-| Unit | Vitest | Math utilities, pure functions | Phase 1 Ã¢Å“â€¦ |
-| Component | Vitest + Vue Test Utils | Component logic, props, emits | Phase 4 Ã¢Å“â€¦ |
-| E2E | Playwright | User flows, integration | Phase 6 Ã¢Å“â€¦ |
-| Visual Regression | Playwright screenshots | UI consistency | Phase 7 Ã¢Å“â€¦ |
-| Accessibility | axe-core + Playwright | WCAG compliance | Phase 6 Ã¢Å“â€¦ |
+| Unit | Vitest | Math utilities, pure functions | Phase 1 ✅ |
+| Component | Vitest + Vue Test Utils | Component logic, props, emits | Phase 4 ✅ |
+| E2E | Playwright | User flows, integration | Phase 6 ✅ |
+| Visual Regression | Playwright screenshots | UI consistency | Phase 7 ✅ |
+| Accessibility | axe-core + Playwright | WCAG compliance | Phase 6 ✅ |
 
 ### Test File Structure
 
 ```
 tests/
-Ã¢â€Å“Ã¢â€â‚¬Ã¢â€â‚¬ unit/                    # Vitest unit tests (co-located with source)
+├── unit/                    # Vitest unit tests (co-located with source)
 e2e/
-Ã¢â€Å“Ã¢â€â‚¬Ã¢â€â‚¬ navigation.spec.ts       # Site-wide navigation
-Ã¢â€Å“Ã¢â€â‚¬Ã¢â€â‚¬ basics/
-Ã¢â€â€š   Ã¢â€Å“Ã¢â€â‚¬Ã¢â€â‚¬ number-types.spec.ts
-Ã¢â€â€š   Ã¢â€â€Ã¢â€â‚¬Ã¢â€â‚¬ symbols.spec.ts
-Ã¢â€Å“Ã¢â€â‚¬Ã¢â€â‚¬ algebra/
-Ã¢â€â€š   Ã¢â€Å“Ã¢â€â‚¬Ã¢â€â‚¬ summation.spec.ts
-Ã¢â€â€š   Ã¢â€â€Ã¢â€â‚¬Ã¢â€â‚¬ quadratics.spec.ts
-Ã¢â€â€Ã¢â€â‚¬Ã¢â€â‚¬ visual/
-    Ã¢â€Å“Ã¢â€â‚¬Ã¢â€â‚¬ widgets.spec.ts      # Widget screenshots
-    Ã¢â€â€Ã¢â€â‚¬Ã¢â€â‚¬ pages.spec.ts        # Full page screenshots
+├── navigation.spec.ts       # Site-wide navigation
+├── basics/
+│   ├── number-types.spec.ts
+│   └── symbols.spec.ts
+├── algebra/
+│   ├── summation.spec.ts
+│   └── quadratics.spec.ts
+├── statistics/
+│   ├── distributions.spec.ts
+│   ├── sampling.spec.ts
+│   ├── hypothesis-testing.spec.ts
+│   └── correlation.spec.ts
+└── visual/
+    ├── widgets.spec.ts      # Widget screenshots
+    └── pages.spec.ts        # Full page screenshots
 ```
 
 ### CI Workflow
@@ -457,6 +604,8 @@ Decisions made during roadmap planning:
 | R-020 | Underscore prefix for intentionally unused variables | ESLint `@typescript-eslint/no-unused-vars` ignores variables matching `/^_/u`; prevents CI failures |
 | R-021 | Isometric projection for 3D visualization | SVG-based approach avoids WebGL complexity; 30° angles provide clear depth cues |
 | R-022 | Cross product as default 3D vector operation | Unique to 3D; demonstrates right-hand rule effectively |
+| R-023 | Statistics expansion before AI/ML (Phases 17-20) | Complete inferential statistics foundation; direct bridge to ML concepts |
+| R-024 | Four statistics phases in sequence | Each builds on previous: distributions → sampling → hypothesis testing → regression |
 
 ---
 
@@ -464,14 +613,14 @@ Decisions made during roadmap planning:
 
 ### Content Progression
 ```
-Phase:  4    5    6    7    8    9    10   11   12   13   14
-        Ã¢â€â€š    Ã¢â€â€š    Ã¢â€â€š    Ã¢â€â€š    Ã¢â€â€š    Ã¢â€â€š    Ã¢â€â€š    Ã¢â€â€š    Ã¢â€â€š    Ã¢â€â€š    Ã¢â€â€š
-Basics: Ã¢â€“Ë†Ã¢â€“Ë†Ã¢â€“Ë†Ã¢â€“Ë† Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€“Ë†Ã¢â€“Ë†Ã¢â€“Ë†Ã¢â€“Ë†                                      
-Algebra:     Ã¢â€“Ë†Ã¢â€“Ë†Ã¢â€“Ë†Ã¢â€“Ë†      Ã¢â€“Ë†Ã¢â€“Ë†Ã¢â€“Ë†Ã¢â€“Ë† Ã¢â€“Ë†Ã¢â€“Ë†Ã¢â€“Ë†Ã¢â€“Ë†                            
-Trig:                            Ã¢â€“Ë†Ã¢â€“Ë†Ã¢â€“Ë†Ã¢â€“Ë†                       
-Stats:                                Ã¢â€“Ë†Ã¢â€“Ë†Ã¢â€“Ë†Ã¢â€“Ë†                  
-LinAlg:                                    Ã¢â€“Ë†Ã¢â€“Ë†Ã¢â€“Ë†Ã¢â€“Ë† Ã¢â€“Ë†Ã¢â€“Ë†Ã¢â€“Ë†Ã¢â€“Ë†        
-Calc:                                                Ã¢â€“Ë†Ã¢â€“Ë†Ã¢â€“Ë†Ã¢â€“Ë† Ã¢â€“Ë†Ã¢â€“Ë†Ã¢â€“Ë†Ã¢â€“Ë†
+Phase:  4    5    6    7    8    9    10   11   12   13   14   15   16   17   18   19   20
+        │    │    │    │    │    │    │    │    │    │    │    │    │    │    │    │    │
+Basics: ████ ─────████
+Algebra:     ████      ████ ████
+Trig:                            ████                     ████
+Stats:                                ████                          ████ ████ ████ ████
+LinAlg:                                    ████ ████                ████
+Calc:                                                ████ ████
 ```
 
 ### Widget Progression
@@ -490,6 +639,10 @@ Phase 15: InverseTrigExplorer     (arcsin/arccos/arctan, domain/range)
 Phase 15: TrigCodePlayground      (rotation, waves, circular motion, projectiles)
 Phase 16: VectorOperations3D      (3D vectors, cross product, isometric projection)
 Phase 16: MatrixTransformations3D (3D rotation matrices, Euler angles, unit cube)
+Phase 17: DistributionExplorer    (PDF/CDF curves, CLT demo)
+Phase 18: SamplingSimulator       (population grid, CI demonstration)
+Phase 19: HypothesisTestingSimulator (p-value shading, power curves)
+Phase 20: CorrelationExplorer     (scatter plot, regression line, residuals)
 ```
 
 ### Technical Capability Building
@@ -506,6 +659,10 @@ Phase 13: Epsilon-delta bands, limit visualization
 Phase 14: Tangent lines, derivative graphs
 Phase 15: Multi-demo composables, requestAnimationFrame animations, domain validation
 Phase 16: Isometric projection, 3D coordinate systems, SVG-based 3D visualization
+Phase 17: Distribution curves, CLT convergence animation, probability shading
+Phase 18: Population grid virtualization, bootstrap resampling, CI capture animation
+Phase 19: Hypothesis test visualization, Type I/II error demo, power curves
+Phase 20: Draggable scatter plot, real-time correlation, residual lines
 ```
 
 ---
@@ -514,12 +671,13 @@ Phase 16: Isometric projection, 3D coordinate systems, SVG-based 3D visualizatio
 
 | Metric | Target | Measured By |
 |--------|--------|-------------|
-| Content Coverage | All archive content migrated | Phase 16 |
-| Widget Count | 14+ major interactive widgets | Phase 16 |
+| Content Coverage | All archive content migrated + Statistics expansion | Phase 20 |
+| Widget Count | 18+ major interactive widgets | Phase 20 |
 | Test Coverage | All utilities tested, E2E for all widgets | Ongoing |
 | Accessibility | WCAG 2.1 AA compliance | axe-core audits |
 | Performance | Lighthouse >90 | Phase 10 audit |
 | Mobile Usability | All widgets functional on mobile | Phase 8 |
+| Statistics Tests | ~360 new unit tests (Phases 17-20) | Phase 20 |
 
 ---
 
@@ -527,17 +685,20 @@ Phase 16: Isometric projection, 3D coordinate systems, SVG-based 3D visualizatio
 
 | After Phase | Evaluate | Outcome |
 |-------------|----------|---------|
-| 5 | Widget architecture solid? Animation approach correct? | Ã¢Å“â€¦ Yes - preset-based architecture works well |
-| 6 | Testing infrastructure working? Content density appropriate? | Ã¢Å“â€¦ Playwright + axe-core working; content pacing good |
-| 7 | Coordinate system reusable? Visual regression catching issues? | Ã¢Å“â€¦ CoordinateSystem + PlotCurve/Point/Line reusable for Phase 8+ |
-| 8 | Mobile experience acceptable? | âœ… Yes - widgets responsive; touch interactions work |
-| 10 | Performance acceptable? Ready for more complex visualizations? | âœ… Yes - panel architecture scales well; histogram/box plot performant |
+| 5 | Widget architecture solid? Animation approach correct? | ✅ Yes - preset-based architecture works well |
+| 6 | Testing infrastructure working? Content density appropriate? | ✅ Playwright + axe-core working; content pacing good |
+| 7 | Coordinate system reusable? Visual regression catching issues? | ✅ CoordinateSystem + PlotCurve/Point/Line reusable for Phase 8+ |
+| 8 | Mobile experience acceptable? | ✅ Yes - widgets responsive; touch interactions work |
+| 10 | Performance acceptable? Ready for more complex visualizations? | ✅ Yes - panel architecture scales well; histogram/box plot performant |
 | 12 | Linear algebra approach working? Ready for calculus? | ✅ Yes - vectors + matrices complete; composable pattern proven |
 | 13 | Limits visualization effective? Epsilon-delta approach working? | ✅ Yes - numerical approach intuitive; ε-δ bands educational |
 | 14 | Derivatives visualization effective? Secant animation working? | ✅ Yes - tangent lines clear; secant→tangent animation demonstrates limit definition well |
 | 15 | Trigonometry section complete? All subtopics covered? | ✅ Yes - 5 subtopics (Unit Circle, Right Triangle, Identities, Inverse Functions, Trig in Code); comprehensive coverage |
 | 16 | 3D linear algebra effective? Isometric projection working? | ✅ Yes - isometric SVG visualization works well; cross product with right-hand rule demo; Euler angles clearly demonstrated |
-| 17+ | Core math sections complete. Evaluate AI/ML phase scope. | — |
+| 17 | Distribution explorer effective? CLT demo clear? | ✅ Yes - DistributionExplorer with 5 distributions; CLT demo shows convergence to normal; 1461 tests total |
+| 18 | Sampling visualization effective? CI demo working? | — |
+| 19 | Hypothesis testing intuitive? p-value visualization clear? | — |
+| 20 | Correlation/regression effective? ML bridge clear? Statistics section complete? | — |
 
 ---
 
@@ -552,6 +713,8 @@ Phase 16: Isometric projection, 3D coordinate systems, SVG-based 3D visualizatio
 | Performance degradation | Phase 10 includes performance audit |
 | Testing gaps | E2E added in Phase 6, before widget proliferation |
 | Visual regressions | Screenshot testing added in Phase 7 |
+| Statistics complexity | Four focused phases (17-20) with clear increments |
+| Population grid performance | Virtualization for large N in Phase 18 |
 
 ---
 
@@ -572,6 +735,8 @@ Phase 16: Isometric projection, 3D coordinate systems, SVG-based 3D visualizatio
 | 2026-01-17 | Phase 14 complete: DerivativeVisualizer widget, tangent lines, secant-to-tangent animation, derivative utilities (67 tests), derivatives page with gradient descent focus |
 | 2026-01-18 | Phase 15 complete: TrigIdentityExplorer (21 identities), InverseTrigExplorer (arcsin/arccos/arctan/atan2), TrigCodePlayground (rotation/waves/circular motion/projectiles); trigonometry section finished with 5 subtopics; 1048 tests total |
 | 2026-01-18 | Phase 16 complete: VectorOperations3D (8 operations, cross product, right-hand rule), MatrixTransformations3D (3×3 rotation matrices, Euler angles, unit cube); isometric projection composable; 1252 tests total |
+| 2026-01-18 | Statistics expansion planned: Phases 17-20 detailed (Probability Distributions, Sampling & Estimation, Hypothesis Testing, Correlation & Regression); ~28.5 hours estimated; ~360 new unit tests planned |
+| 2026-01-18 | Phase 17 complete: DistributionExplorer widget (5 distributions), CLTDemonstration component, DistributionsView content page; 209 new unit tests; 1461 tests total |
 
 ---
 

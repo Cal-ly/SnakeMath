@@ -3424,3 +3424,222 @@ Before marking phase complete, verify new content against DESIGN_SYSTEM.md:
 - Reduces batch fix-up work
 - Maintains consistent user experience across all content
 - Makes onboarding new contributors easier
+
+---
+
+## Phase 17: Probability Distributions
+
+### LL-060: Error Function (erf) Approximation Suffices for Educational Purposes
+**Issue**: Normal distribution CDF requires the error function, which has no closed-form solution.
+
+**Context**: Implementing normal CDF needed erf(x) = (2/√π) ∫₀ˣ e^(-t²) dt. Options included external libraries (jstat, mathjs) or approximation.
+
+**Resolution**: Used Abramowitz and Stegun approximation (formula 7.1.26) which provides ~1.5×10⁻⁷ max error:
+```typescript
+function erf(x: number): number {
+  const a1 = 0.254829592, a2 = -0.284496736, a3 = 1.421413741
+  const a4 = -1.453152027, a5 = 1.061405429, p = 0.3275911
+  const sign = x < 0 ? -1 : 1
+  x = Math.abs(x)
+  const t = 1 / (1 + p * x)
+  const y = 1 - (((((a5 * t + a4) * t) + a3) * t + a2) * t + a1) * t * Math.exp(-x * x)
+  return sign * y
+}
+```
+
+**Lesson**: For educational visualization, well-known approximations are often sufficient. Avoid adding dependencies for functions that can be approximated with acceptable accuracy.
+
+---
+
+### LL-061: Discriminated Unions Require Careful Type Narrowing in Vue Computed Properties
+**Issue**: TypeScript didn't automatically narrow distribution parameter types in computed properties when checking the distribution type.
+
+**Code**:
+```typescript
+// Error: Property 'mu' does not exist on type 'NormalParams | BinomialParams | ...'
+const stats = computed(() => {
+  if (distributionType.value === 'normal') {
+    return { mean: params.value.mu } // TypeScript doesn't narrow here
+  }
+})
+```
+
+**Resolution**: Explicitly narrow with type assertions or separate the type guard:
+```typescript
+const stats = computed(() => {
+  const type = distributionType.value
+  const p = params.value
+  if (type === 'normal') {
+    const normalParams = p as { mu: number; sigma: number }
+    return { mean: normalParams.mu, variance: normalParams.sigma ** 2 }
+  }
+  // ... other cases
+})
+```
+
+**Lesson**: Vue's computed properties don't always preserve type narrowing from reactive refs. Use explicit type assertions or helper functions for discriminated unions.
+
+---
+
+### LI-075: Tab-Based Distribution Selection Scales Well
+**Identified**: Horizontal tab buttons provide effective navigation for multiple distributions.
+
+**Pattern**:
+```vue
+<div class="flex flex-wrap gap-2">
+  <button
+    v-for="dist in distributions"
+    :key="dist.type"
+    :class="{
+      'bg-primary text-white': selected === dist.type,
+      'bg-surface hover:bg-surface-alt': selected !== dist.type
+    }"
+    @click="selected = dist.type"
+  >
+    <i :class="dist.icon" aria-hidden="true" />
+    {{ dist.label }}
+  </button>
+</div>
+```
+
+**Benefits**:
+- Visual icons aid quick recognition (bell for normal, stairs for binomial)
+- Horizontal layout accommodates 5+ options with wrapping
+- Selected state is visually distinct
+- URL state sync allows direct linking to specific distribution
+- Consistent with other tab-based widgets (TrigCodePlayground)
+
+---
+
+### LI-076: CLT Demonstration Benefits from Auto-Run Animation with Stop Control
+**Identified**: Central Limit Theorem visualization is most effective with animated sample accumulation.
+
+**Pattern**:
+```typescript
+const autoRun = ref(false)
+let animationTimer: ReturnType<typeof setTimeout> | null = null
+
+function startAutoRun() {
+  autoRun.value = true
+  runAutoLoop()
+}
+
+function runAutoLoop() {
+  if (!autoRun.value) return
+  takeSamples(10) // Small batch per frame
+
+  if (sampleMeans.value.length >= 1000) {
+    stopAutoRun()
+    return
+  }
+
+  animationTimer = setTimeout(runAutoLoop, 100) // 10 batches/sec
+}
+
+function stopAutoRun() {
+  autoRun.value = false
+  if (animationTimer) clearTimeout(animationTimer)
+}
+
+onUnmounted(() => stopAutoRun()) // Cleanup (LL-019, LI-019)
+```
+
+**Benefits**:
+- Shows gradual convergence to normal distribution
+- User can stop at any point to examine state
+- Auto-stops at reasonable limit (1000 samples)
+- Proper cleanup prevents memory leaks
+
+---
+
+### LI-077: Histogram Bin Width Calculation Differs for Discrete vs Continuous
+**Identified**: Discrete and continuous distributions require different histogram binning strategies.
+
+**Pattern**:
+```typescript
+function createHistogram(data: number[], binCount: number, isDiscrete: boolean) {
+  if (isDiscrete) {
+    // For discrete: bins align with integer values
+    const min = Math.floor(Math.min(...data))
+    const max = Math.ceil(Math.max(...data))
+    const bins = []
+    for (let x = min; x <= max; x++) {
+      const count = data.filter(d => Math.round(d) === x).length
+      bins.push({ start: x - 0.5, end: x + 0.5, count, density: count / data.length })
+    }
+    return bins
+  } else {
+    // For continuous: equal-width bins
+    const min = Math.min(...data)
+    const max = Math.max(...data)
+    const binWidth = (max - min) / binCount
+    // ... standard histogram logic
+  }
+}
+```
+
+**Benefits**:
+- Discrete distributions show probability mass at integers
+- Continuous distributions show probability density across ranges
+- Visual consistency with theoretical PDF/PMF
+- Educational: reinforces discrete vs continuous distinction
+
+---
+
+### LI-078: Distribution Quick Reference Table Pattern
+**Identified**: A summary table helps users quickly compare distribution characteristics.
+
+**Pattern**:
+```vue
+<table class="w-full text-sm">
+  <thead>
+    <tr class="bg-surface-alt">
+      <th>Distribution</th>
+      <th>Type</th>
+      <th>Parameters</th>
+      <th>Mean</th>
+      <th>Variance</th>
+      <th>Use Case</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr v-for="dist in distributions" :key="dist.type">
+      <td>{{ dist.name }}</td>
+      <td>{{ dist.discrete ? 'Discrete' : 'Continuous' }}</td>
+      <td><MathBlock :formula="dist.paramsLatex" /></td>
+      <td><MathBlock :formula="dist.meanLatex" /></td>
+      <td><MathBlock :formula="dist.varianceLatex" /></td>
+      <td>{{ dist.useCase }}</td>
+    </tr>
+  </tbody>
+</table>
+```
+
+**Benefits**:
+- Quick reference without scrolling through individual sections
+- Side-by-side comparison of formulas
+- Programmer-focused use cases in plain language
+- Works as a study aid and cheat sheet
+
+---
+
+## Phase 17 Summary
+
+Phase 17 implemented Probability Distributions with the DistributionExplorer widget and CLT demonstration.
+
+**Lessons Learned (LL)**:
+- LL-060: Error function approximation suffices for educational purposes
+- LL-061: Discriminated unions require careful type narrowing in Vue computed properties
+
+**Lessons Identified (LI)**:
+- LI-075: Tab-based distribution selection scales well
+- LI-076: CLT demonstration benefits from auto-run animation with stop control
+- LI-077: Histogram bin width calculation differs for discrete vs continuous
+- LI-078: Distribution quick reference table pattern
+
+**Key Takeaways**:
+1. Mathematical approximations are often sufficient for educational visualization
+2. TypeScript discriminated unions need explicit narrowing in Vue reactive contexts
+3. Animation with user control (play/pause) aids understanding of convergence
+4. Visual distinction between discrete (bars) and continuous (curves) reinforces concepts
+5. Quick reference tables complement detailed explanations

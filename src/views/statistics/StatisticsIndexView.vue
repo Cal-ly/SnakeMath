@@ -165,11 +165,11 @@ const topic = topics.find((t) => t.id === 'statistics')!
         <div class="grid gap-3 md:grid-cols-2">
           <div class="p-3 rounded-lg border border-border">
             <p class="font-medium text-text-primary">
-              <i class="fa-solid fa-bell-curve text-text-muted mr-2" aria-hidden="true" />
-              Probability Distributions
+              <i class="fa-solid fa-database text-text-muted mr-2" aria-hidden="true" />
+              Sampling & Estimation
             </p>
             <p class="text-sm text-text-muted mt-1">
-              Normal, binomial, Poisson — the shapes of randomness.
+              Making inferences about populations from samples.
             </p>
           </div>
 
@@ -190,16 +190,6 @@ const topic = topics.find((t) => t.id === 'statistics')!
             </p>
             <p class="text-sm text-text-muted mt-1">
               Measuring relationships between variables.
-            </p>
-          </div>
-
-          <div class="p-3 rounded-lg border border-border">
-            <p class="font-medium text-text-primary">
-              <i class="fa-solid fa-database text-text-muted mr-2" aria-hidden="true" />
-              Sampling & Estimation
-            </p>
-            <p class="text-sm text-text-muted mt-1">
-              Making inferences about populations from samples.
             </p>
           </div>
         </div>

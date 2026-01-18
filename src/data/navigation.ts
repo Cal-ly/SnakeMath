@@ -207,6 +207,13 @@ export const topics: NavTopic[] = [
         path: '/statistics/descriptive',
         faIcon: 'fa-solid fa-chart-simple',
       },
+      {
+        id: 'distributions',
+        title: 'Probability Distributions',
+        description: 'Each distribution is a personality profile for randomness',
+        path: '/statistics/distributions',
+        faIcon: 'fa-solid fa-bell',
+      },
     ],
   },
   {

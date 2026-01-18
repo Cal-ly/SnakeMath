@@ -25,6 +25,16 @@ export default defineConfigWithVueTs(
   {
     ...pluginVitest.configs.recommended,
     files: ['src/**/*.test.ts', 'src/**/__tests__/*'],
+    rules: {
+      ...pluginVitest.configs.recommended.rules,
+      // Recognize expectClose helper as containing assertions
+      'vitest/expect-expect': [
+        'error',
+        {
+          assertFunctionNames: ['expect', 'expectClose'],
+        },
+      ],
+    },
   },
 
   skipFormatting,

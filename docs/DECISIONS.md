@@ -2500,3 +2500,186 @@ for (const [angle, _latex] of specialAngles) { ... }
 **When to use underscore vs remove**:
 - Use underscore: Variable may be needed soon, documents a pattern, or is part of a larger API
 - Remove entirely: Truly dead code with no foreseeable use
+
+---
+
+## Phase 17 Decisions
+
+### D-134: Discriminated Union Pattern for Distribution Parameters
+**Decision**: Use TypeScript discriminated unions to handle different distribution parameter types.
+
+**Rationale**:
+- Each distribution has unique parameters (μ, σ for normal; n, p for binomial; λ for poisson/exponential; a, b for uniform)
+- Discriminated unions provide type safety when accessing distribution-specific parameters
+- Enables exhaustive switch statements with compile-time checking
+- Follows functional programming patterns
+
+**Implementation**:
+```typescript
+type DistributionParams =
+  | { type: 'normal'; params: { mu: number; sigma: number } }
+  | { type: 'binomial'; params: { n: number; p: number } }
+  | { type: 'poisson'; params: { lambda: number } }
+  | { type: 'exponential'; params: { lambda: number } }
+  | { type: 'uniform'; params: { a: number; b: number } }
+```
+
+**Trade-off**: More verbose than a single generic object, but provides compile-time safety for parameter access.
+
+---
+
+### D-135: Tab-Based Distribution Selector with Visual Icons
+**Decision**: Use horizontal tab buttons with Font Awesome icons to select distributions.
+
+**Rationale**:
+- Clear visual distinction between distributions
+- Icons provide quick recognition (bell for normal, stairs for binomial, etc.)
+- Horizontal layout works well for 5 distributions
+- Consistent with UnitCircleExplorer special angle buttons
+- URL state sync via `type` parameter
+
+**Implementation**:
+```vue
+<button
+  v-for="dist in distributions"
+  :key="dist.type"
+  :class="{ 'bg-primary text-white': selected === dist.type }"
+  @click="selectDistribution(dist.type)"
+>
+  <i :class="dist.icon" />
+  {{ dist.label }}
+</button>
+```
+
+---
+
+### D-136: SVG Bars for Discrete, Smooth Curves for Continuous
+**Decision**: Use different visualization styles based on distribution type.
+
+**Rationale**:
+- Discrete distributions (binomial, poisson) naturally visualize as bars at integer x values
+- Continuous distributions (normal, exponential, uniform) visualize as smooth curves
+- Visual distinction reinforces the conceptual difference
+- Bars show individual probability masses, curves show probability density
+
+**Implementation**:
+```typescript
+const isDiscrete = computed(() =>
+  ['binomial', 'poisson'].includes(distribution.value.type)
+)
+```
+
+---
+
+### D-137: CLT as Separate Opt-In Component
+**Decision**: Create CLTDemonstration as a standalone component, shown via `showCLT` prop rather than embedded in main widget.
+
+**Rationale**:
+- CLT is a distinct concept from individual distributions
+- Keeps main DistributionExplorer focused on single-distribution exploration
+- CLT demo requires its own controls (source distribution, sample size, auto-run)
+- Content page can decide where to show CLT demo
+- Reduces initial complexity for users
+
+**Implementation**:
+```vue
+<DistributionExplorer :showCLT="true" />
+<!-- or in content page: -->
+<CLTDemonstration />
+```
+
+---
+
+### D-138: Error Function Approximation for Normal CDF
+**Decision**: Implement error function (erf) approximation internally rather than using an external library.
+
+**Rationale**:
+- Normal CDF requires erf(x) = (2/√π) ∫₀ˣ e^(-t²) dt
+- Abramowitz and Stegun approximation provides ~1.5×10⁻⁷ max error
+- No external dependency needed for educational purposes
+- Sufficient accuracy for visualization and probability calculations
+
+**Implementation**:
+```typescript
+function erf(x: number): number {
+  // Abramowitz and Stegun approximation (7.1.26)
+  const a1 = 0.254829592, a2 = -0.284496736, a3 = 1.421413741
+  const a4 = -1.453152027, a5 = 1.061405429, p = 0.3275911
+  const sign = x < 0 ? -1 : 1
+  x = Math.abs(x)
+  const t = 1 / (1 + p * x)
+  const y = 1 - (((((a5 * t + a4) * t) + a3) * t + a2) * t + a1) * t * Math.exp(-x * x)
+  return sign * y
+}
+```
+
+**Trade-off**: Approximation rather than exact, but sufficient for educational visualization.
+
+---
+
+### D-139: Composable Pattern (useDistributions) Following Established Conventions
+**Decision**: Create `useDistributions` composable following the established pattern from useVectors, useMatrixTransformations, useLimits, etc.
+
+**Rationale**:
+- Consistent API across all widget composables
+- Separates state logic from presentation
+- Supports optional URL state synchronization
+- Computed properties for derived data (PDF/CDF points, histogram)
+- Testable independently of components
+
+**Implementation**:
+```typescript
+export function useDistributions(options: UseDistributionsOptions = {}) {
+  // State
+  const distributionType = ref<DistributionType>('normal')
+  const params = ref<DistributionParams>(defaultParams)
+
+  // Computed
+  const pdfData = computed(() => generatePdfPoints())
+  const cdfData = computed(() => generateCdfPoints())
+  const stats = computed(() => getDistributionStats(config))
+
+  // URL sync
+  if (options.syncUrl) { ... }
+
+  return { distributionType, params, pdfData, cdfData, stats, ... }
+}
+```
+
+---
+
+### D-140: Probability Calculator with Range Support
+**Decision**: Support both P(X < a) and P(a < X < b) probability calculations.
+
+**Rationale**:
+- Single-bound queries (P(X < a), P(X > a)) are most common
+- Range queries (P(a < X < b)) useful for interval probabilities
+- Dropdown to select comparison type (<, >, range)
+- Real-time calculation as bounds change
+- Educational: shows how CDF is used for probability calculation
+
+**Implementation**:
+```typescript
+const probability = computed(() => {
+  if (mode.value === 'lessThan') return cdf(upper.value)
+  if (mode.value === 'greaterThan') return 1 - cdf(lower.value)
+  return cdf(upper.value) - cdf(lower.value) // range
+})
+```
+
+---
+
+### D-141: Sample Histogram with Adjustable Sample Count
+**Decision**: Allow users to generate random samples and visualize as histogram.
+
+**Rationale**:
+- Connects theoretical distribution to empirical samples
+- Shows how histogram approximates PDF/PMF as sample size increases
+- Educational demonstration of sampling variability
+- Regenerate button for repeated sampling
+
+**Implementation**:
+- Default 1000 samples
+- Histogram with auto-calculated bin count (Sturges' rule)
+- Overlay theoretical curve for comparison
+- Clear visual distinction (bars vs curve)

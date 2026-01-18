@@ -5,13 +5,13 @@ This document outlines the current state of the project for easy resumption afte
 
 ---
 
-## Current Status: Phase 16 Complete
+## Current Status: Phase 17 Complete
 
 **Last Updated**: 2026-01-18
 
 ### Project Summary
 
-SnakeMath is an educational mathematics website for programmers. Sixteen phases of development have established:
+SnakeMath is an educational mathematics website for programmers. Seventeen phases of development have established:
 
 | Phase | Focus | Key Deliverables | Status |
 |-------|-------|------------------|--------|
@@ -32,6 +32,7 @@ SnakeMath is an educational mathematics website for programmers. Sixteen phases 
 | — | Content Review | Three-analogy blocks, pitfall callouts, RelatedTopics | Complete |
 | 15 | Trigonometry — Remaining Topics | Right Triangle, Identities, Inverse, Trig in Code | Complete |
 | 16 | Linear Algebra — 3D | VectorOperations3D, MatrixTransformations3D, isometric projection | Complete |
+| 17 | Statistics — Distributions | DistributionExplorer, CLTDemonstration, Distributions content page | Complete |
 
 ### What's Live
 
@@ -60,7 +61,9 @@ SnakeMath is an educational mathematics website for programmers. Sixteen phases 
   - Matrices (MatrixTransformations widget with unit square visualization)
   - **Vectors 3D (VectorOperations3D widget with isometric projection, cross product, right-hand rule)**
   - **Matrices 3D (MatrixTransformations3D widget with 3×3 rotation matrices, Euler angles)**
-- `/statistics` - Descriptive Statistics (StatisticsCalculator widget with histogram & box plot)
+- `/statistics` - Statistics section (2 subtopics):
+  - Descriptive Statistics (StatisticsCalculator widget with histogram & box plot)
+  - **Probability Distributions (DistributionExplorer widget with 5 distributions, CLT demo)**
 - `/calculus` - Calculus section:
   - Limits (LimitsExplorer widget with epsilon-delta visualization)
   - **Derivatives (DerivativeVisualizer widget with tangent lines and secant animation)**
@@ -83,6 +86,8 @@ SnakeMath is an educational mathematics website for programmers. Sixteen phases 
 - **TrigCodePlayground**: 4 demo types (rotation, wave, circular motion, projectile), tab-based navigation, rotation demo with angle slider and matrix display, wave demo with frequency/amplitude/phase controls, circular motion with play/pause animation, projectile physics with trajectory visualization, dynamic Python code generation, 12 presets across demo types, URL state sync
 - **VectorOperations3D**: 3D vector inputs with coordinate sliders, 8 operations (add, subtract, dot product, cross product, magnitude, angle, scalar multiply, normalize), isometric SVG canvas with grid/arrows, cross product with right-hand rule demo, 5 educational presets, parallel/perpendicular badges, URL state sync
 - **MatrixTransformations3D**: 6 transformation types (identity, rotateX, rotateY, rotateZ, combined, scale), isometric SVG canvas with unit cube and basis vectors, Euler angle composition, 8 educational presets, determinant-based property badges (orthogonal, rotation, orientation), URL state sync
+- **DistributionExplorer**: 5 distributions (Normal, Binomial, Poisson, Exponential, Uniform), parameter sliders with real-time PDF/CDF updates, probability calculator (P(X < a), P(a < X < b)), histogram from random samples, distribution comparison tabs, URL state sync
+- **CLTDemonstration**: Interactive Central Limit Theorem demo, source distribution selector (uniform, exponential, binomial, poisson), sample size slider, auto-run animation showing sample means converging to normal, histogram with normal curve overlay
 
 **Visualization Components**:
 - **CoordinateSystem**: Reusable SVG coordinate system with axes, grid, labels
@@ -93,7 +98,7 @@ SnakeMath is an educational mathematics website for programmers. Sixteen phases 
 - **BoxPlotChart**: SVG box plot with quartiles, whiskers, and outlier markers
 
 **Testing Infrastructure**:
-- 1252 unit tests (Vitest) - including vector3d (92), matrix3d (112), and isometricProjection tests
+- 1461 unit tests (Vitest) - including distributions (209), vector3d (92), matrix3d (112), and isometricProjection tests
 - E2E tests (Playwright) with tiered CI approach
 - Visual regression tests (Playwright screenshot comparison) - local only
 - WCAG 2.1 AA accessibility audits via axe-core
@@ -160,6 +165,8 @@ npm run build        # Production build
 | Matrix 3D utilities | `src/utils/math/matrix3d.ts` |
 | Matrix 3D composable | `src/composables/useMatrixTransformations3D.ts` |
 | Isometric projection composable | `src/composables/useIsometricProjection.ts` |
+| Distributions utilities | `src/utils/math/distributions.ts` |
+| Distributions composable | `src/composables/useDistributions.ts` |
 
 ### Archived Documentation
 Phase completion summaries are in `docs/archive/`:
@@ -171,8 +178,8 @@ Phase completion summaries are in `docs/archive/`:
 
 ## Test Coverage
 
-### Unit Tests (1252 tests)
-- Math utilities (number classification, parsing, quadratic, exponential, trigonometry, statistics, product, vector, matrix, limits, derivative, rightTriangle, trigIdentities, inverseTrig, trigApplications, vector3d, matrix3d functions)
+### Unit Tests (1461 tests)
+- Math utilities (number classification, parsing, quadratic, exponential, trigonometry, statistics, product, vector, matrix, limits, derivative, rightTriangle, trigIdentities, inverseTrig, trigApplications, vector3d, matrix3d, distributions functions)
 - Data validation (symbols, navigation)
 - Component logic (via composables)
 
@@ -189,7 +196,9 @@ Phase completion summaries are in `docs/archive/`:
 - **DerivativeVisualizer** (preset functions, point of tangency, secant controls, animation, derivative curve, URL sync)
 - **VectorOperations3D** (inputs, operations, presets, canvas, cross product, right-hand rule, URL sync)
 - **MatrixTransformations3D** (transformation types, sliders, presets, matrix display, unit cube, URL sync)
-- Accessibility (WCAG 2.1 AA audits for all pages including calculus and linear algebra 3D)
+- **DistributionExplorer** (distribution tabs, parameters, probability calculator, histogram, URL sync)
+- **CLTDemonstration** (samples, auto-run, reset, histogram, normal curve)
+- Accessibility (WCAG 2.1 AA audits for all pages including statistics distributions)
 
 ### Visual Regression Tests (Local Only)
 - All pages baseline screenshots
@@ -224,6 +233,86 @@ Phase completion summaries are in `docs/archive/`:
 
 - **Chunk Size Warnings**: Shiki produces large language chunks (lazy-loaded, acceptable)
 - **v-html Warnings**: ESLint warns about v-html in MathBlock/CodeExample (expected, trusted content)
+
+---
+
+## Phase 17 Completion Summary
+
+Phase 17 implemented Probability Distributions: the DistributionExplorer widget with 5 distributions, CLT demonstration component, and comprehensive content page.
+
+### Completed Increments
+
+**Increment 17A: Distribution Math Utilities**
+- Created `src/utils/math/distributions.ts` with 209 comprehensive tests
+- Types: `DistributionType`, `DistributionParams`, `DistributionConfig`, `HistogramBin`
+- PDF/PMF functions: `normalPdf`, `binomialPmf`, `poissonPmf`, `exponentialPdf`, `uniformPdf`
+- CDF functions: `normalCdf`, `binomialCdf`, `poissonCdf`, `exponentialCdf`, `uniformCdf`
+- Quantile functions: `normalQuantile`, `binomialQuantile`, `poissonQuantile`, `exponentialQuantile`, `uniformQuantile`
+- Sampling functions: `generateSamples`, `createHistogram`
+- Statistics helpers: `getDistributionStats`, `calculateProbability`
+- Error function implementation for normal distribution CDF
+
+**Increment 17B: useDistributions Composable**
+- Created `src/composables/useDistributions.ts` for state management + URL sync
+- Distribution selection with type-safe parameter handling
+- Computed PDF/CDF data points for visualization
+- Probability calculator state (lower/upper bounds)
+- Sample generation and histogram data
+- URL state synchronization for shareable links
+
+**Increment 17C: DistributionExplorer Widget Components**
+- Built widget in `src/components/widgets/DistributionExplorer/`:
+  - `DistributionExplorer.vue` - main orchestrator component with tabs
+  - `DistributionSelector.vue` - distribution type tabs
+  - `ParameterControls.vue` - distribution-specific parameter sliders
+  - `DistributionChart.vue` - SVG PDF/CDF visualization with bars/curves
+  - `ProbabilityCalculator.vue` - P(X < a), P(a < X < b) calculator
+  - `DistributionStats.vue` - mean, variance, std dev, mode display
+  - `SampleHistogram.vue` - histogram from random samples
+  - `index.ts` - barrel exports
+
+**Increment 17D: Testing**
+- Type-check and lint passed
+- All 1461 unit tests pass
+
+**Increment 17E: CLT Demonstration**
+- Created `CLTDemonstration.vue` component
+- Source distribution selector (uniform, exponential, binomial, poisson)
+- Sample size slider (5-100)
+- Take samples, auto-run, and reset buttons
+- Histogram visualization of sample means
+- Normal curve overlay for comparison
+- Theoretical mean and std dev display
+- Educational explanation of CLT
+
+**Increment 17F: Content Page & E2E Tests**
+- Created `src/views/statistics/DistributionsView.vue` content page
+- Three-analogy blocks (everyday, programming, visual)
+- Sections for discrete vs continuous, each of 5 distributions
+- Interactive DistributionExplorer widget with URL sync
+- CLT demonstration section
+- Code examples (Python) for all distributions
+- Common pitfalls section
+- Distribution quick reference table
+- Related topics
+- Created `e2e/statistics/distribution-explorer.spec.ts` with comprehensive E2E tests
+
+### Key Architectural Decisions (Phase 17)
+- D-134: Discriminated union pattern for distribution parameters
+- D-135: Tab-based distribution selector with visual icons
+- D-136: SVG bars for discrete distributions, smooth curves for continuous
+- D-137: CLT as separate opt-in component (not embedded in main widget)
+- D-138: Error function approximation for normal CDF (no external library)
+- D-139: Composable pattern (useDistributions) following established conventions
+
+### Lessons Learned (Phase 17)
+- LL-060: Error function (erf) approximation is sufficient for educational purposes
+- LL-061: Discriminated unions require careful type narrowing in Vue computed properties
+
+### Lessons Identified (Phase 17)
+- LI-075: Tab-based distribution selection scales well for multiple distributions
+- LI-076: CLT demonstration benefits from auto-run animation with stop control
+- LI-077: Histogram bin width calculation differs for discrete vs continuous distributions
 
 ---
 
