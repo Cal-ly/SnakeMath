@@ -1,5 +1,7 @@
 # Visual Regression Testing
 
+> **Archived**: Visual regression testing was removed from CI in Phase 9. See D-070 in DECISIONS.md. This document preserved for historical context.
+
 This document explains how to work with visual regression tests in SnakeMath.
 
 ## Important: Local Only

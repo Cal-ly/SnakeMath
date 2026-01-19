@@ -4175,3 +4175,12 @@ import {
 **Lesson**: This is a recurring pattern in math-focused content. When displaying mathematical comparisons (especially effect sizes, thresholds, or ranges), always use `&lt;` and `&gt;` HTML entities. Consider creating a shared guideline in CLAUDE.md for this pattern.
 
 **Action Taken**: Added "ESLint Patterns" section to CLAUDE.md with quick reference for all common patterns.
+
+---
+
+## Document History
+
+| Date | Phase | Changes |
+|------|-------|---------|
+| 2024 | Phase 1 | Document created |
+| 2026-01-19 | Phase 21 | Added document history section |

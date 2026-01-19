@@ -34,7 +34,7 @@ const topic = topics.find((t) => t.id === 'statistics')!
       </ContentSection>
 
       <!-- The Three Pillars -->
-      <ContentSection id="pillars" title="The Three Pillars of Descriptive Statistics" icon="fa-solid fa-landmark" collapsible>
+      <ContentSection id="pillars" title="The Three Pillars of Descriptive Statistics" icon="fa-solid fa-landmark" collapsible :default-expanded="false">
         <div class="grid gap-4 md:grid-cols-3">
           <div class="p-4 rounded-lg border border-border">
             <div class="w-12 h-12 mb-3 rounded-lg bg-emerald-100 dark:bg-emerald-900 flex items-center justify-center">
@@ -72,7 +72,7 @@ const topic = topics.find((t) => t.id === 'statistics')!
       </ContentSection>
 
       <!-- Why It Matters -->
-      <ContentSection id="why-it-matters" title="Why Programmers Need This" icon="fa-solid fa-rocket" collapsible>
+      <ContentSection id="why-it-matters" title="Why Programmers Need This" icon="fa-solid fa-rocket" collapsible :default-expanded="false">
         <div class="grid gap-4 md:grid-cols-2">
           <div class="p-4 rounded-lg border border-border">
             <p class="font-medium text-text-primary mb-2">

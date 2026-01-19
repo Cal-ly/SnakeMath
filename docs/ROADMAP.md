@@ -540,11 +540,10 @@ Lower detail, higher flexibility. Evaluated after Phase 21.
 | Phase | Possible Focus |
 |-------|----------------|
 | 22 | AI/ML Foundations: Neural network intuition, gradient descent visualization |
-| 23 | PWA features: offline support, installability |
-| 24 | Search functionality, content discovery |
-| 25 | User progress tracking (local storage) |
-| 26 | Practice problems / quiz system |
-| 27 | Community contributions framework |
+| 23 | Search functionality, content discovery |
+| 24 | User progress tracking (local storage) |
+| 25 | Practice problems / quiz system |
+| 26 | Community contributions framework |
 
 ---
 
@@ -638,6 +637,7 @@ Decisions made during roadmap planning:
 | R-022 | Cross product as default 3D vector operation | Unique to 3D; demonstrates right-hand rule effectively |
 | R-023 | Statistics expansion before AI/ML (Phases 17-20) | Complete inferential statistics foundation; direct bridge to ML concepts |
 | R-024 | Four statistics phases in sequence | Each builds on previous: distributions → sampling → hypothesis testing → regression |
+| R-025 | PWA removed from scope | Target audience (programmers at computers) has low offline need; complexity outweighs benefits |
 
 ---
 

@@ -3073,3 +3073,12 @@ function animate(timestamp: number) {
 - `b`: Upper bound
 - `n`: Number of subdivisions
 - `method`: Riemann sum method
+
+---
+
+## Document History
+
+| Date | Phase | Changes |
+|------|-------|---------|
+| 2024 | Phase 1 | Document created |
+| 2026-01-19 | Phase 21 | Added document history section |

@@ -216,7 +216,7 @@ npm run test:visual:update
 ### Baselines
 Screenshots are stored in `e2e/__screenshots__/` and committed to git.
 
-See [VISUAL_TESTING.md](../VISUAL_TESTING.md) for more details.
+See [VISUAL_TESTING.md](./VISUAL_TESTING.md) for more details.
 
 ## Adding Tests for New Features
 
