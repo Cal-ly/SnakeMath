@@ -219,7 +219,7 @@ print(f"P(4) = {polynomial_from_roots(roots, 4)}")  # (4-1)(4-2)(4-3) = 6`
   >
     <div class="space-y-8">
       <!-- Introduction -->
-      <ContentSection id="introduction" title="What is Product Notation?" unicode-icon="Π">
+      <ContentSection id="introduction" title="What is Product Notation?" unicode-icon="Π" collapsible>
         <p class="mb-4">
           Just like <MathBlock formula="\Sigma" /> (Sigma) means "add all these up,"
           <MathBlock formula="\Pi" /> (Pi, the capital Greek letter) means
@@ -299,6 +299,7 @@ print(f"P(4) = {polynomial_from_roots(roots, 4)}")  # (4-1)(4-2)(4-3) = 6`
         id="the-secret"
         title="Π Is Just a For Loop"
         icon="fa-solid fa-wand-magic-sparkles"
+        collapsible
       >
         <p class="mb-4">The same pattern as summation, just with multiplication:</p>
 
@@ -354,7 +355,7 @@ for i in range(1, n+1):
       </ContentSection>
 
       <!-- Interactive Explorer -->
-      <ContentSection id="explorer" title="Interactive Explorer" icon="fa-solid fa-flask">
+      <ContentSection id="explorer" title="Interactive Explorer" icon="fa-solid fa-flask" collapsible>
         <p class="mb-4">
           Try different product formulas and see how the factors multiply together:
         </p>
@@ -419,7 +420,7 @@ for i in range(1, n+1):
       </ContentSection>
 
       <!-- Factorial -->
-      <ContentSection id="factorial" title="Factorial: The Star of Product Notation" icon="fa-solid fa-star">
+      <ContentSection id="factorial" title="Factorial: The Star of Product Notation" icon="fa-solid fa-star" collapsible>
         <p class="mb-4">
           The most famous use of product notation is the <strong>factorial</strong>:
         </p>
@@ -461,7 +462,7 @@ for i in range(1, n+1):
       </ContentSection>
 
       <!-- Permutations and Combinations -->
-      <ContentSection id="permutations" title="Permutations & Combinations" icon="fa-solid fa-shuffle">
+      <ContentSection id="permutations" title="Permutations & Combinations" icon="fa-solid fa-shuffle" collapsible>
         <p class="mb-4">
           Factorials are the building blocks for counting problems. Two key formulas:
         </p>
@@ -522,7 +523,7 @@ for i in range(1, n+1):
       </ContentSection>
 
       <!-- Telescoping Products -->
-      <ContentSection id="telescoping" title="Telescoping Products" icon="fa-solid fa-minimize" collapsible>
+      <ContentSection id="telescoping" title="Telescoping Products" icon="fa-solid fa-minimize" collapsible :default-expanded="false">
         <p class="mb-4">
           Some products have a beautiful property: most factors cancel out, leaving a simple result.
         </p>
@@ -553,7 +554,7 @@ for i in range(1, n+1):
       </ContentSection>
 
       <!-- Real-World Applications -->
-      <ContentSection id="applications" title="Real-World Applications" icon="fa-solid fa-rocket" collapsible>
+      <ContentSection id="applications" title="Real-World Applications" icon="fa-solid fa-rocket" collapsible :default-expanded="false">
         <p class="mb-4">
           Product notation appears throughout programming and data science:
         </p>
@@ -609,7 +610,7 @@ for i in range(1, n+1):
       </ContentSection>
 
       <!-- Quick Reference -->
-      <ContentSection id="reference" title="Quick Reference" icon="fa-solid fa-list-check">
+      <ContentSection id="reference" title="Quick Reference" icon="fa-solid fa-list-check" collapsible :default-expanded="false">
         <div class="grid gap-4 md:grid-cols-2">
           <div class="p-4 rounded-lg border border-border">
             <h4 class="font-medium text-text-primary mb-3">Product Anatomy</h4>

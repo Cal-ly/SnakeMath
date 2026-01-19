@@ -174,9 +174,83 @@ For multiple examples in same topic, append descriptor:
 
 ### Primary Component
 
-Use `<CollapsiblePanel>` for all expandable content.
+Use `<CollapsiblePanel>` for standalone expandable content, or the `collapsible` prop on `<ContentSection>` for page sections.
 
-### Default States
+### ContentSection Collapsible Pattern
+
+**ALL `ContentSection` components in topic pages MUST have the `collapsible` prop.** This allows users to collapse any section to reduce cognitive load, while controlling which sections start expanded.
+
+| Section Type | Props | Example |
+|--------------|-------|---------|
+| Primary content (Introduction, Interactive Explorer) | `collapsible` (expanded by default) | `<ContentSection id="intro" title="..." collapsible>` |
+| Supplementary content (everything else) | `collapsible :default-expanded="false"` | `<ContentSection id="code" title="..." collapsible :default-expanded="false">` |
+
+**Primary content (expanded by default):**
+```vue
+<ContentSection
+  id="introduction"
+  title="What is X?"
+  icon="fa-solid fa-info"
+  collapsible
+>
+  <!-- Content here -->
+</ContentSection>
+```
+Note: When `collapsible` is present without `:default-expanded`, it defaults to `true` (expanded).
+
+**Supplementary content (collapsed by default):**
+```vue
+<ContentSection
+  id="python-code"
+  title="In Python"
+  icon="fa-brands fa-python"
+  collapsible
+  :default-expanded="false"
+>
+  <!-- Content here -->
+</ContentSection>
+```
+
+### What Qualifies as Primary Content
+
+Only these section types should be **expanded by default**:
+- Introduction / "What is X?" sections
+- Interactive widget/explorer sections
+
+### What Qualifies as Supplementary Content
+
+Everything else should be **collapsed by default**:
+- "In Python" / "In Code" sections
+- "Operations" / "Common Rules" / "Formulas"
+- "Applications" / "Use Cases"
+- "Advanced Topics"
+- "Common Pitfalls" (when in its own section)
+- Any section that's supplementary to the main teaching
+
+### Common Mistake
+
+**WRONG:** Setting `:default-expanded="false"` without `collapsible`
+```vue
+<!-- ❌ This doesn't work - section will always be expanded -->
+<ContentSection
+  id="code"
+  title="Code"
+  :default-expanded="false"
+>
+```
+
+**CORRECT:** Always include `collapsible` prop
+```vue
+<!-- ✅ This works - section will be collapsed by default -->
+<ContentSection
+  id="code"
+  title="Code"
+  collapsible
+  :default-expanded="false"
+>
+```
+
+### Default States Summary
 
 | Content Type | Default State |
 |--------------|---------------|
@@ -405,7 +479,7 @@ When creating new content pages, additionally verify:
 - [ ] TopicPage wrapper: With `title` and `description` props
 - [ ] Three-Analogy Block: Amber/Emerald/Blue cards with `bg-surface-alt` backgrounds
 - [ ] Pitfall Callout: Amber warning box with specific error name
-- [ ] Collapsible sections: Advanced content has `collapsible :default-expanded="false"`
+- [ ] Collapsible sections: **ALL** ContentSections have `collapsible`; primary expanded, supplementary collapsed
 - [ ] CodeExample props: All have `id` (format: `section-topic-descriptor`) and `title` (filename.py style)
 - [ ] RelatedTopics: 3-4 items including parent index and cross-section links
 - [ ] Dark mode: Color text has `dark:` variant (e.g., `text-amber-600 dark:text-amber-400`)
@@ -434,6 +508,9 @@ grep -rL "Everyday Analogy" src/views/*/*View.vue
 
 # Find pages missing pitfall callout
 grep -rL "Common Pitfall" src/views/*/*View.vue
+
+# Find ContentSections missing collapsible prop
+grep -rn "<ContentSection" src/views/ | grep -v "collapsible"
 ```
 
 ### Phase Completion Checklist
@@ -455,3 +532,5 @@ Before marking any phase complete, verify new content:
 | Pitfall wrong color | Red styling instead of amber | Use `bg-amber-50 dark:bg-amber-900/30` |
 | CodeExample no ID | Can't cross-reference examples | Add `id="section-topic-descriptor"` |
 | All sections expanded | Page feels overwhelming | Add `collapsible :default-expanded="false"` to advanced sections |
+| Sections not collapsible | Users can't collapse sections | Add `collapsible` prop to ALL ContentSections |
+| `default-expanded` has no effect | Section always expanded | Must add `collapsible` prop for `default-expanded` to work |

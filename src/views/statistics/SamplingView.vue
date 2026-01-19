@@ -181,7 +181,7 @@ print(f"Sample size for proportion: {n_prop}")  # ~1068`
   >
     <div class="space-y-8">
       <!-- Introduction -->
-      <ContentSection id="introduction" title="Why Sampling?" icon="fa-solid fa-users">
+      <ContentSection id="introduction" title="Why Sampling?" icon="fa-solid fa-users" collapsible>
         <p class="mb-4">
           <strong>Sampling</strong> is how we learn about large populations without measuring everyone.
           When you can't survey all 300 million Americans, you sample 1,000 and make inferences.
@@ -237,7 +237,7 @@ print(f"Sample size for proportion: {n_prop}")  # ~1068`
       </ContentSection>
 
       <!-- Population vs Sample -->
-      <ContentSection id="population-sample" title="Population vs Sample" icon="fa-solid fa-layer-group">
+      <ContentSection id="population-sample" title="Population vs Sample" icon="fa-solid fa-layer-group" collapsible :default-expanded="false">
         <p class="mb-4">
           The <strong>population</strong> is everything you want to learn about.
           The <strong>sample</strong> is the subset you actually measure.
@@ -277,7 +277,7 @@ print(f"Sample size for proportion: {n_prop}")  # ~1068`
       </ContentSection>
 
       <!-- Interactive Widget -->
-      <ContentSection id="explorer" title="Sampling Simulator" icon="fa-solid fa-sliders">
+      <ContentSection id="explorer" title="Sampling Simulator" icon="fa-solid fa-sliders" collapsible>
         <p class="mb-4">
           Explore how different sampling methods work. Take samples from a population,
           watch the sampling distribution of means emerge, and see confidence intervals in action.
@@ -292,7 +292,7 @@ print(f"Sample size for proportion: {n_prop}")  # ~1068`
       </ContentSection>
 
       <!-- Sampling Methods -->
-      <ContentSection id="methods" title="Sampling Methods" icon="fa-solid fa-shuffle" collapsible>
+      <ContentSection id="methods" title="Sampling Methods" icon="fa-solid fa-shuffle" collapsible :default-expanded="false">
         <p class="mb-4">
           Different situations call for different sampling approaches.
           The key is ensuring every item has a known (ideally equal) probability of selection.
@@ -374,7 +374,7 @@ print(f"Sample size for proportion: {n_prop}")  # ~1068`
       </ContentSection>
 
       <!-- Sampling Distribution & Standard Error -->
-      <ContentSection id="sampling-distribution" title="Sampling Distribution & Standard Error" icon="fa-solid fa-chart-line" collapsible>
+      <ContentSection id="sampling-distribution" title="Sampling Distribution & Standard Error" icon="fa-solid fa-chart-line" collapsible :default-expanded="false">
         <p class="mb-4">
           If you took many samples and computed the mean of each, those means would form a distribution
           called the <strong>sampling distribution</strong>. This is the key insight that makes inference possible.
@@ -415,7 +415,7 @@ print(f"Sample size for proportion: {n_prop}")  # ~1068`
       </ContentSection>
 
       <!-- Confidence Intervals -->
-      <ContentSection id="confidence-intervals" title="Confidence Intervals" icon="fa-solid fa-arrows-left-right-to-line" collapsible>
+      <ContentSection id="confidence-intervals" title="Confidence Intervals" icon="fa-solid fa-arrows-left-right-to-line" collapsible :default-expanded="false">
         <p class="mb-4">
           A <strong>confidence interval</strong> gives a range of plausible values for the population
           parameter, not just a single point estimate. It honestly communicates uncertainty.

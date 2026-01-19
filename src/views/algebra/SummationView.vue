@@ -115,7 +115,7 @@ compare_methods(100_000_000)`
   >
     <div class="space-y-8">
       <!-- Introduction -->
-      <ContentSection id="introduction" title="What is Summation Notation?" unicode-icon="Σ">
+      <ContentSection id="introduction" title="What is Summation Notation?" unicode-icon="Σ" collapsible>
         <p class="mb-4">
           That big, scary Greek letter <MathBlock formula="\Sigma" /> (Sigma) sitting in your
           textbook? It's just a fancy way of saying <strong>"add all these things up."</strong>
@@ -193,6 +193,7 @@ compare_methods(100_000_000)`
         id="the-secret"
         title="Σ Is Just a For Loop"
         icon="fa-solid fa-wand-magic-sparkles"
+        collapsible
       >
         <p class="mb-4">Here's the pattern that will change how you see math forever:</p>
 
@@ -244,7 +245,7 @@ for i in range(1, n+1):
       </ContentSection>
 
       <!-- Interactive Explorer -->
-      <ContentSection id="explorer" title="Interactive Explorer" icon="fa-solid fa-flask">
+      <ContentSection id="explorer" title="Interactive Explorer" icon="fa-solid fa-flask" collapsible>
         <p class="mb-4">
           Try it yourself! Change the preset formula, adjust the bounds, and watch how the math
           notation corresponds to code. The URL updates automatically so you can share interesting
@@ -260,7 +261,7 @@ for i in range(1, n+1):
       </ContentSection>
 
       <!-- Python's Built-in Tools -->
-      <ContentSection id="python" title="Python's sum() Function" icon="fa-brands fa-python" collapsible>
+      <ContentSection id="python" title="Python's sum() Function" icon="fa-brands fa-python" collapsible :default-expanded="false">
         <p class="mb-4">
           Python makes summation even easier with its built-in <code>sum()</code> function:
         </p>
@@ -274,7 +275,7 @@ for i in range(1, n+1):
       </ContentSection>
 
       <!-- The Gauss Story -->
-      <ContentSection id="gauss" title="The Gauss Story" icon="fa-solid fa-graduation-cap" collapsible>
+      <ContentSection id="gauss" title="The Gauss Story" icon="fa-solid fa-graduation-cap" collapsible :default-expanded="false">
         <p class="mb-4">
           Legend has it that when mathematician Carl Friedrich Gauss was just 7 years old, his
           teacher asked the class to add all numbers from 1 to 100 to keep them busy. While other
@@ -298,7 +299,7 @@ for i in range(1, n+1):
       </ContentSection>
 
       <!-- Closed-Form Formulas -->
-      <ContentSection id="formulas" title="Famous Closed-Form Formulas" icon="fa-solid fa-bolt" collapsible>
+      <ContentSection id="formulas" title="Famous Closed-Form Formulas" icon="fa-solid fa-bolt" collapsible :default-expanded="false">
         <p class="mb-4">
           Mathematicians have discovered shortcuts for many common sums. These
           <em>closed-form formulas</em> let you calculate the answer in constant time:
@@ -355,7 +356,7 @@ for i in range(1, n+1):
       </ContentSection>
 
       <!-- Why Formulas Matter -->
-      <ContentSection id="complexity" title="Why Formulas Matter: O(n) vs O(1)" icon="fa-solid fa-rocket" collapsible>
+      <ContentSection id="complexity" title="Why Formulas Matter: O(n) vs O(1)" icon="fa-solid fa-rocket" collapsible :default-expanded="false">
         <p class="mb-4">
           Understanding closed-form formulas isn't just about math — it's about writing faster code.
           The difference between using a loop and using a formula is the difference between O(n) and
@@ -395,7 +396,7 @@ for i in range(1, n+1):
       </ContentSection>
 
       <!-- Quick Reference -->
-      <ContentSection id="reference" title="Quick Reference" icon="fa-solid fa-list-check">
+      <ContentSection id="reference" title="Quick Reference" icon="fa-solid fa-list-check" collapsible :default-expanded="false">
         <div class="grid gap-4 md:grid-cols-2">
           <div class="p-4 rounded-lg border border-border">
             <h4 class="font-medium text-text-primary mb-3">Sigma Anatomy</h4>

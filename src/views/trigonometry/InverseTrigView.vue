@@ -142,7 +142,7 @@ print(f"Mouse angle: {angle:.2f}°")  # ~36.87° (toward top-right)`
   >
     <div class="space-y-8">
       <!-- Introduction -->
-      <ContentSection id="introduction" title="From Coordinates to Angles" icon="fa-solid fa-rotate-left">
+      <ContentSection id="introduction" title="From Coordinates to Angles" icon="fa-solid fa-rotate-left" collapsible>
       <p class="text-lg mb-4">
         The <strong>inverse trigonometric functions</strong> solve the reverse problem: given a trig
         value, find the angle that produced it. If <MathBlock formula="\sin(\theta) = 0.5" />, what is
@@ -203,7 +203,7 @@ print(f"Mouse angle: {angle:.2f}°")  # ~36.87° (toward top-right)`
     </ContentSection>
 
       <!-- Interactive Widget -->
-      <ContentSection id="explorer" title="Interactive Explorer" icon="fa-solid fa-sliders">
+      <ContentSection id="explorer" title="Interactive Explorer" icon="fa-solid fa-sliders" collapsible>
         <p class="mb-4">
         Explore all four inverse trig functions. Notice how <strong>atan2</strong> (marked with ★)
         handles all quadrants correctly—it's the one programmers actually use!

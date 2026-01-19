@@ -255,7 +255,7 @@ print(f"Rank: {rank}")  # If rank = number of unknowns, unique solution
   >
     <div class="space-y-8">
       <!-- Introduction -->
-      <ContentSection id="introduction" title="What is a Linear Equation?" icon="fa-solid fa-equals">
+      <ContentSection id="introduction" title="What is a Linear Equation?" icon="fa-solid fa-equals" collapsible>
         <p class="mb-4">
           A <strong>linear equation</strong> is any equation where the variables appear only to the
           first power (no x², no √x, no 1/x). The graph is always a straight line.
@@ -350,6 +350,7 @@ print(f"Rank: {rank}")  # If rank = number of unknowns, unique solution
         id="solving"
         title="Solving Linear Equations"
         icon="fa-solid fa-wand-magic-sparkles"
+        collapsible
       >
         <p class="mb-4">
           Solving <MathBlock formula="ax + b = c" /> for x is like running operations in reverse:
@@ -430,7 +431,7 @@ print(f"Rank: {rank}")  # If rank = number of unknowns, unique solution
       </ContentSection>
 
       <!-- Systems of Equations -->
-      <ContentSection id="systems" title="Systems of Linear Equations" icon="fa-solid fa-layer-group">
+      <ContentSection id="systems" title="Systems of Linear Equations" icon="fa-solid fa-layer-group" collapsible>
         <p class="mb-4">
           When you have multiple equations with multiple unknowns, you have a
           <strong>system</strong>. The solution is where all equations are satisfied simultaneously.
@@ -535,7 +536,7 @@ print(f"Rank: {rank}")  # If rank = number of unknowns, unique solution
       </ContentSection>
 
       <!-- Matrix Form -->
-      <ContentSection id="matrix" title="Matrix Form & NumPy" icon="fa-solid fa-table-cells">
+      <ContentSection id="matrix" title="Matrix Form & NumPy" icon="fa-solid fa-table-cells" collapsible>
         <p class="mb-4">
           Systems of linear equations can be written in matrix form: <MathBlock formula="Ax = b" />.
           This is where linear equations connect to <strong>linear algebra</strong>.
@@ -581,7 +582,7 @@ print(f"Rank: {rank}")  # If rank = number of unknowns, unique solution
       </ContentSection>
 
       <!-- Slope and Intercept -->
-      <ContentSection id="slope" title="Slope & Intercept" icon="fa-solid fa-chart-line" collapsible>
+      <ContentSection id="slope" title="Slope & Intercept" icon="fa-solid fa-chart-line" collapsible :default-expanded="false">
         <p class="mb-4">
           The slope-intercept form <MathBlock formula="y = mx + b" /> tells you everything about a line:
         </p>
@@ -628,7 +629,7 @@ print(f"Rank: {rank}")  # If rank = number of unknowns, unique solution
       </ContentSection>
 
       <!-- Applications -->
-      <ContentSection id="applications" title="Real-World Applications" icon="fa-solid fa-rocket" collapsible>
+      <ContentSection id="applications" title="Real-World Applications" icon="fa-solid fa-rocket" collapsible :default-expanded="false">
         <p class="mb-4">
           Linear equations appear constantly in programming:
         </p>
@@ -680,7 +681,7 @@ print(f"Rank: {rank}")  # If rank = number of unknowns, unique solution
       </ContentSection>
 
       <!-- Connection to Linear Algebra -->
-      <ContentSection id="linear-algebra" title="Gateway to Linear Algebra" icon="fa-solid fa-door-open" collapsible>
+      <ContentSection id="linear-algebra" title="Gateway to Linear Algebra" icon="fa-solid fa-door-open" collapsible :default-expanded="false">
         <p class="mb-4">
           Linear equations are the foundation of <strong>linear algebra</strong>, one of the most
           important areas of mathematics for programmers. Here's how they connect:
@@ -719,7 +720,7 @@ print(f"Rank: {rank}")  # If rank = number of unknowns, unique solution
       </ContentSection>
 
       <!-- Quick Reference -->
-      <ContentSection id="reference" title="Quick Reference" icon="fa-solid fa-list-check">
+      <ContentSection id="reference" title="Quick Reference" icon="fa-solid fa-list-check" collapsible :default-expanded="false">
         <div class="grid gap-4 md:grid-cols-2">
           <div class="p-4 rounded-lg border border-border">
             <h4 class="font-medium text-text-primary mb-3">Forms of Linear Equations</h4>

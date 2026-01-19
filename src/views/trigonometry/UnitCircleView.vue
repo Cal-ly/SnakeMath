@@ -102,7 +102,7 @@ print(f"Rotated point: ({result[0]:.2f}, {result[1]:.2f})")`
   >
     <div class="space-y-8">
       <!-- What is the Unit Circle -->
-      <ContentSection id="what-is-unit-circle" title="What is the Unit Circle?" icon="fa-solid fa-circle-notch">
+      <ContentSection id="what-is-unit-circle" title="What is the Unit Circle?" icon="fa-solid fa-circle-notch" collapsible>
         <p class="mb-4">
           The <strong>unit circle</strong> is simply a circle with radius 1, centered at the origin
           (0, 0). What makes it special is the beautiful relationship between angles and coordinates:
@@ -178,7 +178,7 @@ print(f"Rotated point: ({result[0]:.2f}, {result[1]:.2f})")`
       </ContentSection>
 
       <!-- Interactive Explorer -->
-      <ContentSection id="explorer" title="Interactive Explorer" icon="fa-solid fa-hand-pointer">
+      <ContentSection id="explorer" title="Interactive Explorer" icon="fa-solid fa-hand-pointer" collapsible>
         <p class="mb-4">
           Use the slider or click special angle buttons to explore how angles map to coordinates and
           trigonometric values. Toggle "Show wave graphs" to see how the sine and cosine functions
@@ -441,7 +441,7 @@ print(f"Rotated point: ({result[0]:.2f}, {result[1]:.2f})")`
       </ContentSection>
 
       <!-- Key Identities -->
-      <ContentSection id="identities" title="Key Identities" icon="fa-solid fa-equals">
+      <ContentSection id="identities" title="Key Identities" icon="fa-solid fa-equals" collapsible :default-expanded="false">
         <p class="mb-4">
           These fundamental relationships are worth knowing:
         </p>

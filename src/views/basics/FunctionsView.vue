@@ -140,7 +140,7 @@ print(impure_increment(5))  # 7 (counter is now 2)
   >
     <div class="space-y-8">
       <!-- What is a Function? -->
-      <ContentSection id="what-is" title="What is a Function?" icon="fa-solid fa-box">
+      <ContentSection id="what-is" title="What is a Function?" icon="fa-solid fa-box" collapsible>
         <p class="mb-4">
           A <strong>function</strong> is like a machine: you put something in, it does some
           processing, and you get something out. The same input always produces the same output.
@@ -227,7 +227,7 @@ print(impure_increment(5))  # 7 (counter is now 2)
       </ContentSection>
 
       <!-- Interactive Demo -->
-      <ContentSection id="try-it" title="Try It: Interactive Demo" icon="fa-solid fa-flask">
+      <ContentSection id="try-it" title="Try It: Interactive Demo" icon="fa-solid fa-flask" collapsible>
         <p class="mb-4">
           Experiment with different functions and see how changing the input affects the output.
           Watch the step-by-step calculation as x changes!
@@ -247,6 +247,7 @@ print(impure_increment(5))  # 7 (counter is now 2)
         title="Function Notation"
         icon="fa-solid fa-pen-fancy"
         collapsible
+        :default-expanded="false"
       >
         <p class="mb-4">
           The notation <MathBlock formula="f(x)" /> is read as "f of x". The letter
@@ -286,6 +287,7 @@ print(impure_increment(5))  # 7 (counter is now 2)
         title="Functions with Multiple Inputs"
         icon="fa-solid fa-code-merge"
         collapsible
+        :default-expanded="false"
       >
         <p class="mb-4">
           Functions can take more than one input. In math, we write <MathBlock formula="f(x, y)" />
@@ -312,6 +314,7 @@ print(impure_increment(5))  # 7 (counter is now 2)
         title="Lambda Functions"
         icon="fa-solid fa-bolt"
         collapsible
+        :default-expanded="false"
       >
         <p class="mb-4">
           Python's <code>lambda</code> keyword creates small, anonymous functions in a single line.
@@ -334,6 +337,7 @@ print(impure_increment(5))  # 7 (counter is now 2)
         title="Function Composition"
         icon="fa-solid fa-layer-group"
         collapsible
+        :default-expanded="false"
       >
         <p class="mb-4">
           <strong>Composition</strong> means applying one function's output as another function's
@@ -368,6 +372,7 @@ print(impure_increment(5))  # 7 (counter is now 2)
         title="Pure vs Impure Functions"
         icon="fa-solid fa-flask-vial"
         collapsible
+        :default-expanded="false"
       >
         <p class="mb-4">
           In mathematics, functions are always <strong>pure</strong>: the same input always gives
@@ -405,7 +410,7 @@ print(impure_increment(5))  # 7 (counter is now 2)
       </ContentSection>
 
       <!-- Why Functions Matter -->
-      <ContentSection id="why-matter" title="Why Functions Matter" icon="fa-solid fa-star">
+      <ContentSection id="why-matter" title="Why Functions Matter" icon="fa-solid fa-star" collapsible :default-expanded="false">
         <div class="grid md:grid-cols-3 gap-4">
           <div class="p-4 rounded-lg border border-border text-center">
             <div class="text-3xl mb-3">♻️</div>

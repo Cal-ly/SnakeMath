@@ -13,7 +13,7 @@ const topic = topics.find((t) => t.id === 'trigonometry')!
   >
     <div class="space-y-8">
       <!-- Hero intro -->
-      <ContentSection id="intro" title="Trigonometry for Programmers" icon="fa-solid fa-circle-notch">
+      <ContentSection id="intro" title="Trigonometry for Programmers" icon="fa-solid fa-circle-notch" collapsible>
         <p class="mb-4">
           Trigonometry might seem like "hard math," but for programmers it's actually one of the
           most <strong>practical and visual</strong> areas of mathematics. Any time you work with
@@ -34,7 +34,7 @@ const topic = topics.find((t) => t.id === 'trigonometry')!
       </ContentSection>
 
       <!-- Why It Matters -->
-      <ContentSection id="why-it-matters" title="Why Programmers Need This" icon="fa-solid fa-rocket">
+      <ContentSection id="why-it-matters" title="Why Programmers Need This" icon="fa-solid fa-rocket" collapsible>
         <div class="grid gap-4 md:grid-cols-2">
           <div class="p-4 rounded-lg border border-border">
             <p class="font-medium text-text-primary mb-2">
@@ -83,7 +83,7 @@ const topic = topics.find((t) => t.id === 'trigonometry')!
       </ContentSection>
 
       <!-- Topics in this section -->
-      <ContentSection id="topics" title="Topics in This Section" icon="fa-solid fa-book-open">
+      <ContentSection id="topics" title="Topics in This Section" icon="fa-solid fa-book-open" collapsible :default-expanded="false">
         <div class="space-y-3">
           <RouterLink
             v-for="subtopic in topic.subtopics"

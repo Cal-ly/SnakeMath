@@ -13,7 +13,7 @@ const topic = topics.find((t) => t.id === 'algebra')!
   >
     <div class="space-y-8">
       <!-- Hero intro -->
-      <ContentSection id="intro" title="Algebra for Programmers" icon="fa-solid fa-superscript">
+      <ContentSection id="intro" title="Algebra for Programmers" icon="fa-solid fa-superscript" collapsible>
         <p class="mb-4">
           Algebra is where math stops being just numbers and starts being about
           <strong>patterns and relationships</strong>. For programmers, algebra is your secret
@@ -35,7 +35,7 @@ const topic = topics.find((t) => t.id === 'algebra')!
       </ContentSection>
 
       <!-- Topics in this section -->
-      <ContentSection id="topics" title="Topics in This Section" icon="fa-solid fa-book-open">
+      <ContentSection id="topics" title="Topics in This Section" icon="fa-solid fa-book-open" collapsible :default-expanded="false">
         <div class="space-y-3">
           <RouterLink
             v-for="subtopic in topic.subtopics"

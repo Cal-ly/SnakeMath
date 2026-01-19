@@ -147,7 +147,7 @@ str_value = str(42)        # "42"`
   >
     <div class="space-y-8">
       <!-- What is a Variable? -->
-      <ContentSection id="what-is" title="What is a Variable?" icon="fa-solid fa-box-archive">
+      <ContentSection id="what-is" title="What is a Variable?" icon="fa-solid fa-box-archive" collapsible>
         <p class="mb-4">
           A <strong>variable</strong> is a named container for a value. In both math and
           programming, we use variables to store and work with data.
@@ -233,6 +233,7 @@ str_value = str(42)        # "42"`
         title="Variable Naming"
         icon="fa-solid fa-tag"
         collapsible
+        :default-expanded="false"
       >
         <p class="mb-4">
           Mathematicians and programmers have different naming conventions:
@@ -298,6 +299,7 @@ str_value = str(42)        # "42"`
         title="Expressions"
         icon="fa-solid fa-calculator"
         collapsible
+        :default-expanded="false"
       >
         <p class="mb-4">
           An <strong>expression</strong> is a combination of variables, values, and operators that
@@ -332,6 +334,7 @@ str_value = str(42)        # "42"`
         title="Substitution"
         icon="fa-solid fa-arrow-right-arrow-left"
         collapsible
+        :default-expanded="false"
       >
         <p class="mb-4">
           <strong>Substitution</strong> means replacing a variable with a specific value. This is
@@ -361,6 +364,7 @@ str_value = str(42)        # "42"`
         title="Multiple Variables"
         icon="fa-solid fa-cubes"
         collapsible
+        :default-expanded="false"
       >
         <p class="mb-4">
           Real problems often involve multiple variables working together:
@@ -386,6 +390,7 @@ str_value = str(42)        # "42"`
         title="Python's Dynamic Types"
         icon="fa-brands fa-python"
         collapsible
+        :default-expanded="false"
       >
         <p class="mb-4">
           Unlike statically typed languages, Python lets variables hold different types of values:
@@ -417,7 +422,7 @@ str_value = str(42)        # "42"`
       </ContentSection>
 
       <!-- Key Takeaways -->
-      <ContentSection id="summary" title="Key Takeaways" icon="fa-solid fa-list-check">
+      <ContentSection id="summary" title="Key Takeaways" icon="fa-solid fa-list-check" collapsible :default-expanded="false">
         <ul class="space-y-3">
           <li class="flex items-start gap-3">
             <i class="fa-solid fa-check text-primary mt-1" aria-hidden="true" />

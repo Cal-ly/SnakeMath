@@ -178,7 +178,7 @@ print(f"Concert: {watts_to_decibels(concert):.0f} dB")  # 110 dB
 <template>
   <TopicPage title="Exponentials & Logarithms">
     <!-- What are Exponential Functions? -->
-    <ContentSection id="introduction" title="What are Exponential Functions?">
+    <ContentSection id="introduction" title="What are Exponential Functions?" collapsible>
       <p class="mb-4">
         An <strong>exponential function</strong> has the variable in the exponent. In its most
         general form:
@@ -270,7 +270,7 @@ print(f"Concert: {watts_to_decibels(concert):.0f} dB")  # 110 dB
     </ContentSection>
 
     <!-- Interactive Explorer -->
-    <ContentSection id="explorer" title="Interactive Explorer">
+    <ContentSection id="explorer" title="Interactive Explorer" collapsible>
       <p class="mb-4">
         Use the <strong>Function Explorer</strong> tab to visualize exponential and logarithmic
         functions with different bases. Switch to <strong>Complexity Comparison</strong> to see
@@ -281,7 +281,7 @@ print(f"Concert: {watts_to_decibels(concert):.0f} dB")  # 110 dB
     </ContentSection>
 
     <!-- Special Bases -->
-    <ContentSection id="special-bases" title="Special Bases" :default-expanded="false">
+    <ContentSection id="special-bases" title="Special Bases" collapsible :default-expanded="false">
       <div class="space-y-6">
         <div class="p-4 bg-surface-secondary rounded-lg">
           <h4 class="font-semibold mb-2">
@@ -345,7 +345,7 @@ print(f"Concert: {watts_to_decibels(concert):.0f} dB")  # 110 dB
     </ContentSection>
 
     <!-- Growth and Decay -->
-    <ContentSection id="growth-decay" title="Growth and Decay" :default-expanded="false">
+    <ContentSection id="growth-decay" title="Growth and Decay" collapsible :default-expanded="false">
       <p class="mb-4">
         Exponential functions model processes where the rate of change is proportional to the
         current value.
@@ -379,7 +379,7 @@ print(f"Concert: {watts_to_decibels(concert):.0f} dB")  # 110 dB
     </ContentSection>
 
     <!-- What are Logarithms? -->
-    <ContentSection id="logarithms" title="What are Logarithms?" :default-expanded="false">
+    <ContentSection id="logarithms" title="What are Logarithms?" collapsible :default-expanded="false">
       <p class="mb-4">
         The <strong>logarithm</strong> is the inverse of the exponential. If
         <MathBlock formula="b^y = x" />, then <MathBlock formula="\log_b(x) = y" />.
@@ -409,7 +409,7 @@ print(f"Concert: {watts_to_decibels(concert):.0f} dB")  # 110 dB
     </ContentSection>
 
     <!-- Logarithm Properties -->
-    <ContentSection id="log-properties" title="Logarithm Properties" :default-expanded="false">
+    <ContentSection id="log-properties" title="Logarithm Properties" collapsible :default-expanded="false">
       <div class="space-y-4 mb-6">
         <div class="p-3 bg-surface-secondary rounded-lg">
           <h4 class="font-semibold mb-1">Product Rule</h4>
@@ -436,7 +436,7 @@ print(f"Concert: {watts_to_decibels(concert):.0f} dB")  # 110 dB
     </ContentSection>
 
     <!-- Compound Interest -->
-    <ContentSection id="compound-interest" title="Compound Interest" :default-expanded="false">
+    <ContentSection id="compound-interest" title="Compound Interest" collapsible :default-expanded="false">
       <p class="mb-4">
         The compound interest formula is a classic application of exponentials:
       </p>
@@ -462,7 +462,7 @@ print(f"Concert: {watts_to_decibels(concert):.0f} dB")  # 110 dB
     </ContentSection>
 
     <!-- Algorithm Complexity -->
-    <ContentSection id="complexity" title="Algorithm Complexity" :default-expanded="false">
+    <ContentSection id="complexity" title="Algorithm Complexity" collapsible :default-expanded="false">
       <p class="mb-4">
         This is where exponentials and logarithms become critical for programmers. The difference
         between <MathBlock formula="O(\log n)" /> and <MathBlock formula="O(n)" /> - or worse,
@@ -513,7 +513,7 @@ print(f"Concert: {watts_to_decibels(concert):.0f} dB")  # 110 dB
     </ContentSection>
 
     <!-- Real-World Examples -->
-    <ContentSection id="real-world" title="Real-World Examples" :default-expanded="false">
+    <ContentSection id="real-world" title="Real-World Examples" collapsible :default-expanded="false">
       <div class="space-y-6">
         <div>
           <h4 class="font-semibold mb-2">Binary in Computing</h4>
@@ -546,7 +546,7 @@ print(f"Concert: {watts_to_decibels(concert):.0f} dB")  # 110 dB
     </ContentSection>
 
     <!-- Key Formulas Reference -->
-    <ContentSection id="reference" title="Key Formulas Reference">
+    <ContentSection id="reference" title="Key Formulas Reference" collapsible :default-expanded="false">
       <div class="overflow-x-auto">
         <table class="w-full text-sm">
           <thead>

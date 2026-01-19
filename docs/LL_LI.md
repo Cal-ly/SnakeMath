@@ -5,6 +5,12 @@ The intent of this document is to gather lessons from this project, as it is bei
 
 ---
 
+## Known Icon Issues
+
+TODO: Insert list of known Fonts Awesome Icons, that doesn't work (or are paywalled) like the `fa-sigma` and what we can replace them with.
+
+---
+
 ## Phase 1: Project Foundation
 
 ### LL-001: Tailwind CSS Version Mismatch

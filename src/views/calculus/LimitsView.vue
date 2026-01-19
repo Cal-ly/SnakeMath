@@ -223,7 +223,7 @@ check_one_sided_limits(sign, 0)`
   >
     <div class="space-y-8">
       <!-- Introduction -->
-      <ContentSection id="introduction" title="What is a Limit?" icon="fa-solid fa-arrows-to-dot">
+      <ContentSection id="introduction" title="What is a Limit?" icon="fa-solid fa-arrows-to-dot" collapsible>
         <p class="mb-4">
           A <strong>limit</strong> answers the question: "What value does f(x) approach as x gets
           closer and closer to some point a?"
@@ -307,7 +307,7 @@ check_one_sided_limits(sign, 0)`
       </ContentSection>
 
       <!-- Interactive Explorer -->
-      <ContentSection id="explorer" title="Interactive Limit Explorer" icon="fa-solid fa-compass">
+      <ContentSection id="explorer" title="Interactive Limit Explorer" icon="fa-solid fa-compass" collapsible>
         <p class="mb-4 text-text-secondary">
           Explore different functions and see how limits behave. Select a function, choose an
           approach point, and watch how f(x) approaches (or doesn't approach) a limit value.

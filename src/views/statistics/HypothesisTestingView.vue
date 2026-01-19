@@ -182,7 +182,7 @@ print(f"\\nstatsmodels: n = {n_required:.1f} per group")`
   >
     <div class="space-y-8">
       <!-- Introduction -->
-      <ContentSection id="introduction" title="What is Hypothesis Testing?" icon="fa-solid fa-scale-balanced">
+      <ContentSection id="introduction" title="What is Hypothesis Testing?" icon="fa-solid fa-scale-balanced" collapsible>
         <p class="mb-4">
           <strong>Hypothesis testing</strong> is a framework for making decisions based on data.
           You start with a default assumption (null hypothesis), collect data, and decide whether
@@ -238,7 +238,7 @@ print(f"\\nstatsmodels: n = {n_required:.1f} per group")`
       </ContentSection>
 
       <!-- The Logic of Hypothesis Testing -->
-      <ContentSection id="logic" title="The Logic of Hypothesis Testing" icon="fa-solid fa-diagram-project">
+      <ContentSection id="logic" title="The Logic of Hypothesis Testing" icon="fa-solid fa-diagram-project" collapsible :default-expanded="false">
         <p class="mb-4">
           Hypothesis testing follows a specific logical structure. Understanding this structure
           helps you interpret results correctly.
@@ -306,7 +306,7 @@ print(f"\\nstatsmodels: n = {n_required:.1f} per group")`
       </ContentSection>
 
       <!-- Interactive Widget -->
-      <ContentSection id="explorer" title="Hypothesis Testing Simulator" icon="fa-solid fa-sliders">
+      <ContentSection id="explorer" title="Hypothesis Testing Simulator" icon="fa-solid fa-sliders" collapsible>
         <p class="mb-4">
           Explore how hypothesis testing works with real calculations. Try different test types,
           adjust your data, and see how p-values and effect sizes change.
@@ -320,7 +320,7 @@ print(f"\\nstatsmodels: n = {n_required:.1f} per group")`
       </ContentSection>
 
       <!-- P-Values -->
-      <ContentSection id="p-values" title="Understanding p-Values" icon="fa-solid fa-percent" collapsible>
+      <ContentSection id="p-values" title="Understanding p-Values" icon="fa-solid fa-percent" collapsible :default-expanded="false">
         <p class="mb-4">
           The <strong>p-value</strong> quantifies how surprised we should be by our data
           if the null hypothesis were true.
@@ -370,7 +370,7 @@ print(f"\\nstatsmodels: n = {n_required:.1f} per group")`
       </ContentSection>
 
       <!-- Type I and II Errors -->
-      <ContentSection id="errors" title="Type I & II Errors" icon="fa-solid fa-triangle-exclamation" collapsible>
+      <ContentSection id="errors" title="Type I & II Errors" icon="fa-solid fa-triangle-exclamation" collapsible :default-expanded="false">
         <p class="mb-4">
           Any decision has a chance of being wrong. Understanding these error types helps you
           design better experiments and interpret results appropriately.
@@ -457,7 +457,7 @@ print(f"\\nstatsmodels: n = {n_required:.1f} per group")`
       </ContentSection>
 
       <!-- Common Tests -->
-      <ContentSection id="tests" title="Common Hypothesis Tests" icon="fa-solid fa-list-check" collapsible>
+      <ContentSection id="tests" title="Common Hypothesis Tests" icon="fa-solid fa-list-check" collapsible :default-expanded="false">
         <p class="mb-4">
           Different scenarios require different tests. Here are the most common ones you'll use.
         </p>
@@ -547,7 +547,7 @@ print(f"\\nstatsmodels: n = {n_required:.1f} per group")`
       </ContentSection>
 
       <!-- Effect Size -->
-      <ContentSection id="effect-size" title="Effect Size" icon="fa-solid fa-ruler" collapsible>
+      <ContentSection id="effect-size" title="Effect Size" icon="fa-solid fa-ruler" collapsible :default-expanded="false">
         <p class="mb-4">
           <strong>Effect size</strong> measures the magnitude of an effect, independent of sample size.
           Statistical significance tells you IF there's an effect; effect size tells you HOW BIG.
@@ -591,7 +591,7 @@ print(f"\\nstatsmodels: n = {n_required:.1f} per group")`
       </ContentSection>
 
       <!-- Power Analysis -->
-      <ContentSection id="power" title="Power Analysis" icon="fa-solid fa-bolt" collapsible>
+      <ContentSection id="power" title="Power Analysis" icon="fa-solid fa-bolt" collapsible :default-expanded="false">
         <p class="mb-4">
           <strong>Statistical power</strong> is the probability of detecting a real effect.
           Power analysis helps you determine sample size BEFORE collecting data.

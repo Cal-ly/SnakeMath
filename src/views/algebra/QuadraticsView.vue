@@ -76,7 +76,7 @@ print(f"Ball hits ground at t = {t:.2f} seconds")`
 <template>
   <TopicPage title="Quadratic Functions">
     <!-- What is a Quadratic Function? -->
-    <ContentSection id="introduction" title="What is a Quadratic Function?">
+    <ContentSection id="introduction" title="What is a Quadratic Function?" collapsible>
       <p class="mb-4">
         A <strong>quadratic function</strong> is a polynomial of degree 2. In its most general form,
         it looks like this:
@@ -155,7 +155,7 @@ print(f"Ball hits ground at t = {t:.2f} seconds")`
     </ContentSection>
 
     <!-- Interactive Explorer -->
-    <ContentSection id="explorer" title="Interactive Explorer">
+    <ContentSection id="explorer" title="Interactive Explorer" collapsible>
       <p class="mb-4">
         Adjust the coefficients below to see how they affect the shape and position of the
         parabola. Try the presets to see common patterns.
@@ -165,7 +165,7 @@ print(f"Ball hits ground at t = {t:.2f} seconds")`
     </ContentSection>
 
     <!-- Understanding the Coefficients -->
-    <ContentSection id="coefficients" title="Understanding the Coefficients" :default-expanded="false">
+    <ContentSection id="coefficients" title="Understanding the Coefficients" collapsible :default-expanded="false">
       <div class="space-y-6">
         <div>
           <h4 class="font-semibold mb-2">
@@ -210,7 +210,7 @@ print(f"Ball hits ground at t = {t:.2f} seconds")`
     </ContentSection>
 
     <!-- The Three Forms -->
-    <ContentSection id="forms" title="The Three Forms" :default-expanded="false">
+    <ContentSection id="forms" title="The Three Forms" collapsible :default-expanded="false">
       <div class="space-y-6">
         <div class="p-4 bg-surface-secondary rounded-lg">
           <h4 class="font-semibold mb-2">Standard Form</h4>
@@ -243,7 +243,7 @@ print(f"Ball hits ground at t = {t:.2f} seconds")`
     </ContentSection>
 
     <!-- Solving Quadratic Equations -->
-    <ContentSection id="solving" title="Solving Quadratic Equations" :default-expanded="false">
+    <ContentSection id="solving" title="Solving Quadratic Equations" collapsible :default-expanded="false">
       <p class="mb-4">
         To find the <strong>roots</strong> (x-intercepts) of a quadratic, we set
         <MathBlock formula="y = 0" /> and solve using the <strong>quadratic formula</strong>:
@@ -279,7 +279,7 @@ print(f"Ball hits ground at t = {t:.2f} seconds")`
     </ContentSection>
 
     <!-- Real-World Applications -->
-    <ContentSection id="applications" title="Real-World Applications" :default-expanded="false">
+    <ContentSection id="applications" title="Real-World Applications" collapsible :default-expanded="false">
       <div class="space-y-6">
         <div>
           <h4 class="font-semibold mb-2">Projectile Motion</h4>
@@ -318,7 +318,7 @@ print(f"Ball hits ground at t = {t:.2f} seconds")`
     </ContentSection>
 
     <!-- Key Formulas Reference -->
-    <ContentSection id="reference" title="Key Formulas Reference">
+    <ContentSection id="reference" title="Key Formulas Reference" collapsible :default-expanded="false">
       <div class="overflow-x-auto">
         <table class="w-full text-sm">
           <thead>

@@ -68,6 +68,11 @@ Phase plans are provided in conversations and define:
 | LL-XXX | Lessons Learned (bugs, gotchas) | LL-015: KaTeX rendering issue |
 | LI-XXX | Lessons Identified (patterns, best practices) | LI-012: URL state sync pattern |
 
+### Definitions
+- *Chapters* refer to supertopics like "Foundations", "Algebra", "Calculus" etc.
+- *Topics* refer to topics like "The Unit Circle", "Vectors in 2D" etc.
+- *Subtopics* refer to subtopics like "Inverse Matrices", "Solving Quadratic Equations" etc.
+
 ---
 
 ## Archive Usage

@@ -97,7 +97,7 @@ result = math.prod(range(1, 6))  # 120`
   >
     <div class="space-y-8">
       <!-- Intro -->
-      <ContentSection id="intro" title="The Core Insight" icon="fa-solid fa-lightbulb">
+      <ContentSection id="intro" title="The Core Insight" icon="fa-solid fa-lightbulb" collapsible>
         <p class="mb-4">
           In a simple sense, nearly all math can be broken down to four operators:
           <strong>addition</strong>, <strong>subtraction</strong>,
@@ -171,6 +171,7 @@ result = math.prod(range(1, 6))  # 120`
         title="Summation: Σ = for loop"
         icon="fa-solid fa-plus"
         collapsible
+        :default-expanded="false"
       >
         <p class="mb-4">
           That big and scary-looking <MathBlock formula="\Sigma" /> is basically just
@@ -203,6 +204,7 @@ result = math.prod(range(1, 6))  # 120`
         title="Product: Π = multiply loop"
         icon="fa-solid fa-xmark"
         collapsible
+        :default-expanded="false"
       >
         <p class="mb-4">
           Similarly, <MathBlock formula="\Pi" /> (capital pi) means "multiply them all together":
@@ -232,6 +234,7 @@ result = math.prod(range(1, 6))  # 120`
         title="Differential Equations - Broken Down"
         icon="fa-solid fa-chart-line"
         collapsible
+        :default-expanded="false"
       >
         <p class="mb-4">
           <em>"But what about differential equations?"</em> - Great question! Let's see how

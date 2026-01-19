@@ -227,7 +227,7 @@ print(f"f'(2) = {result.derivative}") # 7
   >
     <div class="space-y-8">
       <!-- Introduction -->
-      <ContentSection id="introduction" title="What is a Derivative?" icon="fa-solid fa-chart-line">
+      <ContentSection id="introduction" title="What is a Derivative?" icon="fa-solid fa-chart-line" collapsible>
         <p class="mb-4">
           A <strong>derivative</strong> tells you how fast something is changing at a specific
           moment. It's the <em>slope of the tangent line</em> to a curve - the instantaneous rate of
@@ -297,7 +297,7 @@ print(f"f'(2) = {result.derivative}") # 7
       </ContentSection>
 
       <!-- Interactive Explorer -->
-      <ContentSection id="explorer" title="Interactive Derivative Explorer" icon="fa-solid fa-compass">
+      <ContentSection id="explorer" title="Interactive Derivative Explorer" icon="fa-solid fa-compass" collapsible>
         <p class="mb-4 text-text-secondary">
           Explore different functions and see how the derivative (slope of the tangent line) changes
           as you move along the curve. Toggle the secant line to see how it converges to the

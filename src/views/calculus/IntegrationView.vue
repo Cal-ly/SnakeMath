@@ -218,7 +218,7 @@ print(f"Unsigned area = {unsigned_area:.4f}")`
   >
     <div class="space-y-8">
       <!-- Introduction -->
-      <ContentSection id="introduction" title="What is Integration?" icon="fa-solid fa-chart-area">
+      <ContentSection id="introduction" title="What is Integration?" icon="fa-solid fa-chart-area" collapsible>
         <p class="mb-4">
           <strong>Integration</strong> is the process of finding the area under a curve. Where
           derivatives tell you how fast something is changing, integrals tell you
@@ -296,6 +296,7 @@ print(f"Unsigned area = {unsigned_area:.4f}")`
         id="signed-area"
         title="Understanding Signed Area"
         icon="fa-solid fa-plus-minus"
+        collapsible
       >
         <p class="mb-4">
           The integral computes <strong>signed area</strong>: regions above the x-axis contribute
@@ -339,7 +340,7 @@ print(f"Unsigned area = {unsigned_area:.4f}")`
       </ContentSection>
 
       <!-- Interactive Explorer -->
-      <ContentSection id="explorer" title="Interactive Integration Explorer" icon="fa-solid fa-compass">
+      <ContentSection id="explorer" title="Interactive Integration Explorer" icon="fa-solid fa-compass" collapsible>
         <p class="mb-4 text-text-secondary">
           Explore different functions and watch how Riemann sums approximate the integral.
           Increase n to see the approximation converge to the exact value!

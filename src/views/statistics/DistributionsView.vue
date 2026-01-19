@@ -170,7 +170,7 @@ plt.show()`
   >
     <div class="space-y-8">
       <!-- Introduction -->
-      <ContentSection id="introduction" title="What are Probability Distributions?" icon="fa-solid fa-dice">
+      <ContentSection id="introduction" title="What are Probability Distributions?" icon="fa-solid fa-dice" collapsible>
         <p class="mb-4">
           A <strong>probability distribution</strong> describes how likely different outcomes are.
           Think of it as a "personality profile" for randomness — each distribution has its own
@@ -219,7 +219,7 @@ plt.show()`
       </ContentSection>
 
       <!-- Discrete vs Continuous -->
-      <ContentSection id="discrete-continuous" title="Discrete vs Continuous" icon="fa-solid fa-arrows-left-right">
+      <ContentSection id="discrete-continuous" title="Discrete vs Continuous" icon="fa-solid fa-arrows-left-right" collapsible :default-expanded="false">
         <p class="mb-4">
           The first question to ask about any distribution: <strong>discrete or continuous?</strong>
         </p>
@@ -274,7 +274,7 @@ plt.show()`
       </ContentSection>
 
       <!-- Interactive Widget -->
-      <ContentSection id="explorer" title="Distribution Explorer" icon="fa-solid fa-sliders">
+      <ContentSection id="explorer" title="Distribution Explorer" icon="fa-solid fa-sliders" collapsible>
         <p class="mb-4">
           Select a distribution and adjust its parameters to see how the shape changes.
           Try the probability calculator to answer questions like "P(X ≤ 1.96)" for a standard normal.
@@ -294,6 +294,7 @@ plt.show()`
         title="Normal Distribution (Gaussian)"
         icon="fa-solid fa-bell"
         collapsible
+        :default-expanded="false"
       >
         <p class="mb-4">
           The <strong>normal distribution</strong> is the most important distribution in statistics.
@@ -519,7 +520,7 @@ plt.show()`
       </ContentSection>
 
       <!-- Central Limit Theorem -->
-      <ContentSection id="clt" title="Central Limit Theorem" icon="fa-solid fa-chart-line">
+      <ContentSection id="clt" title="Central Limit Theorem" icon="fa-solid fa-chart-line" collapsible :default-expanded="false">
         <p class="mb-4">
           The <strong>Central Limit Theorem (CLT)</strong> is one of the most remarkable results in
           statistics: no matter what shape the original distribution has, the distribution of

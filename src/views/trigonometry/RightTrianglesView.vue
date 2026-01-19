@@ -156,7 +156,7 @@ print(f"Range: {result['range']:.1f}m")            # ~255.1m`
   >
     <div class="space-y-8">
       <!-- Introduction & SOHCAHTOA -->
-      <ContentSection id="introduction" title="SOHCAHTOA: The Foundation" icon="fa-solid fa-draw-polygon">
+      <ContentSection id="introduction" title="SOHCAHTOA: The Foundation" icon="fa-solid fa-draw-polygon" collapsible>
         <p class="mb-4">
           Before the unit circle, there was the <strong>right triangle</strong>. The trigonometric
           functions were originally defined as ratios of sides in a right triangle, and this is
@@ -232,7 +232,7 @@ print(f"Range: {result['range']:.1f}m")            # ~255.1m`
       </ContentSection>
 
       <!-- Interactive Triangle Solver -->
-      <ContentSection id="solver" title="Triangle Solver" icon="fa-solid fa-calculator">
+      <ContentSection id="solver" title="Triangle Solver" icon="fa-solid fa-calculator" collapsible>
         <p class="mb-4">
           Enter any two known values (with at least one side) and this widget will calculate
           the rest. It shows which formulas are used for each step.

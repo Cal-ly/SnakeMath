@@ -159,7 +159,7 @@ print(Decimal('0.1'))  # 0.1 (exact)`
   >
     <div class="space-y-8">
       <!-- Overview -->
-      <ContentSection id="overview" title="The Number Hierarchy" icon="fa-solid fa-layer-group">
+      <ContentSection id="overview" title="The Number Hierarchy" icon="fa-solid fa-layer-group" collapsible>
         <p class="mb-4">
           Mathematicians have organized numbers into a beautiful nested hierarchy. Each set contains
           all the numbers from the previous set, plus new ones:
@@ -226,7 +226,7 @@ print(Decimal('0.1'))  # 0.1 (exact)`
       </ContentSection>
 
       <!-- Interactive Explorer -->
-      <ContentSection id="explorer" title="Interactive Explorer" icon="fa-solid fa-flask">
+      <ContentSection id="explorer" title="Interactive Explorer" icon="fa-solid fa-flask" collapsible>
         <p class="mb-4">
           Enter any number to see which sets it belongs to. The URL updates so you can share
           interesting numbers with others!
@@ -241,6 +241,7 @@ print(Decimal('0.1'))  # 0.1 (exact)`
         title="ℕ Natural Numbers"
         icon="fa-solid fa-seedling"
         collapsible
+        :default-expanded="false"
       >
         <p class="mb-4">
           The <strong>natural numbers</strong> are the counting numbers we learn as children:
@@ -267,6 +268,7 @@ print(Decimal('0.1'))  # 0.1 (exact)`
         title="ℤ Integers"
         icon="fa-solid fa-arrows-left-right"
         collapsible
+        :default-expanded="false"
       >
         <p class="mb-4">
           <strong>Integers</strong> extend natural numbers with zero and negatives:
@@ -284,7 +286,7 @@ print(Decimal('0.1'))  # 0.1 (exact)`
       </ContentSection>
 
       <!-- Rational Numbers -->
-      <ContentSection id="rational" title="ℚ Rational Numbers" icon="fa-solid fa-divide" collapsible>
+      <ContentSection id="rational" title="ℚ Rational Numbers" icon="fa-solid fa-divide" collapsible :default-expanded="false">
         <p class="mb-4">
           <strong>Rational numbers</strong> are any number that can be expressed as a fraction of
           two integers:
@@ -310,7 +312,7 @@ print(Decimal('0.1'))  # 0.1 (exact)`
       </ContentSection>
 
       <!-- Real Numbers -->
-      <ContentSection id="real" title="ℝ Real Numbers" icon="fa-solid fa-infinity" collapsible>
+      <ContentSection id="real" title="ℝ Real Numbers" icon="fa-solid fa-infinity" collapsible :default-expanded="false">
         <p class="mb-4">
           <strong>Real numbers</strong> include all rationals plus the
           <em>irrationals</em> — numbers that cannot be expressed as fractions:
@@ -337,7 +339,7 @@ print(Decimal('0.1'))  # 0.1 (exact)`
       </ContentSection>
 
       <!-- Complex Numbers -->
-      <ContentSection id="complex" title="ℂ Complex Numbers" icon="fa-solid fa-atom" collapsible>
+      <ContentSection id="complex" title="ℂ Complex Numbers" icon="fa-solid fa-atom" collapsible :default-expanded="false">
         <p class="mb-4">
           <strong>Complex numbers</strong> extend the reals by introducing the
           <em>imaginary unit</em> <MathBlock formula="i" />, defined as:
@@ -363,6 +365,7 @@ print(Decimal('0.1'))  # 0.1 (exact)`
         title="Python Type Hierarchy"
         icon="fa-brands fa-python"
         collapsible
+        :default-expanded="false"
       >
         <p class="mb-4">
           Python's <code>numbers</code> module mirrors the mathematical hierarchy:
@@ -382,6 +385,7 @@ print(Decimal('0.1'))  # 0.1 (exact)`
         title="Python Data Types for Numbers"
         icon="fa-solid fa-code"
         collapsible
+        :default-expanded="false"
       >
         <p class="mb-4">
           Python provides three built-in numeric types that correspond to the mathematical sets:
@@ -414,6 +418,7 @@ print(Decimal('0.1'))  # 0.1 (exact)`
         title="Floating-Point Precision"
         icon="fa-solid fa-triangle-exclamation"
         collapsible
+        :default-expanded="false"
       >
         <p class="mb-4">
           Floating-point numbers are <em>approximations</em>. This can lead to surprises:
@@ -445,7 +450,7 @@ print(Decimal('0.1'))  # 0.1 (exact)`
       </ContentSection>
 
       <!-- Quick Reference -->
-      <ContentSection id="summary" title="Quick Reference" icon="fa-solid fa-list-check">
+      <ContentSection id="summary" title="Quick Reference" icon="fa-solid fa-list-check" collapsible :default-expanded="false">
         <div class="overflow-x-auto">
           <table class="w-full text-sm">
             <thead>

@@ -156,6 +156,7 @@ print(f"   output = X @ {model.coef_} + {model.intercept_:.3f}")`
         id="introduction"
         title="What is Correlation?"
         icon="fa-solid fa-link"
+        collapsible
       >
         <p class="mb-4">
           <strong>Correlation</strong> measures whether two variables tend to move together.
@@ -215,6 +216,7 @@ print(f"   output = X @ {model.coef_} + {model.intercept_:.3f}")`
         title="Pearson Correlation Coefficient"
         icon="fa-solid fa-arrows-left-right"
         collapsible
+        :default-expanded="false"
       >
         <p class="mb-4">
           The <strong>Pearson correlation coefficient (r)</strong> quantifies linear relationships
@@ -271,6 +273,7 @@ print(f"   output = X @ {model.coef_} + {model.intercept_:.3f}")`
         id="explorer"
         title="Correlation Explorer"
         icon="fa-solid fa-chart-scatter"
+        collapsible
       >
         <p class="mb-4">
           Explore correlation and regression interactively. Add points by clicking,
@@ -287,6 +290,7 @@ print(f"   output = X @ {model.coef_} + {model.intercept_:.3f}")`
         title="Linear Regression"
         icon="fa-solid fa-chart-line"
         collapsible
+        :default-expanded="false"
       >
         <p class="mb-4">
           <strong>Linear regression</strong> fits a line through data to make predictions.
@@ -334,6 +338,7 @@ print(f"   output = X @ {model.coef_} + {model.intercept_:.3f}")`
         title="R² (Coefficient of Determination)"
         icon="fa-solid fa-square-check"
         collapsible
+        :default-expanded="false"
       >
         <p class="mb-4">
           <strong>R²</strong> tells you what proportion of the variance in y is explained by x.
@@ -381,6 +386,7 @@ print(f"   output = X @ {model.coef_} + {model.intercept_:.3f}")`
         title="Residuals (Model Errors)"
         icon="fa-solid fa-ruler-combined"
         collapsible
+        :default-expanded="false"
       >
         <p class="mb-4">
           <strong>Residuals</strong> are the differences between observed and predicted values.
@@ -431,6 +437,7 @@ print(f"   output = X @ {model.coef_} + {model.intercept_:.3f}")`
         title="Multiple Regression & ML Bridge"
         icon="fa-solid fa-network-wired"
         collapsible
+        :default-expanded="false"
       >
         <p class="mb-4">
           <strong>Multiple regression</strong> extends linear regression to multiple predictors.
@@ -483,6 +490,7 @@ print(f"   output = X @ {model.coef_} + {model.intercept_:.3f}")`
         title="Correlation ≠ Causation"
         icon="fa-solid fa-exclamation-triangle"
         collapsible
+        :default-expanded="false"
       >
         <div class="p-4 bg-red-50 dark:bg-red-900/30 border-l-4 border-red-500 rounded-r-lg mb-4">
           <p class="font-bold text-red-700 dark:text-red-300 mb-2">

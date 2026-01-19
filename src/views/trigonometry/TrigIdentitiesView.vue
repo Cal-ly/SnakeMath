@@ -138,7 +138,7 @@ for x in [0, 0.5, 1.0]:
   >
     <div class="space-y-8">
       <!-- Introduction -->
-      <ContentSection id="introduction" title="Why Identities Matter" icon="fa-solid fa-equals">
+      <ContentSection id="introduction" title="Why Identities Matter" icon="fa-solid fa-equals" collapsible>
         <p class="mb-4">
           Trig identities are equations that are <strong>always true</strong> for any angle.
           They're the "cheat codes" of trigonometry — ways to transform complex expressions into
@@ -207,7 +207,7 @@ for x in [0, 0.5, 1.0]:
       </ContentSection>
 
       <!-- Interactive Explorer -->
-      <ContentSection id="explorer" title="Identity Explorer" icon="fa-solid fa-calculator">
+      <ContentSection id="explorer" title="Identity Explorer" icon="fa-solid fa-calculator" collapsible>
         <p class="mb-4">
           Select a category and explore each identity. Adjust the angle slider to verify that
           both sides of the equation always equal each other. Expand the proofs to see the

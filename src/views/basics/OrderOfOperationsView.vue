@@ -150,7 +150,7 @@ print(f"Future value: \${A:.2f}")  # $1,647.01
   >
     <div class="space-y-8">
       <!-- Why Order Matters -->
-      <ContentSection id="why" title="Why Order Matters" icon="fa-solid fa-triangle-exclamation">
+      <ContentSection id="why" title="Why Order Matters" icon="fa-solid fa-triangle-exclamation" collapsible>
         <p class="mb-4">
           Consider this expression: <MathBlock formula="2 + 3 \times 4" />. What's the answer?
         </p>
@@ -228,7 +228,7 @@ print(f"Future value: \${A:.2f}")  # $1,647.01
       </ContentSection>
 
       <!-- PEMDAS -->
-      <ContentSection id="pemdas" title="PEMDAS / BODMAS" icon="fa-solid fa-list-ol">
+      <ContentSection id="pemdas" title="PEMDAS / BODMAS" icon="fa-solid fa-list-ol" collapsible :default-expanded="false">
         <p class="mb-4">
           The standard order of operations is remembered by the mnemonic <strong>PEMDAS</strong>
           (or BODMAS in some countries):
@@ -275,6 +275,7 @@ print(f"Future value: \${A:.2f}")  # $1,647.01
         title="Python Operator Precedence"
         icon="fa-solid fa-table"
         collapsible
+        :default-expanded="false"
       >
         <p class="mb-4">
           Python follows the same rules as mathematics, plus some extras for programming:
@@ -316,6 +317,7 @@ print(f"Future value: \${A:.2f}")  # $1,647.01
         title="Associativity: Left vs Right"
         icon="fa-solid fa-arrows-left-right"
         collapsible
+        :default-expanded="false"
       >
         <p class="mb-4">
           When operators have the same precedence, <strong>associativity</strong> determines the
@@ -342,6 +344,7 @@ print(f"Future value: \${A:.2f}")  # $1,647.01
         title="Common Gotchas"
         icon="fa-solid fa-bug"
         collapsible
+        :default-expanded="false"
       >
         <h4 class="font-medium text-text-primary mb-3">1. Exponentiation is Right-Associative</h4>
         <p class="mb-4 text-text-secondary">
@@ -372,6 +375,7 @@ print(f"Future value: \${A:.2f}")  # $1,647.01
         title="Parentheses: Your Best Friend"
         icon="fa-solid fa-parentheses"
         collapsible
+        :default-expanded="false"
       >
         <p class="mb-4">
           Parentheses always override the default order. When in doubt, use them!
@@ -392,7 +396,7 @@ print(f"Future value: \${A:.2f}")  # $1,647.01
       </ContentSection>
 
       <!-- Quick Reference -->
-      <ContentSection id="summary" title="Quick Reference" icon="fa-solid fa-list-check">
+      <ContentSection id="summary" title="Quick Reference" icon="fa-solid fa-list-check" collapsible :default-expanded="false">
         <div class="space-y-3">
           <div class="flex items-start gap-3 p-3 rounded-lg border border-border">
             <span class="font-bold text-primary w-8">1.</span>

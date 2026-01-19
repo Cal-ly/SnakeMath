@@ -14,7 +14,7 @@ const topic = topics.find((t) => t.id === 'linear-algebra')!
   >
     <div class="space-y-8">
       <!-- Hero intro -->
-      <ContentSection id="intro" title="The Language of ML" icon="fa-solid fa-brain">
+      <ContentSection id="intro" title="The Language of ML" icon="fa-solid fa-brain" collapsible>
         <p class="mb-4">
           Linear algebra is the <strong>mathematics of machine learning</strong>. Every neural network,
           every image transformation, every recommendation algorithm — they all run on vectors and
@@ -35,7 +35,7 @@ const topic = topics.find((t) => t.id === 'linear-algebra')!
       </ContentSection>
 
       <!-- Key Concepts Preview -->
-      <ContentSection id="concepts" title="Core Concepts" icon="fa-solid fa-cubes">
+      <ContentSection id="concepts" title="Core Concepts" icon="fa-solid fa-cubes" collapsible>
         <div class="grid gap-4 sm:grid-cols-2">
           <div class="p-4 rounded-lg border border-border">
             <h4 class="font-semibold text-primary mb-2">
@@ -84,7 +84,7 @@ const topic = topics.find((t) => t.id === 'linear-algebra')!
       </ContentSection>
 
       <!-- Topics in this section -->
-      <ContentSection id="topics" title="Topics in This Section" icon="fa-solid fa-book-open">
+      <ContentSection id="topics" title="Topics in This Section" icon="fa-solid fa-book-open" collapsible :default-expanded="false">
         <div class="space-y-3">
           <RouterLink
             v-for="subtopic in topic.subtopics"
@@ -128,7 +128,7 @@ const topic = topics.find((t) => t.id === 'linear-algebra')!
       </ContentSection>
 
       <!-- Python/NumPy Preview -->
-      <ContentSection id="python" title="In Python" icon="fa-brands fa-python">
+      <ContentSection id="python" title="In Python" icon="fa-brands fa-python" collapsible :default-expanded="false">
         <p class="mb-4 text-text-secondary">
           NumPy is the Python library for linear algebra. Everything we explore visually translates
           directly to NumPy code:

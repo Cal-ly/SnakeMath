@@ -129,7 +129,7 @@ print(f"Normalized mean: {normalized.mean():.4f}, std: {normalized.std():.4f}")`
   >
     <div class="space-y-8">
       <!-- What are Descriptive Statistics -->
-      <ContentSection id="what-is" title="What are Descriptive Statistics?" icon="fa-solid fa-chart-simple">
+      <ContentSection id="what-is" title="What are Descriptive Statistics?" icon="fa-solid fa-chart-simple" collapsible>
         <p class="mb-4">
           Descriptive statistics are tools for <strong>summarizing and describing</strong> the main
           features of a dataset. Instead of looking at every individual data point, we use a few
@@ -203,7 +203,7 @@ print(f"Normalized mean: {normalized.mean():.4f}, std: {normalized.std():.4f}")`
       </ContentSection>
 
       <!-- Interactive Calculator -->
-      <ContentSection id="calculator" title="Interactive Statistics Calculator" icon="fa-solid fa-calculator">
+      <ContentSection id="calculator" title="Interactive Statistics Calculator" icon="fa-solid fa-calculator" collapsible>
         <p class="mb-4">
           Select a preset dataset or enter your own values to see all the statistics in action.
           Adjust the histogram bins to see how it affects your perception of the data distribution.
@@ -631,7 +631,7 @@ print(f"Normalized mean: {normalized.mean():.4f}, std: {normalized.std():.4f}")`
       </ContentSection>
 
       <!-- Quick Reference -->
-      <ContentSection id="reference" title="Quick Reference" icon="fa-solid fa-book">
+      <ContentSection id="reference" title="Quick Reference" icon="fa-solid fa-book" collapsible :default-expanded="false">
         <div class="overflow-x-auto">
           <table class="w-full text-sm">
             <thead>

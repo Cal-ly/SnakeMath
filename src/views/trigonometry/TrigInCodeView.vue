@@ -144,7 +144,7 @@ for frame in range(frames + 1):
   >
     <div class="space-y-8">
       <!-- Introduction -->
-      <ContentSection id="intro" title="Trig is Everywhere in Code" icon="fa-solid fa-code">
+      <ContentSection id="intro" title="Trig is Everywhere in Code" icon="fa-solid fa-code" collapsible>
         <p class="mb-4">
           If you've ever wondered "when will I actually use trig?", here's the answer:
           <strong>constantly</strong>. Every rotation, every animation, every physics simulation,
@@ -242,7 +242,7 @@ for frame in range(frames + 1):
       </ContentSection>
 
       <!-- Interactive Playground -->
-      <ContentSection id="playground" title="Interactive Playground" icon="fa-solid fa-play">
+      <ContentSection id="playground" title="Interactive Playground" icon="fa-solid fa-play" collapsible>
         <p class="mb-4 text-text-secondary">
           Experiment with these four common trig applications. Each demo shows the math, the code,
           and the visual result together.
@@ -489,7 +489,7 @@ for frame in range(frames + 1):
       </ContentSection>
 
       <!-- Summary -->
-      <ContentSection id="summary" title="Key Takeaways" icon="fa-solid fa-check-circle">
+      <ContentSection id="summary" title="Key Takeaways" icon="fa-solid fa-check-circle" collapsible :default-expanded="false">
         <div class="space-y-3">
           <div class="flex items-start gap-3 p-3 rounded-lg border border-border">
             <i class="fa-solid fa-arrow-right text-primary mt-1" aria-hidden="true" />

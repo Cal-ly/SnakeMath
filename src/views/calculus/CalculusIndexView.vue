@@ -67,7 +67,7 @@ const relatedTopics = [
   >
     <div class="space-y-8">
       <!-- Introduction -->
-      <ContentSection id="introduction" title="What is Calculus?" icon="fa-solid fa-infinity">
+      <ContentSection id="introduction" title="What is Calculus?" icon="fa-solid fa-infinity" collapsible>
         <p class="mb-4">
           Calculus is the mathematics of <strong>change</strong> and
           <strong>accumulation</strong>. It provides tools to analyze how things change
@@ -112,6 +112,8 @@ const relatedTopics = [
         id="programming"
         title="Why Programmers Need Calculus"
         icon="fa-solid fa-laptop-code"
+        collapsible
+        :default-expanded="false"
       >
         <p class="mb-4">
           If you're wondering "when will I ever use this?" - the answer is: constantly, if you work
@@ -186,7 +188,7 @@ const relatedTopics = [
       </ContentSection>
 
       <!-- Topics Grid -->
-      <ContentSection id="topics" title="Topics" icon="fa-solid fa-list">
+      <ContentSection id="topics" title="Topics" icon="fa-solid fa-list" collapsible :default-expanded="false">
         <div class="grid gap-4 sm:grid-cols-2 lg:grid-cols-3">
           <router-link
             v-for="topic in topics"
