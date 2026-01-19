@@ -84,7 +84,7 @@ const topic = topics.find((t) => t.id === 'linear-algebra')!
       </ContentSection>
 
       <!-- Topics in this section -->
-      <ContentSection id="topics" title="Topics in This Section" icon="fa-solid fa-book-open" collapsible :default-expanded="false">
+      <ContentSection id="topics" title="Topics in This Section" icon="fa-solid fa-book-open" collapsible>
         <div class="space-y-3">
           <RouterLink
             v-for="subtopic in topic.subtopics"

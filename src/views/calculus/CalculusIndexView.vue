@@ -188,7 +188,7 @@ const relatedTopics = [
       </ContentSection>
 
       <!-- Topics Grid -->
-      <ContentSection id="topics" title="Topics" icon="fa-solid fa-list" collapsible :default-expanded="false">
+      <ContentSection id="topics" title="Topics" icon="fa-solid fa-list" collapsible>
         <div class="grid gap-4 sm:grid-cols-2 lg:grid-cols-3">
           <router-link
             v-for="topic in topics"

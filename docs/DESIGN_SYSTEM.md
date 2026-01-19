@@ -216,6 +216,7 @@ Note: When `collapsible` is present without `:default-expanded`, it defaults to 
 Only these section types should be **expanded by default**:
 - Introduction / "What is X?" sections
 - Interactive widget/explorer sections
+- "Topics in This Section" (on index pages) — users need to see navigation options
 
 ### What Qualifies as Supplementary Content
 
@@ -255,6 +256,7 @@ Everything else should be **collapsed by default**:
 | Content Type | Default State |
 |--------------|---------------|
 | Primary teaching content | Expanded |
+| Topics in This Section (index pages) | Expanded |
 | Supplementary examples | Collapsed |
 | Advanced/optional content | Collapsed |
 | Code examples in ContentSection | Follow section state |
