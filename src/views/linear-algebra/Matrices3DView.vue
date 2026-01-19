@@ -162,7 +162,7 @@ print(f"Transformed point: {transformed[:3]}")  # [1, 0, 0]
   >
     <div class="space-y-8">
       <!-- Introduction -->
-      <ContentSection id="introduction" title="3D Transformations" icon="fa-solid fa-cube">
+      <ContentSection id="introduction" title="3D Transformations" icon="fa-solid fa-cube" collapsible>
         <p class="mb-4">
           3D matrices extend the power of 2D transformations to three dimensions. The key
           player is the <strong>3&times;3 rotation matrix</strong> &mdash; it rotates vectors
@@ -263,7 +263,7 @@ print(f"Transformed point: {transformed[:3]}")  # [1, 0, 0]
       </ContentSection>
 
       <!-- Interactive Explorer -->
-      <ContentSection id="explorer" title="Interactive Explorer" icon="fa-solid fa-compass">
+      <ContentSection id="explorer" title="Interactive Explorer" icon="fa-solid fa-compass" collapsible>
         <p class="mb-4 text-text-secondary">
           Watch how rotation matrices transform the unit cube. The colored axes show the
           <strong>transformed basis vectors</strong> &mdash; where the standard X, Y, Z
@@ -278,6 +278,7 @@ print(f"Transformed point: {transformed[:3]}")  # [1, 0, 0]
         id="rotation-matrices"
         title="Rotation Matrices"
         icon="fa-solid fa-sync-alt"
+        collapsible
         :default-expanded="false"
       >
         <p class="mb-4">
@@ -325,6 +326,7 @@ print(f"Transformed point: {transformed[:3]}")  # [1, 0, 0]
         id="euler-angles"
         title="Euler Angles"
         icon="fa-solid fa-compass"
+        collapsible
         :default-expanded="false"
       >
         <p class="mb-4">
@@ -374,6 +376,7 @@ print(f"Transformed point: {transformed[:3]}")  # [1, 0, 0]
         id="properties"
         title="Matrix Properties"
         icon="fa-solid fa-info-circle"
+        collapsible
         :default-expanded="false"
       >
         <p class="mb-4">
@@ -417,6 +420,7 @@ print(f"Transformed point: {transformed[:3]}")  # [1, 0, 0]
         id="graphics"
         title="3D Graphics Pipeline"
         icon="fa-solid fa-video"
+        collapsible
         :default-expanded="false"
       >
         <p class="mb-4">
@@ -446,6 +450,7 @@ print(f"Transformed point: {transformed[:3]}")  # [1, 0, 0]
         id="robotics"
         title="Robotics: Homogeneous Transforms"
         icon="fa-solid fa-robot"
+        collapsible
         :default-expanded="false"
       >
         <p class="mb-4">

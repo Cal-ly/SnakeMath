@@ -115,7 +115,7 @@ print(f"king-apple: {cosine_similarity(king, apple):.3f}")  # ~0.43 (not similar
   >
     <div class="space-y-8">
       <!-- Introduction -->
-      <ContentSection id="introduction" title="What is a Vector?" icon="fa-solid fa-arrow-right">
+      <ContentSection id="introduction" title="What is a Vector?" icon="fa-solid fa-arrow-right" collapsible>
         <p class="mb-4">
           A vector is just a <strong>list of numbers</strong>. That's it! In programming terms,
           it's an array. In math, we think of it geometrically as an <strong>arrow</strong> pointing
@@ -192,7 +192,7 @@ print(f"king-apple: {cosine_similarity(king, apple):.3f}")  # ~0.43 (not similar
       </ContentSection>
 
       <!-- Interactive Explorer -->
-      <ContentSection id="explorer" title="Interactive Explorer" icon="fa-solid fa-compass">
+      <ContentSection id="explorer" title="Interactive Explorer" icon="fa-solid fa-compass" collapsible>
         <p class="mb-4 text-text-secondary">
           Experiment with vector operations below. Try the presets to see special cases like
           perpendicular vectors (dot product = 0) or parallel vectors.
@@ -206,6 +206,7 @@ print(f"king-apple: {cosine_similarity(king, apple):.3f}")  # ~0.43 (not similar
         id="addition"
         title="Vector Addition"
         icon="fa-solid fa-plus"
+        collapsible
         :default-expanded="false"
       >
         <p class="mb-4">
@@ -235,6 +236,7 @@ print(f"king-apple: {cosine_similarity(king, apple):.3f}")  # ~0.43 (not similar
         id="dot-product"
         title="Dot Product"
         icon="fa-solid fa-circle-dot"
+        collapsible
         :default-expanded="false"
       >
         <p class="mb-4">
@@ -280,6 +282,7 @@ print(f"king-apple: {cosine_similarity(king, apple):.3f}")  # ~0.43 (not similar
         id="magnitude"
         title="Magnitude & Unit Vectors"
         icon="fa-solid fa-ruler"
+        collapsible
         :default-expanded="false"
       >
         <p class="mb-4">
@@ -313,6 +316,7 @@ print(f"king-apple: {cosine_similarity(king, apple):.3f}")  # ~0.43 (not similar
         id="angle"
         title="Angle Between Vectors"
         icon="fa-solid fa-angle-right"
+        collapsible
         :default-expanded="false"
       >
         <p class="mb-4">
@@ -341,6 +345,7 @@ print(f"king-apple: {cosine_similarity(king, apple):.3f}")  # ~0.43 (not similar
         id="applications"
         title="ML Applications"
         icon="fa-solid fa-robot"
+        collapsible
         :default-expanded="false"
       >
         <p class="mb-4">

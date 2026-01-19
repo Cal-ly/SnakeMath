@@ -57,7 +57,7 @@ Phase plans are provided in conversations and define:
 | [docs/DECISIONS.md](docs/DECISIONS.md) | Architectural decision records | When making decisions |
 | [docs/LL_LI.md](docs/LL_LI.md) | Lessons learned & patterns identified | After every phase |
 | [docs/DESIGN_SYSTEM.md](docs/DESIGN_SYSTEM.md) | UI patterns, component conventions | When adding new patterns |
-| [docs/TESTING.md](docs/TESTING.md) | Testing strategy and commands | When changing test approach |
+| [docs/TESTING.md](archive/SnakeMath/planning/TESTING.md) | Testing strategy and commands | When changing test approach |
 | [docs/TODO.md](docs/TODO.md) | Task tracking and backlog | When completing/adding tasks |
 | [docs/ACCESSIBILITY.md](docs/ACCESSIBILITY.md) | Accessibility guidelines | When updating a11y approach |
 

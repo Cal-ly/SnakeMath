@@ -341,6 +341,7 @@ print(f"f'(2) = {result.derivative}") # 7
         id="secant-tangent"
         title="From Secants to Tangents"
         icon="fa-solid fa-arrows-down-to-line"
+        collapsible
         :default-expanded="false"
       >
         <p class="mb-4">
@@ -391,6 +392,7 @@ print(f"f'(2) = {result.derivative}") # 7
         id="rules"
         title="Common Derivative Rules"
         icon="fa-solid fa-list-check"
+        collapsible
         :default-expanded="false"
       >
         <p class="mb-4">
@@ -453,6 +455,7 @@ print(f"f'(2) = {result.derivative}") # 7
         id="critical-points"
         title="Critical Points and Optimization"
         icon="fa-solid fa-location-dot"
+        collapsible
         :default-expanded="false"
       >
         <p class="mb-4">
@@ -505,7 +508,13 @@ print(f"f'(2) = {result.derivative}") # 7
       </ContentSection>
 
       <!-- Gradient Descent -->
-      <ContentSection id="gradient-descent" title="Gradient Descent in Action" icon="fa-solid fa-brain">
+      <ContentSection
+        id="gradient-descent"
+        title="Gradient Descent in Action"
+        icon="fa-solid fa-brain"
+        collapsible
+        :default-expanded="false"
+      >
         <p class="mb-4">
           <strong>Gradient descent</strong> is the workhorse of machine learning. The idea is
           beautifully simple: the derivative tells you which way is uphill, so go the opposite way
@@ -558,6 +567,7 @@ print(f"f'(2) = {result.derivative}") # 7
         id="applications"
         title="More Programming Applications"
         icon="fa-solid fa-laptop-code"
+        collapsible
         :default-expanded="false"
       >
         <p class="mb-4">Beyond gradient descent, derivatives appear everywhere in programming:</p>

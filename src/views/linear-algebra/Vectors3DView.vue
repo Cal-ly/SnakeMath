@@ -108,7 +108,7 @@ print(f"Light intensity: {intensity}")  # 1.0 (max)`
   >
     <div class="space-y-8">
       <!-- Introduction -->
-      <ContentSection id="introduction" title="From 2D to 3D" icon="fa-solid fa-cube">
+      <ContentSection id="introduction" title="From 2D to 3D" icon="fa-solid fa-cube" collapsible>
         <p class="mb-4">
           Everything you learned about 2D vectors extends naturally to 3D. But 3D gives us
           something new and powerful: the <strong>cross product</strong> &mdash; a way to find
@@ -184,7 +184,7 @@ print(f"Light intensity: {intensity}")  # 1.0 (max)`
       </ContentSection>
 
       <!-- Interactive Explorer -->
-      <ContentSection id="explorer" title="Interactive Explorer" icon="fa-solid fa-compass">
+      <ContentSection id="explorer" title="Interactive Explorer" icon="fa-solid fa-compass" collapsible>
         <p class="mb-4 text-text-secondary">
           Experiment with 3D vector operations. The <strong>cross product</strong> creates a
           vector perpendicular to both inputs &mdash; try the presets to see special cases!
@@ -198,6 +198,7 @@ print(f"Light intensity: {intensity}")  # 1.0 (max)`
         id="cross-product"
         title="The Cross Product"
         icon="fa-solid fa-times"
+        collapsible
         :default-expanded="false"
       >
         <p class="mb-4">
@@ -264,6 +265,7 @@ print(f"Light intensity: {intensity}")  # 1.0 (max)`
         id="physics"
         title="Physics Applications"
         icon="fa-solid fa-atom"
+        collapsible
         :default-expanded="false"
       >
         <p class="mb-4">
@@ -326,6 +328,7 @@ print(f"Light intensity: {intensity}")  # 1.0 (max)`
         id="graphics"
         title="3D Graphics Applications"
         icon="fa-solid fa-cube"
+        collapsible
         :default-expanded="false"
       >
         <p class="mb-4">

@@ -381,7 +381,13 @@ print(f"Unsigned area = {unsigned_area:.4f}")`
       </ContentSection>
 
       <!-- Riemann Sums -->
-      <ContentSection id="riemann-sums" title="Riemann Sums: The Programmer's Approach" icon="fa-solid fa-code">
+      <ContentSection
+        id="riemann-sums"
+        title="Riemann Sums: The Programmer's Approach"
+        icon="fa-solid fa-code"
+        collapsible
+        :default-expanded="false"
+      >
         <p class="mb-4">
           Riemann sums are the computational foundation of integration. Each method samples
           the function differently, affecting accuracy and convergence rate:
@@ -463,6 +469,7 @@ print(f"Unsigned area = {unsigned_area:.4f}")`
         id="ftc"
         title="The Fundamental Theorem of Calculus"
         icon="fa-solid fa-link"
+        collapsible
         :default-expanded="false"
       >
         <p class="mb-4">
@@ -505,6 +512,7 @@ print(f"Unsigned area = {unsigned_area:.4f}")`
         id="pitfalls"
         title="Common Pitfalls"
         icon="fa-solid fa-triangle-exclamation"
+        collapsible
         :default-expanded="false"
       >
         <div class="space-y-4">
@@ -565,6 +573,7 @@ print(f"Unsigned area = {unsigned_area:.4f}")`
         id="python"
         title="Integration in Python"
         icon="fa-brands fa-python"
+        collapsible
         :default-expanded="false"
       >
         <p class="mb-4">

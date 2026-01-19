@@ -349,6 +349,7 @@ check_one_sided_limits(sign, 0)`
         id="numerical"
         title="How Computers Evaluate Limits"
         icon="fa-solid fa-calculator"
+        collapsible
         :default-expanded="false"
       >
         <p class="mb-4">
@@ -376,6 +377,7 @@ check_one_sided_limits(sign, 0)`
         id="epsilon-delta"
         title="The Epsilon-Delta Definition"
         icon="fa-solid fa-ruler-combined"
+        collapsible
         :default-expanded="false"
       >
         <p class="mb-4">
@@ -438,6 +440,7 @@ check_one_sided_limits(sign, 0)`
         id="one-sided"
         title="One-Sided Limits"
         icon="fa-solid fa-arrows-left-right"
+        collapsible
         :default-expanded="false"
       >
         <p class="mb-4">
@@ -483,6 +486,7 @@ check_one_sided_limits(sign, 0)`
         id="discontinuities"
         title="Types of Discontinuities"
         icon="fa-solid fa-code-branch"
+        collapsible
         :default-expanded="false"
       >
         <p class="mb-4">
@@ -557,6 +561,7 @@ check_one_sided_limits(sign, 0)`
         id="famous"
         title="Famous Limits"
         icon="fa-solid fa-star"
+        collapsible
         :default-expanded="false"
       >
         <p class="mb-4">
@@ -607,6 +612,8 @@ check_one_sided_limits(sign, 0)`
         id="applications"
         title="Applications in Programming"
         icon="fa-solid fa-laptop-code"
+        collapsible
+        :default-expanded="false"
       >
         <p class="mb-4">
           Limits aren't just abstract math - they appear constantly in practical programming:

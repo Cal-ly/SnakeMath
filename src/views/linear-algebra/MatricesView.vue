@@ -151,7 +151,7 @@ print(transformed_sprite)`
   >
     <div class="space-y-8">
       <!-- Introduction -->
-      <ContentSection id="introduction" title="What is a Matrix?" icon="fa-solid fa-table-cells">
+      <ContentSection id="introduction" title="What is a Matrix?" icon="fa-solid fa-table-cells" collapsible>
         <p class="mb-4">
           A matrix is a <strong>grid of numbers</strong> arranged in rows and columns. For 2D transformations,
           we use 2×2 matrices — and they're surprisingly powerful. Every rotation, scale, shear, and
@@ -241,7 +241,7 @@ print(transformed_sprite)`
       </ContentSection>
 
       <!-- Interactive Explorer -->
-      <ContentSection id="explorer" title="Interactive Transformation Explorer" icon="fa-solid fa-compass">
+      <ContentSection id="explorer" title="Interactive Transformation Explorer" icon="fa-solid fa-compass" collapsible>
         <p class="mb-4 text-text-secondary">
           Watch how different matrices transform the unit square and basis vectors. Try rotation,
           scaling, shearing, and reflection to build intuition for what each matrix "does."
@@ -255,6 +255,7 @@ print(transformed_sprite)`
         id="transformations"
         title="Transformation Types"
         icon="fa-solid fa-wand-magic-sparkles"
+        collapsible
         :default-expanded="false"
       >
         <p class="mb-4">
@@ -314,6 +315,7 @@ print(transformed_sprite)`
         id="determinant"
         title="The Determinant"
         icon="fa-solid fa-square"
+        collapsible
         :default-expanded="false"
       >
         <p class="mb-4">
@@ -377,6 +379,7 @@ print(transformed_sprite)`
         id="composition"
         title="Composition of Transformations"
         icon="fa-solid fa-layer-group"
+        collapsible
         :default-expanded="false"
       >
         <p class="mb-4">
@@ -410,6 +413,7 @@ print(transformed_sprite)`
         id="inverse"
         title="Inverse Matrices"
         icon="fa-solid fa-undo"
+        collapsible
         :default-expanded="false"
       >
         <p class="mb-4">
@@ -439,6 +443,7 @@ print(transformed_sprite)`
         id="applications"
         title="Graphics & ML Applications"
         icon="fa-solid fa-gamepad"
+        collapsible
         :default-expanded="false"
       >
         <p class="mb-4">
