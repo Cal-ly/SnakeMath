@@ -5,13 +5,13 @@ This document outlines the current state of the project for easy resumption afte
 
 ---
 
-## Current Status: Phase 20 Complete
+## Current Status: Phase 21 Complete
 
 **Last Updated**: 2026-01-19
 
 ### Project Summary
 
-SnakeMath is an educational mathematics website for programmers. Twenty phases of development have established:
+SnakeMath is an educational mathematics website for programmers. Twenty-one phases of development have established:
 
 | Phase | Focus | Key Deliverables | Status |
 |-------|-------|------------------|--------|
@@ -36,6 +36,7 @@ SnakeMath is an educational mathematics website for programmers. Twenty phases o
 | 18 | Statistics — Sampling | SamplingSimulator, CI demo, bootstrap panel, Sampling content page | Complete |
 | 19 | Statistics — Hypothesis Testing | HypothesisTestingSimulator, p-value viz, power analysis, Type I/II demo | Complete |
 | 20 | Statistics — Correlation & Regression | CorrelationExplorer, scatter plot, residuals, Anscombe's quartet | Complete |
+| 21 | Calculus — Integration | IntegrationExplorer, Riemann sums, convergence animation | Complete |
 
 ### What's Live
 
@@ -70,9 +71,10 @@ SnakeMath is an educational mathematics website for programmers. Twenty phases o
   - Sampling & Estimation (SamplingSimulator widget with 4 sampling methods, CI demo, bootstrap)
   - Hypothesis Testing (HypothesisTestingSimulator widget with 4 test types, p-value viz, power analysis)
   - **Correlation & Regression (CorrelationExplorer widget with scatter plot, regression line, residuals, Anscombe's quartet)**
-- `/calculus` - Calculus section:
+- `/calculus` - Calculus section (3 subtopics):
   - Limits (LimitsExplorer widget with epsilon-delta visualization)
-  - **Derivatives (DerivativeVisualizer widget with tangent lines and secant animation)**
+  - Derivatives (DerivativeVisualizer widget with tangent lines and secant animation)
+  - **Integration (IntegrationExplorer widget with Riemann sums, convergence animation)**
 
 **Interactive Widgets**:
 - **NumberTypeExplorer**: Classify numbers, Venn diagram, number line, set membership
@@ -97,6 +99,7 @@ SnakeMath is an educational mathematics website for programmers. Twenty phases o
 - **SamplingSimulator**: 4 sampling methods (simple random, stratified, systematic, cluster), population grid visualization, animated sample drawing, sampling distribution histogram, CI coverage demonstration with capture rate, bootstrap confidence intervals, sample size calculator for mean and proportion, 5 educational presets, URL state sync
 - **HypothesisTestingSimulator**: 4 test types (one-sample t, two-sample t, one-proportion z, two-proportion z), hypothesis setup (H₀, H₁, α), test statistic and p-value calculation, distribution visualization with rejection region shading, effect size (Cohen's d/h), Type I/II error interactive demo, power analysis with sample size calculator, 5 educational presets, URL state sync
 - **CorrelationExplorer**: Interactive scatter plot with click-to-add points, draggable points, regression line overlay with equation (ŷ = mx + b), real-time correlation coefficient (r) and R² display, residual lines visualization, residual plot (residuals vs x), Anscombe's quartet demonstration, 8 correlation presets (strong positive/negative, no correlation, non-linear, outlier effect), causation warning component, statistics panel (n, r, R², slope, intercept, standard error), URL state sync
+- **IntegrationExplorer**: 8 preset functions with interesting integration properties, 5 Riemann sum methods (left, right, midpoint, trapezoidal, Simpson's), SVG visualization with function curve and colored rectangles (blue positive, red negative), bounds controls (a, b) with n slider (1-200), convergence animation with play/pause/speed controls, real-time approximation, exact value, and error display, URL state sync
 
 **Visualization Components**:
 - **CoordinateSystem**: Reusable SVG coordinate system with axes, grid, labels
@@ -107,8 +110,8 @@ SnakeMath is an educational mathematics website for programmers. Twenty phases o
 - **BoxPlotChart**: SVG box plot with quartiles, whiskers, and outlier markers
 
 **Testing Infrastructure**:
-- 1744 unit tests (Vitest) - including correlation (70), hypothesis testing (103), sampling (110), distributions (209), vector3d (92), matrix3d (112), and isometricProjection tests
-- E2E tests (Playwright) with tiered CI approach - including correlation and hypothesis testing tests
+- 1852 unit tests (Vitest) - including integration (76), useIntegration (32), correlation (70), hypothesis testing (103), sampling (110), distributions (209), vector3d (92), matrix3d (112), and isometricProjection tests
+- E2E tests (Playwright) with tiered CI approach - including integration, correlation and hypothesis testing tests
 - Visual regression tests (Playwright screenshot comparison) - local only
 - WCAG 2.1 AA accessibility audits via axe-core
 - **Tiered CI workflow**: quick-check (push), full-test (PR only)
@@ -182,6 +185,8 @@ npm run build        # Production build
 | Hypothesis testing composable | `src/composables/useHypothesisTesting.ts` |
 | Correlation utilities | `src/utils/math/correlation.ts` |
 | Correlation composable | `src/composables/useCorrelation.ts` |
+| Integration utilities | `src/utils/math/integration.ts` |
+| Integration composable | `src/composables/useIntegration.ts` |
 
 ### Archived Documentation
 Phase completion summaries are in `docs/archive/`:
@@ -193,8 +198,8 @@ Phase completion summaries are in `docs/archive/`:
 
 ## Test Coverage
 
-### Unit Tests (1744 tests)
-- Math utilities (number classification, parsing, quadratic, exponential, trigonometry, statistics, product, vector, matrix, limits, derivative, rightTriangle, trigIdentities, inverseTrig, trigApplications, vector3d, matrix3d, distributions, sampling, hypothesis, correlation functions)
+### Unit Tests (1852 tests)
+- Math utilities (number classification, parsing, quadratic, exponential, trigonometry, statistics, product, vector, matrix, limits, derivative, rightTriangle, trigIdentities, inverseTrig, trigApplications, vector3d, matrix3d, distributions, sampling, hypothesis, correlation, integration functions)
 - Data validation (symbols, navigation)
 - Component logic (via composables)
 
@@ -216,7 +221,8 @@ Phase completion summaries are in `docs/archive/`:
 - **SamplingSimulator** (sampling methods, population grid, sample drawing, CI demo, bootstrap, URL sync)
 - **HypothesisTestingSimulator** (test types, alternative hypotheses, alpha levels, presets, type error demo, power analysis, URL sync)
 - **CorrelationExplorer** (scatter plot interactions, add/remove points, random data, presets, Anscombe's quartet, residuals toggle, URL sync)
-- Accessibility (WCAG 2.1 AA audits for all pages including statistics correlation)
+- **IntegrationExplorer** (preset functions, bounds controls, n slider, method selection, canvas visualization, results display, convergence animation, URL sync)
+- Accessibility (WCAG 2.1 AA audits for all pages including calculus integration)
 
 ### Visual Regression Tests (Local Only)
 - All pages baseline screenshots
@@ -323,9 +329,84 @@ Phase 20 implemented Correlation & Regression: the CorrelationExplorer widget wi
 
 ---
 
-## Phase 19 Completion Summary
+## Phase 21 Completion Summary
 
-Phase 19 implemented Hypothesis Testing: the HypothesisTestingSimulator widget with 4 test types, p-value visualization, Type I/II error demo, power analysis, and comprehensive content page.
+Phase 21 implemented Integration (Integral Calculus): the IntegrationExplorer widget with Riemann sum visualization, 5 approximation methods, convergence animation, and comprehensive content page. This completes the Calculus section's core topics.
+
+### Completed Increments
+
+**Increment 21A: Integration Math Utilities**
+- Created `src/utils/math/integration.ts` with 76 comprehensive tests
+- Types: `RiemannMethod`, `RiemannSumResult`, `RiemannSamplePoint`, `IntegrationResult`, `IntegrationFunctionPreset`, `IntegrationInterestingPoint`
+- Riemann sum methods: `riemannSumLeft`, `riemannSumRight`, `riemannSumMidpoint`, `riemannSumTrapezoidal`, `riemannSumSimpson`
+- Main dispatcher: `riemannSum(f, a, b, n, method)` routing to appropriate method
+- 8 preset functions: linear, quadratic, sine, exponential, reciprocal, cubic-signed, semicircle, constant
+- Utility functions: `clampN`, `validateBounds`, `isEffectivelyZero`
+- Constants: `DEFAULT_N=10`, `MAX_N=200`, `MIN_N=1`, `DEFAULT_METHOD='midpoint'`
+
+**Increment 21B: useIntegration Composable**
+- Created `src/composables/useIntegration.ts` with 32 tests for state management + URL sync
+- Reactive state: preset, bounds (a, b), subdivisions (n), method
+- Computed: riemannResult, integrationResult, exactValue, relativeError, functionPoints
+- Setter functions for all state updates
+- URL state synchronization with 300ms debounce (per LL-015)
+
+**Increment 21C: IntegrationExplorer Widget Components**
+- Built widget in `src/components/widgets/IntegrationExplorer/`:
+  - `IntegrationExplorer.vue` - main orchestrator with data-testid
+  - `FunctionSelector.vue` - dropdown for preset selection with formula display
+  - `BoundsControls.vue` - bounds inputs (a, b) and n slider (1-200)
+  - `MethodSelector.vue` - radio buttons for 5 Riemann methods
+  - `ResultsDisplay.vue` - approximation, exact value, error display
+  - `IntegrationCanvas.vue` - SVG visualization with function curve and rectangles
+  - `index.ts` - barrel exports
+
+**Increment 21D: Convergence Animation**
+- Created `ConvergenceAnimation.vue` component
+- Play/pause/reset controls
+- requestAnimationFrame animation with smooth n increment
+- Speed control (0.5x to 3x)
+- Progress bar and live stats (n, approximation, error)
+- Real-time display of convergence to exact value
+
+**Increment 21E: Content Page**
+- Created `src/views/calculus/IntegrationView.vue` content page
+- Three-analogy blocks (everyday: odometer, programming: accumulator, visual: area)
+- Common pitfall callout (signed vs unsigned area)
+- Sections: Introduction, Signed Area, Riemann Sums, Fundamental Theorem, Common Pitfalls
+- Python code examples (scipy.integrate, numpy trapz/simps)
+- Related topics linking to Limits, Derivatives, Summation
+
+**Increment 21F: E2E Tests & Polish**
+- Created `e2e/widgets/integration-explorer.spec.ts` with comprehensive E2E tests
+- Created `e2e/accessibility/integration.spec.ts` for WCAG compliance
+- Tests cover preset selection, bounds controls, method selection, canvas, results, animation, URL sync
+- All 1852 unit tests pass, build succeeds
+
+### Key Architectural Decisions (Phase 21)
+- D-120: Widget named IntegrationExplorer (consistent with Limits/Derivatives pattern)
+- D-121: Single view with collapsible panels (not tabs)
+- D-122: Preset-based functions only (no arbitrary user input)
+- D-123: Include Simpson's rule (demonstrates O(1/n⁴) convergence)
+- D-124: Blue positive/red negative area visualization for signed area
+- D-125: Smooth n increment animation using requestAnimationFrame
+- D-126: Geometric interpretation focus (area, accumulation)
+- D-127: URL state sync for preset, bounds, n, method
+
+### Lessons Learned (Phase 21)
+- LL-068: Simpson's rule requires even n; automatically adjust to next even number
+- LL-069: Semicircle preset needs careful domain handling for negative sqrt
+
+### Lessons Identified (Phase 21)
+- LI-088: Convergence animation effectively demonstrates Riemann sum limit definition
+- LI-089: Color-coded rectangles (blue/red) clearly show signed area concept
+- LI-090: Error percentage display motivates increasing n for better approximation
+
+---
+
+## Phase 20 Completion Summary
+
+Phase 20 implemented Correlation & Regression: the CorrelationExplorer widget with interactive scatter plot, regression line, residual visualization, Anscombe's quartet, and comprehensive content page. This completes the Statistics section and bridges toward ML foundations.
 
 ### Completed Increments
 

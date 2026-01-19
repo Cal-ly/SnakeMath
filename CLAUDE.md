@@ -364,6 +364,79 @@ const value = useUrlState('value', defaultValue)
 
 ---
 
+## ESLint Patterns
+
+The project uses strict ESLint rules. These patterns prevent common CI failures:
+
+### Unused Variables (`@typescript-eslint/no-unused-vars`)
+
+Prefix unused variables with underscore (`_`) to suppress warnings:
+
+```typescript
+// ❌ Error: 'props' is assigned but never used
+const props = defineProps<Props>()
+
+// ✅ OK: Underscore prefix ignores the warning
+const _props = defineProps<Props>()
+
+// ✅ Better: Don't assign if only used in template
+defineProps<Props>()
+```
+
+For unused imports, use alias syntax:
+```typescript
+// ❌ Error: 'erf' is defined but never used
+import { standardNormalCdf, erf } from './distributions'
+
+// ✅ OK: Alias with underscore
+import { standardNormalCdf, erf as _erf } from './distributions'
+```
+
+### Computed Properties Must Return (`vue/return-in-computed-property`)
+
+Every code path in computed properties must return a value:
+
+```typescript
+// ❌ Error: switch without default doesn't always return
+const result = computed(() => {
+  switch (type.value) {
+    case 'a': return 1
+    case 'b': return 2
+  }
+  // Implicit undefined return triggers ESLint error
+})
+
+// ✅ OK: Add default case
+const result = computed(() => {
+  switch (type.value) {
+    case 'a': return 1
+    case 'b': return 2
+    default: return null
+  }
+})
+```
+
+### HTML Entities in Vue Templates (`vue/no-parsing-error`)
+
+Use HTML entities for `<` and `>` in template text content:
+
+```vue
+<!-- ❌ Error: '<' interpreted as HTML tag start -->
+<div>< 0.2</div>
+<li>m < 0: line goes down</li>
+
+<!-- ✅ OK: Use HTML entities -->
+<div>&lt; 0.2</div>
+<li>m &lt; 0: line goes down</li>
+```
+
+### Quick Checklist Before Commit
+1. Run `npm run lint` to catch unused variables
+2. Ensure all computed properties have explicit returns
+3. Use `&lt;`/`&gt;` for math comparisons in templates
+
+---
+
 ## Quick Reference
 
 ### Commands

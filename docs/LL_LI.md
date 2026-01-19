@@ -4078,3 +4078,94 @@ Phase 20 implemented Correlation & Regression with the CorrelationExplorer widge
 3. Anscombe's quartet is an invaluable teaching tool for "always visualize data"
 4. Correlation presets (strong/weak/none, positive/negative, non-linear, outlier effects) cover key educational scenarios
 5. The Statistics section is now complete with 5 subtopics bridging toward ML/AI foundations
+
+---
+
+## Post-Phase 20: ESLint CI Fix
+
+### LL-068: Computed Properties Require Explicit Returns in All Code Paths
+**Issue**: Vue computed properties using switch statements without default cases triggered `vue/return-in-computed-property` ESLint errors in CI, even though TypeScript didn't complain locally.
+
+**Code**:
+```typescript
+// ❌ Error: Expected to return a value in computed function
+const criticalValues = computed(() => {
+  if (condition) {
+    switch (alternative.value) {
+      case 'two-sided': return { lower: -val, upper: val }
+      case 'less': return { lower: -val, upper: null }
+      case 'greater': return { lower: null, upper: val }
+    }
+    // ESLint error: no return after switch
+  } else {
+    // Similar pattern...
+  }
+})
+```
+
+**Resolution**: Add default case to all switch statements in computed properties:
+```typescript
+// ✅ OK: Default case ensures all paths return
+const criticalValues = computed(() => {
+  if (condition) {
+    switch (alternative.value) {
+      case 'two-sided': return { lower: -val, upper: val }
+      case 'less': return { lower: -val, upper: null }
+      case 'greater': return { lower: null, upper: val }
+      default: return { lower: -val, upper: val }
+    }
+  } else {
+    // ...
+  }
+})
+```
+
+**Lesson**: Always add default cases to switch statements inside computed properties, even when TypeScript's exhaustiveness checking suggests it's unnecessary. ESLint's `vue/return-in-computed-property` rule analyzes code paths differently than TypeScript.
+
+---
+
+### LL-069: Import Aliasing for Unused Exports
+**Issue**: Importing functions for potential future use (or for code documentation purposes) triggered `@typescript-eslint/no-unused-vars` errors in CI.
+
+**Code**:
+```typescript
+// ❌ Error: 'sampleSizeForProportions' is defined but never used
+import {
+  oneSampleTTest,
+  sampleSizeForProportions,  // Imported for future use
+  cohensD,                    // Imported for reference
+} from '@/utils/math/hypothesis'
+```
+
+**Resolution**: Use import aliasing with underscore prefix:
+```typescript
+// ✅ OK: Aliased imports suppress warnings
+import {
+  oneSampleTTest,
+  sampleSizeForProportions as _sampleSizeForProportions,
+  cohensD as _cohensD,
+} from '@/utils/math/hypothesis'
+```
+
+**Lesson**: When imports are needed for documentation or anticipated future use, alias them with underscore prefix (`as _name`). This satisfies ESLint while keeping the imports available. However, prefer removing truly unused imports and re-adding them when needed.
+
+---
+
+### LL-070: HTML Entities for Less-Than in Vue Templates (Recurring)
+**Issue**: Using `< 0.2` in Vue template text content caused `vue/no-parsing-error` because `<` was interpreted as an HTML tag start. This is a recurring issue (also documented in LL-041).
+
+**Code**:
+```vue
+<!-- ❌ Error: invalid-first-character-of-tag-name at column 49 -->
+<div class="font-bold text-gray-400">< 0.2</div>
+```
+
+**Resolution**: Use HTML entity `&lt;`:
+```vue
+<!-- ✅ OK: HTML entity renders as '<' -->
+<div class="font-bold text-gray-400">&lt; 0.2</div>
+```
+
+**Lesson**: This is a recurring pattern in math-focused content. When displaying mathematical comparisons (especially effect sizes, thresholds, or ranges), always use `&lt;` and `&gt;` HTML entities. Consider creating a shared guideline in CLAUDE.md for this pattern.
+
+**Action Taken**: Added "ESLint Patterns" section to CLAUDE.md with quick reference for all common patterns.

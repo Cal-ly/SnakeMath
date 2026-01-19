@@ -2964,3 +2964,112 @@ export function useSamplingSimulator(options: UseSamplingSimulatorOptions = {}) 
 - State for Type I/II error demo (alpha, effect size, sample size)
 - State for power analysis (effect size, desired power, test type)
 - URL sync with 300ms debounce (per LL-015)
+
+
+---
+
+## Phase 21 Decisions
+
+### D-120: Widget Named IntegrationExplorer
+**Decision**: Name the integration widget "IntegrationExplorer" following the established calculus widget pattern.
+
+**Rationale**:
+- Consistent with LimitsExplorer and DerivativeVisualizer naming
+- "Explorer" suggests interactive discovery of integration concepts
+- Clear naming convention across calculus widgets
+
+---
+
+### D-121: Single View with Collapsible Panels
+**Decision**: Use a single-page layout with collapsible ContentSection panels rather than tabs.
+
+**Rationale**:
+- Integration content flows naturally from concept to concept
+- Collapsible panels allow focus on specific topics
+- Consistent with Limits and Derivatives pages
+- Better for scrolling through related content
+
+---
+
+### D-122: Preset-Based Functions Only
+**Decision**: Use preset function definitions rather than allowing arbitrary user input.
+
+**Rationale**:
+- Security: no eval() or arbitrary code execution
+- Curated educational examples with interesting integration properties
+- Consistent with established pattern (LimitsExplorer, DerivativeVisualizer)
+- Each preset includes known exact integral for error calculation
+
+---
+
+### D-123: Include Simpson's Rule
+**Decision**: Include Simpson's rule alongside left, right, midpoint, and trapezoidal methods.
+
+**Rationale**:
+- Simpson's rule demonstrates superior O(1/n⁴) convergence rate
+- Educational: shows polynomial interpolation approach
+- Practical: commonly used in numerical computing (scipy.integrate.simps)
+- Automatically handles even-n requirement internally
+
+---
+
+### D-124: Blue Positive / Red Negative Areas
+**Decision**: Use blue for positive areas and red for negative areas in Riemann sum visualization.
+
+**Rationale**:
+- Clearly visualizes signed area concept
+- Blue/red intuitive (profit/loss, above/below axis)
+- Consistent with financial convention
+- Distinct from axis/curve colors
+
+---
+
+### D-125: Smooth N Increment Animation
+**Decision**: Use requestAnimationFrame with delta time for smooth n increment during convergence animation.
+
+**Rationale**:
+- Smooth visual progression from n=4 to n=200
+- Time-based increment (not frame-based) for consistent speed across devices
+- Speed control (0.5x to 3x) for user preference
+- Real-time error display shows convergence
+
+**Implementation**:
+```typescript
+function animate(timestamp: number) {
+  const deltaTime = timestamp - lastTimestamp
+  const baseRate = (targetN - startN) / 5000 // ms
+  const increment = baseRate * deltaTime * animationSpeed
+  const newN = Math.min(targetN, currentN + increment)
+  emit('update:n', Math.round(newN))
+  if (newN < targetN) requestAnimationFrame(animate)
+}
+```
+
+---
+
+### D-126: Geometric Interpretation Focus
+**Decision**: Emphasize geometric interpretation (area, accumulation) over formal calculus.
+
+**Rationale**:
+- Aligns with SnakeMath's visual-first approach
+- Programmers relate better to area/accumulation concepts
+- Connects to practical applications (AUC, running totals)
+- Formal theory available in textbooks
+
+---
+
+### D-127: URL State Sync for All Widget Parameters
+**Decision**: Sync preset, bounds (a, b), subdivisions (n), and method to URL.
+
+**Rationale**:
+- Shareable widget configurations
+- Consistent with other widgets (LimitsExplorer, DerivativeVisualizer)
+- Enables bookmarking specific examples
+- 300ms debounce per LL-015
+
+**URL Parameters**:
+- `preset`: Function preset ID
+- `a`: Lower bound
+- `b`: Upper bound
+- `n`: Number of subdivisions
+- `method`: Riemann sum method

@@ -491,3 +491,101 @@ export interface CriticalPoint {
   /** Classification of the critical point */
   type: CriticalPointType
 }
+
+// ============================================================================
+// Integration Types (Phase 21)
+// ============================================================================
+
+/**
+ * Available Riemann sum methods for numerical integration
+ */
+export type RiemannMethod = 'left' | 'right' | 'midpoint' | 'trapezoidal' | 'simpson'
+
+/**
+ * Result of computing a Riemann sum
+ */
+export interface RiemannSumResult {
+  /** Computed approximation of the integral */
+  approximation: number
+  /** Individual rectangle/trapezoid areas (signed) */
+  areas: number[]
+  /** Sample points used for evaluation, with height and width for visualization */
+  samplePoints: RiemannSamplePoint[]
+  /** Total number of subdivisions */
+  n: number
+  /** Width of each subdivision: (b - a) / n */
+  deltaX: number
+}
+
+/**
+ * A sample point in the Riemann sum, used for visualization
+ */
+export interface RiemannSamplePoint {
+  /** X coordinate where function is sampled */
+  x: number
+  /** Y value: f(x) at sample point */
+  y: number
+  /** Left edge of the rectangle/trapezoid */
+  leftX: number
+  /** Width of this subdivision */
+  width: number
+  /** For trapezoidal: y value at right edge */
+  rightY?: number
+}
+
+/**
+ * Result of evaluating an integral with error analysis
+ */
+export interface IntegrationResult {
+  /** Numerical approximation */
+  approximation: number
+  /** Exact value if known from antiderivative */
+  exactValue?: number
+  /** Absolute error: |approximation - exactValue| */
+  absoluteError?: number
+  /** Relative error: |approximation - exactValue| / |exactValue| */
+  relativeError?: number
+  /** Method used for computation */
+  method: RiemannMethod
+  /** Number of subdivisions */
+  n: number
+}
+
+/**
+ * A preset function for the IntegrationExplorer widget
+ * D-122: Use preset functions only (no arbitrary input)
+ */
+export interface IntegrationFunctionPreset {
+  /** Unique identifier */
+  id: string
+  /** Display name */
+  name: string
+  /** Educational description */
+  description: string
+  /** The function f(x) to integrate */
+  fn: (x: number) => number
+  /** The antiderivative F(x) where F'(x) = f(x) */
+  antiderivative: (x: number) => number
+  /** LaTeX representation of f(x) */
+  latex: string
+  /** LaTeX representation of F(x) */
+  antiderivativeLatex: string
+  /** Default integration bounds */
+  defaultBounds: { a: number; b: number }
+  /** Recommended viewing domain for visualization */
+  viewDomain: { min: number; max: number }
+  /** Known exact integral value for default bounds (for display) */
+  exactValueDisplay: string
+  /** Points of interest for exploration */
+  interestingPoints?: IntegrationInterestingPoint[]
+}
+
+/**
+ * A point of interest for integration exploration
+ */
+export interface IntegrationInterestingPoint {
+  /** X coordinate */
+  x: number
+  /** Description of what's notable here */
+  description: string
+}

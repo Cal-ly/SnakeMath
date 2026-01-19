@@ -37,7 +37,7 @@ const topics = [
     path: '/calculus/integration',
     description: 'Accumulation and area under curves',
     icon: 'fa-solid fa-chart-area',
-    available: false,
+    available: true,
   },
 ]
 

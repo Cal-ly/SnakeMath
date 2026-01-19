@@ -50,6 +50,7 @@ Each topic builds toward machine learning foundations:
 | 18 | Sampling & Estimation | SamplingSimulator | Statistics: Sampling, CI, Bootstrap | ✅ Complete |
 | 19 | Hypothesis Testing | HypothesisTestingSimulator | Statistics: p-values, Power, A/B Testing | ✅ Complete |
 | 20 | Correlation & Regression | CorrelationExplorer | Statistics: Correlation, Linear Regression | ✅ Complete |
+| 21 | Calculus: Integration | IntegrationExplorer | Calculus: Riemann Sums, Definite Integrals | ✅ Complete |
 
 ---
 
@@ -500,14 +501,45 @@ Each topic builds toward machine learning foundations:
 
 ---
 
-## Future Horizons (Phase 21+)
+### Phase 21: Calculus — Integration
+*Area Under the Curve*
 
-Lower detail, higher flexibility. Evaluated after Phase 20.
+**Goal**: Visualize definite integrals using Riemann sums with convergence demonstration.
+
+| Track | Deliverables |
+|-------|--------------|
+| Content | Definite integrals, Riemann sums, Fundamental Theorem of Calculus |
+| Widget | IntegrationExplorer: preset functions, 5 Riemann methods, convergence animation |
+| Polish | Signed area visualization, error display |
+
+**Widget Features**:
+
+*IntegrationExplorer*:
+- 8 preset functions with interesting integration properties
+- 5 Riemann sum methods: left, right, midpoint, trapezoidal, Simpson's
+- SVG visualization with colored rectangles (blue positive, red negative)
+- Bounds controls (a, b) with n slider (1-200)
+- Convergence animation with play/pause/speed controls
+- Real-time approximation, exact value, and error display
+- URL state sync
+
+**Math Utilities**: Riemann sum functions, preset definitions (76+ tests)
+
+**Programmer Relevance**:
+- "Integration is like a running total or accumulator"
+- Numerical integration methods (trapz, simps in scipy/numpy)
+- Connection to summation notation (Σ → ∫)
+- ML applications: area under ROC curve, probability densities
+
+---
+
+## Future Horizons (Phase 22+)
+
+Lower detail, higher flexibility. Evaluated after Phase 21.
 
 | Phase | Possible Focus |
 |-------|----------------|
-| 21 | AI/ML Foundations: Neural network intuition, gradient descent visualization |
-| 22 | Calculus: Integrals (area under curve, accumulation) |
+| 22 | AI/ML Foundations: Neural network intuition, gradient descent visualization |
 | 23 | PWA features: offline support, installability |
 | 24 | Search functionality, content discovery |
 | 25 | User progress tracking (local storage) |
@@ -613,14 +645,14 @@ Decisions made during roadmap planning:
 
 ### Content Progression
 ```
-Phase:  4    5    6    7    8    9    10   11   12   13   14   15   16   17   18   19   20
-        │    │    │    │    │    │    │    │    │    │    │    │    │    │    │    │    │
+Phase:  4    5    6    7    8    9    10   11   12   13   14   15   16   17   18   19   20   21
+        │    │    │    │    │    │    │    │    │    │    │    │    │    │    │    │    │    │
 Basics: ████ ─────████
 Algebra:     ████      ████ ████
 Trig:                            ████                     ████
 Stats:                                ████                          ████ ████ ████ ████
 LinAlg:                                    ████ ████                ████
-Calc:                                                ████ ████
+Calc:                                                ████ ████                          ████
 ```
 
 ### Widget Progression
@@ -643,6 +675,7 @@ Phase 17: DistributionExplorer    (PDF/CDF curves, CLT demo)
 Phase 18: SamplingSimulator       (population grid, CI demonstration)
 Phase 19: HypothesisTestingSimulator (p-value shading, power curves)
 Phase 20: CorrelationExplorer     (scatter plot, regression line, residuals)
+Phase 21: IntegrationExplorer    (Riemann sums, convergence animation)
 ```
 
 ### Technical Capability Building
@@ -663,6 +696,7 @@ Phase 17: Distribution curves, CLT convergence animation, probability shading
 Phase 18: Population grid virtualization, bootstrap resampling, CI capture animation
 Phase 19: Hypothesis test visualization, Type I/II error demo, power curves
 Phase 20: Draggable scatter plot, real-time correlation, residual lines
+Phase 21: Riemann sum visualization, convergence animation, signed area display
 ```
 
 ---
@@ -699,6 +733,7 @@ Phase 20: Draggable scatter plot, real-time correlation, residual lines
 | 18 | Sampling visualization effective? CI demo working? | ✅ Yes - SamplingSimulator with 4 methods; CI coverage demo works; bootstrap panel effective; 1571 tests total |
 | 19 | Hypothesis testing intuitive? p-value visualization clear? | ✅ Yes - HypothesisTestingSimulator with 4 test types; Type I/II error demo effective; power analysis aids study design; 1674 tests total |
 | 20 | Correlation/regression effective? ML bridge clear? Statistics section complete? | ✅ Yes - CorrelationExplorer with scatter plot, regression line, residuals, Anscombe's quartet; Statistics section complete with 5 subtopics; 1744 tests total |
+| 21 | Integration visualization effective? Riemann sum convergence clear? | ✅ Yes - IntegrationExplorer with 5 methods; convergence animation shows limit definition; signed area visualization effective; 1852 tests total |
 
 ---
 
@@ -740,6 +775,7 @@ Phase 20: Draggable scatter plot, real-time correlation, residual lines
 | 2026-01-18 | Phase 18 complete: SamplingSimulator widget (4 sampling methods, CI demo, bootstrap panel, sample size calculator), SamplingView content page; 110 new unit tests; 1571 tests total |
 | 2026-01-19 | Phase 19 complete: HypothesisTestingSimulator widget (4 test types, p-value viz, Type I/II error demo, power analysis), HypothesisTestingView content page; 103 new unit tests; 1674 tests total; 35 E2E tests |
 | 2026-01-19 | Phase 20 complete: CorrelationExplorer widget (scatter plot, regression line, residuals, Anscombe's quartet), CorrelationView content page; 70 new unit tests; 1744 tests total; Statistics section complete with 5 subtopics |
+| 2026-01-19 | Phase 21 complete: IntegrationExplorer widget (5 Riemann sum methods, convergence animation), IntegrationView content page; 108 new unit tests (76 integration + 32 composable); 1852 tests total; Calculus section expanded |
 
 ---
 

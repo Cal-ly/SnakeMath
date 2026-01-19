@@ -179,6 +179,11 @@ const router = createRouter({
       name: 'calculus-derivatives',
       component: () => import('@/views/calculus/DerivativesView.vue'),
     },
+    {
+      path: '/calculus/integration',
+      name: 'calculus-integration',
+      component: () => import('@/views/calculus/IntegrationView.vue'),
+    },
     // Catch-all 404
     {
       path: '/:pathMatch(.*)*',
