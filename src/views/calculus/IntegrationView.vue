@@ -599,7 +599,7 @@ print(f"Unsigned area = {unsigned_area:.4f}")`
           language="python"
           :code="scipyCode"
           :collapsible="true"
-          :default-expanded="true"
+          :default-expanded="false"
         />
       </ContentSection>
 
