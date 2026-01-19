@@ -2683,3 +2683,284 @@ const probability = computed(() => {
 - Histogram with auto-calculated bin count (Sturges' rule)
 - Overlay theoretical curve for comparison
 - Clear visual distinction (bars vs curve)
+
+---
+
+## Phase 18 Decisions
+
+### D-142: Four Sampling Methods with Visual Distinction
+**Decision**: Implement simple random, stratified, systematic, and cluster sampling with distinct visual representations.
+
+**Rationale**:
+- These four methods cover the most common sampling approaches in practice
+- Visual distinction helps learners understand the differences:
+  - Simple random: randomly scattered selection
+  - Stratified: colored groups with proportional selection from each
+  - Systematic: regular interval selection (every k-th item)
+  - Cluster: grouped selection of entire clusters
+- Each method has practical applications programmers encounter
+
+**Implementation**:
+```typescript
+type SamplingMethod = 'simple' | 'stratified' | 'systematic' | 'cluster'
+
+function simpleRandomSample<T>(population: T[], n: number): T[]
+function stratifiedSample<T>(population: T[], n: number, strata: T[][]): T[]
+function systematicSample<T>(population: T[], n: number, start?: number): T[]
+function clusterSample<T>(clusters: T[][], numClusters: number): T[]
+```
+
+---
+
+### D-143: Population Grid Uses SVG with Individual Circles
+**Decision**: Visualize population as a grid of SVG circles, with sampled items highlighted.
+
+**Rationale**:
+- Individual items are clearly visible and countable
+- Highlighting sampled items shows the selection visually
+- Works well for populations up to ~500 items
+- Colored by stratum for stratified sampling
+- Grouped visually for cluster sampling
+
+**Implementation**:
+```vue
+<svg>
+  <circle
+    v-for="(item, i) in population"
+    :cx="getX(i)"
+    :cy="getY(i)"
+    :r="4"
+    :fill="isSampled(i) ? 'var(--primary)' : 'var(--text-muted)'"
+    :opacity="isSampled(i) ? 1 : 0.3"
+  />
+</svg>
+```
+
+---
+
+### D-144: CI Coverage Demo Shows Capture Rate Converging
+**Decision**: Confidence interval demonstration shows individual CIs and running capture rate.
+
+**Rationale**:
+- Visual demonstration of "95% of CIs contain the true mean"
+- Running capture rate converges to confidence level with more samples
+- Individual CI bars colored by whether they contain true mean (green) or not (red)
+- True mean shown as vertical reference line
+- Educational: shows that CI is about the procedure, not the individual interval
+
+**Implementation**:
+- Each CI bar plotted horizontally
+- Green if contains true μ, red if not
+- Capture rate = (green count) / (total count)
+- Auto-run option for animated convergence
+
+---
+
+### D-145: Bootstrap Panel Requires Sample Before Running
+**Decision**: Bootstrap functionality is disabled until user takes a sample first.
+
+**Rationale**:
+- Bootstrap resamples from an existing sample, not the population
+- Educational flow: take sample → then bootstrap from it
+- Prevents confusion about what bootstrap is resampling
+- Shows original sample statistics alongside bootstrap estimates
+- Clear message "Take a sample first" when no sample exists
+
+**Implementation**:
+```vue
+<div v-if="!hasSample">
+  <p>Take a sample first to enable bootstrap.</p>
+</div>
+<div v-else>
+  <button @click="runBootstrap">Run Bootstrap</button>
+</div>
+```
+
+---
+
+### D-146: t-Distribution Approximation Using Cornish-Fisher Expansion
+**Decision**: Use Cornish-Fisher expansion to approximate t-distribution critical values.
+
+**Rationale**:
+- No external statistics library needed
+- Accurate enough for educational purposes (within 0.01 for df > 5)
+- Handles various confidence levels (90%, 95%, 99%)
+- Degrades gracefully to z-distribution for large df
+- Formula: t ≈ z + (z³ + z) / (4df) + ...
+
+**Implementation**:
+```typescript
+function tCriticalValue(df: number, confidenceLevel: number): number {
+  const alpha = 1 - confidenceLevel
+  const z = standardNormalQuantile(1 - alpha / 2)
+
+  // Cornish-Fisher expansion for small df
+  if (df <= 2) return z * 1.5 // Rough approximation
+  const g1 = (z * z * z + z) / (4 * df)
+  const g2 = (z * z * z * z * z + 16 * z * z * z + 5 * z) / (96 * df * df)
+  return z + g1 + g2
+}
+```
+
+---
+
+### D-147: Composable Pattern (useSamplingSimulator) Following Established Conventions
+**Decision**: Create `useSamplingSimulator` composable following the established pattern from other widget composables.
+
+**Rationale**:
+- Consistent API across all widget composables
+- Separates state logic from presentation
+- Supports optional URL state synchronization with 300ms debounce
+- Manages multiple state domains: population, sampling, CI simulation, bootstrap, calculator
+- Testable independently of components
+
+**Implementation**:
+```typescript
+export function useSamplingSimulator(options: UseSamplingSimulatorOptions = {}) {
+  // Population state
+  const population = ref<number[]>([])
+  const populationConfig = ref<PopulationConfig>(defaultConfig)
+
+  // Sampling state
+  const sampleSize = ref(30)
+  const samplingMethod = ref<SamplingMethod>('simple')
+  const currentSample = ref<SampleResult | null>(null)
+  const sampleHistory = ref<SampleHistoryEntry[]>([])
+
+  // CI simulation state
+  const ciResults = ref<CISimulationResult[]>([])
+
+  // Bootstrap state
+  const bootstrapResult = ref<BootstrapResult | null>(null)
+
+  // URL sync with debounce
+  if (options.syncUrl) {
+    watchDebounced([sampleSize, samplingMethod], updateUrl, { debounce: 300 })
+  }
+
+  return { population, sampleSize, samplingMethod, takeSample, runCISimulation, runBootstrap, ... }
+}
+```
+
+---
+
+### D-148: Sample Size Calculator with Mean and Proportion Tabs
+**Decision**: Provide separate calculator modes for estimating mean vs proportion.
+
+**Rationale**:
+- Different formulas for continuous (mean) vs binary (proportion) outcomes
+- Mean estimation: n = (z × σ / E)² requires known/estimated standard deviation
+- Proportion estimation: n = z² × p(1-p) / E² uses expected proportion
+- Tabbed interface keeps both accessible without cluttering UI
+- Educational: shows relationship between margin of error, confidence, and sample size
+
+**Implementation**:
+- Tabs: "Estimating Mean" | "Estimating Proportion"
+- Mean inputs: margin of error (E), std dev estimate (σ), confidence level
+- Proportion inputs: margin of error (E), expected proportion (p), confidence level
+- Result displayed prominently with formula reference
+- Key insight callout: "To halve margin of error, need 4× sample size" (√n relationship)
+
+---
+
+## Phase 19 Decisions
+
+### D-149: T-Distribution Implementation Using Log-Gamma
+**Decision**: Implement t-distribution PDF and CDF from scratch using log-gamma and regularized incomplete beta functions.
+
+**Rationale**:
+- T-distribution is essential for t-tests with small sample sizes
+- Log-gamma avoids overflow issues with large gamma values
+- Regularized incomplete beta function provides accurate CDF calculation
+- No external statistical library required
+- Educational: shows mathematical foundations of hypothesis testing
+
+**Implementation**:
+- `logGamma(x)` using Lanczos approximation
+- `regularizedIncompleteBeta(a, b, x)` using continued fraction approximation
+- `tDistributionPDF(x, df)` using log-gamma for numerical stability
+- `tDistributionCDF(x, df)` using regularized incomplete beta
+
+---
+
+### D-150: Four Test Types for Hypothesis Testing
+**Decision**: Support four common hypothesis test types: one-sample t, two-sample t, one-proportion z, two-proportion z.
+
+**Rationale**:
+- Covers the most common hypothesis testing scenarios
+- One-sample t: test mean against hypothesized value
+- Two-sample t: compare means between two groups (A/B testing)
+- One-proportion z: test proportion against hypothesized value
+- Two-proportion z: compare proportions between two groups
+- Welch's t-test for two-sample (doesn't assume equal variances)
+
+**Trade-offs**:
+- Paired t-test not included (requires paired data structure)
+- Chi-square, ANOVA not included (different visualization needs)
+- Can be extended in future phases
+
+---
+
+### D-151: Effect Size Display with Cohen's Metrics
+**Decision**: Display effect size (Cohen's d for t-tests, Cohen's h for proportion tests) alongside p-values.
+
+**Rationale**:
+- P-value alone doesn't indicate practical significance
+- Effect size quantifies the magnitude of the difference
+- Cohen's d: standardized difference in means (0.2=small, 0.5=medium, 0.8=large)
+- Cohen's h: arcsine-transformed proportion difference
+- Educational: emphasizes practical vs statistical significance
+
+**Implementation**:
+- Effect size calculated automatically from test inputs
+- Displayed with interpretation (negligible/small/medium/large)
+- Visual indicator in results panel
+
+---
+
+### D-152: Tabbed Interface for Hypothesis Testing Widget
+**Decision**: Use a tabbed interface with three panels: Run Test, Type I/II Errors, Power Analysis.
+
+**Rationale**:
+- Separates concerns while keeping related content accessible
+- Run Test: main hypothesis testing functionality
+- Type I/II Errors: educational demo of error trade-offs
+- Power Analysis: sample size planning for study design
+- Consistent with other complex widgets (DistributionExplorer, SamplingSimulator)
+- Each tab focuses on a specific learning objective
+
+---
+
+### D-153: Power Curve Visualization with Reference Lines
+**Decision**: Display power curve showing relationship between sample size and statistical power, with 80% and 90% reference lines.
+
+**Rationale**:
+- Power analysis is critical for study design
+- 80% and 90% are conventional power targets
+- Visual curve shows diminishing returns at higher n
+- Reference lines make it easy to read required sample sizes
+- Purple marker shows user's desired power setting
+
+**Implementation**:
+- SVG line chart with sample size on x-axis, power on y-axis
+- Dashed horizontal lines at 80% and 90% power
+- Three result boxes: required n for desired power, n for 80%, n for 90%
+- Effect size guidelines (negligible/small/medium/large)
+
+---
+
+### D-154: Composable Pattern for Hypothesis Testing State
+**Decision**: Use the established composable pattern (useHypothesisTesting) for state management with URL sync.
+
+**Rationale**:
+- Consistent with useDistributions, useSamplingSimulator, and other phase composables
+- Centralizes all state and computed properties
+- Provides setter functions for all state updates
+- Enables URL state sync for shareable widget configurations
+- Supports preset loading functionality
+
+**Implementation**:
+- State for each test type (one-sample-t, two-sample-t, one-prop-z, two-prop-z)
+- State for Type I/II error demo (alpha, effect size, sample size)
+- State for power analysis (effect size, desired power, test type)
+- URL sync with 300ms debounce (per LL-015)

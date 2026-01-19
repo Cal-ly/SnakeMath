@@ -165,31 +165,21 @@ const topic = topics.find((t) => t.id === 'statistics')!
         <div class="grid gap-3 md:grid-cols-2">
           <div class="p-3 rounded-lg border border-border">
             <p class="font-medium text-text-primary">
-              <i class="fa-solid fa-database text-text-muted mr-2" aria-hidden="true" />
-              Sampling & Estimation
+              <i class="fa-solid fa-sitemap text-text-muted mr-2" aria-hidden="true" />
+              Bayesian Statistics
             </p>
             <p class="text-sm text-text-muted mt-1">
-              Making inferences about populations from samples.
+              Updating beliefs with evidence.
             </p>
           </div>
 
           <div class="p-3 rounded-lg border border-border">
             <p class="font-medium text-text-primary">
-              <i class="fa-solid fa-scale-balanced text-text-muted mr-2" aria-hidden="true" />
-              Hypothesis Testing
+              <i class="fa-solid fa-timeline text-text-muted mr-2" aria-hidden="true" />
+              Time Series Analysis
             </p>
             <p class="text-sm text-text-muted mt-1">
-              P-values, confidence intervals, and statistical significance.
-            </p>
-          </div>
-
-          <div class="p-3 rounded-lg border border-border">
-            <p class="font-medium text-text-primary">
-              <i class="fa-solid fa-chart-mixed text-text-muted mr-2" aria-hidden="true" />
-              Correlation & Regression
-            </p>
-            <p class="text-sm text-text-muted mt-1">
-              Measuring relationships between variables.
+              Analyzing data over time.
             </p>
           </div>
         </div>

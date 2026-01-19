@@ -5,13 +5,13 @@ This document outlines the current state of the project for easy resumption afte
 
 ---
 
-## Current Status: Phase 17 Complete
+## Current Status: Phase 20 Complete
 
-**Last Updated**: 2026-01-18
+**Last Updated**: 2026-01-19
 
 ### Project Summary
 
-SnakeMath is an educational mathematics website for programmers. Seventeen phases of development have established:
+SnakeMath is an educational mathematics website for programmers. Twenty phases of development have established:
 
 | Phase | Focus | Key Deliverables | Status |
 |-------|-------|------------------|--------|
@@ -33,6 +33,9 @@ SnakeMath is an educational mathematics website for programmers. Seventeen phase
 | 15 | Trigonometry — Remaining Topics | Right Triangle, Identities, Inverse, Trig in Code | Complete |
 | 16 | Linear Algebra — 3D | VectorOperations3D, MatrixTransformations3D, isometric projection | Complete |
 | 17 | Statistics — Distributions | DistributionExplorer, CLTDemonstration, Distributions content page | Complete |
+| 18 | Statistics — Sampling | SamplingSimulator, CI demo, bootstrap panel, Sampling content page | Complete |
+| 19 | Statistics — Hypothesis Testing | HypothesisTestingSimulator, p-value viz, power analysis, Type I/II demo | Complete |
+| 20 | Statistics — Correlation & Regression | CorrelationExplorer, scatter plot, residuals, Anscombe's quartet | Complete |
 
 ### What's Live
 
@@ -61,9 +64,12 @@ SnakeMath is an educational mathematics website for programmers. Seventeen phase
   - Matrices (MatrixTransformations widget with unit square visualization)
   - **Vectors 3D (VectorOperations3D widget with isometric projection, cross product, right-hand rule)**
   - **Matrices 3D (MatrixTransformations3D widget with 3×3 rotation matrices, Euler angles)**
-- `/statistics` - Statistics section (2 subtopics):
+- `/statistics` - Statistics section (5 subtopics):
   - Descriptive Statistics (StatisticsCalculator widget with histogram & box plot)
-  - **Probability Distributions (DistributionExplorer widget with 5 distributions, CLT demo)**
+  - Probability Distributions (DistributionExplorer widget with 5 distributions, CLT demo)
+  - Sampling & Estimation (SamplingSimulator widget with 4 sampling methods, CI demo, bootstrap)
+  - Hypothesis Testing (HypothesisTestingSimulator widget with 4 test types, p-value viz, power analysis)
+  - **Correlation & Regression (CorrelationExplorer widget with scatter plot, regression line, residuals, Anscombe's quartet)**
 - `/calculus` - Calculus section:
   - Limits (LimitsExplorer widget with epsilon-delta visualization)
   - **Derivatives (DerivativeVisualizer widget with tangent lines and secant animation)**
@@ -88,6 +94,9 @@ SnakeMath is an educational mathematics website for programmers. Seventeen phase
 - **MatrixTransformations3D**: 6 transformation types (identity, rotateX, rotateY, rotateZ, combined, scale), isometric SVG canvas with unit cube and basis vectors, Euler angle composition, 8 educational presets, determinant-based property badges (orthogonal, rotation, orientation), URL state sync
 - **DistributionExplorer**: 5 distributions (Normal, Binomial, Poisson, Exponential, Uniform), parameter sliders with real-time PDF/CDF updates, probability calculator (P(X < a), P(a < X < b)), histogram from random samples, distribution comparison tabs, URL state sync
 - **CLTDemonstration**: Interactive Central Limit Theorem demo, source distribution selector (uniform, exponential, binomial, poisson), sample size slider, auto-run animation showing sample means converging to normal, histogram with normal curve overlay
+- **SamplingSimulator**: 4 sampling methods (simple random, stratified, systematic, cluster), population grid visualization, animated sample drawing, sampling distribution histogram, CI coverage demonstration with capture rate, bootstrap confidence intervals, sample size calculator for mean and proportion, 5 educational presets, URL state sync
+- **HypothesisTestingSimulator**: 4 test types (one-sample t, two-sample t, one-proportion z, two-proportion z), hypothesis setup (H₀, H₁, α), test statistic and p-value calculation, distribution visualization with rejection region shading, effect size (Cohen's d/h), Type I/II error interactive demo, power analysis with sample size calculator, 5 educational presets, URL state sync
+- **CorrelationExplorer**: Interactive scatter plot with click-to-add points, draggable points, regression line overlay with equation (ŷ = mx + b), real-time correlation coefficient (r) and R² display, residual lines visualization, residual plot (residuals vs x), Anscombe's quartet demonstration, 8 correlation presets (strong positive/negative, no correlation, non-linear, outlier effect), causation warning component, statistics panel (n, r, R², slope, intercept, standard error), URL state sync
 
 **Visualization Components**:
 - **CoordinateSystem**: Reusable SVG coordinate system with axes, grid, labels
@@ -98,8 +107,8 @@ SnakeMath is an educational mathematics website for programmers. Seventeen phase
 - **BoxPlotChart**: SVG box plot with quartiles, whiskers, and outlier markers
 
 **Testing Infrastructure**:
-- 1461 unit tests (Vitest) - including distributions (209), vector3d (92), matrix3d (112), and isometricProjection tests
-- E2E tests (Playwright) with tiered CI approach
+- 1744 unit tests (Vitest) - including correlation (70), hypothesis testing (103), sampling (110), distributions (209), vector3d (92), matrix3d (112), and isometricProjection tests
+- E2E tests (Playwright) with tiered CI approach - including correlation and hypothesis testing tests
 - Visual regression tests (Playwright screenshot comparison) - local only
 - WCAG 2.1 AA accessibility audits via axe-core
 - **Tiered CI workflow**: quick-check (push), full-test (PR only)
@@ -167,6 +176,12 @@ npm run build        # Production build
 | Isometric projection composable | `src/composables/useIsometricProjection.ts` |
 | Distributions utilities | `src/utils/math/distributions.ts` |
 | Distributions composable | `src/composables/useDistributions.ts` |
+| Sampling utilities | `src/utils/math/sampling.ts` |
+| Sampling composable | `src/composables/useSamplingSimulator.ts` |
+| Hypothesis testing utilities | `src/utils/math/hypothesis.ts` |
+| Hypothesis testing composable | `src/composables/useHypothesisTesting.ts` |
+| Correlation utilities | `src/utils/math/correlation.ts` |
+| Correlation composable | `src/composables/useCorrelation.ts` |
 
 ### Archived Documentation
 Phase completion summaries are in `docs/archive/`:
@@ -178,8 +193,8 @@ Phase completion summaries are in `docs/archive/`:
 
 ## Test Coverage
 
-### Unit Tests (1461 tests)
-- Math utilities (number classification, parsing, quadratic, exponential, trigonometry, statistics, product, vector, matrix, limits, derivative, rightTriangle, trigIdentities, inverseTrig, trigApplications, vector3d, matrix3d, distributions functions)
+### Unit Tests (1744 tests)
+- Math utilities (number classification, parsing, quadratic, exponential, trigonometry, statistics, product, vector, matrix, limits, derivative, rightTriangle, trigIdentities, inverseTrig, trigApplications, vector3d, matrix3d, distributions, sampling, hypothesis, correlation functions)
 - Data validation (symbols, navigation)
 - Component logic (via composables)
 
@@ -198,7 +213,10 @@ Phase completion summaries are in `docs/archive/`:
 - **MatrixTransformations3D** (transformation types, sliders, presets, matrix display, unit cube, URL sync)
 - **DistributionExplorer** (distribution tabs, parameters, probability calculator, histogram, URL sync)
 - **CLTDemonstration** (samples, auto-run, reset, histogram, normal curve)
-- Accessibility (WCAG 2.1 AA audits for all pages including statistics distributions)
+- **SamplingSimulator** (sampling methods, population grid, sample drawing, CI demo, bootstrap, URL sync)
+- **HypothesisTestingSimulator** (test types, alternative hypotheses, alpha levels, presets, type error demo, power analysis, URL sync)
+- **CorrelationExplorer** (scatter plot interactions, add/remove points, random data, presets, Anscombe's quartet, residuals toggle, URL sync)
+- Accessibility (WCAG 2.1 AA audits for all pages including statistics correlation)
 
 ### Visual Regression Tests (Local Only)
 - All pages baseline screenshots
@@ -233,6 +251,227 @@ Phase completion summaries are in `docs/archive/`:
 
 - **Chunk Size Warnings**: Shiki produces large language chunks (lazy-loaded, acceptable)
 - **v-html Warnings**: ESLint warns about v-html in MathBlock/CodeExample (expected, trusted content)
+
+---
+
+## Phase 20 Completion Summary
+
+Phase 20 implemented Correlation & Regression: the CorrelationExplorer widget with interactive scatter plot, regression line, residual visualization, Anscombe's quartet, and comprehensive content page. This completes the Statistics section and bridges toward ML foundations.
+
+### Completed Increments
+
+**Increment 20A: Correlation Math Utilities**
+- Created `src/utils/math/correlation.ts` with 70 comprehensive tests
+- Types: `Point`, `LinearRegressionResult`, `ResidualAnalysis`, `CorrelationPreset`, `AnscombeDataset`
+- Functions: `pearsonCorrelation`, `interpretCorrelation`, `linearRegression`, `predictY`
+- Functions: `calculateResiduals`, `analyzeResiduals`, `standardErrorOfEstimate`
+- Functions: `cooksDistance`, `identifyOutliers`
+- Helper functions: `mean`, `standardDeviation`, `pointsToArrays`, `arraysToPoints`
+- Anscombe's Quartet data (4 famous datasets with identical r ≈ 0.816)
+- 8 correlation presets: strong-positive, strong-negative, moderate-positive, weak-negative, no-correlation, quadratic, outlier-effect, heteroscedastic
+
+**Increment 20B: useCorrelation Composable**
+- Created `src/composables/useCorrelation.ts` for state management + URL sync
+- Point management: add, remove, move, clear, generate random
+- Computed statistics: correlation, regression, residuals, R²
+- Preset and Anscombe dataset loading
+- Toggle states for regression line, residuals, confidence intervals
+- URL state synchronization with 300ms debounce (per LL-015)
+
+**Increment 20C-20E: CorrelationExplorer Widget Components**
+- Built widget in `src/components/widgets/CorrelationExplorer/`:
+  - `CorrelationExplorer.vue` - main orchestrator with tabbed interface (Explorer, Presets, Anscombe)
+  - `ScatterPlot.vue` - SVG canvas with click-to-add points, draggable points, regression line overlay
+  - `CorrelationStats.vue` - statistics panel (n, r, R², slope, intercept, equation, standard error)
+  - `ResidualPlot.vue` - residuals vs x visualization
+  - `CorrelationPresets.vue` - preset selector with 8 correlation patterns
+  - `AnscombeQuartet.vue` - Anscombe's quartet with educational explanation
+  - `CausationWarning.vue` - prominent "Correlation ≠ Causation" warning
+  - `index.ts` - barrel exports
+
+**Increment 20F: Content Page**
+- Created `src/views/statistics/CorrelationView.vue` content page
+- Three-analogy blocks (everyday, programming, visual)
+- Common pitfall callout (confusing correlation with causation)
+- Sections: Introduction, Pearson Correlation, Linear Regression, R², Residuals, Multiple Regression & ML Bridge
+- Python code examples throughout (numpy, scipy, scikit-learn)
+- Code examples for correlation calculation, regression, and ML integration
+
+**Increment 20G: E2E Tests**
+- Created `e2e/statistics/correlation.spec.ts` with comprehensive E2E tests
+- Tests cover page structure, widget interactions, scatter plot, presets, Anscombe's quartet
+- Toggle controls (regression line, residuals, confidence intervals)
+- URL state sync tests
+- Accessibility tests (form controls, buttons, heading hierarchy)
+
+### Key Architectural Decisions (Phase 20)
+- D-155: Interactive scatter plot with click-to-add and draggable points
+- D-156: Pearson correlation coefficient with interpretation thresholds
+- D-157: Anscombe's quartet as separate tab demonstrating "always visualize data"
+- D-158: Residual plot as toggle feature (not always shown)
+- D-159: Composable pattern (useCorrelation) following established conventions
+- D-160: "Correlation ≠ Causation" warning as dedicated component
+
+### Lessons Learned (Phase 20)
+- LL-066: SVG click-to-add requires coordinate transformation from screen to data space
+- LL-067: Draggable points need throttled updates to prevent performance issues
+
+### Lessons Identified (Phase 20)
+- LI-085: Anscombe's quartet effectively demonstrates importance of visualization
+- LI-086: Tabbed interface (Explorer, Presets, Anscombe) organizes correlation concepts well
+- LI-087: Residual plot toggle allows focused learning progression
+
+---
+
+## Phase 19 Completion Summary
+
+Phase 19 implemented Hypothesis Testing: the HypothesisTestingSimulator widget with 4 test types, p-value visualization, Type I/II error demo, power analysis, and comprehensive content page.
+
+### Completed Increments
+
+**Increment 19A: Hypothesis Testing Math Utilities**
+- Created `src/utils/math/hypothesis.ts` with 103 comprehensive tests
+- Types: `TestType`, `Alternative`, `TestResult`, `HypothesisTestPreset`, `PowerCurvePoint`, `DistributionCurvePoint`
+- T-distribution functions: `tDistributionPDF`, `tDistributionCDF` (using log-gamma and regularized incomplete beta)
+- One-sample t-test: `oneSampleTTest` with effect size calculation
+- Two-sample t-test: `twoSampleTTest` (Welch's approach for unequal variances)
+- One-proportion z-test: `oneProportionZTest` with Cohen's h effect size
+- Two-proportion z-test: `twoProportionZTest` with pooled standard error
+- Effect size: Cohen's d for t-tests, Cohen's h for proportion tests
+- Power analysis: `calculatePower`, `requiredSampleSize`, `generatePowerCurve`
+- Critical values: `getCriticalT`, `getCriticalZ`
+- 5 educational presets: default, drug-efficacy, quality-control, benchmark-comparison, user-survey
+
+**Increment 19B: useHypothesisTesting Composable**
+- Created `src/composables/useHypothesisTesting.ts` for state management + URL sync
+- Test type selection with alternative hypothesis options (two-sided, less, greater)
+- Alpha level selection (0.01, 0.05, 0.10)
+- State for all four test types with appropriate inputs
+- Type I/II error demo state (alpha, effect size, sample size)
+- Power analysis state (effect size, desired power, test type)
+- Computed results for all tests with proper formula application
+- URL state synchronization with 300ms debounce (per LL-015)
+
+**Increment 19C: HypothesisTestingSimulator Widget Components**
+- Built widget in `src/components/widgets/HypothesisTestingSimulator/`:
+  - `HypothesisTestingSimulator.vue` - main orchestrator with tabbed interface
+  - `TestTypeSelector.vue` - test type buttons, alternative hypothesis, alpha level
+  - `TestInputs.vue` - dynamic inputs for each test type (means, std devs, n, proportions)
+  - `TestResults.vue` - test statistic, p-value, effect size, decision, assumption warnings
+  - `PValueVisualization.vue` - SVG distribution curve with rejection region shading
+  - `HypothesisPresets.vue` - preset selector for different scenarios
+  - `TypeErrorDemo.vue` - Type I/II error interactive visualization with alpha/effect/n sliders
+  - `PowerAnalysis.vue` - power curve with sample size calculator
+  - `index.ts` - barrel exports
+
+**Increment 19D: Content Page**
+- Created `src/views/statistics/HypothesisTestingView.vue` content page
+- Three-analogy blocks (legal trial, anomaly detection, visual intuition)
+- Common pitfall callout (p-value misinterpretation)
+- Sections for hypothesis testing logic, p-values, Type I/II errors, power, effect size
+- Python code examples throughout (scipy.stats, statsmodels)
+- A/B testing section with practical example
+- Related topics linking to Statistics Overview and Sampling
+
+**Increment 19E: E2E Tests**
+- Created `e2e/statistics/hypothesis-testing.spec.ts` with 35 comprehensive E2E tests
+- Tests cover page content, widget interactions, test types, presets, tabs
+- Type I/II error demo tests (sliders, displays)
+- Power analysis tests (effect size, desired power, sample size calculation)
+- Accessibility tests (axe-core WCAG 2.1 AA, ARIA roles)
+- URL state sync tests
+- Added data-testid attributes to all interactive elements
+
+### Key Architectural Decisions (Phase 19)
+- D-149: T-distribution implementation using log-gamma and regularized incomplete beta functions
+- D-150: Four test types covering common hypothesis testing scenarios
+- D-151: Effect size display (Cohen's d for t-tests, Cohen's h for proportion tests)
+- D-152: Tabbed interface for test, type errors, and power analysis
+- D-153: Power curve visualization with 80%/90% power reference lines
+- D-154: Composable pattern (useHypothesisTesting) following established conventions
+
+### Lessons Learned (Phase 19)
+- LL-064: axe-core timing issues with Vue ARIA attributes require workarounds
+- LL-065: Accessibility test exclusions for design decisions (color-contrast for dark theme)
+
+### Lessons Identified (Phase 19)
+- LI-082: Type I/II error visualization with dual distribution curves is highly educational
+- LI-083: Power analysis calculator with reference lines (80%/90%) aids study design
+- LI-084: Tabbed interface scales well for multi-panel statistical widgets
+
+---
+
+## Phase 18 Completion Summary
+
+Phase 18 implemented Sampling & Estimation: the SamplingSimulator widget with 4 sampling methods, confidence interval demonstration, bootstrap resampling, and comprehensive content page.
+
+### Completed Increments
+
+**Increment 18A: Sampling Math Utilities**
+- Created `src/utils/math/sampling.ts` with 110 comprehensive tests
+- Types: `SamplingMethod`, `PopulationDistribution`, `PopulationConfig`, `SampleResult`, `ConfidenceInterval`, `BootstrapResult`, `SamplingPreset`
+- Population generation: `generatePopulation` (normal, uniform, exponential distributions)
+- Sampling methods: `simpleRandomSample`, `stratifiedSample`, `systematicSample`, `clusterSample`
+- Statistics: `mean`, `standardDeviation`, `standardErrorMean`, `calculateSampleStatistics`
+- Confidence intervals: `confidenceIntervalMean`, `confidenceIntervalProportion`, `tCriticalValue`, `zCriticalValue`
+- Bootstrap: `bootstrap`, `bootstrapPercentileCI`
+- Sample size: `sampleSizeForMean`, `sampleSizeForProportion`
+- 5 educational presets: default, user-survey, quality-control, election-poll, website-ab-test
+
+**Increment 18B: useSamplingSimulator Composable**
+- Created `src/composables/useSamplingSimulator.ts` for state management + URL sync
+- Population generation with configurable size and distribution
+- Sample management with history tracking
+- CI simulation state for coverage demonstration
+- Bootstrap state with original sample preservation
+- Sample size calculator state for mean and proportion
+- URL state synchronization with 300ms debounce (per LL-015)
+
+**Increment 18C: SamplingSimulator Widget Components**
+- Built widget in `src/components/widgets/SamplingSimulator/`:
+  - `SamplingSimulator.vue` - main orchestrator component
+  - `PopulationGrid.vue` - SVG visualization of population with sampled items highlighted
+  - `SamplingMethodSelector.vue` - radio group for 4 sampling methods
+  - `SampleSizeControls.vue` - slider, buttons, animation toggle
+  - `SamplingDistribution.vue` - histogram of sample means with normal curve overlay
+  - `SamplingResults.vue` - current sample statistics and CI display
+  - `ConfidenceIntervalDemo.vue` - CI coverage simulation with capture rate
+  - `BootstrapPanel.vue` - bootstrap resampling demonstration
+  - `SampleSizeCalculator.vue` - sample size formulas for mean and proportion
+  - `SamplingPresets.vue` - preset selector for different scenarios
+  - `index.ts` - barrel exports
+
+**Increment 18D: Content Page**
+- Created `src/views/statistics/SamplingView.vue` content page
+- Three-analogy blocks (soup tasting, profiling, sample grid)
+- Common pitfall callout (sample size vs. representativeness)
+- Sections for sampling methods, standard error, confidence intervals, bootstrap
+- Python code examples throughout
+- Related topics linking to Statistics Overview and Probability Distributions
+
+**Increment 18E: E2E Tests**
+- Created `e2e/statistics/sampling-simulator.spec.ts` with comprehensive E2E tests
+- Tests cover page content, widget interactions, sampling methods, CI demo, bootstrap panel
+- Accessibility tests (axe-core WCAG 2.1 AA, ARIA roles)
+- URL state sync tests
+- Mobile responsiveness tests
+
+### Key Architectural Decisions (Phase 18)
+- D-142: Four sampling methods with visual distinction (simple=random, stratified=colored groups, systematic=regular intervals, cluster=grouped)
+- D-143: Population grid uses SVG with individual circles for items
+- D-144: CI coverage demo shows capture rate converging to confidence level
+- D-145: Bootstrap panel requires sample before running (educational flow)
+- D-146: t-distribution approximation using Cornish-Fisher expansion
+- D-147: Composable pattern (useSamplingSimulator) following established conventions
+
+### Lessons Learned (Phase 18)
+- LL-062: t-critical value approximation requires Cornish-Fisher expansion for accuracy
+- LL-063: Bootstrap percentile CI uses sorted resampled means for interval bounds
+
+### Lessons Identified (Phase 18)
+- LI-079: Population grid visualization effectively shows sampling selection
+- LI-080: CI coverage demo with auto-run demonstrates capture rate convergence
+- LI-081: Sample size calculator benefits from separate tabs for mean vs proportion
 
 ---
 

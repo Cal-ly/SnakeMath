@@ -1,0 +1,8 @@
+export { default as HypothesisTestingSimulator } from './HypothesisTestingSimulator.vue'
+export { default as TestTypeSelector } from './TestTypeSelector.vue'
+export { default as TestInputs } from './TestInputs.vue'
+export { default as TestResults } from './TestResults.vue'
+export { default as PValueVisualization } from './PValueVisualization.vue'
+export { default as HypothesisPresets } from './HypothesisPresets.vue'
+export { default as TypeErrorDemo } from './TypeErrorDemo.vue'
+export { default as PowerAnalysis } from './PowerAnalysis.vue'

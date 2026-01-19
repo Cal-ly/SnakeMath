@@ -148,6 +148,21 @@ const router = createRouter({
       name: 'statistics-distributions',
       component: () => import('@/views/statistics/DistributionsView.vue'),
     },
+    {
+      path: '/statistics/sampling',
+      name: 'statistics-sampling',
+      component: () => import('@/views/statistics/SamplingView.vue'),
+    },
+    {
+      path: '/statistics/hypothesis-testing',
+      name: 'statistics-hypothesis-testing',
+      component: () => import('@/views/statistics/HypothesisTestingView.vue'),
+    },
+    {
+      path: '/statistics/correlation',
+      name: 'statistics-correlation',
+      component: () => import('@/views/statistics/CorrelationView.vue'),
+    },
     // Calculus section
     {
       path: '/calculus',

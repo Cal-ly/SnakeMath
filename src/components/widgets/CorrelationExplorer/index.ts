@@ -1,0 +1,7 @@
+export { default as CorrelationExplorer } from './CorrelationExplorer.vue'
+export { default as ScatterPlot } from './ScatterPlot.vue'
+export { default as CorrelationStats } from './CorrelationStats.vue'
+export { default as ResidualPlot } from './ResidualPlot.vue'
+export { default as CorrelationPresets } from './CorrelationPresets.vue'
+export { default as AnscombeQuartet } from './AnscombeQuartet.vue'
+export { default as CausationWarning } from './CausationWarning.vue'

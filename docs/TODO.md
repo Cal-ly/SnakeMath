@@ -1,58 +1,60 @@
 # SnakeMath ToDo List
 
-**Last Updated**: 2026-01-18
+**Last Updated**: 2026-01-19
 
 ---
 
-## Current: Phase 17 Complete - Probability Distributions
+## Current: Phase 20 Complete - Correlation & Regression
 
-Phase 17 (Probability Distributions) is complete. The Statistics section now includes distributions content:
-- ✅ Distributions Math Utilities (PDF/PMF, CDF, quantiles, sampling)
-- ✅ useDistributions composable with URL state sync
-- ✅ DistributionExplorer widget (5 distributions, parameter controls, histogram, probability calculator)
-- ✅ CLTDemonstration component (Central Limit Theorem interactive demo)
-- ✅ DistributionsView content page with comprehensive educational content
-- ✅ E2E tests for widget and CLT demonstration
+Phase 20 (Correlation & Regression) is complete. The Statistics section is now fully implemented with 5 subtopics:
+- ✅ Correlation Math Utilities (Pearson correlation, linear regression, residuals, Cook's distance)
+- ✅ useCorrelation composable with URL state sync
+- ✅ CorrelationExplorer widget (scatter plot, regression line, residuals, Anscombe's quartet)
+- ✅ CorrelationView content page with ML bridge
+- ✅ E2E tests for correlation explorer widget
 
 New features include:
-- 5 distributions: Normal, Binomial, Poisson, Exponential, Uniform
-- Interactive parameter sliders with real-time PDF/CDF updates
-- Probability calculator (P(X < a), P(a < X < b))
-- Histogram from random samples
-- Central Limit Theorem demonstration with auto-run animation
-- 1461 total unit tests (209 new distribution tests)
+- Interactive scatter plot with click-to-add and draggable points
+- Real-time correlation coefficient (r) and R² display
+- Regression line overlay with equation (ŷ = mx + b)
+- Residual visualization toggle
+- Anscombe's quartet demonstration
+- 8 correlation presets (strong positive/negative, no correlation, outlier effect, etc.)
+- "Correlation ≠ Causation" warning component
+- 1744 total unit tests (70 new correlation tests)
 
 ---
 
-## Next Up: Statistics Expansion (Continued)
+## Statistics Section Complete
 
-The Statistics section now has Descriptive Statistics and Probability Distributions. The following three topics will complete the section and bridge toward ML/AI foundations.
-
-### Topic 2: Sampling & Estimation (Phase 18)
-
-**Core Philosophy**: "You can't measure everyone, so you measure some and estimate for all — but how confident can you be in that estimate?"
-
-See detailed planning in Phase 18 plan.
-
----
-
-### Topic 3: Hypothesis Testing (Phase 19)
-
-**Core Philosophy**: "Hypothesis testing is the scientific method formalized — you assume nothing's happening (null hypothesis), then calculate how surprising your data would be under that assumption."
-
-See detailed planning in Phase 19 plan.
+The Statistics section is now fully implemented with all 5 planned subtopics:
+1. ✅ Descriptive Statistics (StatisticsCalculator widget)
+2. ✅ Probability Distributions (DistributionExplorer widget, CLT demo)
+3. ✅ Sampling & Estimation (SamplingSimulator widget)
+4. ✅ Hypothesis Testing (HypothesisTestingSimulator widget)
+5. ✅ Correlation & Regression (CorrelationExplorer widget)
 
 ---
 
-### Topic 4: Correlation & Regression (Phase 20)
+### ✅ Correlation & Regression (Phase 20 - Complete)
 
-**Core Philosophy**: "Correlation measures 'do these variables move together?' — regression answers 'by how much and can I predict one from the other?'"
-
-See detailed planning in Phase 20 plan.
+**Completed**: CorrelationExplorer widget with scatter plot, regression line, residuals, Anscombe's quartet, comprehensive content page bridging to ML.
 
 ---
 
-### ✅ Topic 1: Probability Distributions (Phase 17 - Complete)
+### ✅ Hypothesis Testing (Phase 19 - Complete)
+
+**Completed**: HypothesisTestingSimulator widget with 4 test types, p-value visualization, Type I/II error demo, power analysis, comprehensive content page.
+
+---
+
+### ✅ Sampling & Estimation (Phase 18 - Complete)
+
+**Completed**: SamplingSimulator widget with 4 sampling methods, CI demonstration, bootstrap panel, sample size calculator, comprehensive content page.
+
+---
+
+### ✅ Probability Distributions (Phase 17 - Complete)
 
 **Completed**: DistributionExplorer widget with 5 distributions, CLT demonstration, comprehensive content page.
 
@@ -81,14 +83,20 @@ See detailed planning in Phase 20 plan.
 - [ ] Q&A section for each topic
 - [ ] "Code Equivalent" sections for all relevant code examples (like in `algebra/summation` where there is also a switch between Python and JavaScript)
 - [ ] Write "for" in cursive to visually connect to for-loop concept or otherwise visually differentiate
-- [ ] An Linear Algebra overview with Scalars, Vectors, Matrices and Tensors. Furhter, introduce "Rank" in matrices.
+- [ ] An Linear Algebra overview with Scalars, Vectors, Matrices and Tensors
 - [ ] A dedicated Tensor Topic with the Mathematical/Physics Tensor
 - [ ] Tensors used in programming and how they differ from the Mathematical/Physics Tensor
-
+- [ ] Either a seperate topic on e.g. Vector spaces, Rank, Covariance matrices and other subtopics or integrate into existing content
+- [ ] Eigenvalue, Eigenvectors and Eigen decomposition
 
 ### Site Features
 - [ ] Tech stack section with "why" documentation. The intent is for the site to double as a portfolio piece
 - [ ] Add SEO (meta tags, structured data, sitemap)
+
+### Analogies for future content
+Below is a list of subjects and analogies, that could be used in future content.
+
+- **Vector Spaces**: A vector space is simply a set of directions and combinations you can build using those directions. Let's make it even clearer: Vectors are like LEGO bricks. A vector space is the box of all possible LEGO structures you can build using certain types of bricks.
 
 ---
 
@@ -109,6 +117,9 @@ See detailed planning in Phase 20 plan.
 | 15 | Trigonometry — Remaining Topics | ✅ Complete |
 | 16 | Linear Algebra — 3D | ✅ Complete |
 | 17 | Statistics — Probability Distributions | ✅ Complete |
+| 18 | Statistics — Sampling & Estimation | ✅ Complete |
+| 19 | Statistics — Hypothesis Testing | ✅ Complete |
+| 20 | Statistics — Correlation & Regression | ✅ Complete |
 | — | Design System Standardization | ✅ Complete |
 | — | Content Review (Three-Analogy, Pitfalls) | ✅ Complete |
 | — | Algebra Expansion (Product Notation, Linear Equations) | ✅ Complete |

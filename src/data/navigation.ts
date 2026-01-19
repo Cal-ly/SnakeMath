@@ -214,6 +214,27 @@ export const topics: NavTopic[] = [
         path: '/statistics/distributions',
         faIcon: 'fa-solid fa-bell',
       },
+      {
+        id: 'sampling',
+        title: 'Sampling & Estimation',
+        description: 'Measure some, estimate all — with confidence',
+        path: '/statistics/sampling',
+        faIcon: 'fa-solid fa-hand-pointer',
+      },
+      {
+        id: 'hypothesis-testing',
+        title: 'Hypothesis Testing',
+        description: 'The scientific method, formalized — make decisions with data',
+        path: '/statistics/hypothesis-testing',
+        faIcon: 'fa-solid fa-scale-balanced',
+      },
+      {
+        id: 'correlation',
+        title: 'Correlation & Regression',
+        description: 'Measuring relationships — the foundation of predictive modeling',
+        path: '/statistics/correlation',
+        faIcon: 'fa-solid fa-chart-scatter',
+      },
     ],
   },
   {

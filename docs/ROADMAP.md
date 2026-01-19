@@ -47,9 +47,9 @@ Each topic builds toward machine learning foundations:
 | 15 | Trigonometry: Remaining Topics | InverseTrigExplorer, TrigCodePlayground | Trig: Identities, Inverse Functions, Trig in Code | ✅ Complete |
 | 16 | Linear Algebra: 3D | VectorOperations3D, MatrixTransformations3D | LinAlg: Vectors 3D, Matrices 3D | ✅ Complete |
 | 17 | Probability Distributions | DistributionExplorer | Statistics: Distributions, CLT | ✅ Complete |
-| **18** | **Sampling & Estimation** | **SamplingSimulator** | **Statistics: Sampling, CI, Bootstrap** | 🎯 Next |
-| **19** | **Hypothesis Testing** | **HypothesisTestingSimulator** | **Statistics: p-values, Power, A/B Testing** | 📋 Planned |
-| **20** | **Correlation & Regression** | **CorrelationExplorer** | **Statistics: Correlation, Linear Regression** | 📋 Planned |
+| 18 | Sampling & Estimation | SamplingSimulator | Statistics: Sampling, CI, Bootstrap | ✅ Complete |
+| 19 | Hypothesis Testing | HypothesisTestingSimulator | Statistics: p-values, Power, A/B Testing | ✅ Complete |
+| **20** | **Correlation & Regression** | **CorrelationExplorer** | **Statistics: Correlation, Linear Regression** | 🎯 Next |
 
 ---
 
@@ -696,8 +696,8 @@ Phase 20: Draggable scatter plot, real-time correlation, residual lines
 | 15 | Trigonometry section complete? All subtopics covered? | ✅ Yes - 5 subtopics (Unit Circle, Right Triangle, Identities, Inverse Functions, Trig in Code); comprehensive coverage |
 | 16 | 3D linear algebra effective? Isometric projection working? | ✅ Yes - isometric SVG visualization works well; cross product with right-hand rule demo; Euler angles clearly demonstrated |
 | 17 | Distribution explorer effective? CLT demo clear? | ✅ Yes - DistributionExplorer with 5 distributions; CLT demo shows convergence to normal; 1461 tests total |
-| 18 | Sampling visualization effective? CI demo working? | — |
-| 19 | Hypothesis testing intuitive? p-value visualization clear? | — |
+| 18 | Sampling visualization effective? CI demo working? | ✅ Yes - SamplingSimulator with 4 methods; CI coverage demo works; bootstrap panel effective; 1571 tests total |
+| 19 | Hypothesis testing intuitive? p-value visualization clear? | ✅ Yes - HypothesisTestingSimulator with 4 test types; Type I/II error demo effective; power analysis aids study design; 1674 tests total |
 | 20 | Correlation/regression effective? ML bridge clear? Statistics section complete? | — |
 
 ---
@@ -737,6 +737,8 @@ Phase 20: Draggable scatter plot, real-time correlation, residual lines
 | 2026-01-18 | Phase 16 complete: VectorOperations3D (8 operations, cross product, right-hand rule), MatrixTransformations3D (3×3 rotation matrices, Euler angles, unit cube); isometric projection composable; 1252 tests total |
 | 2026-01-18 | Statistics expansion planned: Phases 17-20 detailed (Probability Distributions, Sampling & Estimation, Hypothesis Testing, Correlation & Regression); ~28.5 hours estimated; ~360 new unit tests planned |
 | 2026-01-18 | Phase 17 complete: DistributionExplorer widget (5 distributions), CLTDemonstration component, DistributionsView content page; 209 new unit tests; 1461 tests total |
+| 2026-01-18 | Phase 18 complete: SamplingSimulator widget (4 sampling methods, CI demo, bootstrap panel, sample size calculator), SamplingView content page; 110 new unit tests; 1571 tests total |
+| 2026-01-19 | Phase 19 complete: HypothesisTestingSimulator widget (4 test types, p-value viz, Type I/II error demo, power analysis), HypothesisTestingView content page; 103 new unit tests; 1674 tests total; 35 E2E tests |
 
 ---
 
