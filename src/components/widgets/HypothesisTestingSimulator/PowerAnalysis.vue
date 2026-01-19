@@ -328,7 +328,7 @@ function handleTestTypeChange(type: 'one-sample' | 'two-sample') {
       <div class="text-sm font-medium text-text-secondary mb-2">Effect Size Guidelines</div>
       <div class="grid grid-cols-4 gap-2 text-xs text-center">
         <div class="p-2 bg-bg-tertiary rounded">
-          <div class="font-bold text-gray-400">< 0.2</div>
+          <div class="font-bold text-gray-400">&lt; 0.2</div>
           <div class="text-text-muted">Negligible</div>
         </div>
         <div class="p-2 bg-bg-tertiary rounded">

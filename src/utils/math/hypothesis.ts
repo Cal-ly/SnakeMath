@@ -12,7 +12,7 @@
  * - Effect Size: Standardized measure of the magnitude of an effect
  */
 
-import { standardNormalCdf, standardNormalQuantile, erf } from './distributions'
+import { standardNormalCdf, standardNormalQuantile, erf as _erf } from './distributions'
 
 // ============================================================================
 // Types
@@ -116,8 +116,8 @@ export interface HypothesisTestPreset {
 // Constants
 // ============================================================================
 
-const SQRT_2 = Math.sqrt(2)
-const SQRT_2_PI = Math.sqrt(2 * Math.PI)
+const _SQRT_2 = Math.sqrt(2)
+const _SQRT_2_PI = Math.sqrt(2 * Math.PI)
 
 // ============================================================================
 // T-Distribution Functions
@@ -1173,13 +1173,13 @@ export function describeTestResult(
     ? ` with a ${result.effectSizeInterpretation} effect size (${result.effectSize.toFixed(2)})`
     : ''
 
-  let directionText = ''
+  let _directionText = ''
   if (result.alternative === 'two-sided') {
-    directionText = result.rejectNull ? 'significantly different from' : 'not significantly different from'
+    _directionText = result.rejectNull ? 'significantly different from' : 'not significantly different from'
   } else if (result.alternative === 'greater') {
-    directionText = result.rejectNull ? 'significantly greater than' : 'not significantly greater than'
+    _directionText = result.rejectNull ? 'significantly greater than' : 'not significantly greater than'
   } else {
-    directionText = result.rejectNull ? 'significantly less than' : 'not significantly less than'
+    _directionText = result.rejectNull ? 'significantly less than' : 'not significantly less than'
   }
 
   const pValueText = formatPValue(result.pValue)

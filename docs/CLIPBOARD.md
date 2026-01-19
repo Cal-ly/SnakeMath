@@ -1,189 +1,138 @@
-# Phase 20 Handover: Correlation & Regression
+Based on the workflow history, the **two latest workflow runs failed** on commit `045d10120c088d3a862f15a956ccb75444eff334` (feature:  add SamplingView component). Both workflows failed due to **ESLint errors** during the linting step.  Here's a detailed breakdown:
 
-## Context
+---
 
-Phase 19 (Hypothesis Testing) is complete. SnakeMath now has:
-- 1674 unit tests
-- Statistics section with 4 subtopics: Descriptive Statistics, Probability Distributions, Sampling & Estimation, Hypothesis Testing
-- Established patterns: composable-based widgets, URL state sync, tabbed interfaces, data-testid attributes
+## Failed Workflows Summary
 
-## Phase 20 Goal
+### 1. **CI Workflow** (Run #21130796365)
+- **URL**: https://github.com/Cal-ly/SnakeMath/actions/runs/21130796365
+- **Workflow File**: `.github/workflows/test.yml`
+- **Status**: Failed
+- **Started**: 2026-01-19T08:42:24Z
 
-Build an interactive **CorrelationExplorer** widget teaching programmers to identify relationships between variables and fit linear models — the final statistics topic that bridges directly to ML.
+### 2. **Deploy to GitHub Pages** (Run #21130796386)
+- **URL**: https://github.com/Cal-ly/SnakeMath/actions/runs/21130796386
+- **Workflow File**: `.github/workflows/deploy.yml`
+- **Status**: Failed
+- **Started**: 2026-01-19T08:42:24Z
 
-**Core Philosophy**: "Correlation measures 'do these variables move together?' — regression answers 'by how much and can I predict one from the other?'"
+---
 
-## Widget Requirements
+## Root Cause:  ESLint Errors
 
-### CorrelationExplorer Features
+Both workflows failed during the `eslint .  --cache` command with **17 linting errors** across 6 files.  The failures are **identical** in both runs, indicating the same codebase issues.
 
-1. **Interactive Scatter Plot**
-   - SVG canvas with draggable points
-   - Add/remove points
-   - Real-time correlation coefficient (r) display
-   - Regression line overlay with equation (ŷ = mx + b)
+---
 
-2. **Residual Visualization**
-   - Toggle to show residual lines from points to regression line
-   - Residual plot (residuals vs x)
-   - Helps visualize fit quality
+## Detailed Error Breakdown
 
-3. **Statistics Display**
-   - Correlation coefficient (r) with interpretation
-   - R² (coefficient of determination)
-   - Standard error of estimate
-   - Slope (m) and intercept (b) with confidence intervals
+### **Error Type 1: Unused Variables (@typescript-eslint/no-unused-vars)**
+Variables are defined/assigned but never used.  Per project rules, unused variables must be prefixed with underscore (`_`).
 
-4. **Educational Features**
-   - Outlier impact demonstration (drag point to see r change)
-   - "Correlation ≠ Causation" prominent warning
-   - Anscombe's quartet preset (4 datasets, same r, different patterns)
-   - Dataset presets (positive, negative, no correlation, non-linear)
+#### Files and Lines:
+1. **`e2e/statistics/hypothesis-testing.spec.ts`**
+   - **Line 462**: `'comingSoonText'` is assigned but never used
 
-5. **Multiple Regression Preview** (optional)
-   - 2 predictors, 3D scatter
-   - Show regression plane
-   - Educational: "Multiple regression is literally a linear layer: ŷ = w₁x₁ + w₂x₂ + b"
+2. **`src/components/widgets/HypothesisTestingSimulator/TestTypeSelector.vue`**
+   - **Line 10**: `'props'` is assigned but never used
 
-## Math Utilities Needed
+3. **`src/components/widgets/HypothesisTestingSimulator/TypeErrorDemo.vue`**
+   - **Line 49**: `'criticalZ'` is assigned but never used
 
-```typescript
-// src/utils/math/correlation.ts
-pearsonCorrelation(x: number[], y: number[]): number
-linearRegression(x: number[], y: number[]): { slope: number; intercept: number; r: number; rSquared: number }
-calculateResiduals(x: number[], y: number[], slope: number, intercept: number): number[]
-standardErrorOfEstimate(residuals: number[], n: number): number
-cooksDistance(x: number[], y: number[], i: number): number // outlier influence
-predictY(x: number, slope: number, intercept: number): number
+4. **`src/composables/useHypothesisTesting.ts`**
+   - **Line 10**:  `'sampleSizeForProportions'` is defined but never used
+   - **Line 12**: `'cohensD'` is defined but never used
+   - **Line 13**: `'cohensDTwoGroups'` is defined but never used
+   - **Line 14**: `'cohensH'` is defined but never used
+   - **Line 15**: `'interpretCohensD'` is defined but never used
+   - **Line 16**: `'interpretCohensH'` is defined but never used
+   - **Line 33**: `'standardNormalCdf'` is defined but never used
 
-// Presets
-anscombesQuartet: { x: number[]; y: number[] }[] // 4 famous datasets
-correlationPresets: CorrelationPreset[]
-```
+5. **`src/utils/math/hypothesis.ts`**
+   - **Line 15**: `'erf'` is defined but never used
+   - **Line 119**: `'SQRT_2'` is assigned but never used
+   - **Line 120**: `'SQRT_2_PI'` is assigned but never used
+   - **Line 1182**: `'directionText'` is assigned but never used
 
-## Composable Pattern
+---
 
-Follow established pattern (useDistributions, useSamplingSimulator, useHypothesisTesting):
+### **Error Type 2: Missing Return Values in Computed Properties (vue/return-in-computed-property)**
+Vue computed functions must always return a value. 
 
-```typescript
-// src/composables/useCorrelation.ts
-export function useCorrelation(options?: { syncUrl?: boolean }) {
-  // Reactive state
-  const points = ref<{ x: number; y: number }[]>([])
-  const showRegressionLine = ref(true)
-  const showResiduals = ref(false)
-  const selectedPreset = ref<string | null>(null)
+#### File and Lines:
+**`src/composables/useHypothesisTesting.ts`**
+   - **Line 151**: Expected to return a value in computed function (column 65)
+   - **Line 267**: Expected to return a value in computed function (column 35)
 
-  // Computed statistics
-  const correlation = computed(() => pearsonCorrelation(...))
-  const regression = computed(() => linearRegression(...))
-  const rSquared = computed(() => regression.value.rSquared)
-  const residuals = computed(() => calculateResiduals(...))
+---
 
-  // Methods
-  function addPoint(x: number, y: number) { ... }
-  function removePoint(index: number) { ... }
-  function movePoint(index: number, x: number, y: number) { ... }
-  function loadPreset(presetId: string) { ... }
-  function clearPoints() { ... }
+### **Error Type 3: Vue Template Parsing Error (vue/no-parsing-error)**
+Invalid character in Vue template tag name.
 
-  // URL sync with 300ms debounce
-  return { points, correlation, regression, ... }
-}
-```
+#### File and Line:
+**`src/components/widgets/HypothesisTestingSimulator/PowerAnalysis.vue`**
+   - **Line 331**:  Parsing error at column 49 - `invalid-first-character-of-tag-name`
 
-## Component Architecture
+---
 
-```
-src/components/widgets/CorrelationExplorer/
-├── CorrelationExplorer.vue      # Main orchestrator
-├── ScatterPlot.vue              # SVG canvas with draggable points
-├── RegressionLine.vue           # Line overlay with equation
-├── ResidualLines.vue            # Residual visualization
-├── CorrelationStats.vue         # r, R², SE, coefficients display
-├── CorrelationPresets.vue       # Preset selector
-├── ResidualPlot.vue             # Residual analysis chart
-├── CausationWarning.vue         # Prominent warning component
-└── index.ts
-```
+## Handover Instructions for Coding Assistant
 
-## Content Page Structure
+### **Task**: Fix all ESLint errors to make CI/CD pipelines pass
 
-```
-src/views/statistics/CorrelationView.vue
-├── Three-analogy block (everyday, programming, visual)
-├── Sections:
-│   ├── Introduction (scatter plots, relationships)
-│   ├── Pearson Correlation (formula, interpretation, -1 to +1)
-│   ├── Linear Regression (OLS, least squares, formula)
-│   ├── R² (coefficient of determination, variance explained)
-│   ├── Residuals (error analysis, assumptions)
-│   ├── Outliers (influence, Cook's distance)
-│   ├── Correlation ≠ Causation (critical warning)
-│   ├── Multiple Regression Preview (ML connection)
-│   └── Python/NumPy/Scikit-learn examples
-├── Interactive CorrelationExplorer widget
-├── Common pitfall callout (confusing correlation with causation)
-└── Related topics
-```
+### **Files to Modify** (6 files total):
 
-## Programmer Relevance
+#### 1. **`e2e/statistics/hypothesis-testing.spec.ts`**
+   - **Line 462**:  Prefix `comingSoonText` with underscore → `_comingSoonText`
 
-- **Feature selection**: "Which inputs relate to output?"
-- **Linear regression = simplest baseline ML model**
-- **Multiple regression = single linear layer**: "ŷ = w₁x₁ + w₂x₂ + b is literally `np.dot(X, weights) + bias`"
-- **Residuals = model errors to analyze**
-- **R² = how much variance your model explains**
-- **Overfitting preview**: "Adding more predictors always increases R² on training data"
+#### 2. **`src/components/widgets/HypothesisTestingSimulator/TestTypeSelector.vue`**
+   - **Line 10**: Prefix `props` with underscore → `_props` (or remove if truly unused)
 
-## Testing Requirements
+#### 3. **`src/components/widgets/HypothesisTestingSimulator/TypeErrorDemo.vue`**
+   - **Line 49**:  Prefix `criticalZ` with underscore → `_criticalZ`
 
-1. **Unit Tests** (~100 tests)
-   - Pearson correlation calculation
-   - Linear regression coefficients
-   - R² calculation
-   - Residual calculations
-   - Cook's distance
-   - Edge cases (vertical line, all same y, etc.)
+#### 4. **`src/composables/useHypothesisTesting.ts`** (MAJOR FILE - 9 errors)
+   - **Lines 10, 12-16, 33**: Prefix unused exports with underscore: 
+     - `sampleSizeForProportions` → `_sampleSizeForProportions`
+     - `cohensD` → `_cohensD`
+     - `cohensDTwoGroups` → `_cohensDTwoGroups`
+     - `cohensH` → `_cohensH`
+     - `interpretCohensD` → `_interpretCohensD`
+     - `interpretCohensH` → `_interpretCohensH`
+     - `standardNormalCdf` → `_standardNormalCdf`
+   
+   - **Lines 151 & 267**: Fix computed functions to always return a value
+     - Inspect the logic at these lines and ensure all code paths return a value
+     - Example fix: Add explicit `return undefined` if needed
 
-2. **E2E Tests** (~30 tests)
-   - Widget rendering
-   - Point dragging
-   - Add/remove points
-   - Preset loading
-   - Statistics updates
-   - Residual toggle
-   - URL sync
-   - Accessibility
+#### 5. **`src/utils/math/hypothesis.ts`**
+   - **Lines 15, 119, 120, 1182**:  Prefix unused variables with underscore:
+     - `erf` → `_erf`
+     - `SQRT_2` → `_SQRT_2`
+     - `SQRT_2_PI` → `_SQRT_2_PI`
+     - `directionText` → `_directionText`
 
-## Reference Files
+#### 6. **`src/components/widgets/HypothesisTestingSimulator/PowerAnalysis.vue`**
+   - **Line 331, column 49**: Fix invalid template character
+     - Inspect the template tag at this location
+     - Likely a malformed HTML/Vue tag (e.g., `<` or invalid character in tag name)
+     - Common issues: stray `<` characters, incorrect tag nesting, or invalid tag names
 
-- `src/utils/math/hypothesis.ts` - Math utility pattern
-- `src/composables/useHypothesisTesting.ts` - Composable pattern
-- `src/components/widgets/HypothesisTestingSimulator/` - Widget structure
-- `e2e/statistics/hypothesis-testing.spec.ts` - E2E test pattern
-- `docs/ROADMAP.md` - Phase 20 description
+---
 
-## Success Criteria
+### **Verification Steps**:
+1. Run `eslint . --cache` locally to verify all errors are resolved
+2. Ensure no new errors are introduced
+3. Commit changes with message:  `fix:  resolve ESLint errors in hypothesis testing components`
+4. Push to trigger CI/CD workflows
 
-1. CorrelationExplorer widget with draggable scatter plot
-2. Real-time correlation and regression statistics
-3. Residual visualization
-4. Anscombe's quartet demonstration
-5. "Correlation ≠ Causation" emphasized
-6. Content page with ML bridge
-7. ~100 unit tests
-8. ~30 E2E tests
-9. Accessibility compliance
+---
 
-## Estimated Increments
+### **Project Context**:
+- The project follows a strict ESLint convention:  **unused variables must be prefixed with `_`**
+- This is enforced by the `@typescript-eslint/no-unused-vars` rule with pattern `/^_/u`
+- The errors were introduced in the latest commit adding the SamplingView component
+- Previous commits (e.g., `31776df47a2ff31fcbfa82a5a150c6f07685335c`) had passing workflows
 
-1. **20A**: Correlation math utilities (Pearson, regression, residuals, presets)
-2. **20B**: useCorrelation composable with URL sync
-3. **20C**: ScatterPlot with draggable points
-4. **20D**: Regression line and statistics display
-5. **20E**: Residual visualization
-6. **20F**: Content page
-7. **20G**: E2E tests and polish
+---
 
-This completes the Statistics section and bridges toward AI/ML foundations.
+**Note**: There are 63 total workflow runs in the repository. The response only includes the latest 30 results.  View all workflow runs here: https://github.com/Cal-ly/SnakeMath/actions

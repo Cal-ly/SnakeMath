@@ -459,7 +459,7 @@ test.describe('Statistics Index Updated @e2e', () => {
     // Coming soon section should NOT contain hypothesis testing
     // This checks that we properly moved it out of coming soon
     const mainContent = page.locator('main')
-    const comingSoonText = await mainContent.textContent()
+    const _comingSoonText = await mainContent.textContent()
 
     // The term "Hypothesis Testing" should appear as a link, not in a "Coming Soon" context
     const hypothesisLink = page.locator('a[href*="hypothesis-testing"]')

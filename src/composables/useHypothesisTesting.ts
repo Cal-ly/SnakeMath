@@ -7,13 +7,13 @@ import {
   twoPropZTest,
   calculatePower,
   sampleSizeForPower,
-  sampleSizeForProportions,
+  sampleSizeForProportions as _sampleSizeForProportions,
   generatePowerCurve,
-  cohensD,
-  cohensDTwoGroups,
-  cohensH,
-  interpretCohensD,
-  interpretCohensH,
+  cohensD as _cohensD,
+  cohensDTwoGroups as _cohensDTwoGroups,
+  cohensH as _cohensH,
+  interpretCohensD as _interpretCohensD,
+  interpretCohensH as _interpretCohensH,
   tDistributionPdf,
   tCriticalValue,
   hypothesisTestPresets,
@@ -30,7 +30,7 @@ import type {
   ZTestResult,
   HypothesisTestPreset,
 } from '@/utils/math/hypothesis'
-import { standardNormalPdf, standardNormalCdf } from '@/utils/math/distributions'
+import { standardNormalPdf, standardNormalCdf as _standardNormalCdf } from '@/utils/math/distributions'
 
 // ============================================================================
 // Types
@@ -188,6 +188,8 @@ export function useHypothesisTesting(options: UseHypothesisTestingOptions = {}) 
             alternative: alternative.value,
             alpha: alpha.value,
           })
+        default:
+          return null
       }
     } catch {
       return null
@@ -274,6 +276,8 @@ export function useHypothesisTesting(options: UseHypothesisTestingOptions = {}) 
           return { lower: -tCrit, upper: null }
         case 'greater':
           return { lower: null, upper: tCrit }
+        default:
+          return { lower: -tCrit, upper: tCrit }
       }
     } else {
       // Z-test critical values
@@ -285,6 +289,8 @@ export function useHypothesisTesting(options: UseHypothesisTestingOptions = {}) 
           return { lower: -zCrit, upper: null }
         case 'greater':
           return { lower: null, upper: zCrit }
+        default:
+          return { lower: -zCrit, upper: zCrit }
       }
     }
   })

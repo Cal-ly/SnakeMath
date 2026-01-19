@@ -7,7 +7,7 @@ interface Props {
   alpha: number
 }
 
-const props = defineProps<Props>()
+const _props = defineProps<Props>()
 
 const emit = defineEmits<{
   selectType: [type: TestType]

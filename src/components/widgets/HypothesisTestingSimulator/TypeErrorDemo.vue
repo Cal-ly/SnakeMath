@@ -46,7 +46,7 @@ const maxY = computed(() => {
 })
 
 // Critical value (z for simplicity)
-const criticalZ = computed(() => {
+const _criticalZ = computed(() => {
   // Two-tailed critical value for given alpha
   // Using normal approximation
   return 1.96 * Math.sqrt(2 / props.sampleSize) * (props.alpha === 0.05 ? 1 : props.alpha === 0.01 ? 1.28 : 0.84)

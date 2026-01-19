@@ -49,7 +49,7 @@ Each topic builds toward machine learning foundations:
 | 17 | Probability Distributions | DistributionExplorer | Statistics: Distributions, CLT | ✅ Complete |
 | 18 | Sampling & Estimation | SamplingSimulator | Statistics: Sampling, CI, Bootstrap | ✅ Complete |
 | 19 | Hypothesis Testing | HypothesisTestingSimulator | Statistics: p-values, Power, A/B Testing | ✅ Complete |
-| **20** | **Correlation & Regression** | **CorrelationExplorer** | **Statistics: Correlation, Linear Regression** | 🎯 Next |
+| 20 | Correlation & Regression | CorrelationExplorer | Statistics: Correlation, Linear Regression | ✅ Complete |
 
 ---
 
@@ -698,7 +698,7 @@ Phase 20: Draggable scatter plot, real-time correlation, residual lines
 | 17 | Distribution explorer effective? CLT demo clear? | ✅ Yes - DistributionExplorer with 5 distributions; CLT demo shows convergence to normal; 1461 tests total |
 | 18 | Sampling visualization effective? CI demo working? | ✅ Yes - SamplingSimulator with 4 methods; CI coverage demo works; bootstrap panel effective; 1571 tests total |
 | 19 | Hypothesis testing intuitive? p-value visualization clear? | ✅ Yes - HypothesisTestingSimulator with 4 test types; Type I/II error demo effective; power analysis aids study design; 1674 tests total |
-| 20 | Correlation/regression effective? ML bridge clear? Statistics section complete? | — |
+| 20 | Correlation/regression effective? ML bridge clear? Statistics section complete? | ✅ Yes - CorrelationExplorer with scatter plot, regression line, residuals, Anscombe's quartet; Statistics section complete with 5 subtopics; 1744 tests total |
 
 ---
 
@@ -739,6 +739,7 @@ Phase 20: Draggable scatter plot, real-time correlation, residual lines
 | 2026-01-18 | Phase 17 complete: DistributionExplorer widget (5 distributions), CLTDemonstration component, DistributionsView content page; 209 new unit tests; 1461 tests total |
 | 2026-01-18 | Phase 18 complete: SamplingSimulator widget (4 sampling methods, CI demo, bootstrap panel, sample size calculator), SamplingView content page; 110 new unit tests; 1571 tests total |
 | 2026-01-19 | Phase 19 complete: HypothesisTestingSimulator widget (4 test types, p-value viz, Type I/II error demo, power analysis), HypothesisTestingView content page; 103 new unit tests; 1674 tests total; 35 E2E tests |
+| 2026-01-19 | Phase 20 complete: CorrelationExplorer widget (scatter plot, regression line, residuals, Anscombe's quartet), CorrelationView content page; 70 new unit tests; 1744 tests total; Statistics section complete with 5 subtopics |
 
 ---
 
