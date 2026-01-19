@@ -98,6 +98,7 @@ print(f"Rotated point: ({result[0]:.2f}, {result[1]:.2f})")`
   <TopicPage
     title="Unit Circle"
     description="The foundation of all trigonometry - understanding how angles map to coordinates."
+    :related-topics="relatedTopics"
   >
     <div class="space-y-8">
       <!-- What is the Unit Circle -->
