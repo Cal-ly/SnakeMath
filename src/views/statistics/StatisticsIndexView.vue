@@ -13,7 +13,7 @@ const topic = topics.find((t) => t.id === 'statistics')!
   >
     <div class="space-y-8">
       <!-- Hero intro -->
-      <ContentSection id="intro" title="Statistics for Programmers" icon="fa-solid fa-chart-pie">
+      <ContentSection id="intro" title="Statistics for Programmers" icon="fa-solid fa-chart-pie" collapsible>
         <p class="mb-4">
           Statistics is the science of <strong>making sense of data</strong>. For programmers,
           statistics is essential for data science, machine learning, A/B testing, and building
@@ -34,7 +34,7 @@ const topic = topics.find((t) => t.id === 'statistics')!
       </ContentSection>
 
       <!-- The Three Pillars -->
-      <ContentSection id="pillars" title="The Three Pillars of Descriptive Statistics" icon="fa-solid fa-landmark">
+      <ContentSection id="pillars" title="The Three Pillars of Descriptive Statistics" icon="fa-solid fa-landmark" collapsible>
         <div class="grid gap-4 md:grid-cols-3">
           <div class="p-4 rounded-lg border border-border">
             <div class="w-12 h-12 mb-3 rounded-lg bg-emerald-100 dark:bg-emerald-900 flex items-center justify-center">
@@ -72,7 +72,7 @@ const topic = topics.find((t) => t.id === 'statistics')!
       </ContentSection>
 
       <!-- Why It Matters -->
-      <ContentSection id="why-it-matters" title="Why Programmers Need This" icon="fa-solid fa-rocket">
+      <ContentSection id="why-it-matters" title="Why Programmers Need This" icon="fa-solid fa-rocket" collapsible>
         <div class="grid gap-4 md:grid-cols-2">
           <div class="p-4 rounded-lg border border-border">
             <p class="font-medium text-text-primary mb-2">
@@ -121,7 +121,7 @@ const topic = topics.find((t) => t.id === 'statistics')!
       </ContentSection>
 
       <!-- Topics in this section -->
-      <ContentSection id="topics" title="Topics in This Section" icon="fa-solid fa-book-open">
+      <ContentSection id="topics" title="Topics in This Section" icon="fa-solid fa-book-open" collapsible :default-expanded="false">
         <div class="space-y-3">
           <RouterLink
             v-for="subtopic in topic.subtopics"
@@ -157,7 +157,7 @@ const topic = topics.find((t) => t.id === 'statistics')!
       </ContentSection>
 
       <!-- Coming Soon -->
-      <ContentSection id="coming-soon" title="Coming Soon" icon="fa-solid fa-clock">
+      <ContentSection id="coming-soon" title="Coming Soon" icon="fa-solid fa-clock" collapsible :default-expanded="false">
         <p class="mb-4 text-text-secondary">
           We're expanding our statistics coverage. Here's what's in the pipeline:
         </p>
