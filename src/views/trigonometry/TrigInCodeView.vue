@@ -3,7 +3,6 @@ import TopicPage from '@/components/content/TopicPage.vue'
 import ContentSection from '@/components/content/ContentSection.vue'
 import MathBlock from '@/components/content/MathBlock.vue'
 import CodeExample from '@/components/content/CodeExample.vue'
-import RelatedTopics from '@/components/content/RelatedTopics.vue'
 import { TrigCodePlayground } from '@/components/widgets/TrigCodePlayground'
 
 const relatedTopics = [
@@ -141,6 +140,7 @@ for frame in range(frames + 1):
   <TopicPage
     title="Trig in Code"
     description="Practical trigonometry implementations that programmers actually use."
+    :related-topics="relatedTopics"
   >
     <div class="space-y-8">
       <!-- Introduction -->
@@ -535,7 +535,7 @@ for frame in range(frames + 1):
       </ContentSection>
 
       <!-- Related Topics -->
-      <RelatedTopics :topics="relatedTopics" />
+        <!-- Related topics rendered by TopicPage -->
     </div>
   </TopicPage>
 </template>

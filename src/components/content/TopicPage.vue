@@ -1,8 +1,17 @@
 <script setup lang="ts">
-import { computed } from 'vue'
+import { computed, useSlots } from 'vue'
 import { useRoute } from 'vue-router'
-import { getBreadcrumbs, getSubtopicByPath, getTopicByPath } from '@/data/navigation'
+import { topics as navTopics, getBreadcrumbs, getSubtopicByPath, getTopicByPath } from '@/data/navigation'
 import Breadcrumbs from '@/components/layout/Breadcrumbs.vue'
+import ContentSection from '@/components/content/ContentSection.vue'
+import RelatedTopics from '@/components/content/RelatedTopics.vue'
+
+interface RelatedTopicLink {
+  title: string
+  path: string
+  description?: string
+  faIcon?: string
+}
 
 interface Props {
   /** Page title - overrides auto-detected title */
@@ -13,6 +22,8 @@ interface Props {
   faIcon?: string
   /** Whether to show breadcrumbs */
   showBreadcrumbs?: boolean
+  /** Optional explicit related topics (overrides auto-generated) */
+  relatedTopics?: RelatedTopicLink[]
 }
 
 const props = withDefaults(defineProps<Props>(), {
@@ -20,9 +31,11 @@ const props = withDefaults(defineProps<Props>(), {
   description: undefined,
   faIcon: undefined,
   showBreadcrumbs: true,
+  relatedTopics: undefined,
 })
 
 const route = useRoute()
+const slots = useSlots()
 
 // Auto-detect title and description from navigation data
 const autoTitle = computed(() => {
@@ -56,6 +69,49 @@ const displayDescription = computed(() => props.description || autoDescription.v
 const displayFaIcon = computed(() => props.faIcon || autoFaIcon.value)
 
 const breadcrumbs = computed(() => getBreadcrumbs(route.path))
+
+const autoRelatedTopics = computed<RelatedTopicLink[]>(() => {
+  const topic = getTopicByPath(route.path)
+  if (!topic || route.path === '/') return []
+
+  const subtopic = getSubtopicByPath(route.path)
+  if (subtopic) {
+    const siblings = topic.subtopics
+      .filter((s) => s.path !== route.path)
+      .slice(0, 6)
+      .map((s) => ({
+        title: s.title,
+        path: s.path,
+        description: s.description,
+        faIcon: s.faIcon,
+      }))
+
+    return [
+      {
+        title: `${topic.title} Overview`,
+        path: topic.path,
+        description: 'Back to the section index',
+        faIcon: topic.faIcon,
+      },
+      ...siblings,
+    ]
+  }
+
+  // Topic index page: link to other chapters
+  return navTopics
+    .filter((t) => t.path !== topic.path)
+    .slice(0, 6)
+    .map((t) => ({
+      title: t.title,
+      path: t.path,
+      description: t.description,
+      faIcon: t.faIcon,
+    }))
+})
+
+const effectiveRelatedTopics = computed<RelatedTopicLink[]>(() => props.relatedTopics ?? autoRelatedTopics.value)
+const hasRelatedSlot = computed(() => Boolean(slots.related))
+const shouldShowRelated = computed(() => hasRelatedSlot.value || effectiveRelatedTopics.value.length > 0)
 </script>
 
 <template>
@@ -79,10 +135,18 @@ const breadcrumbs = computed(() => getBreadcrumbs(route.path))
       <slot />
     </div>
 
-    <!-- Related Topics Slot -->
-    <aside v-if="$slots.related" class="mt-8 pt-6 border-t border-border">
-      <slot name="related" />
-    </aside>
+    <!-- Related Topics -->
+    <ContentSection
+      v-if="shouldShowRelated"
+      id="related-topics"
+      title="Related Topics"
+      icon="fa-solid fa-link"
+      collapsible
+      :default-expanded="false"
+    >
+      <slot v-if="hasRelatedSlot" name="related" />
+      <RelatedTopics v-else :topics="effectiveRelatedTopics" :show-title="false" />
+    </ContentSection>
 
     <!-- Navigation Slot (prev/next) -->
     <nav v-if="$slots.navigation" class="mt-8 pt-6 border-t border-border">

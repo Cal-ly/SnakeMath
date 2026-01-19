@@ -1,6 +1,5 @@
 <script setup lang="ts">
 import TopicPage from '@/components/content/TopicPage.vue'
-import RelatedTopics from '@/components/content/RelatedTopics.vue'
 import MathBlock from '@/components/content/MathBlock.vue'
 import ContentSection from '@/components/content/ContentSection.vue'
 import CodeExample from '@/components/content/CodeExample.vue'
@@ -112,6 +111,7 @@ print(f"king-apple: {cosine_similarity(king, apple):.3f}")  # ~0.43 (not similar
   <TopicPage
     title="Vectors in 2D"
     description="Arrows in 2D space, lists of numbers, and the foundation of machine learning."
+    :related-topics="relatedTopics"
   >
     <div class="space-y-8">
       <!-- Introduction -->
@@ -404,7 +404,7 @@ print(f"king-apple: {cosine_similarity(king, apple):.3f}")  # ~0.43 (not similar
       </ContentSection>
 
       <!-- Related Topics -->
-      <RelatedTopics :topics="relatedTopics" />
+      <!-- Related topics rendered by TopicPage -->
     </div>
   </TopicPage>
 </template>

@@ -96,9 +96,9 @@ For special characters not in either library (e.g., Greek letters like Σ), use 
 
 ### Related Topics Section
 
-**Use for**: Cross-linking to related content at the bottom of subpages.
+**Use for**: Cross-linking to related content at the bottom of ALL pages (both index and topic pages).
 
-**Requirement**: All subpages (non-index views) must include a Related Topics section at the bottom.
+**Requirement**: All pages must include a Related Topics section at the bottom, wrapped in a collapsible ContentSection that is collapsed by default.
 
 **Component**: Use `<RelatedTopics>` from `src/components/content/RelatedTopics.vue`
 
@@ -116,16 +116,26 @@ const relatedTopics = [
 </script>
 
 <template>
-  <!-- At the end of the page content -->
-  <RelatedTopics :topics="relatedTopics" />
+  <!-- At the end of the page content, inside a collapsible section -->
+  <ContentSection
+    id="related"
+    title="Related Topics"
+    icon="fa-solid fa-link"
+    collapsible
+    :default-expanded="false"
+  >
+    <RelatedTopics :topics="relatedTopics" />
+  </ContentSection>
 </template>
 ```
 
 **Guidelines**:
 - Include 2-4 related topics
-- Always link back to the parent index page (e.g., "Statistics Overview")
+- For topic pages: link back to the parent index page (e.g., "Statistics Overview")
+- For index pages: link to other chapter index pages or key topics
 - Include at least one topic from a different section when relevant
 - Use descriptive text, not just topic titles
+- Always wrap in a collapsible ContentSection, collapsed by default
 
 ---
 
@@ -474,7 +484,7 @@ When creating new components, verify:
 - [ ] Interactive elements: Has hover, focus, active states
 - [ ] Colors: Uses semantic color classes
 - [ ] Responsive: Works on mobile, enhanced on desktop
-- [ ] Related Topics: Subpages have RelatedTopics section at bottom
+- [ ] Related Topics: ALL pages have RelatedTopics in collapsible section (collapsed by default)
 
 When creating new content pages, additionally verify:
 
@@ -483,7 +493,7 @@ When creating new content pages, additionally verify:
 - [ ] Pitfall Callout: Amber warning box with specific error name
 - [ ] Collapsible sections: **ALL** ContentSections have `collapsible`; primary expanded, supplementary collapsed
 - [ ] CodeExample props: All have `id` (format: `section-topic-descriptor`) and `title` (filename.py style)
-- [ ] RelatedTopics: 3-4 items including parent index and cross-section links
+- [ ] RelatedTopics: 2-4 items in collapsible section; topic pages link to parent index, index pages link to other chapters
 - [ ] Dark mode: Color text has `dark:` variant (e.g., `text-amber-600 dark:text-amber-400`)
 - [ ] Navigation description: Engaging hook under 60 characters
 

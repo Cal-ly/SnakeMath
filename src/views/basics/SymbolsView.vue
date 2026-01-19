@@ -1,6 +1,5 @@
 <script setup lang="ts">
 import TopicPage from '@/components/content/TopicPage.vue'
-import RelatedTopics from '@/components/content/RelatedTopics.vue'
 import TabGroup from '@/components/ui/TabGroup.vue'
 import SymbolTable from '@/components/content/SymbolTable.vue'
 import {
@@ -48,6 +47,7 @@ const setsAndLogicSymbols = [...setSymbols, ...logicSymbols]
   <TopicPage
     title="Math Symbols"
     description="A programmer's guide to mathematical notation."
+    :related-topics="relatedTopics"
   >
     <div class="space-y-6">
       <div class="card p-6">
@@ -112,8 +112,5 @@ const setsAndLogicSymbols = [...setSymbols, ...logicSymbols]
       </div>
     </div>
 
-    <template #related>
-      <RelatedTopics :topics="relatedTopics" />
-    </template>
   </TopicPage>
 </template>

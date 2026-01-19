@@ -1,7 +1,6 @@
 <script setup lang="ts">
 import { ref, computed } from 'vue'
 import TopicPage from '@/components/content/TopicPage.vue'
-import RelatedTopics from '@/components/content/RelatedTopics.vue'
 import MathBlock from '@/components/content/MathBlock.vue'
 import ContentSection from '@/components/content/ContentSection.vue'
 import CodeExample from '@/components/content/CodeExample.vue'
@@ -216,6 +215,7 @@ print(f"P(4) = {polynomial_from_roots(roots, 4)}")  # (4-1)(4-2)(4-3) = 6`
   <TopicPage
     title="Product Notation"
     description="Learn how the Π symbol is just a for loop with multiplication."
+    :related-topics="relatedTopics"
   >
     <div class="space-y-8">
       <!-- Introduction -->
@@ -666,8 +666,5 @@ for i in range(1, n+1):
       </ContentSection>
     </div>
 
-    <template #related>
-      <RelatedTopics :topics="relatedTopics" />
-    </template>
   </TopicPage>
 </template>

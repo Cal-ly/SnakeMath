@@ -3,7 +3,6 @@ import TopicPage from '@/components/content/TopicPage.vue'
 import ContentSection from '@/components/content/ContentSection.vue'
 import MathBlock from '@/components/content/MathBlock.vue'
 import CodeExample from '@/components/content/CodeExample.vue'
-import RelatedTopics from '@/components/content/RelatedTopics.vue'
 import { CorrelationExplorer } from '@/components/widgets/CorrelationExplorer'
 
 const relatedTopics = [
@@ -149,6 +148,7 @@ print(f"   output = X @ {model.coef_} + {model.intercept_:.3f}")`
   <TopicPage
     title="Correlation & Regression"
     description="Measuring relationships between variables — the foundation of predictive modeling."
+    :related-topics="relatedTopics"
   >
     <div class="space-y-8">
       <!-- Introduction -->
@@ -610,7 +610,7 @@ print(f"   output = X @ {model.coef_} + {model.intercept_:.3f}")`
       </ContentSection>
 
       <!-- Related Topics -->
-      <RelatedTopics :topics="relatedTopics" />
+      <!-- Related topics rendered by TopicPage -->
     </div>
   </TopicPage>
 </template>

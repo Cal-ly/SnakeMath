@@ -3,7 +3,6 @@ import TopicPage from '@/components/content/TopicPage.vue'
 import ContentSection from '@/components/content/ContentSection.vue'
 import MathBlock from '@/components/content/MathBlock.vue'
 import CodeExample from '@/components/content/CodeExample.vue'
-import RelatedTopics from '@/components/content/RelatedTopics.vue'
 import { HypothesisTestingSimulator } from '@/components/widgets/HypothesisTestingSimulator'
 
 const relatedTopics = [
@@ -179,6 +178,7 @@ print(f"\\nstatsmodels: n = {n_required:.1f} per group")`
   <TopicPage
     title="Hypothesis Testing"
     description="The scientific method, formalized — make decisions with quantified uncertainty."
+    :related-topics="relatedTopics"
   >
     <div class="space-y-8">
       <!-- Introduction -->
@@ -726,7 +726,7 @@ print(f"\\nstatsmodels: n = {n_required:.1f} per group")`
       </ContentSection>
 
       <!-- Related Topics -->
-      <RelatedTopics :topics="relatedTopics" />
+      <!-- Related topics rendered by TopicPage -->
     </div>
   </TopicPage>
 </template>

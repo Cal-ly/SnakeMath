@@ -1,6 +1,5 @@
 <script setup lang="ts">
 import TopicPage from '@/components/content/TopicPage.vue'
-import RelatedTopics from '@/components/content/RelatedTopics.vue'
 import MathBlock from '@/components/content/MathBlock.vue'
 import ContentSection from '@/components/content/ContentSection.vue'
 import CodeExample from '@/components/content/CodeExample.vue'
@@ -148,6 +147,7 @@ print(transformed_sprite)`
   <TopicPage
     title="Matrices in 2D"
     description="2×2 arrays that transform vectors — the foundation of computer graphics and neural networks."
+    :related-topics="relatedTopics"
   >
     <div class="space-y-8">
       <!-- Introduction -->
@@ -501,7 +501,7 @@ print(transformed_sprite)`
       </ContentSection>
 
       <!-- Related Topics -->
-      <RelatedTopics :topics="relatedTopics" />
+      <!-- Related topics rendered by TopicPage -->
     </div>
   </TopicPage>
 </template>

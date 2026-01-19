@@ -233,7 +233,7 @@ export const topics: NavTopic[] = [
         title: 'Correlation & Regression',
         description: 'Measuring relationships — the foundation of predictive modeling',
         path: '/statistics/correlation',
-        faIcon: 'fa-solid fa-chart-scatter',
+        faIcon: 'fa-solid fa-arrow-trend-up',
       },
     ],
   },

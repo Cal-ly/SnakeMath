@@ -10,7 +10,6 @@
 
 import TopicPage from '@/components/content/TopicPage.vue'
 import ContentSection from '@/components/content/ContentSection.vue'
-import RelatedTopics from '@/components/content/RelatedTopics.vue'
 import MathBlock from '@/components/content/MathBlock.vue'
 
 // ============================================================================
@@ -64,6 +63,7 @@ const relatedTopics = [
   <TopicPage
     title="Calculus"
     description="The mathematics of change - derivatives, integrals, and limits"
+    :related-topics="relatedTopics"
   >
     <div class="space-y-8">
       <!-- Introduction -->
@@ -232,8 +232,6 @@ const relatedTopics = [
         </div>
       </ContentSection>
 
-      <!-- Related Topics -->
-      <RelatedTopics :topics="relatedTopics" />
     </div>
   </TopicPage>
 </template>

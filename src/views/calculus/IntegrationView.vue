@@ -15,7 +15,6 @@
 
 import TopicPage from '@/components/content/TopicPage.vue'
 import ContentSection from '@/components/content/ContentSection.vue'
-import RelatedTopics from '@/components/content/RelatedTopics.vue'
 import MathBlock from '@/components/content/MathBlock.vue'
 import CodeExample from '@/components/content/CodeExample.vue'
 import { IntegrationExplorer } from '@/components/widgets'
@@ -212,7 +211,7 @@ print(f"Unsigned area = {unsigned_area:.4f}")`
 </script>
 
 <template>
-  <TopicPage
+  <TopicPage :related-topics="relatedTopics">
     title="Integration"
     description="Area under curves - the inverse of differentiation and the foundation of accumulation"
   >
@@ -613,8 +612,6 @@ print(f"Unsigned area = {unsigned_area:.4f}")`
         />
       </ContentSection>
 
-      <!-- Related Topics -->
-      <RelatedTopics :topics="relatedTopics" />
     </div>
   </TopicPage>
 </template>

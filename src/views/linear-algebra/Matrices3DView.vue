@@ -1,6 +1,5 @@
 <script setup lang="ts">
 import TopicPage from '@/components/content/TopicPage.vue'
-import RelatedTopics from '@/components/content/RelatedTopics.vue'
 import MathBlock from '@/components/content/MathBlock.vue'
 import ContentSection from '@/components/content/ContentSection.vue'
 import CodeExample from '@/components/content/CodeExample.vue'
@@ -159,6 +158,7 @@ print(f"Transformed point: {transformed[:3]}")  # [1, 0, 0]
   <TopicPage
     title="Matrices in 3D"
     description="Rotation matrices, Euler angles, and transformations in three-dimensional space."
+    :related-topics="relatedTopics"
   >
     <div class="space-y-8">
       <!-- Introduction -->
@@ -479,7 +479,7 @@ print(f"Transformed point: {transformed[:3]}")  # [1, 0, 0]
       </ContentSection>
 
       <!-- Related Topics -->
-      <RelatedTopics :topics="relatedTopics" />
+      <!-- Related topics rendered by TopicPage -->
     </div>
   </TopicPage>
 </template>

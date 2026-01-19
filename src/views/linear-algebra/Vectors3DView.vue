@@ -1,6 +1,5 @@
 <script setup lang="ts">
 import TopicPage from '@/components/content/TopicPage.vue'
-import RelatedTopics from '@/components/content/RelatedTopics.vue'
 import MathBlock from '@/components/content/MathBlock.vue'
 import ContentSection from '@/components/content/ContentSection.vue'
 import CodeExample from '@/components/content/CodeExample.vue'
@@ -105,6 +104,7 @@ print(f"Light intensity: {intensity}")  # 1.0 (max)`
   <TopicPage
     title="Vectors in 3D"
     description="Extend to three dimensions: cross products, right-hand rule, and real-world physics."
+    :related-topics="relatedTopics"
   >
     <div class="space-y-8">
       <!-- Introduction -->
@@ -365,7 +365,7 @@ print(f"Light intensity: {intensity}")  # 1.0 (max)`
       </ContentSection>
 
       <!-- Related Topics -->
-      <RelatedTopics :topics="relatedTopics" />
+      <!-- Related topics rendered by TopicPage -->
     </div>
   </TopicPage>
 </template>

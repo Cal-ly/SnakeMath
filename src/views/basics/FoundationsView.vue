@@ -1,6 +1,5 @@
 <script setup lang="ts">
 import TopicPage from '@/components/content/TopicPage.vue'
-import RelatedTopics from '@/components/content/RelatedTopics.vue'
 import MathBlock from '@/components/content/MathBlock.vue'
 import CodeExample from '@/components/content/CodeExample.vue'
 import ContentSection from '@/components/content/ContentSection.vue'
@@ -94,6 +93,7 @@ result = math.prod(range(1, 6))  # 120`
   <TopicPage
     title="Foundations"
     description="Everything in math breaks down to four operators and a set of rules."
+    :related-topics="relatedTopics"
   >
     <div class="space-y-8">
       <!-- Intro -->
@@ -301,8 +301,5 @@ result = math.prod(range(1, 6))  # 120`
       </ContentSection> -->
     </div>
 
-    <template #related>
-      <RelatedTopics :topics="relatedTopics" />
-    </template>
   </TopicPage>
 </template>

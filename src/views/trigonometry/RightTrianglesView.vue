@@ -3,7 +3,6 @@ import TopicPage from '@/components/content/TopicPage.vue'
 import ContentSection from '@/components/content/ContentSection.vue'
 import MathBlock from '@/components/content/MathBlock.vue'
 import CodeExample from '@/components/content/CodeExample.vue'
-import RelatedTopics from '@/components/content/RelatedTopics.vue'
 import { RightTriangleSolver } from '@/components/widgets/RightTriangleSolver'
 import { getSOHCAHTOA, SPECIAL_TRIANGLES } from '@/utils/math/rightTriangle'
 
@@ -153,6 +152,7 @@ print(f"Range: {result['range']:.1f}m")            # ~255.1m`
   <TopicPage
     title="Right Triangle Trigonometry"
     description="SOHCAHTOA - the gateway to trigonometry through right triangle ratios."
+    :related-topics="relatedTopics"
   >
     <div class="space-y-8">
       <!-- Introduction & SOHCAHTOA -->
@@ -416,8 +416,6 @@ print(f"Range: {result['range']:.1f}m")            # ~255.1m`
         </p>
       </ContentSection>
 
-      <!-- Related Topics -->
-      <RelatedTopics :topics="relatedTopics" />
     </div>
   </TopicPage>
 </template>

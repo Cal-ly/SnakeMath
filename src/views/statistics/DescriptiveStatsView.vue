@@ -3,7 +3,6 @@ import TopicPage from '@/components/content/TopicPage.vue'
 import ContentSection from '@/components/content/ContentSection.vue'
 import MathBlock from '@/components/content/MathBlock.vue'
 import CodeExample from '@/components/content/CodeExample.vue'
-import RelatedTopics from '@/components/content/RelatedTopics.vue'
 import { StatisticsCalculator } from '@/components/widgets/StatisticsCalculator'
 
 const relatedTopics = [
@@ -126,6 +125,7 @@ print(f"Normalized mean: {normalized.mean():.4f}, std: {normalized.std():.4f}")`
   <TopicPage
     title="Descriptive Statistics"
     description="Summarizing and understanding data through numbers and visualizations."
+    :related-topics="relatedTopics"
   >
     <div class="space-y-8">
       <!-- What are Descriptive Statistics -->
@@ -691,7 +691,7 @@ print(f"Normalized mean: {normalized.mean():.4f}, std: {normalized.std():.4f}")`
       </ContentSection>
 
       <!-- Related Topics -->
-      <RelatedTopics :topics="relatedTopics" />
+      <!-- Related topics rendered by TopicPage -->
     </div>
   </TopicPage>
 </template>

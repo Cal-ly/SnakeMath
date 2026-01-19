@@ -11,16 +11,19 @@ interface RelatedTopic {
 interface Props {
   topics: RelatedTopic[]
   title?: string
+  /** Render the default section title/header (use false when wrapping in another titled container) */
+  showTitle?: boolean
 }
 
 withDefaults(defineProps<Props>(), {
   title: 'Related Topics',
+  showTitle: true,
 })
 </script>
 
 <template>
   <div>
-    <h2 class="text-lg font-semibold text-text-primary mb-4">
+    <h2 v-if="showTitle" class="text-lg font-semibold text-text-primary mb-4">
       <i class="fa-solid fa-link mr-2 text-primary" aria-hidden="true" />
       {{ title }}
     </h2>

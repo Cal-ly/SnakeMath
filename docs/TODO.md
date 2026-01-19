@@ -23,6 +23,9 @@ See [CURRENT_STATE.md](CURRENT_STATE.md) for detailed project status and [ROADMA
 - [ ] Ensure all topics have at least three analogies (1x everyday, 1x programming/system, 1x visual/intuitive)
 - [ ] Ensure all mathematical terms are either explained or reference their explanation
 
+### UI Fixes
+- [ ] "Related Topics" in "Calculus" should be a collapsible section and collapsed by default
+
 ---
 
 ## Future Ideas

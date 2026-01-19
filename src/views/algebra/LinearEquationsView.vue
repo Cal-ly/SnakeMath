@@ -1,7 +1,6 @@
 <script setup lang="ts">
 import { ref, computed } from 'vue'
 import TopicPage from '@/components/content/TopicPage.vue'
-import RelatedTopics from '@/components/content/RelatedTopics.vue'
 import MathBlock from '@/components/content/MathBlock.vue'
 import ContentSection from '@/components/content/ContentSection.vue'
 import CodeExample from '@/components/content/CodeExample.vue'
@@ -252,6 +251,7 @@ print(f"Rank: {rank}")  # If rank = number of unknowns, unique solution
   <TopicPage
     title="Linear Equations"
     description="The building blocks of algebra and the gateway to linear algebra."
+    :related-topics="relatedTopics"
   >
     <div class="space-y-8">
       <!-- Introduction -->
@@ -769,8 +769,5 @@ print(f"Rank: {rank}")  # If rank = number of unknowns, unique solution
       </ContentSection>
     </div>
 
-    <template #related>
-      <RelatedTopics :topics="relatedTopics" />
-    </template>
   </TopicPage>
 </template>

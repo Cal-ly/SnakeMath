@@ -3,7 +3,6 @@ import TopicPage from '@/components/content/TopicPage.vue'
 import ContentSection from '@/components/content/ContentSection.vue'
 import MathBlock from '@/components/content/MathBlock.vue'
 import CodeExample from '@/components/content/CodeExample.vue'
-import RelatedTopics from '@/components/content/RelatedTopics.vue'
 import { TrigIdentityExplorer } from '@/components/widgets/TrigIdentityExplorer'
 
 const relatedTopics = [
@@ -135,6 +134,7 @@ for x in [0, 0.5, 1.0]:
   <TopicPage
     title="Trigonometric Identities"
     description="The fundamental equations that relate trigonometric functions to each other."
+    :related-topics="relatedTopics"
   >
     <div class="space-y-8">
       <!-- Introduction -->
@@ -461,8 +461,6 @@ for x in [0, 0.5, 1.0]:
         </div>
       </ContentSection>
 
-      <!-- Related Topics -->
-      <RelatedTopics :topics="relatedTopics" />
     </div>
   </TopicPage>
 </template>

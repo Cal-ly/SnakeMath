@@ -3,7 +3,6 @@ import TopicPage from '@/components/content/TopicPage.vue'
 import ContentSection from '@/components/content/ContentSection.vue'
 import MathBlock from '@/components/content/MathBlock.vue'
 import CodeExample from '@/components/content/CodeExample.vue'
-import RelatedTopics from '@/components/content/RelatedTopics.vue'
 import { DistributionExplorer, CLTDemonstration } from '@/components/widgets/DistributionExplorer'
 
 const relatedTopics = [
@@ -167,6 +166,7 @@ plt.show()`
   <TopicPage
     title="Probability Distributions"
     description="Each distribution is a personality profile for randomness - learn to recognize and use them."
+    :related-topics="relatedTopics"
   >
     <div class="space-y-8">
       <!-- Introduction -->
@@ -677,7 +677,7 @@ plt.show()`
       </ContentSection>
 
       <!-- Related Topics -->
-      <RelatedTopics :topics="relatedTopics" />
+      <!-- Related topics rendered by TopicPage -->
     </div>
   </TopicPage>
 </template>

@@ -1,6 +1,5 @@
 <script setup lang="ts">
 import TopicPage from '@/components/content/TopicPage.vue'
-import RelatedTopics from '@/components/content/RelatedTopics.vue'
 import MathBlock from '@/components/content/MathBlock.vue'
 import ContentSection from '@/components/content/ContentSection.vue'
 import CodeExample from '@/components/content/CodeExample.vue'
@@ -176,7 +175,7 @@ print(f"Concert: {watts_to_decibels(concert):.0f} dB")  # 110 dB
 </script>
 
 <template>
-  <TopicPage title="Exponentials & Logarithms">
+  <TopicPage title="Exponentials & Logarithms" :related-topics="relatedTopics">
     <!-- What are Exponential Functions? -->
     <ContentSection id="introduction" title="What are Exponential Functions?" collapsible>
       <p class="mb-4">
@@ -632,7 +631,5 @@ print(f"Concert: {watts_to_decibels(concert):.0f} dB")  # 110 dB
         </table>
       </div>
     </ContentSection>
-
-    <RelatedTopics :topics="relatedTopics" />
   </TopicPage>
 </template>

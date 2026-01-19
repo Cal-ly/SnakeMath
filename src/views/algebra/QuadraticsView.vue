@@ -1,6 +1,5 @@
 <script setup lang="ts">
 import TopicPage from '@/components/content/TopicPage.vue'
-import RelatedTopics from '@/components/content/RelatedTopics.vue'
 import MathBlock from '@/components/content/MathBlock.vue'
 import ContentSection from '@/components/content/ContentSection.vue'
 import CodeExample from '@/components/content/CodeExample.vue'
@@ -74,7 +73,7 @@ print(f"Ball hits ground at t = {t:.2f} seconds")`
 </script>
 
 <template>
-  <TopicPage title="Quadratic Functions">
+  <TopicPage title="Quadratic Functions" :related-topics="relatedTopics">
     <!-- What is a Quadratic Function? -->
     <ContentSection id="introduction" title="What is a Quadratic Function?" collapsible>
       <p class="mb-4">
@@ -368,7 +367,5 @@ print(f"Ball hits ground at t = {t:.2f} seconds")`
         </table>
       </div>
     </ContentSection>
-
-    <RelatedTopics :topics="relatedTopics" />
   </TopicPage>
 </template>

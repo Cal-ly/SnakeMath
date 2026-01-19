@@ -1,6 +1,5 @@
 <script setup lang="ts">
 import TopicPage from '@/components/content/TopicPage.vue'
-import RelatedTopics from '@/components/content/RelatedTopics.vue'
 import MathBlock from '@/components/content/MathBlock.vue'
 import ContentSection from '@/components/content/ContentSection.vue'
 import CodeExample from '@/components/content/CodeExample.vue'
@@ -156,6 +155,7 @@ print(Decimal('0.1'))  # 0.1 (exact)`
   <TopicPage
     title="Number Types"
     description="Understanding ℕ, ℤ, ℚ, ℝ, and ℂ — and how they map to code."
+    :related-topics="relatedTopics"
   >
     <div class="space-y-8">
       <!-- Overview -->
@@ -498,8 +498,5 @@ print(Decimal('0.1'))  # 0.1 (exact)`
       </ContentSection>
     </div>
 
-    <template #related>
-      <RelatedTopics :topics="relatedTopics" />
-    </template>
   </TopicPage>
 </template>

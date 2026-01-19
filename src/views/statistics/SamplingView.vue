@@ -3,7 +3,6 @@ import TopicPage from '@/components/content/TopicPage.vue'
 import ContentSection from '@/components/content/ContentSection.vue'
 import MathBlock from '@/components/content/MathBlock.vue'
 import CodeExample from '@/components/content/CodeExample.vue'
-import RelatedTopics from '@/components/content/RelatedTopics.vue'
 import { SamplingSimulator } from '@/components/widgets/SamplingSimulator'
 
 const relatedTopics = [
@@ -178,6 +177,7 @@ print(f"Sample size for proportion: {n_prop}")  # ~1068`
   <TopicPage
     title="Sampling & Estimation"
     description="Measure some, estimate all — with confidence intervals and bootstrap."
+    :related-topics="relatedTopics"
   >
     <div class="space-y-8">
       <!-- Introduction -->
@@ -597,8 +597,7 @@ print(f"Sample size for proportion: {n_prop}")  # ~1068`
         </div>
       </ContentSection>
 
-      <!-- Related Topics -->
-      <RelatedTopics :topics="relatedTopics" />
+      <!-- Related topics rendered by TopicPage -->
     </div>
   </TopicPage>
 </template>

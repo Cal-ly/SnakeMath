@@ -4,7 +4,6 @@ import ContentSection from '@/components/content/ContentSection.vue'
 import MathBlock from '@/components/content/MathBlock.vue'
 import CodeExample from '@/components/content/CodeExample.vue'
 import CollapsiblePanel from '@/components/ui/CollapsiblePanel.vue'
-import RelatedTopics from '@/components/content/RelatedTopics.vue'
 import { InverseTrigExplorer } from '@/components/widgets/InverseTrigExplorer'
 
 const relatedTopics = [
@@ -139,6 +138,7 @@ print(f"Mouse angle: {angle:.2f}°")  # ~36.87° (toward top-right)`
   <TopicPage
     title="Inverse Trig Functions"
     description="Finding angles from coordinates - the reverse lookup that programmers actually need."
+    :related-topics="relatedTopics"
   >
     <div class="space-y-8">
       <!-- Introduction -->
@@ -410,8 +410,6 @@ print(f"Mouse angle: {angle:.2f}°")  # ~36.87° (toward top-right)`
       </div>
     </CollapsiblePanel>
 
-      <!-- Related Topics -->
-      <RelatedTopics :topics="relatedTopics" />
     </div>
   </TopicPage>
 </template>

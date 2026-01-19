@@ -1,6 +1,5 @@
 <script setup lang="ts">
 import TopicPage from '@/components/content/TopicPage.vue'
-import RelatedTopics from '@/components/content/RelatedTopics.vue'
 import MathBlock from '@/components/content/MathBlock.vue'
 import ContentSection from '@/components/content/ContentSection.vue'
 import CodeExample from '@/components/content/CodeExample.vue'
@@ -137,6 +136,7 @@ print(impure_increment(5))  # 7 (counter is now 2)
   <TopicPage
     title="Functions"
     description="Input, output, and the f(x) notation — from math to code."
+    :related-topics="relatedTopics"
   >
     <div class="space-y-8">
       <!-- What is a Function? -->
@@ -443,8 +443,5 @@ print(impure_increment(5))  # 7 (counter is now 2)
       </ContentSection>
     </div>
 
-    <template #related>
-      <RelatedTopics :topics="relatedTopics" />
-    </template>
   </TopicPage>
 </template>

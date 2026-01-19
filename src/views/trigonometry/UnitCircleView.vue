@@ -3,7 +3,6 @@ import TopicPage from '@/components/content/TopicPage.vue'
 import ContentSection from '@/components/content/ContentSection.vue'
 import MathBlock from '@/components/content/MathBlock.vue'
 import CodeExample from '@/components/content/CodeExample.vue'
-import RelatedTopics from '@/components/content/RelatedTopics.vue'
 import { UnitCircleExplorer } from '@/components/widgets/UnitCircleExplorer'
 
 const relatedTopics = [
@@ -261,9 +260,7 @@ print(f"Rotated point: ({result[0]:.2f}, {result[1]:.2f})")`
                 <td class="p-2 border border-border text-center font-mono">0</td>
                 <td class="p-2 border border-border text-center font-mono">1</td>
                 <td class="p-2 border border-border text-center font-mono">0</td>
-              </tr>
-              <tr>
-                <td class="p-2 border border-border font-mono">30°</td>
+                  <!-- Related Topics removed -->
                 <td class="p-2 border border-border text-center font-mono">1/2</td>
                 <td class="p-2 border border-border text-center font-mono">√3/2</td>
                 <td class="p-2 border border-border text-center font-mono">√3/3</td>
@@ -476,8 +473,7 @@ print(f"Rotated point: ({result[0]:.2f}, {result[1]:.2f})")`
         </div>
       </ContentSection>
 
-      <!-- Related Topics -->
-      <RelatedTopics :topics="relatedTopics" />
+      <!-- Related topics rendered by TopicPage -->
     </div>
   </TopicPage>
 </template>

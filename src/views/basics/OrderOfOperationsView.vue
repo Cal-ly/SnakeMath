@@ -1,6 +1,5 @@
 <script setup lang="ts">
 import TopicPage from '@/components/content/TopicPage.vue'
-import RelatedTopics from '@/components/content/RelatedTopics.vue'
 import MathBlock from '@/components/content/MathBlock.vue'
 import ContentSection from '@/components/content/ContentSection.vue'
 import CodeExample from '@/components/content/CodeExample.vue'
@@ -147,6 +146,7 @@ print(f"Future value: \${A:.2f}")  # $1,647.01
   <TopicPage
     title="Order of Operations"
     description="PEMDAS, operator precedence, and why 2 + 3 × 4 = 14 (not 20)."
+    :related-topics="relatedTopics"
   >
     <div class="space-y-8">
       <!-- Why Order Matters -->
@@ -432,8 +432,5 @@ print(f"Future value: \${A:.2f}")  # $1,647.01
       </ContentSection>
     </div>
 
-    <template #related>
-      <RelatedTopics :topics="relatedTopics" />
-    </template>
   </TopicPage>
 </template>

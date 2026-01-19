@@ -15,7 +15,6 @@
 
 import TopicPage from '@/components/content/TopicPage.vue'
 import ContentSection from '@/components/content/ContentSection.vue'
-import RelatedTopics from '@/components/content/RelatedTopics.vue'
 import MathBlock from '@/components/content/MathBlock.vue'
 import CodeExample from '@/components/content/CodeExample.vue'
 import { DerivativeVisualizer } from '@/components/widgets'
@@ -221,7 +220,7 @@ print(f"f'(2) = {result.derivative}") # 7
 </script>
 
 <template>
-  <TopicPage
+  <TopicPage :related-topics="relatedTopics">
     title="Derivatives"
     description="The slope of change - understanding rates, tangent lines, and the foundation of optimization"
   >
@@ -633,8 +632,6 @@ print(f"f'(2) = {result.derivative}") # 7
         </div>
       </ContentSection>
 
-      <!-- Related Topics -->
-      <RelatedTopics :topics="relatedTopics" />
     </div>
   </TopicPage>
 </template>

@@ -1,6 +1,5 @@
 <script setup lang="ts">
 import TopicPage from '@/components/content/TopicPage.vue'
-import RelatedTopics from '@/components/content/RelatedTopics.vue'
 import MathBlock from '@/components/content/MathBlock.vue'
 import ContentSection from '@/components/content/ContentSection.vue'
 import CodeExample from '@/components/content/CodeExample.vue'
@@ -144,6 +143,7 @@ str_value = str(42)        # "42"`
   <TopicPage
     title="Variables & Expressions"
     description="Named values and how to combine them — from math to code."
+    :related-topics="relatedTopics"
   >
     <div class="space-y-8">
       <!-- What is a Variable? -->
@@ -458,8 +458,5 @@ str_value = str(42)        # "42"`
       </ContentSection>
     </div>
 
-    <template #related>
-      <RelatedTopics :topics="relatedTopics" />
-    </template>
   </TopicPage>
 </template>
